@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+   <head>
+     <meta charset="UTF-8">
+     <base href='/'></base>
+     <title>Webpack App</title>
+   </head>
+   <body>
+     <nav class="navbar navbar-default navbar-pf" role="navigation" ng-controller="User.MenuController as UsersCrtl">
+       <ul class="nav navbar-nav navbar-primary" hawtio-main-nav ng-show="currentUser"></ul>
+       <ul id="right-nav" class="nav navbar-nav navbar-right">
+         <ul class="nav navbar-nav" ng-hide="currentUser">
+                <li><a ng-click="UsersCrtl.openLoginForm()">Log In</a></li>
+            </ul>
+            <ul class="nav navbar-nav" ng-show="currentUser">
+              <li><a ng-click="UsersCrtl.logout()"> Logout</a></li>
+            </ul>
+         <!-- <li><a ng-click="UsersCrtl.logout()"><span class="glyphicon-log-out"></span> Logout</a></li>-->
+
+
+
+          <!-- Modal -->
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Please Login:</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="embed-responsive embed-responsive-16by9">
+                    <a class="btn btn-block btn-social btn-google" ng-click="UsersCrtl.poptastic('/auth/google')" onclick="">
+                      <span class="fa fa-google"></span> Sign in with Google
+                    </a>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          </ul>
+     </nav>
+     <div class="container-fluid">
+           <div class="row">
+             <div class="col-md-1 sidebar">
+               <ul class="nav nav-sidebar" hawtio-sub-tabs ng-show="currentUser"></ul>
+             </div>
+             <div id="main"  class="col-md-11 main ng-cloak" ng-controller="HawtioNav.ViewController">
+                <div ng-include src="viewPartial"></div>
+             </div>
+           </div>
+         </div>
+
+
+
+
+         <!-- Button trigger modal
+         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+           Launch demo modal
+         </button>-->
+
+
+
+
+<script src="https://use.fontawesome.com/ff56f68762.js"></script>
+
+
+   </body>
+</html>
