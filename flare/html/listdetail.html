@@ -1,0 +1,33 @@
+<div ng-controller="Flare.ListDetailPageController as fCtl">
+
+
+    <h1>{{fCtl.list.name}}</h1>
+    <h3>{{fCtl.list.discription}}</h3>
+
+    <h3>Memebers:</h3>
+
+
+    <table id="listdetailtable" datatable="ng" class="row-border hover">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>SMS</th>
+            <th>Telephone</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="member in fCtl.list.members">
+            <td>{{member.displayName }}</td>
+            <td>{{member.flareemail }}</td>
+            <td>{{member.flaresms }}</td>
+            <td>{{member.flaretel }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+
+
+</div>

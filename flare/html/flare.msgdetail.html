@@ -1,0 +1,36 @@
+<div ng-controller="Flare.MsgDetailPageController as fCtl">
+
+
+    <h1>{{fCtl.message.shortTitle}}</h1>
+    <h3>{{fCtl.message.discription}}</h3>
+
+    <p>{{fCtl.message.content}}</p>
+
+    <h3>Recipients :</h3>
+
+
+    <table id="msgdetailtable" datatable="ng" class="row-border hover">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>SMS</th>
+            <th>Telasdfgene</th>
+            <th>status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="member in fCtl.list.members">
+            <td>{{member.displayName }}</td>
+            <td>{{member.flareemail }}</td>
+            <td>{{member.flaresms }}</td>
+            <td>{{member.flaretel }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+
+
+</div>

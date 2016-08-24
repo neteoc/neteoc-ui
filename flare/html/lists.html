@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
-    </head>
-    <body>
+<div ng-controller="Flare.ListPageController as fCtl">
 
-    </body>
-</html>
+
+    <h1>{{fCtl.title}}</h1>
+
+
+    <table id="listtable" datatable="ng" class="row-border hover">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>discription</th>
+            <th>Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="list in fCtl.lists">
+            <td>{{ list.name }}</td>
+            <td>{{ list.discription }}</td>
+            <td><a href="/Flare/list/{{ list._id }}">Details</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+</div>

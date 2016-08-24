@@ -3,22 +3,14 @@
 
 module.exports = function(parentModule) {
 
-    parentModule
+    parentModule._module
         .factory('List', function ($resource) {
-            return {
+            return $resource('/lists/:id');
+        });
 
-                list: function(){
-                    return $resource('/lists')
-                },
 
-                find: function(){
-                    return $resource('/lists/find')
-                },
-
-                removeUser: function(){
-                    return $resource('/lists/removeuser')
-                }
-
-            }
+    parentModule._module
+        .factory('Message', function ($resource) {
+            return $resource('/message/:id');
         });
 };
