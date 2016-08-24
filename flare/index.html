@@ -1,0 +1,7 @@
+<div ng-controller="Flare.IndexPageController as FlaresCrtl">
+  <h1>{{FlaresCrtl.title}}</h1>
+  <div>{{FlaresCrtl.messages.message.displayName}}</div>
+  <ul>
+    <li ng-repeat="message in FlaresCrtl.data">{{message.longTitle}} - {{message.content}}</li>
+  </ul>
+</div>

@@ -20,7 +20,8 @@ module.exports = {
   context: path.resolve('.'),
   entry: "./index.js",
   output: {
-    path: path.resolve('../server/public/'),
+    path: path.resolve('../neteoc-server/public/'),
+    //path: path.resolve('./public/'),
     publicPath: '/public/',
     filename: "[hash]-bundle.js"
   },
