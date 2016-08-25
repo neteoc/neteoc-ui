@@ -152,6 +152,8 @@ module.exports = function(parentModule) {
     parentModule.MsgDetailPageController = parentModule._module.controller('Flare.MsgDetailPageController', [ '$routeParams', 'List', 'Message', function($routeParams, List, Message) {
         let vm = this;
 
+
+
         Message.get({ id: $routeParams.id})
             .$promise
             .then(function(message){

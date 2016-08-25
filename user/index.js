@@ -48,20 +48,46 @@ var User;
 
 
 
-  User.PageController = User._module.controller('User.PageController', ['$scope', '$http', function($scope, $http) {
-    let vm = this;
-    let title = "Users";
+  User.PageController = User._module.controller('User.PageController', ['Session', 'User', function(Session, User) {
+      let vm = this;
+      let title = "Users";
+
+
+      Session.get().$promise.then(function (sessonuser) {
+          "use strict";
+
+          User.get({ id: sessonuser._id}).$promise.then(function (dbuser) {
+
+              console.log(dbuser);
+              angular.extend(vm, {
+                  user: dbuser
+              });
+
+          });
+
+
+
+      });
+
+      let updateUser = function () {
+              vm.user.$update({ id: vm.user._id}, function () {
+                  console.log("user updated");
+              })
+      };
+
+
 
     let poptastic = function(url) {
         var newWindow = window.open(url, 'name', 'height=600,width=450');
         if (window.focus) {
           newWindow.focus();
         }
-      }
+      };
 
-    angular.extend(this, {
+    angular.extend(vm, {
       title: title,
-      poptastic: poptastic
+      poptastic: poptastic,
+      updateUser: updateUser
     });
   }]);
 
