@@ -5,7 +5,12 @@ module.exports = function(parentModule) {
 
     parentModule._module
         .factory('List', function ($resource) {
-            return $resource('/lists/:id');
+            return $resource('/lists/:id', { id: '@_id' },
+                {
+                    'update': {
+                        method:'PUT'
+                    }
+                });
         });
 
 

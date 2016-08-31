@@ -17,7 +17,7 @@ module.exports = function(parentModule) {
                 return 'Flare';
             })
             .href(function () {
-                return '/Flare/';
+                return '/ui/flare';
             })
             .subPath('Flares', 'flares', templateUrl)
             .subPath('Lists', 'lists', listTemplateUrl)

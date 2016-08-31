@@ -9,48 +9,152 @@ module.exports = function(parentModule) {
     require('datatables.net-select');
     require('angular-datatables/dist/plugins/select/angular-datatables.select.min.js');
 
+    var moment = require('moment');
+
     parentModule.ListPageController = parentModule._module.controller('Flare.ListPageController', ['List', function(List) {
         let vm = this;
         let title = "Lists";
+        let newList = new List;
 
-
-        List.query()
-            .$promise
-            .then(function(lists){
-                console.log(lists);
-                angular.extend(vm, {
-                    lists: lists
+        let getLists = function() {
+            List.query()
+                .$promise
+                .then(function(lists){
+                    console.log(lists);
+                    angular.extend(vm, {
+                        lists: lists
+                    });
+                    $(document).ready(function() {
+                        $('#listtable').DataTable();
+                    } );
                 });
-                $(document).ready(function() {
-                    $('#listtable').DataTable();
-                } );
-            });
+        };
 
+
+
+        let createList = function() {
+
+
+            List.save(newList, function(){
+                    console.log('list saved!');
+                    getLists();
+                })
+
+
+        };
+
+        getLists();
 
         angular.extend(vm, {
-            title: title
+            title: title,
+            createList: createList,
+            newList: newList,
+            getLists: getLists
         });
 
 
     }]);
 
 
-    parentModule.ListDetailPageController = parentModule._module.controller('Flare.ListDetailPageController', [ '$routeParams', 'List', function($routeParams, List) {
+    parentModule.ListDetailPageController = parentModule._module.controller('Flare.ListDetailPageController', [ '$routeParams', 'List', 'User', function($routeParams, List, User) {
         let vm = this;
+        let adduserdata = "";
 
-        List.get({ id: $routeParams.id})
-            .$promise
-            .then(function(list){
+        User.query().$promise.then(function(users){
                 angular.extend(vm, {
-                    list: list
-                });
-                $(document).ready(function() {
-                    $('#listdetailtable').DataTable();
-                } );
+                    users: users
+                })
             });
 
+        let getList = function() {
+
+            return List.get({ id: $routeParams.id})
+                .$promise
+                .then(function(list){
+                    console.log(list);
+                    angular.extend(vm, {
+                        list: list
+                    });
+                    $(document).ready(function() {
+                        $('#listdetailtable').DataTable();
+                    } );
+                    return list;
+                });
+
+        };
+
+        let addUser = function(){
+
+            getList()
+                .then(function(list){
+                    //console.log(list);
+                    //console.log(adduserdata);
+                    //console.log(vm.adduserdata);
+                    if (typeof list.members === "undefined") {
+                        list.members = [];
+                    }
+                    list.members.push(vm.adduserdata);
+                    list.$update(function(){
+                        getList();
+                    });
+                });
+
+
+        };
+
+        let makeAdmin = function(userID){
+
+
+            vm.list.admins.push(userID);
+            vm.list.$update(function(){
+                getList();
+            })
+
+
+
+
+        };
+
+        let isAdmin = function(userID){
+
+            console.log(userID);
+            console.log(vm.list.admins);
+
+            if (vm.list.admins.indexOf(userID) != -1 ){
+                return true;
+            } else {
+                return false;
+            }
+
+
+
+        };
+
+        let removeUser = function(userID){
+
+
+            for(var i =  vm.list.admins.length - 1; i >= 0; i--) {
+                if( vm.list.admins[i] === userID) {
+                    vm.list.admins.splice(i, 1);
+                    vm.list.$update(function(){
+                        getList();
+                    })
+                }
+            }
+
+
+
+        };
+
+        getList();
+
         angular.extend(vm, {
-            title: $routeParams.id
+            title: $routeParams.id,
+            adduserdata: adduserdata,
+            addUser: addUser,
+            isAdmin: isAdmin,
+            makeAdmin: makeAdmin,
+            removeUser: removeUser
         });
 
 
@@ -92,6 +196,9 @@ module.exports = function(parentModule) {
         let Flares = {};
         let message = "";
         let FormTitle = "Send Flare";
+        let formPatterns = {
+            word: /^\s*\w*\s*$/
+        };
         let newmsg = new Message();
 
         let getFlares = function (){
@@ -105,6 +212,11 @@ module.exports = function(parentModule) {
                     $(document).ready(function() {
                         $('#messagestable').DataTable();
                     } );
+                    angular.forEach(messages, function(value, key, message) {
+                        //var timestamp = moment(message.createdAt).format("dddd, MMMM Do YYYY, h:mm:ss a");
+                        var timestamp = moment(message.createdAt).format("DD MMM YYYY - kkMM");
+                        messages[key].createdAtString = timestamp;
+                    });
                 });
 
 
@@ -144,7 +256,8 @@ module.exports = function(parentModule) {
             getLists: getLists,
             newmsg: newmsg,
             FormTitle: FormTitle,
-            savemessage: savemessage
+            savemessage: savemessage,
+            formPatterns: formPatterns
         });
     }]);
 
@@ -157,6 +270,9 @@ module.exports = function(parentModule) {
         Message.get({ id: $routeParams.id})
             .$promise
             .then(function(message){
+
+                message.createdAtString = moment(message.createdAt).format("DD MMM YYYY - kkMM");
+
                 angular.extend(vm, {
                     message: message
                 });
@@ -179,6 +295,7 @@ module.exports = function(parentModule) {
 
 
     }]);
+
 
 
 };

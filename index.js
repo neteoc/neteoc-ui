@@ -15,6 +15,8 @@ require("./user");
 
 import {} from './flare';
 
+require("./admin");
 
+require("./org/org.index");
 
 //test me

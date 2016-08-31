@@ -1,7 +1,5 @@
 import {hawtioPluginLoader } from 'adminjs-core';
 
-;
-
 var User;
 (function (User) {
 
@@ -52,26 +50,32 @@ var User;
       let vm = this;
       let title = "Users";
 
+      let getUser = function () {
+          Session.get().$promise.then(function (sessonuser) {
+              "use strict";
 
-      Session.get().$promise.then(function (sessonuser) {
-          "use strict";
 
-          User.get({ id: sessonuser._id}).$promise.then(function (dbuser) {
+              User.get({id: sessonuser._id}).$promise.then(function (dbuser) {
 
-              console.log(dbuser);
-              angular.extend(vm, {
-                  user: dbuser
+                  console.log(dbuser);
+                  angular.extend(vm, {
+                      user: dbuser
+                  });
+
               });
 
+
           });
+      };
 
 
+      getUser();
 
-      });
 
       let updateUser = function () {
-              vm.user.$update({ id: vm.user._id}, function () {
+              vm.user.$update(function () {
                   console.log("user updated");
+                  getUser();
               })
       };
 
@@ -119,7 +123,7 @@ var User;
         console.log("got 401------------------------------")
         //poptastic('/auth/google');
         return false;
-      }
+      };
 
       let logout = function() {
         Auth.logout(function(err) {

@@ -20,11 +20,11 @@ module.exports = function(parentModule) {
                 });
             parentModule.tab = builder.create()
                 .id(parentModule.pluginName)
-                .title(function () { return 'Profile'; })
-                .href(function() { return '/Flares/user'; })
+                .title(function () { return 'User'; })
+                .href(function() { return '/ui/user'; })
                 .subPath('Profile', 'profile', templateUrl)
-                .subPath('Account', 'account', accountTemplateUrl)
-                .subPath('Lists', 'lists', listsTemplateUrl)
+                //.subPath('Account', 'account', accountTemplateUrl)
+                //.subPath('Lists', 'lists', listsTemplateUrl)
                 .build();
             builder.configureRouting($routeProvider, parentModule.tab);
             var interceptor = ['$rootScope', '$q', "Base64", function(scope, $q, Base64) {

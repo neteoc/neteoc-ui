@@ -5,7 +5,7 @@ module.exports = function(parentModule) {
 
     parentModule
         .factory('User', function ($resource) {
-            return $resource('/user/:id', {},
+            return $resource('/user/:id', { id: '@_id' },
                 {
                     'update': {
                         method:'PUT'

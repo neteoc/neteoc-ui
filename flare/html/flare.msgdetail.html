@@ -1,10 +1,13 @@
 <div ng-controller="Flare.MsgDetailPageController as fCtl">
 
 
-    <h1>{{fCtl.message.shortTitle}}</h1>
+    <h1>{{fCtl.message.shortTitle}}</h1> {{fCtl.message.createdAtString}}
     <h3>{{fCtl.message.discription}}</h3>
 
+    <h3>Content:</h3>
     <p>{{fCtl.message.content}}</p>
+
+
 
     <h3>Recipients :</h3>
 
@@ -15,8 +18,7 @@
             <th>Name</th>
             <th>Email</th>
             <th>SMS</th>
-            <th>Telasdfgene</th>
-            <th>status</th>
+            <th>Telephone</th>
         </tr>
         </thead>
         <tbody>

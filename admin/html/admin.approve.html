@@ -1,0 +1,29 @@
+
+<div ng-controller="Admin.approveUserController as ctlr">
+
+    <h1>{{ctlr.title}}</h1>
+
+
+    <table id="approvelisttable" datatable="ng" class="row-border hover">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Provider</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in ctlr.users">
+            <td>{{ user.displayName }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.provider }}</td>
+            <td>
+                <button type="button" ng-click="ctlr.approveuser(user._id)" class="btn btn-success">Approve user</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>

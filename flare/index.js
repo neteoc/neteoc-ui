@@ -14,7 +14,7 @@ var Flare;
   require('./flare.routes')(Flare);
   require('./flare.controllers')(Flare);
 
-  Flare._module.run(['HawtioNav', '$rootScope', '$location', function(HawtioNav, $rootScope, $location) {
+  Flare._module.run(['HawtioNav', '$rootScope', '$location', 'Session', function(HawtioNav, $rootScope, $location, Session) {
 
     $rootScope.$on('event:auth-loginRequired', function() {
       //$location.path('/Flares/login/login');
@@ -22,10 +22,17 @@ var Flare;
       //UserPlugin.poptastic('/auth/google');
       return false;
     });
-    HawtioNav.add(Flare.tab);
-  }]);
+    Session.get().$promise.then(function(session){
+      console.log('session on admin run', session);
+      if (session.status == "approved"){
+        console.log('Is user approved? ', session.status);
 
-  //console.log('meep');
+          HawtioNav.add(Flare.tab);
+
+      }
+    });
+
+  }]);
 
 
   hawtioPluginLoader.addModule(Flare.pluginName);

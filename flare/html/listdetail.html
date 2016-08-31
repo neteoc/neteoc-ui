@@ -1,10 +1,15 @@
 <div ng-controller="Flare.ListDetailPageController as fCtl">
 
+    <a data-original-title="Add User" href="#" type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#addUserListModal">
+        <span class="glyphicon glyphicon-envelope"> Add User </span>
+    </a>
+
 
     <h1>{{fCtl.list.name}}</h1>
     <h3>{{fCtl.list.discription}}</h3>
 
     <h3>Memebers:</h3>
+
 
 
     <table id="listdetailtable" datatable="ng" class="row-border hover">
@@ -14,6 +19,8 @@
             <th>Email</th>
             <th>SMS</th>
             <th>Telephone</th>
+            <th>Action</th>
+
         </tr>
         </thead>
         <tbody>
@@ -22,10 +29,49 @@
             <td>{{member.flareemail }}</td>
             <td>{{member.flaresms }}</td>
             <td>{{member.flaretel }}</td>
+            <td>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Actions
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Remove</a></li>
+                            <li ng-hide="fCtl.isAdmin(member._id)" ng-click="fCtl.makeAdmin(member._id)"><a href="#">Make Admin</a></li>
+                            <li ng-show="fCtl.isAdmin(member._id)" ng-click="fCtl.removeUser(member._id)"><a href="#">Remove Admin</a></li>
+                        </ul>
+                    </div>
+
+            </td>
         </tr>
         </tbody>
     </table>
 
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="addUserListModal" tabindex="-1" role="dialog" aria-labelledby="listModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{{fCtl.title}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <select id="listSelector" class="form-control" ng-model="fCtl.adduserdata">
+                            <option ng-repeat="user in fCtl.users" value="{{ user._id }}">{{ user.displayName }}</option>
+                        </select>
+                        <p></p>
+                        <button ng-click="fCtl.addUser()" type="submit" class="btn btn-danger" data-dismiss="modal">Fire</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
 
 
 
