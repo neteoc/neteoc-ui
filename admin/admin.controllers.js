@@ -56,4 +56,18 @@ module.exports = function(parentModule) {
 
     }]);
 
+    parentModule.adminIndexController = parentModule._module.controller(parentModule.pluginName + '.adminIndexController', ['User', function(User) {
+      let vm = this;
+      let title = "Site Administration";
+
+
+
+
+      angular.extend(vm, {
+          title: title
+      });
+
+
+    }]);
+
 };
