@@ -1,6 +1,19 @@
 import {hawtioPluginLoader } from 'adminjs-core';
 
 
+let openLoginForm = function() {
+  //$location.path('/Flares/login/login');
+  $('#myModal').modal({backdrop: 'static',
+  keyboard: false});
+  $('#myModal').modal('show');
+  $('#myModal').on('hide.bs.modal', function(e) {
+      e.preventDefault();
+    });
+
+  //poptastic('/auth/google');
+  return false;
+};
+
 
 var Flare;
 (function (Flare) {
@@ -17,15 +30,13 @@ var Flare;
   Flare._module.run(['HawtioNav', '$rootScope', '$location', 'Session', function(HawtioNav, $rootScope, $location, Session) {
 
     $rootScope.$on('event:auth-loginRequired', function() {
-      //$location.path('/Flares/login/login');
-      console.log("got 401--------------!!!!!!!!!!!!!!!!!")
-      //UserPlugin.poptastic('/auth/google');
+      openLoginForm();
       return false;
     });
     Session.get().$promise.then(function(session){
-      console.log('session on admin run', session);
+
       if (session.status == "approved"){
-        console.log('Is user approved? ', session.status);
+
 
           HawtioNav.add(Flare.tab);
 

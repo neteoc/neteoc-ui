@@ -105,7 +105,7 @@ var User;
       });
     }]);
 
-  User.MenuController = User._module.controller('User.MenuController', ['$scope', '$http', 'Auth', '$location', function($scope, $http, Auth, $location) {
+  User.MenuController = User._module.controller('User.MenuController', ['$scope', '$http', 'Auth', '$location', 'Session', function($scope, $http, Auth, $location, Session) {
       let vm = this;
       let title = "Users";
 
@@ -119,17 +119,18 @@ var User;
         $('#myModal').on('hide.bs.modal', function(e) {
             e.preventDefault();
           });
-
-        console.log("got 401------------------------------")
-        //poptastic('/auth/google');
         return false;
       };
+
+      //Session.query().$promise
+      //  .error(function(data) { console.log(data) })
+      //  .success(function(data) { console.log(err);  });
 
       let logout = function() {
         Auth.logout(function(err) {
           if(!err) {
             $location.path('/');
-            //openLoginForm();
+            openLoginForm();
           }
         });
       };
