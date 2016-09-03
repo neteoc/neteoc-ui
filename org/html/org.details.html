@@ -82,6 +82,7 @@
                       <div class="form-group">
                           <label for="title">Email: </label>
                           <input ng-model="ctlr.newinvite.email" type="text" class="form-control" id="title" placeholder="title"  required >
+                          <p class="help-block">Tip: To invite a list of people,  add several emails here seperated by a comma. <br /> EX: example.person@example.com, other.person@no.com </p>
                       </div>
                         <p></p>
                         <button ng-click="ctlr.inviteUser()" type="submit" class="btn btn-danger" data-dismiss="modal" ng-disabled="inviteform.$invalid">Fire</button>
