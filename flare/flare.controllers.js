@@ -212,10 +212,8 @@ module.exports = function(parentModule) {
                     $(document).ready(function() {
                         $('#messagestable').DataTable();
                     } );
-                    angular.forEach(messages, function(value, key, message) {
-                        //var timestamp = moment(message.createdAt).format("dddd, MMMM Do YYYY, h:mm:ss a");
-                        var timestamp = moment(message.createdAt).format("DD MMM YYYY - kkMM");
-                        messages[key].createdAtString = timestamp;
+                    angular.forEach(messages, function(value, key) {
+                        messages[key].createdAtString = moment(value.createdAt).format("DD MMM YYYY - kkMM");
                     });
                 });
 
