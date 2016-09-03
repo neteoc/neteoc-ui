@@ -193,6 +193,7 @@ module.exports = function(parentModule) {
 
     parentModule.FlarePageController = parentModule._module.controller('Flare.FlarePageController', ['List', 'Message', function(List, Message) {
         let vm = this;
+        let title = "Flares sent by you";
         let Flares = {};
         let message = "";
         let FormTitle = "Send Flare";
@@ -244,7 +245,7 @@ module.exports = function(parentModule) {
 
 
 
-        let title = "Flares";
+
         angular.extend(vm, {
             title: title,
             message: message,
