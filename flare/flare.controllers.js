@@ -220,7 +220,7 @@ module.exports = function(parentModule) {
     }]);
 
 
-    parentModule.FlarePageController = parentModule._module.controller('Flare.FlarePageController', ['List', 'Message', function(List, Message) {
+    parentModule.FlarePageController = parentModule._module.controller('Flare.FlarePageController', ['List', 'Message', 'Message_inbox', function(List, Message, Message_inbox) {
         let vm = this;
         let title = "Flares sent by you";
         let Flares = {};
@@ -242,7 +242,26 @@ module.exports = function(parentModule) {
                         $('#messagestable').DataTable();
                     } );
                     angular.forEach(messages, function(value, key) {
-                        messages[key].createdAtString = moment(value.createdAt).format("DD MMM YYYY - kkMM");
+                        messages[key].createdAtString = moment(value.createdAt).format("DD MMM YYYY - kkmm");
+                    });
+                });
+
+
+
+        };
+
+        let getInbox = function (){
+            Message_inbox.query()
+                .$promise
+                .then(function(inbox){
+                    angular.extend(vm, {
+                        inbox: inbox
+                    });
+                    $(document).ready(function() {
+                        $('#inboxtable').DataTable();
+                    } );
+                    angular.forEach(inbox, function(value, key) {
+                        inbox[key].createdAtString = moment(value.createdAt).format("DD MMM YYYY - kkMM");
                     });
                 });
 
@@ -268,6 +287,7 @@ module.exports = function(parentModule) {
 
         $(document).ready(function() {
             getFlares();
+            getInbox();
         } );
 
 

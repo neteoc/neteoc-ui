@@ -110,6 +110,11 @@ module.exports = function(parentModule) {
       getInvites();
 
 
+      let removeInvite = function(inviteID) {
+        Invite.get({})
+      };
+
+
       let makeAdmin = function(userID){
           vm.org.admins.push(userID);
           vm.org.$update(function(){
@@ -152,6 +157,7 @@ module.exports = function(parentModule) {
     parentModule.InviteDetailController = parentModule._module.controller(parentModule.pluginName + '.InviteDetailController', ['Org', 'Invite', '$routeParams', '$location', function(Org, Invite, $routeParams, $location) {
       var vm = this;
       var title = "Invite Details";
+      let disableInvite = true;
 
 
       let getInvite = function() {
@@ -160,23 +166,43 @@ module.exports = function(parentModule) {
           .$promise.then(function(invite){
               angular.extend(vm, {
                 invite: invite
-              })
+              });
+              enableInvite();
           })
       };
+
+
+
+      let enableInvite = function() {
+        //inviteExpired(vm.invite.createdAt, 1);
+        var diff = moment(vm.invite.createdAt).diff(moment(), 'days')
+        console.log(diff)
+          if (vm.invite.status == 'pending' && diff <= 3){
+            vm.disableInvite = false;
+          }
+
+      };
+
 
       getInvite();
 
       let updateInvite = function(status) {
-         vm.invite.status = status;
-         vm.invite.orgid = $routeParams.orgid;
-         vm.invite.inviteid = $routeParams.inviteid;
+         if (!vm.disableInvite) {
+           vm.invite.status = status;
+           vm.invite.orgid = $routeParams.orgid;
+           vm.invite.inviteid = $routeParams.inviteid;
 
-         vm.invite.$update(function(invite){
+           vm.invite.$update(function(invite){
 
-           if (invite.message == "saved"){
-             $location.url('/ui/user/profile');
-           }
-         })
+             if (invite.message == "saved"){
+               $location.url('/ui/user/profile');
+             }
+           })
+
+         } else {
+           console.log("status is disabled");
+         }
+
       }
 
 
@@ -184,7 +210,8 @@ module.exports = function(parentModule) {
 
       angular.extend(vm, {
         title: title,
-        updateInvite: updateInvite
+        updateInvite: updateInvite,
+        disableInvite: disableInvite
       })
     }])
 

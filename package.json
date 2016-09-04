@@ -31,6 +31,7 @@
     "html-loader": "^0.4.3",
     "image-webpack-loader": "^2.0.0",
     "jquery": "^3.1.0",
+    "leaflet": "^0.7.7",
     "lodash": "^3.10.1",
     "moment": "^2.14.1",
     "moment-timezone": "^0.5.5",

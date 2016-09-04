@@ -4,27 +4,53 @@
         <span class="glyphicon glyphicon-envelope"> Broadcast Message </span>
     </a>
 
-  <h1>{{FlaresCrtl.title}}</h1>
+
+  <h3>Inbox</h3>
+
+
+      <table id="inboxtable" datatable="ng" class="row-border hover">
+          <thead>
+              <tr>
+                  <th>Timestamp</th>
+                  <th>From</th>
+                  <th>Subject</th>
+                  <th>Details</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr ng-repeat="message in FlaresCrtl.inbox">
+                  <td>{{message.additionalData.createdAtString}}</td>
+                  <td>{{message.author.displayName}}</td>
+                  <td>{{message.longTitle}}</td>
+                  <td><a href="/Flare/message/{{ message._id }}">Details</a></td>
+              </tr>
+          </tbody>
+      </table>
+
+  <h3>Sent</h3>
 
 
     <table id="messagestable" datatable="ng" class="row-border hover">
         <thead>
             <tr>
                 <th>Timestamp</th>
-                <th>Name</th>
-                <th>discription</th>
+                <th>Subject</th>
+                <th>Content</th>
                 <th>Details</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="message in FlaresCrtl.messages">
-                <td>{{message.createdAtString}}</td>
+                <td>{{message.additionalData.createdAtString}}</td>
                 <td>{{message.longTitle}}</td>
                 <td>{{message.content}}</td>
                 <td><a href="/Flare/message/{{ message._id }}">Details</a></td>
             </tr>
         </tbody>
     </table>
+
+
+
 
 
     <!-- Modal -->

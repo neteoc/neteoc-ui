@@ -17,5 +17,8 @@ module.exports = function(parentModule) {
     parentModule._module
         .factory('Message', function ($resource) {
             return $resource('/message/:id');
-        });
+        })
+        .factory('Message_inbox', function ($resource) {
+            return $resource('/message/received');
+        })
 };
