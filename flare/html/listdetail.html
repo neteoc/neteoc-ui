@@ -56,12 +56,12 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">{{fCtl.title}}</h4>
+                    <h4 class="modal-title" id="myModalLabel">Add User</h4>
                 </div>
                 <div class="modal-body">
                     <form>
                         <select id="listSelector" class="form-control" ng-model="fCtl.adduserdata">
-                            <option ng-repeat="user in fCtl.users" value="{{ user._id }}">{{ user.displayName }}</option>
+                            <option ng-repeat="user in fCtl.org.members" value="{{ user._id }}">{{ user.displayName }}</option>
                         </select>
                         <p></p>
                         <button ng-click="fCtl.addUser()" type="submit" class="btn btn-danger" data-dismiss="modal">Fire</button>

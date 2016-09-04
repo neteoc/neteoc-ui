@@ -20,7 +20,7 @@ var Flare;
   Flare.pluginName = 'Flare-plugin';
   Flare.templatePath = '';
 
-  Flare._module = angular.module(Flare.pluginName, ['UserPlugin', require('angular-resource'), require('angular-route')]);
+  Flare._module = angular.module(Flare.pluginName, ['UserPlugin', 'Org', require('angular-resource'), require('angular-route')]);
 
   Flare.tab = undefined;
   require('./flare.services')(Flare);

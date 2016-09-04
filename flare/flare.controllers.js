@@ -11,7 +11,7 @@ module.exports = function(parentModule) {
 
     var moment = require('moment');
 
-    parentModule.ListPageController = parentModule._module.controller('Flare.ListPageController', ['List', function(List) {
+    parentModule.ListPageController = parentModule._module.controller('Flare.ListPageController', ['List', 'Org', function(List, Org) {
         let vm = this;
         let title = "Lists";
         let newList = new List;
@@ -30,6 +30,15 @@ module.exports = function(parentModule) {
                 });
         };
 
+        let getOrgs = function() {
+          Org.query().$promise.then(function(orgs){
+            angular.extend(vm, {
+              orgs: orgs
+            })
+          });
+
+        };
+
 
 
         let createList = function() {
@@ -42,6 +51,8 @@ module.exports = function(parentModule) {
 
 
         };
+
+        getOrgs();
 
         getLists();
 
@@ -56,7 +67,7 @@ module.exports = function(parentModule) {
     }]);
 
 
-    parentModule.ListDetailPageController = parentModule._module.controller('Flare.ListDetailPageController', [ '$routeParams', 'List', 'User', function($routeParams, List, User) {
+    parentModule.ListDetailPageController = parentModule._module.controller('Flare.ListDetailPageController', [ '$routeParams', 'List', 'User', 'Org', function($routeParams, List, User, Org) {
         let vm = this;
         let adduserdata = "";
 
@@ -65,6 +76,23 @@ module.exports = function(parentModule) {
                     users: users
                 })
             });
+
+
+        let getOrg = function(orgid) {
+
+                return Org.get({ id: orgid})
+                    .$promise
+                    .then(function(org){
+                        angular.extend(vm, {
+                            org: org
+                        });
+                        return org;
+                    });
+
+            };
+
+
+
 
         let getList = function() {
 
@@ -75,6 +103,7 @@ module.exports = function(parentModule) {
                     angular.extend(vm, {
                         list: list
                     });
+                    getOrg(list.org);
                     $(document).ready(function() {
                         $('#listdetailtable').DataTable();
                     } );

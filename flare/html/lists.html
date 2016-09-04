@@ -46,6 +46,12 @@
                             <label for="message">Discription</label>
                             <input ng-model="fCtl.newList.data.discription" type="textbox" class="form-control" id="message" placeholder="message">
                         </div>
+                        <div class="form-group">
+                            <label for="listSelector">Organization: </label>
+                            <select id="listSelector" class="form-control" ng-model="fCtl.newList.data.org" Required >
+                                <option ng-repeat="org in fCtl.orgs" value="{{ org._id }}">{{ org.name }}</option>
+                            </select>
+                        </div>
                         <p></p>
                         <button ng-click="fCtl.createList()" type="submit" class="btn btn-danger" data-dismiss="modal">Fire</button>
                     </form>
