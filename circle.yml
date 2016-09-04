@@ -9,6 +9,7 @@ dependencies:
     - npm install
     - npm install -g webpack
     - webpack
+    - mv ../neteoc-server ./
 
 
 deployment:
