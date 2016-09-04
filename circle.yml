@@ -1,6 +1,15 @@
 machine:
   services:
     - docker
+  node:
+    version: 4.5.0
+
+dependencies:
+  override:
+    - npm install
+    - npm install -g webpack
+    - webpack
+
 
 deployment:
   hub:

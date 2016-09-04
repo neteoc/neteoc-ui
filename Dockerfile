@@ -2,12 +2,8 @@
 
 FROM kerryhatcher/neteoc-baseimage:latest
 
-RUN mkdir -p /opt/neteoc-ui
 RUN mkdir -p /opt/neteoc-server
-WORKDIR /opt/neteoc-ui
+WORKDIR /opt/neteoc-server
 
-COPY ./package.json /opt/neteoc-ui
-RUN npm install
-
-COPY . /opt/neteoc-ui
-RUN webpack
+COPY ../neteoc-server /opt/neteoc-server
+#RUN webpack
