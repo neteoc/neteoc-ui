@@ -2,17 +2,25 @@
 <html>
    <head>
      <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, inital-scale=1">
      <base href='/'></base>
      <title>NetEOCS</title>
    </head>
    <body>
-     <nav class="navbar navbar-default navbar-pf" role="navigation" ng-controller="User.MenuController as UsersCrtl">
+     <nav class="navbar navbar-default" role="navigation" ng-controller="User.MenuController as UsersCrtl">
        <div class="container">
          <div class="navbar-header dropdown">
              <a href="#" class="navbar-brand dropdown-toggle" data-toggle="dropdown" aria-expanded="false">NetEOC<span class="caret"></span></a>
              <ul class="dropdown-menu" hawtio-main-nav ng-show="currentUser">
              </ul>
            </div>
+           <ul class="nav navbar-nav">
+             <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{UsersCrtl.subTitle}}<span class="caret"></span></a>
+                <ul class="dropdown-menu" hawtio-sub-tabs>
+                </ul>
+                </li>
+           </ul>
            <ul id="right-nav" class="nav navbar-nav navbar-right">
                 <ul class="nav navbar-nav" ng-show="currentUser">
                   <li><a ng-click="UsersCrtl.logout()"> Logout</a></li>
@@ -49,10 +57,7 @@
 
      <div class="container">
            <div class="row">
-             <div class="col-lg-1 sidebar">
-               <ul class="nav nav-sidebar" hawtio-sub-tabs ng-show="currentUser"></ul>
-             </div>
-             <div id="main"  class="col-lg-11 main ng-cloak" ng-controller="HawtioNav.ViewController">
+             <div id="main"  class="col-lg-12 main ng-cloak" ng-controller="HawtioNav.ViewController">
                 <div ng-include src="viewPartial"></div>
              </div>
            </div>
@@ -77,7 +82,7 @@
              <ul class="nav navbar-nav">
              </ul>
              <ul class="nav navbar-nav navbar-right" ng-controller="User.MenuController as UsersCrtl">
-               <li><a href="https://en.wikipedia.org/wiki/Software_release_life_cycle#Alpha" target="_blank">V0.0.1-Alpha</a></li>
+               <li><a href="https://en.wikipedia.org/wiki/Software_release_life_cycle#Alpha" target="_blank">V0.0.2-Alpha</a></li>
                <li><a href="https://github.com/neteoc" target="_blank">Source Code</a></li>
              </ul>
          </div>

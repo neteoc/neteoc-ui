@@ -105,11 +105,22 @@ var User;
       });
     }]);
 
-  User.MenuController = User._module.controller('User.MenuController', ['$scope', '$http', 'Auth', '$location', 'Session', function($scope, $http, Auth, $location, Session) {
+  User.MenuController = User._module.controller('User.MenuController', ['$scope', '$http', 'Auth', '$location', 'Session', '$rootScope', function($scope, $http, Auth, $location, Session, $rootScope) {
       let vm = this;
       let title = "Users";
-
+      let subTitle = "SubMenu";
       Auth.currentUser();
+
+      subTitle = $location.search()['main-tab']
+
+      $rootScope.$on("$routeChangeSuccess", function(event, next, current) {
+        console.log(next.params['main-tab']);
+        console.log(vm.subTitle)
+        console.log(subTitle)
+        vm.subTitle = next.params['main-tab'];
+      });
+
+      //console.log($location.search()['main-tab']);
 
       let openLoginForm = function() {
         //$location.path('/Flares/login/login');
@@ -140,7 +151,8 @@ var User;
         title: title,
         poptastic: poptastic,
         logout: logout,
-        openLoginForm: openLoginForm
+        openLoginForm: openLoginForm,
+        subTitle: subTitle
       });
     }]);
 
