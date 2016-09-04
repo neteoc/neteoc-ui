@@ -63,7 +63,7 @@
                 <td><a ng-href="/ui/org/{{ invite.org }}/invite/{{ invite._id }}">link</a></td>
                 <td>{{ invite.status }}</td>
                 <td>{{ invite.acceptedBy.displayName }}</td>
-                <td><button type="button" class="btn btn-danger" ng-click="ctlr.removeInvite(invite._id)">Delete Invite</button></td>
+                <td><button type="button" class="btn btn-danger" ng-click="ctlr.archiveInvite(invite._id)">Archive Invite</button></td>
             </tr>
             </tbody>
         </table>

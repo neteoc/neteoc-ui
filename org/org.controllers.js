@@ -64,7 +64,7 @@ module.exports = function(parentModule) {
 
       let getOrg = function() {
 
-          return Org.get({ id: $routeParams.id})
+          return Org.get({ id: $routeParams.orgid})
               .$promise
               .then(function(org){
                   console.log(org);
@@ -81,7 +81,7 @@ module.exports = function(parentModule) {
       };
 
       let getInvites = function() {
-        Invite.query({ orgid: $routeParams.id })
+        Invite.query({ orgid: $routeParams.orgid })
           .$promise.then(function(invites){
               angular.extend(vm, {
                 invites: invites
@@ -110,8 +110,18 @@ module.exports = function(parentModule) {
       getInvites();
 
 
-      let removeInvite = function(inviteID) {
-        Invite.get({})
+      let archiveInvite = function(inviteID) {
+        Invite.get({orgid: $routeParams.orgid, inviteid: inviteID})
+        .$promise.then(function(invite){
+            invite.isArchived = true;
+            invite.orgid = $routeParams.orgid;
+            invite.inviteid = inviteID;
+            invite.$delete(function(data){
+              console.log(data);
+              getInvites();
+            });
+
+        });
       };
 
 
@@ -149,7 +159,8 @@ module.exports = function(parentModule) {
         makeAdmin: makeAdmin,
         removeUser: removeUser,
         newinvite: newinvite,
-        inviteUser: inviteUser
+        inviteUser: inviteUser,
+        archiveInvite: archiveInvite
       })
 
     }]);

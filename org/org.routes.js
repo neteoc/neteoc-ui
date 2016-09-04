@@ -26,7 +26,7 @@ module.exports = function(parentModule) {
 
 
          $routeProvider
-         .when("/ui/org/:id", {
+         .when("/ui/org/:orgid", {
              templateUrl : DetailstemplateUrl
          })
          .when("/ui/org/:orgid/invite/:inviteid", {
