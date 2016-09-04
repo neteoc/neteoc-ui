@@ -3,47 +3,51 @@
    <head>
      <meta charset="UTF-8">
      <base href='/'></base>
-     <title>Webpack App</title>
+     <title>NetEOCS</title>
    </head>
    <body>
      <nav class="navbar navbar-default navbar-pf" role="navigation" ng-controller="User.MenuController as UsersCrtl">
-       <ul class="nav navbar-nav navbar-primary" hawtio-main-nav ng-show="currentUser"></ul>
-       <ul id="right-nav" class="nav navbar-nav navbar-right">
-         <ul class="nav navbar-nav" ng-hide="currentUser">
-                <li><a ng-click="UsersCrtl.openLoginForm()">Log In</a></li>
-            </ul>
-            <ul class="nav navbar-nav" ng-show="currentUser">
-              <li><a ng-click="UsersCrtl.logout()"> Logout</a></li>
-            </ul>
-         <!-- <li><a ng-click="UsersCrtl.logout()"><span class="glyphicon-log-out"></span> Logout</a></li>-->
+       <div class="container">
+         <div class="navbar-header dropdown">
+             <a href="#" class="navbar-brand dropdown-toggle" data-toggle="dropdown" aria-expanded="false">NetEOC<span class="caret"></span></a>
+             <ul class="dropdown-menu" hawtio-main-nav ng-show="currentUser">
+             </ul>
+           </div>
+           <ul id="right-nav" class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav" ng-show="currentUser">
+                  <li><a ng-click="UsersCrtl.logout()"> Logout</a></li>
+                </ul>
+             <!-- <li><a ng-click="UsersCrtl.logout()"><span class="glyphicon-log-out"></span> Logout</a></li>-->
 
 
 
-          <!-- Modal -->
-          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="myModalLabel">Please Login:</h4>
-                </div>
-                <div class="modal-body">
-                  <div class="embed-responsive embed-responsive-16by9">
-                    <a class="btn btn-block btn-social btn-google" ng-click="UsersCrtl.poptastic('/auth/google')" onclick="">
-                      <span class="fa fa-google"></span> Sign in with Google
-                    </a>
+              <!-- Modal -->
+              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Please Login:</h4>
+                    </div>
+                    <div class="modal-body">
+                      <div class="embed-responsive embed-responsive-16by9">
+                        <a class="btn btn-block btn-social btn-google" ng-click="UsersCrtl.poptastic('/auth/google')" onclick="">
+                          <span class="fa fa-google"></span> Sign in with Google
+                        </a>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
                   </div>
                 </div>
-                <div class="modal-footer">
-                </div>
               </div>
-            </div>
-          </div>
 
 
-          </ul>
+              </ul>
+        </div>
      </nav>
-     <div class="container-fluid">
+
+     <div class="container">
            <div class="row">
              <div class="col-lg-1 sidebar">
                <ul class="nav nav-sidebar" hawtio-sub-tabs ng-show="currentUser"></ul>
@@ -61,6 +65,24 @@
          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
            Launch demo modal
          </button>-->
+
+     <div class="navbar navbar-default navbar-fixed-bottom navbar-pf">
+       <div class="container">
+         <div class="navbar-header dropdown">
+             <a href="#" class="navbar-brand dropdown-toggle" data-toggle="dropdown" aria-expanded="false">NetEOC<span class="caret"></span></a>
+             <ul class="dropdown-menu" hawtio-main-nav ng-show="currentUser">
+             </ul>
+           </div>
+           <div class="navbar-collapse collapse" id="navbar-main">
+             <ul class="nav navbar-nav">
+             </ul>
+             <ul class="nav navbar-nav navbar-right" ng-controller="User.MenuController as UsersCrtl">
+               <li><a href="https://en.wikipedia.org/wiki/Software_release_life_cycle#Alpha" target="_blank">V0.0.1-Alpha</a></li>
+               <li><a href="https://github.com/neteoc" target="_blank">Source Code</a></li>
+             </ul>
+         </div>
+       </div>
+     </div>
 
 
 
