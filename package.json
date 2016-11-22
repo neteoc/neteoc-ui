@@ -4,7 +4,10 @@
   "description": "front end for flare",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "dev": "./node_modules/.bin/webpack-dev-server -w",
+    "webpack": "./node_modules/.bin/webpack",
+    "start": "./node_modules/.bin/http-server ./public/"
   },
   "author": "Kerry Hatcher <kerry.hatcher@gasdf.us>",
   "license": "MIT",
@@ -50,6 +53,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.22.0",
+    "http-server": "^0.9.0",
     "imports-loader": "^0.6.5",
     "jasmine-core": "^2.4.1",
     "karma": "^1.2.0",
@@ -61,6 +65,7 @@
     "path": "^0.12.7",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack": "^1.13.1"
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
   }
 }
