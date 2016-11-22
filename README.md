@@ -2,6 +2,17 @@
 
 [![CircleCI](https://circleci.com/gh/neteoc/neteoc-ui.svg?style=svg)](https://circleci.com/gh/neteoc/neteoc-ui)
 
+## Local Dev:
+
+run:
+
+    npm install
+    npm run dev
+
+
+
+## Copyright
+
 NetEOC
 Copyright (C) 2016  Kerry Hatcher <kwhatcher@gmail.com>
 
