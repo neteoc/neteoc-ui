@@ -14,7 +14,7 @@ require("angular-http-auth");
 
 require("./modules/neteoc/neteoc.index");
 
-require("./modules/user");
+require("./modules/user/user.index");
 
 //import {} from './flare';
 
