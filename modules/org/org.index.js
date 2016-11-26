@@ -14,13 +14,13 @@ var Org;
 
 
     // import Routes
-    Org.OrgRoutes = require('./org.routes')(Org);
+    Org.OrgRoutes = require('./org.routes.js')(Org);
 
     //console.log('meep');
 
-    Org.OrgService = require('./org.services')(Org);
+    Org.OrgService = require('./org.services.js')(Org);
 
-    Org.OrgControllers = require('./org.controllers')(Org);
+    Org.OrgControllers = require('./org.controllers.js')(Org);
 
     Org._module.run(['HawtioNav', '$rootScope', '$location', 'Session', function(HawtioNav, $rootScope, $location, Session) {
         HawtioNav.add(Org.tab);

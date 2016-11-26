@@ -3,3 +3,6 @@ docker-compose*
 env.sh
 .idea
 .git
+/dist/
+dist
+

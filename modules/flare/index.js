@@ -23,9 +23,9 @@ var Flare;
   Flare._module = angular.module(Flare.pluginName, ['UserPlugin', 'Org', require('angular-resource'), require('angular-route')]);
 
   Flare.tab = undefined;
-  require('./flare.services')(Flare);
-  require('./flare.routes')(Flare);
-  require('./flare.controllers')(Flare);
+  require('./flare.services.js')(Flare);
+  require('./flare.routes.js')(Flare);
+  require('./flare.controllers.js')(Flare);
 
   Flare._module.run(['HawtioNav', '$rootScope', '$location', 'Session', function(HawtioNav, $rootScope, $location, Session) {
 

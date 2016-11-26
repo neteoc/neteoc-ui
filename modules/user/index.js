@@ -35,21 +35,21 @@ var User;
 
   //console.log('meep');
 
-  User.UserService = require('./user.services')(User._module);
+  User.UserService = require('./user.services.js')(User._module);
 
 
-  User.AuthService = require('./auth.service')(User._module);
+  User.AuthService = require('./auth.service.js')(User._module);
 
 
-  require('./user.controllers')(User);
+  require('./user.controllers.js')(User);
 
 
 
 
-  User.PageController = User._module.controller('User.PageController', ['Session', 'User', function(Session, User) {
+  User.PageController = User._module.controller('User.PageController', ['Session', 'User', 'envService', function(Session, User, envService) {
       let vm = this;
       let title = "Users";
-
+      console.log(envService.get());
       let getUser = function () {
           Session.get().$promise.then(function (sessonuser) {
               "use strict";

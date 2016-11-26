@@ -37,4 +37,7 @@ jspm_packages
 .node_repl_history
 
 .idea
-/public/
+/terraform/creds.sh
+/.terraform/
+/dist/
+/terraform.tfstate.backup

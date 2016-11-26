@@ -14,15 +14,15 @@ var Admin;
 
 
     // import Routes
-    Admin.AdminRoutes = require('./admin.routes')(Admin);
+    Admin.AdminRoutes = require('./admin.routes.js')(Admin);
 
     //console.log('meep');
 
-    Admin.AdminService = require('./admin.services')(Admin);
+    Admin.AdminService = require('./admin.services.js')(Admin);
 
 
 
-    Admin.AdminControllers = require('./admin.controllers')(Admin);
+    Admin.AdminControllers = require('./admin.controllers.js')(Admin);
 
     Admin._module.run(['HawtioNav', '$rootScope', '$location', 'Session', function(HawtioNav, $rootScope, $location, Session) {
         Session.get().$promise.then(function(session){
