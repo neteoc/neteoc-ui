@@ -3,15 +3,6 @@ import {hawtioPluginLoader } from 'adminjs-core';
 var User;
 (function (User) {
 
-
-  let poptastic = function(url) {
-      var newWindow = window.open(url, 'name', 'height=600,width=450');
-      if (window.focus) {
-        newWindow.focus();
-      }
-    };
-
-
   User.pluginName = 'UserPlugin';
   User.templatePath = '';
 
@@ -21,7 +12,7 @@ var User;
 
 
   // import Routes
-  require('./user.routes.js')(User);
+  User.UserRoutes = require('./user.routes.js')(User);
 
   User._module.run(['HawtioNav', '$rootScope', '$location', function(HawtioNav, $rootScope, $location) {
     // On catching 401 errors, redirect to the login page.
@@ -32,10 +23,10 @@ var User;
     HawtioNav.add(User.tab);
   }]);
 
-  User.UserService = require('./user.services.js')(User._module);
+  User.UserService = require('./user.services.js')(User);
 
 
-  User.AuthService = require('./auth.service.js')(User._module);
+  User.AuthService = require('./auth.service.js')(User);
 
 
   User.UserControllers = require('./user.controllers.js')(User);
