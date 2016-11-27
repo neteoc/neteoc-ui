@@ -20,7 +20,6 @@ module.exports = function(parentModule) {
             List.query()
                 .$promise
                 .then(function(lists){
-                    console.log(lists);
                     angular.extend(vm, {
                         lists: lists
                     });

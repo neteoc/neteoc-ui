@@ -25,7 +25,6 @@ module.exports = function(parentModule) {
 
         let getOrgs = function() {
           Org.query().$promise.then(function(orgs){
-            console.log(orgs);
             angular.extend(vm, {
               orgs: orgs
             })
