@@ -8,7 +8,7 @@ var Org;
     Org.pluginName = 'Org';
     Org.templatePath = '';
 
-    Org._module = angular.module(Org.pluginName, ['http-auth-interceptor', require('angular-cookies'), require('angular-resource'), 'UserPlugin']);
+    Org._module = angular.module(Org.pluginName, ['http-auth-interceptor', require('angular-cookies'), require('angular-resource'), 'User']);
 
     Org.tab = undefined;
 

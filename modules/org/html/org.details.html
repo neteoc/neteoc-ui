@@ -60,7 +60,7 @@
             <tbody>
             <tr ng-repeat="invite in ctlr.invites">
                 <td>{{ invite.email }}</td>
-                <td><a ng-href="/ui/org/{{ invite.org }}/invite/{{ invite._id }}">link</a></td>
+                <td><a ng-href="/ui/org/{{ invite.org }}/invite/{{ invite._id }}?main-tab=Org&sub-tab=Org-index">link</a></td>
                 <td>{{ invite.status }}</td>
                 <td>{{ invite.acceptedBy.displayName }}</td>
                 <td><button type="button" class="btn btn-danger" ng-click="ctlr.archiveInvite(invite._id)">Archive Invite</button></td>
