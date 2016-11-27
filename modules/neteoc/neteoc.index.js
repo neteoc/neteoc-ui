@@ -11,9 +11,7 @@ var NetEOC;
     NetEOC.pluginName = 'NetEOC';
     NetEOC.templatePath = '';
 
-    //require('./neteoc.services.js')(NetEOC);
-    //require('./neteoc.routes.js')(NetEOC);
-    //require('./neteoc.controllers.js')(NetEOC);
+
 
 
     NetEOC._module = angular.module(NetEOC.pluginName, ['luminous.environment']);
@@ -34,6 +32,10 @@ var NetEOC;
 
 
     }]);
+
+    //require('./neteoc.services.js')(NetEOC);
+    NetEOC.routes = require('./neteoc.routes.js')(NetEOC);
+    NetEOC.controllers = require('./neteoc.controllers.js')(NetEOC);
 
 
     NetEOC._module.run(['HawtioNav', function(HawtioNav) {
