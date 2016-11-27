@@ -3,21 +3,21 @@
 module.exports = function(parentModule) {
 
     parentModule.AccountPageController = parentModule._module.controller('User.AccountPageController', ['$scope', '$http', 'Account', function($scope, $http, Account) {
-    let vm = this;
-    let title = "Users";
+        let vm = this;
+        let title = "Users";
 
-    let accountinfo = Account.get(function (accountinfo){
-        console.log(accountinfo);
+        let accountinfo = Account.get(function (accountinfo){
+
+            });
+
+
+
+
+        angular.extend(this, {
+            title: title,
+            accountinfo: accountinfo
         });
-        console.log('hello');
-        console.log(Account);
-
-
-    angular.extend(this, {
-        title: title,
-        accountinfo: accountinfo
-    });
-}]);
+    }]);
 
     parentModule.ListPageController = parentModule._module.controller('User.ListPageController', ['$scope', '$http', function($scope, $http) {
         let vm = this;
@@ -29,62 +29,46 @@ module.exports = function(parentModule) {
             title: title
         });
     }]);
-    
+
+    parentModule.PageController = parentModule._module.controller('User.PageController', ['Session', 'User', function(Session, User) {
+              let vm = this;
+              let title = "Users";
+              let getUser = function () {
+                  Session.get().$promise.then(function (sessonuser) {
+                      "use strict";
+
+                      User.get({id: sessonuser._id}).$promise.then(function (dbuser) {
+
+                          angular.extend(vm, {
+                              user: dbuser
+                          });
+
+                      });
 
 
-
-
-  parentModule.PageController = parentModule._module.controller('User.PageController', ['Session', 'User', 'envService', function(Session, User, envService) {
-      let vm = this;
-      let title = "Users";
-      console.log(envService.get());
-      let getUser = function () {
-          Session.get().$promise.then(function (sessonuser) {
-              "use strict";
-
-
-              User.get({id: sessonuser._id}).$promise.then(function (dbuser) {
-
-                  console.log(dbuser);
-                  angular.extend(vm, {
-                      user: dbuser
                   });
-
-              });
-
-
-          });
-      };
+              };
 
 
-      getUser();
+              getUser();
 
 
-      let updateUser = function () {
-              vm.user.$update(function () {
-                  console.log("user updated");
-                  getUser();
-              })
-      };
+              let updateUser = function () {
+                      vm.user.$update(function () {
+                          console.log("user updated");
+                          getUser();
+                      })
+              };
 
 
 
-    let poptastic = function(url) {
-        var newWindow = window.open(url, 'name', 'height=600,width=450');
-        if (window.focus) {
-          newWindow.focus();
-        }
-      };
+            angular.extend(vm, {
+              title: title,
+              updateUser: updateUser
+            });
+    }]);
 
-    angular.extend(vm, {
-      title: title,
-      poptastic: poptastic,
-      updateUser: updateUser
-    });
-  }]);
-
-
-  parentModule.LoginPageController = parentModule._module.controller('User.LoginPageController', ['$scope', '$http', function($scope, $http) {
+    parentModule.LoginPageController = parentModule._module.controller('User.LoginPageController', ['$scope', '$http', function($scope, $http) {
       let vm = this;
       let title = "Users";
 
@@ -94,7 +78,7 @@ module.exports = function(parentModule) {
       });
     }]);
 
-  parentModule.MenuController = parentModule._module.controller('User.MenuController', ['$scope', '$http', 'Auth', '$location', 'Session', '$rootScope', function($scope, $http, Auth, $location, Session, $rootScope) {
+    parentModule.MenuController = parentModule._module.controller('User.MenuController', ['$scope', '$http', 'Auth', '$location', 'Session', '$rootScope', function($scope, $http, Auth, $location, Session, $rootScope) {
       let vm = this;
       let title = "Users";
       let subTitle = "SubMenu";
@@ -103,9 +87,6 @@ module.exports = function(parentModule) {
       subTitle = $location.search()['main-tab']
 
       $rootScope.$on("$routeChangeSuccess", function(event, next, current) {
-        console.log(next.params['main-tab']);
-        console.log(vm.subTitle)
-        console.log(subTitle)
         vm.subTitle = next.params['main-tab'];
       });
 

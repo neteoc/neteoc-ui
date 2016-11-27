@@ -38,3 +38,12 @@ resource "cloudflare_record" "testapi" {
   ttl = 3600
   proxied = false
 }
+
+resource "cloudflare_record" "mockapi" {
+  domain = "neteoc.com"
+  name = "mockapi"
+  value = "${aws_s3_bucket.mockapi.website_endpoint}"
+  type = "CNAME"
+  ttl = 3600
+  proxied = true
+}

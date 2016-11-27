@@ -14,7 +14,6 @@ module.exports = function(parentModule) {
 
     parentModule._module
         .factory('Session', ['$resource', '$appEnvironment', function ($resource, $appEnvironment) {
-            console.log($appEnvironment.config.apiUrl);
             return $resource($appEnvironment.config.apiUrl + 'auth/session/');
         }]);
 

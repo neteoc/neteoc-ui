@@ -58,11 +58,46 @@ resource "aws_s3_bucket" "testapp" {
   }
 }
 
+
+resource "aws_s3_bucket" "mockapi" {
+  bucket = "mockapi.neteoc.com"
+  acl = "public-read"
+  tags {
+    Name = "NetEOC Mock API"
+    Project = "NetEOC"
+    Envroment = "Test"
+  }
+
+  website {
+    index_document = "index.json"
+    error_document = "error.json"
+  }
+  logging {
+    target_bucket = "${aws_s3_bucket.app_log_bucket.id}"
+    target_prefix = "log/"
+  }
+  versioning {
+    enabled = true
+  }
+
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_methods = ["PUT","POST","GET","HEAD"]
+    allowed_origins = ["*"]
+    expose_headers = ["ETag"]
+    max_age_seconds = 3000
+  }
+}
+
 output "website" {
   value = "${aws_s3_bucket.app.website_endpoint}"
 }
 
 output "Test website" {
+  value = "${aws_s3_bucket.testapp.website_endpoint}"
+}
+
+output "MockAPI" {
   value = "${aws_s3_bucket.testapp.website_endpoint}"
 }
 

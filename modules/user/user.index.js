@@ -3,7 +3,7 @@ import {hawtioPluginLoader } from 'adminjs-core';
 var User;
 (function (User) {
 
-  User.pluginName = 'UserPlugin';
+  User.pluginName = 'User';
   User.templatePath = '';
 
   User._module = angular.module(User.pluginName, ['http-auth-interceptor', require('angular-cookies'), require('angular-resource')]);
