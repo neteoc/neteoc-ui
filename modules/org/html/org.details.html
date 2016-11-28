@@ -1,0 +1,97 @@
+<div ng-controller="Org.OrgDetailController as ctlr">
+
+    <h1>{{ctlr.org.name}}</h1>
+    <h3>{{ctlr.org.description}}</h3>
+
+    <p><a data-original-title="Add User" href="#" type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#addOrgModal">
+        <i class="fa fa-user-plus" aria-hidden="true"></i>
+        <span> Invite User </span>
+    </a></p>
+
+    <h3>Members: </h3>
+
+    <table id="orgdetailtable" datatable="ng" class="row-border hover">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>SMS</th>
+          <th>Telephone</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="member in ctlr.org.members">
+            <td>{{member.displayName }}</td>
+            <td>{{member.flareemail }}</td>
+            <td>{{member.flaresms }}</td>
+            <td>{{member.flaretel }}</td>
+            <td>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Actions
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <!--<li><a href="#">Remove</a></li>-->
+                            <li ng-hide="ctlr.isAdmin(member._id)" ng-click="ctlr.makeAdmin(member._id)"><a href="#">Make Admin</a></li>
+                            <li ng-show="ctlr.isAdmin(member._id)" ng-click="ctlr.removeUser(member._id)"><a href="#">Remove Admin</a></li>
+                        </ul>
+                    </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <h3>Invites</h3>
+
+
+    <table id="orginvitetable" datatable="ng" class="row-border hover">
+            <thead>
+            <tr>
+              <th>Email</th>
+              <th>Invite Link</th>
+              <th>Status</th>
+              <th>User</th>
+              <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="invite in ctlr.invites">
+                <td>{{ invite.email }}</td>
+                <td><a ng-href="/ui/org/{{ invite.org }}/invite/{{ invite._id }}?main-tab=Org&sub-tab=Org-index">link</a></td>
+                <td>{{ invite.status }}</td>
+                <td>{{ invite.acceptedBy.displayName }}</td>
+                <td><button type="button" class="btn btn-danger" ng-click="ctlr.archiveInvite(invite._id)">Archive Invite</button></td>
+            </tr>
+            </tbody>
+        </table>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="addOrgModal" tabindex="-1" role="dialog" aria-labelledby="listModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Invite user to {{ctlr.org.name}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="inviteform" name="inviteform">
+                      <div class="form-group">
+                          <label for="title">Email: </label>
+                          <input ng-model="ctlr.newinvite.email" type="text" class="form-control" id="title" placeholder="title"  required >
+                          <p class="help-block">Tip: To invite a list of people,  add several emails here seperated by a comma. <br /> EX: example.person@example.com, other.person@no.com </p>
+                      </div>
+                        <p></p>
+                        <button ng-click="ctlr.inviteUser()" type="submit" class="btn btn-danger" data-dismiss="modal" ng-disabled="inviteform.$invalid">Fire</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>

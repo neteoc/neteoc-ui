@@ -11,12 +11,17 @@ import {HawtioMainNav} from 'adminjs-core-navigation';
 
 
 require("angular-http-auth");
-require("./user");
 
-import {} from './flare';
+require("./modules/neteoc/neteoc.index");
 
-require("./admin");
+require("./modules/user/user.index");
 
-require("./org/org.index");
+require("./modules/flare/flare.index");
+
+//import {} from './flare';
+
+//require("./admin");
+
+require("./modules/org/org.index");
 
 //test me

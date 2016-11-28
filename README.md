@@ -2,6 +2,33 @@
 
 [![CircleCI](https://circleci.com/gh/neteoc/neteoc-ui.svg?style=svg)](https://circleci.com/gh/neteoc/neteoc-ui)
 
+
+---
+## To get started: 
+
+(if on M$ Windows) Install git for windows, you will need **git bash.**: https://git-scm.com/download/win
+
+Install AWS CLI: http://docs.aws.amazon.com/cli/latest/userguide/installing.html
+
+Setup an AWS creds profile with: `aws cli configure --profile neteoc`
+
+Install Terraform: https://www.terraform.io/intro/getting-started/install.html
+
+Install node.js and npm: https://nodejs.org/en/download/package-manager/
+
+Clone this repo then: 
+
+`npm install`          -> installs dependencies
+
+`npm run dev`          -> starts a devlopment server on port 8080 and watches for changes
+
+`npm run deploy`       -> Deploy build artifacts to S3 (Requires some setup, more info to come)
+
+
+---
+
+
+
 NetEOC
 Copyright (C) 2016  Kerry Hatcher <kwhatcher@gmail.com>
 
