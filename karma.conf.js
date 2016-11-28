@@ -15,9 +15,24 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      '**/*.spec.js'
+    './node_modules/angular/angular.js',                             // angular
+    './node_modules/angular-ui-router/release/angular-ui-router.js', // ui-router
+    './node_modules/angular-mocks/angular-mocks.js',
+    './modules/**/*.controlers.js',
+    './modules/**/*.spec.js'
     ],
 
+    preprocessors: {
+    './modules/**/*.index.js': [ 'webpack' ]
+    },
+
+    webpack: {
+      // karma watches the test entry points
+      // (you don't need to specify the entry option)
+      // webpack watches dependencies
+
+      // webpack configuration
+    },
 
     // list of files to exclude
     exclude: [
@@ -56,7 +71,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
 
 
     // Continuous Integration mode
@@ -65,6 +80,13 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser should be started simultaneous
-    concurrency: Infinity
+    concurrency: Infinity,
+
+    plugins: [
+      require('karma-jasmine'),
+      require('karma-chrome-launcher'),
+      require('karma-webpack')
+    ]
+
   })
 }
