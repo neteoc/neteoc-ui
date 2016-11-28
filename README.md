@@ -2,9 +2,10 @@
 
 [![CircleCI](https://circleci.com/gh/neteoc/neteoc-ui.svg?style=svg)](https://circleci.com/gh/neteoc/neteoc-ui)
 
+V2-alpha
 
 ---
-## To get started: 
+## To get started:
 
 (if on M$ Windows) Install git for windows, you will need **git bash.**: https://git-scm.com/download/win
 
@@ -16,7 +17,7 @@ Install Terraform: https://www.terraform.io/intro/getting-started/install.html
 
 Install node.js and npm: https://nodejs.org/en/download/package-manager/
 
-Clone this repo then: 
+Clone this repo then:
 
 `npm install`          -> installs dependencies
 
