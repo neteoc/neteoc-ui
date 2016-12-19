@@ -1,33 +1,29 @@
 machine:
-  services:
-    - docker
   node:
-    version: 4.5.0
+    version: 6.9.2
 
 dependencies:
   override:
     - npm install
-    - npm install -g webpack
-    - webpack
-    - mv ../neteoc-server ./
 
+compile:
+  override:
+    - npm run build
 
 
 deployment:
   production:
-    branch: master
+    branch: prod
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker build -t  neteoc/neteoc-ui:latest .
       - docker push neteoc/neteoc-ui:latest
       - curl -v -X POST https://circleci.com/api/v1/project/neteoc/neteoc-server/tree/master?circle-token=$CIRCLE_TOKEN
   staging:
-    branch: dev
+    branch: test
     commands:
-      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - docker build -t  neteoc/neteoc-ui:dev .
-      - docker push neteoc/neteoc-ui:dev
-      - curl -v -X POST https://circleci.com/api/v1/project/neteoc/neteoc-server/tree/dev?circle-token=$CIRCLE_TOKEN
+      - aws s3 sync ./dist/ s3://test.neteoc.com --acl public-read
+
 
 
 #notify:

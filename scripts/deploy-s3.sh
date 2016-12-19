@@ -18,6 +18,6 @@ rm -rf dist
 npm run build
 
 #sync the dist folder with s3. Need a better way to switch between test and prod.
-aws s3 sync ./dist/ s3://app.neteoc.com --acl public-read
+#aws s3 sync ./dist/ s3://app.neteoc.com --acl public-read
 aws s3 sync ./dist/ s3://test.neteoc.com --acl public-read
-aws s3 sync ./mockapi/ s3://mockapi.neteoc.com --acl public-read
+#aws s3 sync ./mockapi/ s3://mockapi.neteoc.com --acl public-read
