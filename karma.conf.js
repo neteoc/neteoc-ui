@@ -1,5 +1,7 @@
 // Karma configuration
 // Generated on Mon Aug 22 2016 14:37:09 GMT-0400 (EDT)
+var webpackConfig = require('./webpack.config.js');
+webpackConfig.entry = {};
 
 module.exports = function(config) {
   config.set({
@@ -15,15 +17,16 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-    './node_modules/angular/angular.js',                             // angular
-    './node_modules/angular-ui-router/release/angular-ui-router.js', // ui-router
+      './dist/*bundle.js',
+    // './node_modules/angular/angular.js',                             // angular
+    // './node_modules/angular-ui-router/release/angular-ui-router.js', // ui-router
     './node_modules/angular-mocks/angular-mocks.js',
-    './modules/**/*.controlers.js',
+    // './modules/**/*.controlers.js',
     './modules/**/*.spec.js'
     ],
 
     preprocessors: {
-    './modules/**/*.index.js': [ 'webpack' ]
+      './dist/*bundle.js': ['webpack']
     },
 
     webpack: {
