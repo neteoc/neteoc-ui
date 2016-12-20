@@ -1,6 +1,6 @@
 # neteoc-ui
 
-[![CircleCI](https://circleci.com/gh/neteoc/neteoc-ui.svg?style=svg)](https://circleci.com/gh/neteoc/neteoc-ui)
+[![CircleCI](https://circleci.com/gh/neteoc/neteoc-ui/tree/prod.svg?style=svg)](https://circleci.com/gh/neteoc/neteoc-ui/tree/prod)
 
 V2-alpha
 
