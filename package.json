@@ -4,7 +4,7 @@
   "description": "front end for neteoc",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0",
+    "test": "node_modules/.bin/karma start",
     "build": "node_modules/.bin/webpack",
     "dev": "node_modules/.bin/webpack-dev-server -w --history-api-fallback",
     "deploy": "bash ./scripts/deploy-s3.sh",
