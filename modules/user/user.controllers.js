@@ -30,41 +30,23 @@ module.exports = function(parentModule) {
         });
     }]);
 
-    parentModule.PageController = parentModule._module.controller('User.PageController', ['Session', 'User', function(Session, User) {
-              let vm = this;
-              let title = "Users";
-              let getUser = function () {
-                  Session.get().$promise.then(function (sessonuser) {
-                      "use strict";
+    parentModule.PageController = parentModule._module.controller('User.PageController', [ 'User', 'authService', function(User, authService) {
+        let vm = this;
+        let title = "Users";
 
-                      User.get({id: sessonuser._id}).$promise.then(function (dbuser) {
-
-                          angular.extend(vm, {
-                              user: dbuser
-                          });
-
-                      });
+        authService.getProfileDeferred().then(function (profile) {
+            angular.extend(vm, {
+                profile: profile
+            });
+        });
 
 
-                  });
-              };
-
-
-              getUser();
-
-
-              let updateUser = function () {
-                      vm.user.$update(function () {
-                          console.log("user updated");
-                          getUser();
-                      })
-              };
 
 
 
             angular.extend(vm, {
               title: title,
-              updateUser: updateUser
+              authService: authService
             });
     }]);
 
@@ -78,13 +60,16 @@ module.exports = function(parentModule) {
       });
     }]);
 
-    parentModule.MenuController = parentModule._module.controller('User.MenuController', ['$scope', '$http', 'Auth', '$location', 'Session', '$rootScope', function($scope, $http, Auth, $location, Session, $rootScope) {
+    parentModule.MenuController = parentModule._module.controller('User.MenuController', ['$scope', '$http', '$location', '$rootScope', 'authService', function($scope, $http, $location, $rootScope, authService) {
       let vm = this;
       let title = "Users";
       let subTitle = "SubMenu";
-      Auth.currentUser();
+      //vm.authService = authService;
+      //  console.log(authService);
 
-      subTitle = $location.search()['main-tab']
+      $rootScope.isAuthenticated = localStorage.getItem('isAuthenticated');
+
+      subTitle = $location.search()['main-tab'];
 
       $rootScope.$on("$routeChangeSuccess", function(event, next, current) {
         vm.subTitle = next.params['main-tab'];
@@ -101,17 +86,8 @@ module.exports = function(parentModule) {
         return false;
       };
 
-      //Session.query().$promise
-      //  .error(function(data) { console.log(data) })
-      //  .success(function(data) { console.log(err);  });
-
       let logout = function() {
-        Auth.logout(function(err) {
-          if(!err) {
-            $location.path('/');
-            openLoginForm();
-          }
-        });
+
       };
 
 
@@ -119,7 +95,8 @@ module.exports = function(parentModule) {
         title: title,
         logout: logout,
         openLoginForm: openLoginForm,
-        subTitle: subTitle
+        subTitle: subTitle,
+        authService: authService
       });
     }]);
 

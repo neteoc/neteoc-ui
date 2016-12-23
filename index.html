@@ -2,8 +2,9 @@
 <html>
    <head>
      <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, inital-scale=1">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
      <base href='/'></base>
+     <script type="text/javascript" src="https://cdn.auth0.com/js/lock/10.6/lock.min.js"></script>
      <title>NetEOC</title>
    </head>
    <body>
@@ -11,20 +12,23 @@
        <div class="container">
          <div class="navbar-header dropdown">
              <a href="#" class="navbar-brand dropdown-toggle" data-toggle="dropdown" aria-expanded="false">NetEOC<span class="caret"></span></a>
-             <ul class="dropdown-menu" hawtio-main-nav ng-show="currentUser">
+             <ul class="dropdown-menu" hawtio-main-nav ng-if="authService.getAuthState()">
              </ul>
            </div>
-           <ul class="nav navbar-nav">
-             <li class="dropdown">
+           <ul class="nav navbar-nav" ng-if="authService.getAuthState()">
+             <li class="dropdown" >
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{UsersCrtl.subTitle}}<span class="caret"></span></a>
                 <ul class="dropdown-menu" hawtio-sub-tabs>
                 </ul>
                 </li>
            </ul>
            <ul id="right-nav" class="nav navbar-nav navbar-right">
-                <ul class="nav navbar-nav" ng-show="currentUser">
-                  <li><a ng-click="UsersCrtl.logout()"> Logout</a></li>
+                <ul class="nav navbar-nav" ng-if="authService.getAuthState()">
+                  <li><a ng-click="authService.logout()"> Logout</a></li>
                 </ul>
+               <ul class="nav navbar-nav" ng-if="!authService.getAuthState()">
+                   <li><a ng-click="authService.login()">login</a></li>
+               </ul>
              <!-- <li><a ng-click="UsersCrtl.logout()"><span class="glyphicon-log-out"></span> Logout</a></li>-->
 
 
@@ -82,7 +86,7 @@
        <div class="container">
          <div class="navbar-header dropdown">
              <a href="#" class="navbar-brand dropdown-toggle" data-toggle="dropdown" aria-expanded="false">NetEOC<span class="caret"></span></a>
-             <ul class="dropdown-menu" hawtio-main-nav ng-show="currentUser">
+             <ul class="dropdown-menu" hawtio-main-nav ng-if="authService.getAuthState()">
              </ul>
            </div>
            <div class="navbar-collapse collapse" id="navbar-main">

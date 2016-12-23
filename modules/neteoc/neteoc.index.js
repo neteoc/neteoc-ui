@@ -19,11 +19,11 @@ var NetEOC;
     NetEOC._module.config(['$appEnvironmentProvider', function($appEnvironmentProvider) {
 
         $appEnvironmentProvider.addEnvironment('local', ['127.0.0.1', 'localhost', /\.local$/i], {
-            apiUrl: 'http://localhost:8888/mockapi/'
+            apiUrl: 'http://localhost:3000/'
         });
 
         $appEnvironmentProvider.addEnvironment('test', ['test.neteoc.com'], {
-            apiUrl: 'https://mockapi.neteoc.com/'
+            apiUrl: 'https://60twfi7j70.execute-api.us-east-1.amazonaws.com/dev/'
         });
 
         $appEnvironmentProvider.addEnvironment('Production', ['app.neteoc.com'], {
