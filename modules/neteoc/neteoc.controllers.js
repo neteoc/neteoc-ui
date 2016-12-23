@@ -10,8 +10,8 @@ module.exports = function(parentModule) {
           console.log("default path!");
 
           console.log($location.path());
-          //$location.search('main-tab=User&sub-tab=User-profile')
-          //$location.path('/ui/user/profile')
+          $location.search('main-tab=User&sub-tab=User-profile')
+          $location.path('/ui/user/profile')
         }
 
 
