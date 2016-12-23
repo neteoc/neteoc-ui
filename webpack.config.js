@@ -12,7 +12,8 @@ const providerPlugin = new webpack.ProvidePlugin({
   "window.jQuery": "jquery",
   _: 'lodash',
   'P': 'bluebird',
-  'Promise': 'bluebird'
+  'Promise': 'bluebird',
+  "window.Auth0Lock": "auth0-lock"
 });
 
 module.exports = {

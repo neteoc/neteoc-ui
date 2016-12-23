@@ -16,12 +16,12 @@ require("./modules/neteoc/neteoc.index");
 
 require("./modules/user/user.index");
 
-require("./modules/flare/flare.index");
+//require("./modules/flare/flare.index");
 
 //import {} from './flare';
 
 //require("./admin");
 
-require("./modules/org/org.index");
+//require("./modules/org/org.index");
 
 //test me

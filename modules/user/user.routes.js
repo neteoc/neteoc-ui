@@ -11,7 +11,7 @@ module.exports = function(parentModule) {
 
 
     parentModule._module
-        .config(['$routeProvider', 'HawtioNavBuilderProvider', '$locationProvider', function($routeProvider, builder, $locationProvider ) {
+        .config(['$routeProvider', 'HawtioNavBuilderProvider', '$locationProvider', 'lockProvider', 'jwtOptionsProvider', '$httpProvider', function($routeProvider, builder, $locationProvider, lockProvider, jwtOptionsProvider, $httpProvider ) {
             $locationProvider.html5Mode(true);
             $routeProvider
                 .when('/', {
@@ -47,6 +47,24 @@ module.exports = function(parentModule) {
                     return promise.then(success, error);
                 }
             }];
+
+            lockProvider.init({
+                clientID: 'OZBDFi8UeN9fA1Wa8h2BSMYO0zT25R9m',
+                domain: 'neteoc.auth0.com'
+            });
+
+            jwtOptionsProvider.config({
+                tokenGetter: function () {
+                    return localStorage.getItem('id_token');
+                },
+                whiteListedDomains: ['localhost'],
+                unauthenticatedRedirectPath: '/login'
+            });
+            // Add the jwtInterceptor to the array of HTTP interceptors
+            // so that JWTs are attached as Authorization headers
+            $httpProvider.interceptors.push('jwtInterceptor');
+
+
         }]);
 
 };
