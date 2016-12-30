@@ -50,7 +50,7 @@ module.exports = function(parentModule) {
             });
     }]);
 
-    parentModule.LoginPageController = parentModule._module.controller('User.LoginPageController', ['$scope', '$http', function($scope, $http) {
+    parentModule.LoginPageController = parentModule._module.controller('UserLoginPageController', ['$scope', '$http', function($scope, $http) {
       let vm = this;
       let title = "Users";
 

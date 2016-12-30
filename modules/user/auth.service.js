@@ -24,7 +24,7 @@ module.exports = function(parentModule) {
             if (userProfile) {
                 $rootScope.profile = userProfile;
                 deferredProfile.resolve(userProfile);
-                console.log(userProfile);
+                //console.log(userProfile);
                 return userProfile
             }
         }
