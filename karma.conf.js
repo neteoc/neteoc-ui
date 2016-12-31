@@ -18,6 +18,7 @@ module.exports = function (config) {
       require("karma-phantomjs-launcher"),
       require("karma-mocha"),
       require("karma-mocha-reporter"),
+      require("karma-htmlfile-reporter"),
       require("karma-sourcemap-loader"),
       require("karma-webpack")
     ],
@@ -43,7 +44,12 @@ module.exports = function (config) {
     },
 
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['mocha'],
+    // reporters: ['mocha'],
+    reporters: ['mocha', 'html'],
+
+    htmlReporter: {
+      outputFile: 'dist/testResults.html',
+    },
 
     // web server port
     port: 9876,
