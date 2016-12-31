@@ -2,7 +2,7 @@ class ProfileController {
   constructor(Auth) {
     this.user = Auth.getProfile()
     this.name = 'profile';
-    console.log(Auth);
+
   }
 }
 

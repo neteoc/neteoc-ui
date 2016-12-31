@@ -3,7 +3,8 @@ import uiRouter from 'angular-ui-router';
 import aboutComponent from './about.component';
 
 let aboutModule = angular.module('about', [
-  uiRouter
+  uiRouter,
+  'navbar'
 ])
 
 .config(($stateProvider) => {
@@ -15,8 +16,14 @@ let aboutModule = angular.module('about', [
     });
 })
 
+//
+.run(['Menu', function(Menu){
+Menu.addToMainMenu({ display: "about", url: "/about" })
+
+}])
+
 .component('about', aboutComponent)
-  
+
 .name;
 
 export default aboutModule;

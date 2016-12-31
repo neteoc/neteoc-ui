@@ -2,9 +2,7 @@ let MenuFactory = function () {
   const menu = {
     main: {
       display: "NetEOC",
-      items: [
-        { display: "home", url: "/" },
-        { display: "about", url: "/about" }
+      items: [    
       ]
     }
 
@@ -18,8 +16,12 @@ let MenuFactory = function () {
 
   };
 
+  let addToMainMenu = (item) => {
+      menu.main.items.push(item)
+  };
 
-  return { getMenu };
+
+  return { getMenu, addToMainMenu };
 };
 
 export default MenuFactory;

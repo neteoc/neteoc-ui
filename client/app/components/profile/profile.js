@@ -4,7 +4,8 @@ import profileComponent from './profile.component';
 
 let profileModule = angular.module('profile', [
   uiRouter,
-  'user'
+  'user',
+  'navbar'
 ])
 
 .config(($stateProvider) => {
@@ -15,6 +16,13 @@ let profileModule = angular.module('profile', [
       component: 'profile'
     });
 })
+
+.run(['Menu', function(Menu){
+Menu.addToMainMenu({ display: "Profile", url: "/profile" })
+
+}])
+
+
 
 .component('profile', profileComponent)
 
