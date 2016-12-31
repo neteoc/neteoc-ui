@@ -63,13 +63,13 @@
     "yargs": "^3.9.0"
   },
   "scripts": {
-    "build": "gulp webpack",
-    "component": "gulp component",
-    "serve": "gulp serve",
-    "start": "gulp serve",
-    "test": "karma start",
-    "watch": "gulp serve",
-    "webpack": "gulp webpack"
+    "build": "node_modules/.bin/gulp webpack",
+    "component": "node_modules/.bin/gulp component",
+    "serve": "node_modules/.bin/gulp serve",
+    "start": "node_modules/.bin/gulp serve",
+    "test": "node_modules/.bin/karma start",
+    "watch": "node_modules/.bin/gulp serve",
+    "webpack": "node_modules/.bin/gulp webpack"
   },
   "keywords": [
     "angular",
