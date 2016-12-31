@@ -5,6 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "angular": "^1.5.0",
+    "angular-http-auth": "^1.5.0",
+    "angular-jwt": "^0.1.8",
     "angular-lock": "^1.0.5",
     "angular-ui-router": "^1.0.0-beta.1",
     "jquery": "^3.1.1",
@@ -12,6 +14,7 @@
   },
   "devDependencies": {
     "angular-mocks": "^1.5.0",
+    "auth0-lock": "^10.7.3",
     "babel-core": "^6.7.7",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-runtime": "^6.7.5",

@@ -1,13 +1,14 @@
 <nav class="navbar navbar-default" role="navigation">
     <div class="container">
       <div class="navbar-header dropdown">
-          <a href="#" class="navbar-brand dropdown-toggle" data-toggle="dropdown" aria-expanded="false">NetEOC<span class="caret"></span></a>
+          <a href="#" class="navbar-brand dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{ $ctrl.menu.getMenu().main.display }}<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/">home</a></li>
-            <li><a href="/about">about</a></li>
+            <li ng-repeat="item in $ctrl.menu.getMenu().main.items">
+              <a href="{{ item.url }}">{{ item.display }}</a>
+            </li>
           </ul>
         </div>
-        <ul class="nav navbar-nav" ng-if="authService.getAuthState()">
+        <ul class="nav navbar-nav" ng-if="$ctrl.auth.getAuthState()">
           <li class="dropdown" >
              <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{UsersCrtl.subTitle}}<span class="caret"></span></a>
              <ul class="dropdown-menu" hawtio-sub-tabs>
@@ -16,11 +17,11 @@
         </ul>
 
         <ul id="right-nav" class="nav navbar-nav navbar-right">
-             <ul class="nav navbar-nav" ng-if="authService.getAuthState()">
-               <li><a ng-click="authService.logout()"> Logout</a></li>
+             <ul class="nav navbar-nav" ng-if="$ctrl.auth.getAuthState()">
+               <li><a ng-click="$ctrl.auth.logout()"> Logout</a></li>
              </ul>
-            <ul class="nav navbar-nav" ng-if="!authService.getAuthState()">
-                <li><a ng-click="authService.login()">login</a></li>
+            <ul class="nav navbar-nav" ng-if="!$ctrl.auth.getAuthState()">
+                <li><a ng-click="$ctrl.auth.login()">login</a></li>
             </ul>
           <!-- <li><a ng-click="UsersCrtl.logout()"><span class="glyphicon-log-out"></span> Logout</a></li>-->
 
