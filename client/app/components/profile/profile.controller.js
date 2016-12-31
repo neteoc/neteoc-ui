@@ -6,6 +6,6 @@ class ProfileController {
   }
 }
 
-ProfileController.$inject
+
 ProfileController.$inject = ['Auth'];
 export default ProfileController;

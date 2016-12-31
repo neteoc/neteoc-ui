@@ -1,9 +1,12 @@
 <nav class="navbar navbar-default" role="navigation">
     <div class="container">
       <div class="navbar-header dropdown">
-          <a href="#" class="navbar-brand dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{ $ctrl.menu.getMenu().main.display }}<span class="caret"></span></a>
+          <a href="#" class="navbar-brand dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{ $ctrl.menu.getMenu('main').display }}<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li ng-repeat="item in $ctrl.menu.getMenu().main.items">
+            <li ng-repeat="item in $ctrl.menu.getMenu('main').items" >
+              <a href="{{ item.url }}">{{ item.display }}</a>
+            </li>
+            <li ng-repeat="item in $ctrl.menu.getMenu('main').privateItems" ng-if="$ctrl.auth.getAuthState()">
               <a href="{{ item.url }}">{{ item.display }}</a>
             </li>
           </ul>

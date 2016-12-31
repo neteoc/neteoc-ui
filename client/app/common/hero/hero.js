@@ -7,7 +7,7 @@ let heroModule = angular.module('hero', [
 ])
 
 .component('hero', heroComponent)
-  
+
 .name;
 
 export default heroModule;

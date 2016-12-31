@@ -52,6 +52,8 @@ module.exports = function(parentModule) {
             $rootScope.profile = {};
             $rootScope.isAuthenticated = false;
             authManager.unauthenticate();
+            
+
         }
 
 

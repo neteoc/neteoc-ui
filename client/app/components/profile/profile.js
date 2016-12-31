@@ -18,7 +18,7 @@ let profileModule = angular.module('profile', [
 })
 
 .run(['Menu', function(Menu){
-Menu.addToMainMenu({ display: "Profile", url: "/profile" })
+Menu.addToMainMenu({ display: "Profile", url: "/profile", requireLogin: true })
 
 }])
 

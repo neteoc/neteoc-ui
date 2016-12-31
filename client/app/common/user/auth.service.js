@@ -1,7 +1,7 @@
 'use strict';
 
 
-let AuthService = function($q, lock, authManager, User, $rootScope) {
+let AuthService = function($q, lock, authManager, User, $rootScope, $location) {
   var userProfile = JSON.parse(localStorage.getItem('profile')) || null;
   var deferredProfile = $q.defer();
 
@@ -45,6 +45,7 @@ let AuthService = function($q, lock, authManager, User, $rootScope) {
        $rootScope.profile = {};
        $rootScope.isAuthenticated = false;
        authManager.unauthenticate();
+       $location.path('/');
    }
 
 
@@ -83,6 +84,6 @@ let AuthService = function($q, lock, authManager, User, $rootScope) {
    }
 };
 
-AuthService.$inject = ['$q', 'lock', 'authManager', 'User', '$rootScope'];
+AuthService.$inject = ['$q', 'lock', 'authManager', 'User', '$rootScope', '$location'];
 
 export default AuthService;
