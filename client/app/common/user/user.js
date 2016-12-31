@@ -1,5 +1,4 @@
 import angular from 'angular';
-import UserFactory from './user.factory';
 import AuthService from './auth.service';
 
 
@@ -47,9 +46,6 @@ let userModule = angular.module('user', modDeps)
       lock.interceptHash();
 
 }])
-
-
-.factory('User', UserFactory)
 
 .service('Auth', AuthService)
 
