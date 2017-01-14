@@ -4,19 +4,30 @@ class FlareController {
     this.name = 'flare';
     this.$http = $http;
 
-    this.getOrganizationDetails(1);
-
-    console.log(this.organization);
+    this.getAvailableLists();
   }
 
-  getOrganizationDetails = (organizationId) => {
+  getAvailableLists = () => {
 
     let vm = this;
     // TODO: unmockify
-    this.$http.get('https://mockapi.neteoc.com/org/123456789/').then(function(response) {
+    this.$http.get('https://mockapi.neteoc.com/lists/').then(function(response) {
+
+      console.log("Sup");
+      console.log(response);
 
       angular.extend(vm, {
-        organization: response.data
+        // lists: response.data
+        lists: [
+          {
+            _id : 1,
+            name : "first list"
+          },
+          {
+            _id : 2,
+            name : "twoth list"
+          }
+        ]
       });
     });
   }

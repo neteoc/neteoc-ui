@@ -7,6 +7,7 @@
 
   <br />
 
+<!--
   <p>
     To: 
     <select>
@@ -19,4 +20,42 @@
     Message Details: 
     <textarea></textarea>
   </p>
+-->
+
+    <a data-original-title="Broadcast Message" href="#" type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#flareModal" ng-click="FlaresCrtl.getLists()">
+        <span class="glyphicon glyphicon-envelope"> Broadcast Message </span>
+    </a>
+  
+    <div class="modal fade" id="flareModal" tabindex="-1" role="dialog" aria-labelledby="flareModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{{FlaresCrtl.FormTitle}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="flareform" name="userForm">
+                        <div class="form-group">
+                            <label for="title">Subject: </label>
+                            <input ng-model="FlaresCrtl.newmsg.data.title" type="text" class="form-control" id="title" placeholder="title"  required >
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message: </label>
+                            <input ng-model="FlaresCrtl.newmsg.data.content" type="textbox" class="form-control" id="message" placeholder="message"  required>
+                        </div>
+                        <div class="form-group">
+                            <label for="listSelector">List: </label>
+                            <select id="listSelector" class="form-control" ng-model="$ctrl.lists" Required >
+                                <option ng-repeat="list in $ctrl.lists" value="{{ list._id }}">{{ list.name }}</option>
+                            </select>
+                        </div>
+                        <p></p>
+                        <button ng-click="FlaresCrtl.savemessage()" type="submit" class="btn btn-danger" data-dismiss="modal" ng-disabled="userForm.$invalid">Fire</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
 </div>

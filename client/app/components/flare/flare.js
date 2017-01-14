@@ -15,6 +15,10 @@ let flareModule = angular.module('flare', [
     });
 })
 
+.run(['Menu', function(Menu){
+  Menu.addToMainMenu({ display: "Flare", url: "/flare/", requireLogin: true })
+}])
+
 .component('flare', flareComponent)
 
 .name;
