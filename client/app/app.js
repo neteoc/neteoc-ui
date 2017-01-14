@@ -4,7 +4,11 @@ import Common from './common/common';
 import Components from './components/components';
 import AppComponent from './app.component';
 import 'normalize.css';
+import $ from 'jquery';
+import jQuery from 'jquery';
 
+window.$ = $;
+window.jQuery = jQuery;
 
 angular.module('app', [
     uiRouter,
