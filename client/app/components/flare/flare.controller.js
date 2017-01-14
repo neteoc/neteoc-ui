@@ -40,6 +40,9 @@ class FlareController {
     console.log("Sending flare");
     console.log(this.newMessage);
     console.log(this.selectedList);
+
+    // on success
+    this.newMessage = {};
   }
 }
 
