@@ -5,11 +5,15 @@
     <h1>{{$ctrl.organizationName}}</h1>
     <h3>{{$ctrl.organizationDescription}}</h3>
 
-
-    <p><a data-original-title="Add User" href="#" type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#addOrgModal">
-        <i class="fa fa-user-plus" aria-hidden="true"></i>
-        <span> Invite User </span>
-    </a></p>
+    <p>
+        <a data-original-title="Add User" href="#" type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#addOrgModal">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+            <span> Invite User </span>
+        </a>
+        <a type="button" ng-href="/flare/{{$ctrl.organizationId}}" class="btn btn-lg btn-primary" title="Send Flare">
+            Send Flare <span class="glyphicon glyphicon-send"></span>
+        </a>
+    </p>
 
     <h3>Members: </h3>
 

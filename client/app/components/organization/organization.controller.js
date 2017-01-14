@@ -14,12 +14,12 @@ class OrganizationController {
 
     let orgs = [
       {
-        id: 1,
+        _id: 1,
         name: "u",
         description: "none of u bidness"
       },
       {
-        id: 2,
+        _id: 2,
         name: "me",
         description: "likes puppies"
       }
@@ -32,7 +32,7 @@ class OrganizationController {
     // TODO: Go to API
 
     this.orgs.push({
-      id: 3,
+      _id: 3,
       name: "new org",
       description: "this is the only new org you will ever create"
     })
