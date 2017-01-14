@@ -1,9 +1,60 @@
 <navbar></navbar>
 
 <div class="container">
-      <div class="row">
-          <main>
-            dis here an orgazatin is
-          </main>
+
+    <h1>{{$ctrl.name}}</h1>
+
+
+    <p><a data-original-title="Add User" href="#" type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#addOrgModal">
+        <i class="fa fa-users" aria-hidden="true"></i>
+        <span> Create Organization </span>
+    </a></p>
+
+
+    <table id="orglisttable" datatable="ng" class="row-border hover">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th> </th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="org in $ctrl.orgs">
+            <td>{{ org.name }}</td>
+            <td>{{ org.description }}</td>
+            <td>
+                <a type="button" ng-href="/ui/org/{{org._id}}?main-tab=Org&sub-tab=Org-index" class="btn btn-success">Details</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="addOrgModal" tabindex="-1" role="dialog" aria-labelledby="listModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Create Organization</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                          <label for="title">Name: </label>
+                          <input ng-model="$ctrl.neworg.name" type="text" class="form-control" id="title" placeholder="title"  required >
+                      </div>
+                      <div class="form-group">
+                          <label for="message">Description: </label>
+                          <input ng-model="$ctrl.neworg.discription" type="textbox" class="form-control" id="message" placeholder="message"  required>
+                      </div>
+                        <p></p>
+                        <button ng-click="$ctrl.createOrg()" type="submit" class="btn btn-danger" data-dismiss="modal">Fire</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
         </div>
-      </div>
+    </div>
+</div>
