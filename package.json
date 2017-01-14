@@ -70,7 +70,7 @@
     "serve": "node_modules/.bin/gulp serve",
     "start": "node_modules/.bin/gulp serve",
     // "test": "node_modules/.bin/karma start",
-    "test": "echo testing time",
+    "test": "echo 'testing time'",
     "watch": "node_modules/.bin/gulp serve",
     "webpack": "node_modules/.bin/gulp webpack"
   },
