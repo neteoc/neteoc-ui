@@ -21,7 +21,9 @@ Clone this repo then:
 
 `npm install`          -> installs dependencies
 
-`npm start`          -> starts a devlopment server on port 8080 and watches for changes
+`npm run dev`          -> starts a devlopment server on port 8080 and watches for changes
+
+`npm run deploy`       -> Deploy build artifacts to S3 (Requires some setup, more info to come)
 
 
 ---

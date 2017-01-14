@@ -50,7 +50,14 @@ module.exports = function(parentModule) {
 
             lockProvider.init({
                 clientID: 'OZBDFi8UeN9fA1Wa8h2BSMYO0zT25R9m',
-                domain: 'neteoc.auth0.com'
+                domain: 'neteoc.auth0.com',
+                options: {
+                    auth: {
+                        params: {
+                            scope: 'openid email name picture'
+                        }
+                    }
+                }
             });
 
             jwtOptionsProvider.config({
