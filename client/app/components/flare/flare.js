@@ -6,6 +6,15 @@ let flareModule = angular.module('flare', [
   uiRouter
 ])
 
+.config(($stateProvider) => {
+  "ngInject";
+  $stateProvider
+    .state('flare', {
+      url: '/flare/:recipientId',
+      component: 'flare'
+    });
+})
+
 .component('flare', flareComponent)
 
 .name;

@@ -1,3 +1,22 @@
-<div>
-  <h1>{{ $ctrl.name }}</h1>
+<navbar></navbar>
+
+<div class="container">
+
+  <h3 class="panel-title capitalize">Good evening, {{$ctrl.user.name}}.
+    Would you like to send a Flare?</h3>
+
+  <br />
+
+  <p>
+    To: 
+    <select>
+      <option>{{$ctrl.organization.name}}</option>
+    </select>
+    <br />
+    Title: 
+    <input type="text" />
+    <br />
+    Message Details: 
+    <textarea></textarea>
+  </p>
 </div>
