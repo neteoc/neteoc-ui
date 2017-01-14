@@ -4,6 +4,8 @@ class FlareController {
     this.name = 'flare';
     this.$http = $http;
 
+    this.newMessage = {};
+
     this.getAvailableLists();
   }
 
@@ -15,6 +17,7 @@ class FlareController {
 
       console.log("Sup");
       console.log(response);
+      console.log(response.data);
 
       angular.extend(vm, {
         // lists: response.data
@@ -30,6 +33,13 @@ class FlareController {
         ]
       });
     });
+  }
+
+  sendFlare = () => {
+    
+    console.log("Sending flare");
+    console.log(this.newMessage);
+    console.log(this.selectedList);
   }
 }
 
