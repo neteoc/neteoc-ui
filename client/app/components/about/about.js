@@ -18,7 +18,7 @@ let aboutModule = angular.module('about', [
 
 //
 .run(['Menu', function(Menu){
-Menu.addToMainMenu({ display: "about", url: "/about" })
+Menu.addToMainMenu({ display: "About", url: "/about" })
 
 }])
 

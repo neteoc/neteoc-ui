@@ -23,12 +23,12 @@ let AuthService = function($q, lock, authManager, $rootScope, $location) {
    }
 
    function getAuthState() {
-       console.log("=============== Getting Auth State ==================");
+       // console.log("=============== Getting Auth State ==================");
        let state = authManager.isAuthenticated();
        if (!state) {
            state = false
        }
-       console.log(state);
+       // console.log(state);
 
        return state;
    }
