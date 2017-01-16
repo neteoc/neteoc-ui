@@ -1,6 +1,7 @@
 var path    = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   devtool: 'source-map',
@@ -23,6 +24,7 @@ module.exports = {
       $: "jquery",
       jQuery: "jquery"
     }),
+    new ExtractTextPlugin("styles.css"),
     // Injects bundles in your index.html instead of wiring all manually.
     // It also adds hash to all injected assets so we don't have problems
     // with cache purging during deployment.
