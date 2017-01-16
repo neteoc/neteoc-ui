@@ -2,7 +2,7 @@ import angular from 'angular';
 import AuthService from './auth.service';
 
 
-require('angular-lock');
+require('./angular-lock');
 require("angular-http-auth");
 
 let modDeps = [
