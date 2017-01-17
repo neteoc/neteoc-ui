@@ -30,7 +30,7 @@ describe('Flare', () => {
     // template specs
     // tip: use regex to ensure correct bindings are used e.g., {{  }}
     it('has name in template [REMOVE]', () => {
-      expect(FlareTemplate).to.match(/{{\s?\$ctrl\.name\s?}}/g);
+      expect(FlareTemplate).to.match(/\s?\<navbar><\/navbar>\s?/g);
     });
   });
 

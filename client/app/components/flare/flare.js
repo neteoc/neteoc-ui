@@ -1,8 +1,10 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import flareComponent from './flare.component';
+import navbar from '../../common/navbar/navbar'
 
 let flareModule = angular.module('flare', [
+  navbar,
   uiRouter
 ])
 

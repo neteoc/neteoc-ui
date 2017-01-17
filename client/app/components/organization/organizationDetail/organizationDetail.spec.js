@@ -6,6 +6,7 @@ import OrganizationDetailTemplate from './organizationDetail.html';
 describe('OrganizationDetail', () => {
   let $rootScope, makeController;
 
+
   beforeEach(window.module(OrganizationDetailModule));
   beforeEach(inject((_$rootScope_) => {
     $rootScope = _$rootScope_;
@@ -30,7 +31,7 @@ describe('OrganizationDetail', () => {
     // template specs
     // tip: use regex to ensure correct bindings are used e.g., {{  }}
     it('has name in template [REMOVE]', () => {
-      expect(OrganizationDetailTemplate).to.match(/{{\s?\$ctrl\.name\s?}}/g);
+      expect(OrganizationDetailTemplate).to.match(/\s?\<navbar><\/navbar>\s?/g);
     });
   });
 
