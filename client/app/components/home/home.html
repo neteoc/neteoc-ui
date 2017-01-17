@@ -5,10 +5,18 @@
 <div class="container">
       <div class="row">
           <main>
-            <div>
+
+  <div ng-if="$ctrl.Auth.getAuthState()">
+    <h1>Welcome back, {{$ctrl.user.name}}</h1>
+    You have 0 pending messages (because we haven't implemented them yet, lol)
+  </div>
+
+  <div ng-if="!$ctrl.Auth.getAuthState()">
               <h1>What is NetEOC?</h1>
-            </div>
-            <p> NetEOC is a platform to help responders better manage operations via technology </p>
+            <p> NetEOC is a platform to help responders better manage operations via technology.
+              That little button in the top right can log you in using something you already have, like Facebook, or Gmail. </p>
+  </div>
+
           </main>
         </div>
       </div>
