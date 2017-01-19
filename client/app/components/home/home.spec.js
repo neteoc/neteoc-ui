@@ -47,7 +47,7 @@ describe('Home', () => {
     });
 
     it('has name in template', () => {
-      expect(template.find('h1').html()).to.eq('Found in home');
+      expect(template.find('h1').html()).to.eq('What is NetEOC?');
     });
 
   });

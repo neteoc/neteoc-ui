@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 class OrganizationController {
 
   constructor() {
@@ -27,7 +29,7 @@ class OrganizationController {
     return orgs;
   }
 
-  createOrg = () => { 
+  createOrg = () => {
 
     // TODO: Go to API
 
