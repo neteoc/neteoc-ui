@@ -1,7 +1,9 @@
 class MissionsController {
-  constructor() {
+  constructor(Mission) {
     this.name = 'missions';
+    this.missions = Mission
   }
 }
 
+MissionsController.$inject = ['Mission'];
 export default MissionsController;

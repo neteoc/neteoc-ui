@@ -1,3 +1,10 @@
-<div>
-  <h1>{{ $ctrl.name }}</h1>
+<navbar></navbar>
+
+<div class="container">
+
+  <h3 class="panel-title capitalize">{{ $ctrl.name }}</h3>
+
+
+  <div ui-grid="{ data: $ctrl.missions.missions }" class="myGrid"></div>
+
 </div>
