@@ -1,11 +1,32 @@
 class ListsController {
-  constructor() {
+  constructor($http) {
     this.name = 'lists';
+    this.$http = $http;
 
-    this.organizations = this.getOrgs();
-    $(document).ready(function() {
-        $('#orglisttable').DataTable();
-    } );
+    this.getAvailableLists();
+    this.getOrganizations();
+  }
+
+  getAvailableLists = () => {
+
+    let vm = this;
+    this.$http.get('https://mockapi.neteoc.com/lists/').then(function(response) {
+
+      angular.extend(vm, {
+        lists: response.data
+      });
+    });
+  }
+
+  getOrganizations = () => {
+
+    let vm = this;
+    this.$http.get('https://mockapi.neteoc.com/organizations/').then(function(response) {
+
+      angular.extend(vm, {
+        organizations: response.data
+      });
+    });
   }
 
   // TODO: Get from API
@@ -27,4 +48,5 @@ class ListsController {
   }
 }
 
+ListsController.$inject = ['$http'];
 export default ListsController;
