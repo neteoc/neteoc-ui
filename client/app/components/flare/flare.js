@@ -1,9 +1,11 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import flareComponent from './flare.component';
+import lists from './lists/lists';
 
 let flareModule = angular.module('flare', [
-  uiRouter
+  uiRouter,
+  lists
 ])
 
 .config(($stateProvider) => {
