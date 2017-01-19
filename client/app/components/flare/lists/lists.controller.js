@@ -28,24 +28,6 @@ class ListsController {
       });
     });
   }
-
-  // TODO: Get from API
-  getOrgs = () => {
-
-    let orgs = [
-      {
-        _id: 1,
-        name: "u",
-        description: "none of u bidness"
-      },
-      {
-        _id: 2,
-        name: "me",
-        description: "likes puppies"
-      }
-    ];
-    return orgs;
-  }
 }
 
 ListsController.$inject = ['$http'];

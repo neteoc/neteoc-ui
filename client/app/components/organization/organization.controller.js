@@ -2,31 +2,26 @@ import $ from 'jquery';
 
 class OrganizationController {
 
-  constructor() {
+  constructor($http) {
     this.name = 'organization';
+    this.$http = $http;
 
-    this.orgs = this.getOrgs();
+    this.getOrganizations();
+
     $(document).ready(function() {
         $('#orglisttable').DataTable();
     } );
   }
 
-  // TODO: Get from API
-  getOrgs = () => {
+  getOrganizations = () => {
 
-    let orgs = [
-      {
-        _id: 1,
-        name: "u",
-        description: "none of u bidness"
-      },
-      {
-        _id: 2,
-        name: "me",
-        description: "likes puppies"
-      }
-    ];
-    return orgs;
+    let vm = this;
+    this.$http.get('https://mockapi.neteoc.com/organizations/').then(function(response) {
+
+      angular.extend(vm, {
+        organizations: response.data
+      });
+    });
   }
 
   createOrg = () => {
@@ -51,4 +46,5 @@ class OrganizationController {
         */
 }
 
+OrganizationController.$inject = ['$http'];
 export default OrganizationController;
