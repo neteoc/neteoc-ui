@@ -2,15 +2,31 @@ import $ from 'jquery';
 
 class OrganizationController {
 
-  constructor($http) {
+  constructor($http, $scope) {
     this.name = 'organization';
     this.$http = $http;
 
     this.getOrganizations();
 
-    $(document).ready(function() {
-        $('#orglisttable').DataTable();
-    } );
+    this.organizationGrid = {
+      data: '$ctrl.organizations',
+      columnDefs: [{
+        name: 'Name',
+        field: 'name'
+      }, {
+        name: 'Description',
+        field: 'description'
+      }, {
+        name: ' ',
+        // cellTemplate: '<div><button ng-href="/organization/{row.entity._id}">Details</button></div>'
+        cellTemplate: '<div><button ng-click="grid.appScope.organizationDetails(row.entity._id)">Details</button></div>'
+      }]
+    };
+
+    $scope.organizationDetails = function(organizationId) {
+
+      window.location.href = "/organization/" + organizationId;
+    }
   }
 
   getOrganizations = () => {
@@ -33,8 +49,6 @@ class OrganizationController {
       name: "new org",
       description: "this is the only new org you will ever create"
     })
-
-    $('#orglisttable').DataTable();
   }
 
 /*
@@ -46,5 +60,5 @@ class OrganizationController {
         */
 }
 
-OrganizationController.$inject = ['$http'];
+OrganizationController.$inject = ['$http', '$scope'];
 export default OrganizationController;

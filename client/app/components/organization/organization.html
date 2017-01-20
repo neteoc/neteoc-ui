@@ -2,15 +2,15 @@
 
 <div class="container">
 
-    <h1>{{$ctrl.name}}</h1>
-
-
     <p><a data-original-title="Add User" href="#" type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#addOrgModal">
         <i class="fa fa-users" aria-hidden="true"></i>
         <span> Create Organization </span>
     </a></p>
 
+    <h3>Organizations:</h3>
+    <div ui-grid="$ctrl.organizationGrid" class="grid"></div>
 
+<!--
     <table id="orglisttable" datatable="ng" class="row-border hover">
         <thead>
         <tr>
@@ -30,7 +30,7 @@
         </tr>
         </tbody>
     </table>
-
+-->
     <div class="modal fade" id="addOrgModal" tabindex="-1" role="dialog" aria-labelledby="listModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
