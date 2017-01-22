@@ -8,29 +8,11 @@
     </a></p>
 
     <h3>Organizations:</h3>
+
+    <div ng-if="!$ctrl.organizations.length">You don't belong to any organizations :( Maybe you should make your own.</div>
+
     <div ui-grid="$ctrl.organizationGrid" class="grid"></div>
 
-<!--
-    <table id="orglisttable" datatable="ng" class="row-border hover">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th> </th>
-
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="org in $ctrl.orgs">
-            <td>{{ org.name }}</td>
-            <td>{{ org.description }}</td>
-            <td>
-                <a type="button" ng-href="/organization/{{org._id}}" class="btn btn-success">Details</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
--->
     <div class="modal fade" id="addOrgModal" tabindex="-1" role="dialog" aria-labelledby="listModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -42,14 +24,14 @@
                     <form>
                       <div class="form-group">
                           <label for="title">Name: </label>
-                          <input ng-model="$ctrl.neworg.name" type="text" class="form-control" id="title" placeholder="title"  required >
+                          <input ng-model="$ctrl.newOrganization.name" type="text" class="form-control" id="title" placeholder="title"  required >
                       </div>
                       <div class="form-group">
                           <label for="message">Description: </label>
-                          <input ng-model="$ctrl.neworg.discription" type="textbox" class="form-control" id="message" placeholder="message"  required>
+                          <input ng-model="$ctrl.newOrganization.description" type="textbox" class="form-control" id="message" placeholder="message"  required>
                       </div>
                         <p></p>
-                        <button ng-click="$ctrl.createOrg()" type="submit" class="btn btn-danger" data-dismiss="modal">Fire</button>
+                        <button ng-click="$ctrl.createOrganization()" type="submit" class="btn btn-danger" data-dismiss="modal">Fire</button>
                     </form>
                 </div>
             </div>

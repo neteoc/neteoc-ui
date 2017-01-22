@@ -6,6 +6,14 @@ class OrganizationController {
     this.name = 'organization';
     this.$http = $http;
 
+    this.newOrganization = {};
+    
+  var authToken = localStorage.getItem('id_token');
+  $http.defaults.headers.common.Authorization = 'bearer ' + authToken;
+
+  // TODO: This ain't right
+    this.userId = localStorage.getItem('neteoc_id');
+
     this.getOrganizations();
 
     this.organizationGrid = {
@@ -32,7 +40,7 @@ class OrganizationController {
   getOrganizations = () => {
 
     let vm = this;
-    this.$http.get('https://mockapi.neteoc.com/organizations/').then(function(response) {
+    this.$http.get('http://54.172.225.43:54362/users/' + this.userId + '/organizations/').then(function(response) {
 
       angular.extend(vm, {
         organizations: response.data
@@ -40,24 +48,16 @@ class OrganizationController {
     });
   }
 
-  createOrg = () => {
+  createOrganization = () => {
 
-    // TODO: Go to API
+    this.newOrganization.ownerId = this.userId;
 
-    this.orgs.push({
-      _id: 3,
-      name: "new org",
-      description: "this is the only new org you will ever create"
-    })
+    let vm = this;
+    this.$http.post('http://54.172.225.43:54362/organizations', this.newOrganization).then(function(response) {
+
+        vm.organizations.push(response.data);
+    });
   }
-
-/*
-        let createOrg = function() {
-          Org.save(neworg).$promise.then(function(neworg){
-            getOrgs();
-          })
-        };
-        */
 }
 
 OrganizationController.$inject = ['$http', '$scope'];
