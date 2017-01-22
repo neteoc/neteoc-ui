@@ -11,7 +11,7 @@ class OrganizationController {
   var authToken = localStorage.getItem('id_token');
   $http.defaults.headers.common.Authorization = 'bearer ' + authToken;
 
-  // TODO: This ain't right
+  // TODO: This ain't right. Auth service or something, right?
     this.userId = localStorage.getItem('neteoc_id');
 
     this.getOrganizations();
@@ -26,8 +26,7 @@ class OrganizationController {
         field: 'description'
       }, {
         name: ' ',
-        // cellTemplate: '<div><button ng-href="/organization/{row.entity._id}">Details</button></div>'
-        cellTemplate: '<div><button ng-click="grid.appScope.organizationDetails(row.entity._id)">Details</button></div>'
+        cellTemplate: '<div><button ng-click="grid.appScope.organizationDetails(row.entity.id)">Details</button></div>'
       }]
     };
 
@@ -41,6 +40,8 @@ class OrganizationController {
 
     let vm = this;
     this.$http.get('http://54.172.225.43:54362/users/' + this.userId + '/organizations/').then(function(response) {
+
+      console.log(response);
 
       angular.extend(vm, {
         organizations: response.data
