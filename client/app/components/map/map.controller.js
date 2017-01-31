@@ -18,20 +18,23 @@ class MapController {
     this.pinGrid = {
       data: '$ctrl.pins',
       columnDefs: [{
-        name: 'Name',
-        field: 'name'
+        name: 'Location',
+        cellTemplate: '<div>{{row.entity.position.latitude}}, {{row.entity.position.longitude}}</div>'
       }, {
         name: 'Created',
         field: 'createTime'
       }, {
-        name: ' ',
-        cellTemplate: '<div><button ng-click="grid.appScope.organizationDetails(row.entity.id)">Details</button></div>'
+        name: 'Uploaded',
+        cellTemplate: '<div>{{row.entity.uploaded}}</div>'
       }]
     };
   }
+  // TODO: Cell template for uploaded should be icons based on state, with title for explanation
 
   resetNewPin = () => {
 
+      // TODO: each pin needs to be composed of events ...
+      // Each event is like a state-in-time with a userId and timestamp attached to it ...
     this.newPin = {
         "uploaded" : "false",
         "fields" : {
@@ -42,25 +45,35 @@ class MapController {
   
     getLocation = () => {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(this.showPosition);
+            navigator.geolocation.getCurrentPosition(this.positionCallback);
         }
     }
 
-    showPosition = (position) => {
-        this.currentPosition = position.coords;
+    positionCallback = (position) => {
+        this.currentPosition = {
+            "accuracy" : position.coords.accuracy,
+            "altitude" : position.coords.altitude,
+            "altitudeAccuracy" : position.coords.altitudeAccuracy,
+            "heading" : position.coords.heading,
+            "latitude" : position.coords.latitude,
+            "longitude" : position.coords.longitude,
+            "speed" : position.coords.speed
+        }
     }
 
     getPins = () => {
 
-        // TODO: get from local ..
+        this.pins = JSON.parse(localStorage.getItem("unsentPins"));
 
         let vm = this;
         // this.$http.get('http://54.172.225.43:55142/users/' + this.userId + "/flaregroups").then(function(response) {
         this.$http.get('https://mockapi.neteoc.com/pins/').then(function(response) {
 
-            angular.extend(vm, {
-                pins: response.data
-            });
+            if(vm.pins) {
+                vm.pins.concat(response.data);
+            } else {
+                vm.pins = response.data;
+            }
         });
     }
 
@@ -79,8 +92,6 @@ class MapController {
         this.pins.push(this.newPin);
         this.uploadPin(this.newPin);
 
-        // console.log(this.newPin);
-        console.log(JSON.stringify(this.newPin));
         this.resetNewPin();
     }
 
@@ -92,14 +103,18 @@ class MapController {
             console.log("Oh. We actually got a response. That's not supposed to happen.");
             console.log(response.data);
 
-            // set pin uploaded to true
+            pin.uploaded = "success";
 
         }, function errorCallback(response) {
 
             console.log("An error happened. We expected that (for now).");
-            console.log(response);
+            if(response.status != 404) {
+                console.log(response);
+            }
 
-            var unsentPins = localStorage.getItem("unsentPins");
+            pin.uploaded = "error";
+
+            var unsentPins = JSON.parse(localStorage.getItem("unsentPins"));
 
             if(unsentPins == null) {
                 unsentPins = [];
