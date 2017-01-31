@@ -4,6 +4,7 @@ import About from './about/about';
 import Profile from './profile/profile';
 import Organization from './organization/organization';
 import Flare from './flare/flare';
+import map from './map/map'; // "Map" (case sensitive) is a reserved word
 
 
 let componentModule = angular.module('app.components', [
@@ -11,7 +12,8 @@ let componentModule = angular.module('app.components', [
   About,
   Profile,
   Organization,
-  Flare
+  Flare,
+  map
 ])
 
 .name;
