@@ -63,17 +63,20 @@ class MapController {
 
     getPins = () => {
 
-        this.pins = JSON.parse(localStorage.getItem("unsentPins"));
+        this.pins = JSON.parse(localStorage.getItem("unsentPins")) || [];
 
         let vm = this;
         // this.$http.get('http://54.172.225.43:55142/users/' + this.userId + "/flaregroups").then(function(response) {
         this.$http.get('https://mockapi.neteoc.com/pins/').then(function(response) {
 
+            var remotePins = response.data;
+
             if(vm.pins) {
-                vm.pins.concat(response.data);
+                vm.pins = vm.pins.concat(remotePins);
             } else {
-                vm.pins = response.data;
+                vm.pins = remotePins;
             }
+
         });
     }
 
@@ -108,7 +111,7 @@ class MapController {
         }, function errorCallback(response) {
 
             console.log("An error happened. We expected that (for now).");
-            if(response.status != 404) {
+            if(response.status != 404 && response.status != -1) {
                 console.log(response);
             }
 
@@ -142,6 +145,13 @@ class MapController {
             return (c=='x' ? r : (r&0x3|0x8)).toString(16);
         });
         return uuid;
+    }
+
+    /* Debug */
+    
+    logPins = () => {
+
+        console.log(this.pins);
     }
 }
 

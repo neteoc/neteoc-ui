@@ -6,6 +6,11 @@
         <span class="glyphicon glyphicon-plus"> New Map Entry </span>
     </a>
 
+<!-- TODO: ng if am developer -->
+    <a type="button" class="btn btn-lg btn-primary" ng-click="$ctrl.logPins()">
+        <span class="glyphicon glyphicon-plus"> Debug - Log Pins</span>
+    </a>
+
     <p></p>
 
     <div ng-if="!!$ctrl.pins.length" ui-grid="$ctrl.pinGrid" class="grid"></div>
