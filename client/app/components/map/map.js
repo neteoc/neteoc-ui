@@ -16,7 +16,7 @@ let mapModule = angular.module('map', [
 })
 
 .run(['Menu', function(Menu){
-  Menu.addToMainMenu({ display: "Map", url: "/map", requireLogin: true })
+  Menu.addToMainMenu({ display: "GIS", url: "/map", requireLogin: true })
 }])
 
 .component('map', mapComponent)
