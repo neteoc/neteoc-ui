@@ -1,7 +1,8 @@
 class MapController {
-  constructor($http) {
+  constructor($http, $scope) {
     this.name = 'map';
     this.$http = $http;
+    this.$scope = $scope;
 
     // TODO: This ain't right. Auth service or something, right?
     var authToken = localStorage.getItem('id_token');
@@ -28,6 +29,8 @@ class MapController {
         cellTemplate: '<div>{{row.entity.uploaded}}</div>'
       }]
     };
+
+    $scope.attachmentAdded = this.attachmentAdded;
   }
   // TODO: Cell template for uploaded should be icons based on state, with title for explanation
 
@@ -129,6 +132,20 @@ class MapController {
         });
     }
 
+    attachmentAdded = (event) => {
+
+        // event.target.files[0]
+        
+        var files = event.target.files;
+        var reader = new FileReader();
+
+        reader.onload = function(frEvent) {
+            console.log(frEvent.target.result);
+            // document.getElementById("renderImage").innerHTML = '<img src="'+frEvent.target.result+'" />';
+        }
+        reader.readAsDataURL(files[0]);
+    }
+
     getCurrentUnixTime = () => {
 
         return (new Date()).getTime()/1000|0;
@@ -155,5 +172,5 @@ class MapController {
     }
 }
 
-MapController.$inject = ['$http'];
+MapController.$inject = ['$http', '$scope'];
 export default MapController;
