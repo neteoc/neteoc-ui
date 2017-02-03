@@ -50,7 +50,10 @@ class MapController {
         "fields" : {
             "1" : "change me "
         },
-        "attachments" : {}
+        "attachments" : {},
+        "hasAttachments" : function() {
+            return Object.keys(this.attachments).length > 0;
+        }
     }
   }
   
@@ -143,6 +146,11 @@ class MapController {
         let vm = this;
         
         var files = event.target.files;
+
+        if(files.length == 0) {
+            return;
+        }
+
         var reader = new FileReader();
         var fileName = files[0].name;
 
@@ -165,6 +173,10 @@ class MapController {
             // console.log(vm.$exif.getAllTags(this));
             let geoData = vm.$exif.getGeoData(this);
 
+            if(geoData[0] == 0) {
+                return;
+            }
+
             vm.hasLatLongFromImage = true;
             vm.imageLatLong = {
 
@@ -177,12 +189,13 @@ class MapController {
                 }
             }
 
-            // No? Okay.
             vm.$scope.$digest();
-            // Still no? Fuck you, then, Angular.
-            jQuery(".ng-hide").removeClass("ng-hide");
-            // jQuery to the rescue!
         });
+    }
+
+    clearAttachments = () => {
+
+        this.newPin.attachments = {};
     }
 
     getCurrentUnixTime = () => {

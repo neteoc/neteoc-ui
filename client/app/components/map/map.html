@@ -29,7 +29,7 @@
                             <input type="text" ng-model="$ctrl.newPin.position.latitude" />
                             <label for="longitude">Longitude: </label>
                             <input type="text" ng-model="$ctrl.newPin.position.longitude" />
-                            <input type="button" ng-show="{{$ctrl.hasLatLongFromImage}}" value="Set lat long from {{$ctrl.imageLatLong.name}}" ng-click="$ctrl.imageLatLong.set()" />
+                            <input type="button" ng-show="$ctrl.hasLatLongFromImage == true" value="Set lat long from {{$ctrl.imageLatLong.name}}" ng-click="$ctrl.imageLatLong.set()" />
                         </div>
                         <div class="form-group">
                             <label for="message">Fields: </label>
@@ -46,6 +46,7 @@
                             <label for="message">Attachments: </label>
                             <input type="file" id="newAttachment" custom-on-change="attachmentAdded">
                             <div id="imagePreview"></div>
+                            <input type="button" ng-show="$ctrl.newPin.hasAttachments()" value="Clear Attachments" ng-click="$ctrl.clearAttachments()">
                         </div>
                         <p></p>
                         <button ng-click="$ctrl.createMapEntry()" type="submit" class="btn btn-danger" data-dismiss="modal" ng-disabled="newPinForm.$invalid">Create</button>
