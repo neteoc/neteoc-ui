@@ -10,16 +10,26 @@ let mapModule = angular.module('map', [
   "ngInject";
   $stateProvider
     .state('map', {
-      url: '/map',
+      url: '/gis',
       component: 'map'
     });
 })
 
 .run(['Menu', function(Menu){
-  Menu.addToMainMenu({ display: "GIS", url: "/map", requireLogin: true })
+  Menu.addToMainMenu({ display: "GIS", url: "/gis", requireLogin: false })
 }])
 
 .component('map', mapComponent)
+
+.directive('customOnChange', function() {
+  return {
+    restrict: 'A',
+    link: function (scope, element, attrs) {
+      var onChangeHandler = scope.$eval(attrs.customOnChange);
+      element.bind('change', onChangeHandler);
+    }
+  };
+})
 
 .name;
 
