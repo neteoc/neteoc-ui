@@ -1,8 +1,9 @@
 'use strict';
 
+// Should be https://github.com/exif-js/exif-js/blob/master/exif.js
 let ExifService = function() {
 
-    var debug = true;
+    var debug = false;
 
     var root = this;
 
@@ -742,6 +743,32 @@ let ExifService = function() {
         return tags;
     }
 
+    // lifted from http://stackoverflow.com/questions/5269462/how-do-i-convert-exif-long-lat-to-real-values
+    function convertToDegree(arrayDMS) {
+        
+        let FloatD = arrayDMS[0]["numerator"] / arrayDMS[0]["denominator"];
+        let FloatM = arrayDMS[1]["numerator"] / arrayDMS[1]["denominator"];
+        let FloatS = arrayDMS[2]["numerator"] / arrayDMS[2]["denominator"];
+
+        return (FloatD + (FloatM/60) + (FloatS/3600));
+    }
+
+    EXIF.getGeoData = function(img) {
+
+        let latitude = convertToDegree(EXIF.getTag(img, "GPSLatitude"));
+        let longitude = convertToDegree(EXIF.getTag(img, "GPSLongitude"));
+
+        if(EXIF.getTag(img, "GPSLatitudeRef") == "S") {
+            latitude = latitude * -1;
+        }
+
+        if(EXIF.getTag(img, "GPSLongitudeRef") == "W") {
+            longitude = longitude * -1;
+        }
+
+        return [latitude, longitude];
+    }
+
     EXIF.getData = function(img, callback) {
         if ((img instanceof Image || img instanceof HTMLImageElement) && !img.complete) return false;
 
@@ -808,7 +835,7 @@ let ExifService = function() {
        getData: EXIF.getData,
        getAllTags: EXIF.getAllTags,
        pretty: EXIF.pretty,
-       readFromBinaryFile: EXIF.readFromBinaryFile
+       getGeoData: EXIF.getGeoData
    }
 };
 
