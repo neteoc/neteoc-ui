@@ -745,6 +745,10 @@ let ExifService = function() {
 
     // lifted from http://stackoverflow.com/questions/5269462/how-do-i-convert-exif-long-lat-to-real-values
     function convertToDegree(arrayDMS) {
+
+        if(arrayDMS == null) {
+            return 0;
+        }
         
         let FloatD = arrayDMS[0]["numerator"] / arrayDMS[0]["denominator"];
         let FloatM = arrayDMS[1]["numerator"] / arrayDMS[1]["denominator"];
