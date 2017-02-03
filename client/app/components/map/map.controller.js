@@ -1,14 +1,16 @@
 class MapController {
-  constructor($http, $scope) {
+  constructor($http, $scope, $exif) {
     this.name = 'map';
     this.$http = $http;
     this.$scope = $scope;
+    this.$exif = $exif;
 
     // TODO: This ain't right. Auth service or something, right?
     var authToken = localStorage.getItem('id_token');
     $http.defaults.headers.common.Authorization = 'bearer ' + authToken;
     this.userId = localStorage.getItem('neteoc_id');
 
+    this.hasLatLongFromImage = false;
     this.currentPosition = "";
     this.resetNewPin();
 
@@ -27,6 +29,9 @@ class MapController {
       }, {
         name: 'Uploaded',
         cellTemplate: '<div>{{row.entity.uploaded}}</div>'
+      }, {
+        name: ' ',
+        cellTemplate: '<div><button ng-click="grid.appScope.organizationDetails(row.entity.id)">Edit</button></div>'
       }]
     };
 
@@ -39,10 +44,13 @@ class MapController {
       // TODO: each pin needs to be composed of events ...
       // Each event is like a state-in-time with a userId and timestamp attached to it ...
     this.newPin = {
+        "id": this.generateUUID(),
+        "author": this.userId,
         "uploaded" : "false",
         "fields" : {
             "1" : "change me "
-        }
+        },
+        "attachments" : {}
     }
   }
   
@@ -53,7 +61,7 @@ class MapController {
     }
 
     positionCallback = (position) => {
-        this.currentPosition = {
+        this.newPin.position = this.currentPosition = {
             "accuracy" : position.coords.accuracy,
             "altitude" : position.coords.altitude,
             "altitudeAccuracy" : position.coords.altitudeAccuracy,
@@ -90,14 +98,12 @@ class MapController {
   
     createMapEntry = () => {
 
-        this.newPin.position = this.currentPosition;
         this.newPin.createTime = this.getCurrentUnixTime();
-        this.newPin.id = this.generateUUID();
-        this.newPin.author = this.userId;
 
         this.pins.push(this.newPin);
         this.uploadPin(this.newPin);
 
+        this.hasLatLongFromImage = false;
         this.resetNewPin();
     }
 
@@ -134,16 +140,49 @@ class MapController {
 
     attachmentAdded = (event) => {
 
-        // event.target.files[0]
+        let vm = this;
         
         var files = event.target.files;
         var reader = new FileReader();
+        var fileName = files[0].name;
 
         reader.onload = function(frEvent) {
-            console.log(frEvent.target.result);
-            // document.getElementById("renderImage").innerHTML = '<img src="'+frEvent.target.result+'" />';
+
+            console.log(frEvent);
+            // console.log(frEvent.target.result);
+            document.getElementById("imagePreview").innerHTML = '<img width="100px" height="100px" src="'+frEvent.target.result+'" />';
+            // document.getElementById("imagePreview").style.backgroundImage = 'url("'+frEvent.target.result+'")';
+
+            vm.newPin.attachments[fileName] = frEvent.target.result;
         }
         reader.readAsDataURL(files[0]);
+        
+        // if has geo data, allow to set lat long from image
+
+        // TODO: Convert to promise or something
+        this.$exif.getData(files[0], function() {
+
+            // console.log(vm.$exif.getAllTags(this));
+            let geoData = vm.$exif.getGeoData(this);
+
+            vm.hasLatLongFromImage = true;
+            vm.imageLatLong = {
+
+                "name" :  this.name,
+                "latitude" : geoData[0],
+                "longitude" : geoData[1],
+                "set" : function () {
+                    vm.newPin.position.latitude = vm.imageLatLong.latitude;
+                    vm.newPin.position.longitude = vm.imageLatLong.longitude;
+                }
+            }
+
+            // No? Okay.
+            vm.$scope.$digest();
+            // Still no? Fuck you, then, Angular.
+            jQuery(".ng-hide").removeClass("ng-hide");
+            // jQuery to the rescue!
+        });
     }
 
     getCurrentUnixTime = () => {
@@ -172,5 +211,5 @@ class MapController {
     }
 }
 
-MapController.$inject = ['$http', '$scope'];
+MapController.$inject = ['$http', '$scope', 'exif'];
 export default MapController;
