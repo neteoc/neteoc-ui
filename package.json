@@ -67,13 +67,16 @@
     "yargs": "^3.9.0"
   },
   "scripts": {
-    "build": "node_modules/.bin/gulp webpack",
+    "build": "npm run webpack & npm run cordova-prepare & npm run cordova-build",
     "component": "node_modules/.bin/gulp component",
     "serve": "node_modules/.bin/gulp serve",
     "start": "node_modules/.bin/gulp serve",
     "test": "echo 'testing time'",
     "watch": "node_modules/.bin/gulp serve",
-    "webpack": "node_modules/.bin/gulp webpack"
+    "webpack": "node_modules/.bin/gulp webpack",
+    "cordova-prepare" : "node_modules/.bin/cordova prepare",
+    "cordova-build" : "node_modules/.bin/cordova build",
+    "android" : "node_modules/.bin/cordova run android"
   },
   "keywords": [
     "angular",
