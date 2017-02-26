@@ -8,3 +8,19 @@ dist/
 
 .idea
 .idea/*
+
+# cordova
+platforms/*/build/
+platforms/*/www/
+platforms/*/assets/www
+platforms/*/cordova/console.log
+platforms/*/bin
+platforms/*/gen
+platforms/**/local.properties
+platforms/*/ant-build
+platforms/*/ant-gen
+platforms/*/CordovaLib/ant-build
+platforms/*/CordovaLib/ant-gen
+platforms/*/CordovaLib/bin
+platforms/*/CordovaLib/gen
+*.xcuserdatad
