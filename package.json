@@ -30,6 +30,7 @@
     "browser-sync": "^2.11.1",
     "chai": "^3.4.0",
     "connect-history-api-fallback": "^1.1.0",
+    "cordova": "^6.5.0",
     "css-loader": "^0.19.0",
     "del": "^2.2.0",
     "extract-text-webpack-plugin": "^1.0.1",
@@ -74,9 +75,9 @@
     "test": "echo 'testing time'",
     "watch": "node_modules/.bin/gulp serve",
     "webpack": "node_modules/.bin/gulp webpack",
-    "cordova-prepare" : "node_modules/.bin/cordova prepare",
-    "cordova-build" : "node_modules/.bin/cordova build",
-    "android" : "node_modules/.bin/cordova run android"
+    "cordova-prepare": "node_modules/.bin/cordova prepare",
+    "cordova-build": "node_modules/.bin/cordova build",
+    "android": "node_modules/.bin/cordova run android"
   },
   "keywords": [
     "angular",
