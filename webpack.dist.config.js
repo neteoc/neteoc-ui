@@ -3,6 +3,7 @@ var path    = require('path');
 var config  = require('./webpack.config');
 const bootstrapEntryPoints = require('./webpack.bootstrap.config.js');
 
+let distFolder = 'www';
 
 config.entry.bootstrap = [
   bootstrapEntryPoints.prod
@@ -11,7 +12,7 @@ config.entry.bootstrap = [
 config.output = {
   filename: '[name].bundle.js',
   publicPath: '',
-  path: path.resolve(__dirname, 'dist')
+  path: path.resolve(__dirname, distFolder)
 };
 
 config.plugins = config.plugins.concat([
