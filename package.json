@@ -68,7 +68,7 @@
     "yargs": "^3.9.0"
   },
   "scripts": {
-    "build": "npm run webpack & npm run cordova-prepare & npm run cordova-build",
+    "build": "npm run webpack && npm run cordova-prepare && npm run cordova-build",
     "component": "node_modules/.bin/gulp component",
     "serve": "node_modules/.bin/gulp serve",
     "start": "node_modules/.bin/gulp serve",
