@@ -52,6 +52,7 @@
     "lodash": "^4.11.1",
     "mocha": "^2.3.0",
     "ng-annotate-loader": "0.0.10",
+    "ngmap": "^1.18.0",
     "node-libs-browser": "^0.5.0",
     "node-sass": "^3.13.1",
     "raw-loader": "^0.5.1",

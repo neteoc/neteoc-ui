@@ -1,6 +1,6 @@
-class MapController {
+class GisController {
   constructor($http, $scope, $exif) {
-    this.name = 'map';
+    this.name = 'gis';
     this.$http = $http;
     this.$scope = $scope;
     this.$exif = $exif;
@@ -224,5 +224,5 @@ class MapController {
     }
 }
 
-MapController.$inject = ['$http', '$scope', 'exif'];
-export default MapController;
+GisController.$inject = ['$http', '$scope', 'exif'];
+export default GisController;

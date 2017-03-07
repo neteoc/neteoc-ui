@@ -1,7 +1,7 @@
-import MapModule from './map'
-import MapController from './map.controller';
-import MapComponent from './map.component';
-import MapTemplate from './map.html';
+import MapModule from './gis'
+import MapController from './gis.controller';
+import MapComponent from './gis.component';
+import MapTemplate from './gis.html';
 
 describe('Map', () => {
   let $rootScope, makeController;

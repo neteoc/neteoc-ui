@@ -1,17 +1,17 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-import mapComponent from './map.component';
+import mapComponent from './gis.component';
 
-let mapModule = angular.module('map', [
+let mapModule = angular.module('gis', [
   uiRouter
 ])
 
 .config(($stateProvider) => {
   "ngInject";
   $stateProvider
-    .state('map', {
+    .state('gis', {
       url: '/gis',
-      component: 'map'
+      component: 'gis'
     });
 })
 
@@ -19,7 +19,7 @@ let mapModule = angular.module('map', [
   Menu.addToMainMenu({ display: "GIS", url: "/gis", requireLogin: false })
 }])
 
-.component('map', mapComponent)
+.component('gis', mapComponent)
 
 .directive('customOnChange', function() {
   return {

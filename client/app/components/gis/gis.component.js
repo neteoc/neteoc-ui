@@ -1,6 +1,6 @@
-import template from './map.html';
-import controller from './map.controller';
-import './map.scss';
+import template from './gis.html';
+import controller from './gis.controller';
+import './gis.scss';
 
 let mapComponent = {
   restrict: 'E',
