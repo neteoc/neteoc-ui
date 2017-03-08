@@ -12,7 +12,9 @@
     </a>
 
     <p></p>
-    <ng-map center="[40.74, -74.18]"></ng-map>
+    <ng-map center="[{{$ctrl.currentPosition.latitude}}, {{$ctrl.currentPosition.longitude}}]" zoom-to-include-markers="auto">
+        <marker ng-repeat="pin in $ctrl.pins track by $index" position="{{pin.position.latitude}},{{pin.position.longitude}}" title="{{pin.id}}"></marker>
+    </ng-map>
 
     <p></p>
 
