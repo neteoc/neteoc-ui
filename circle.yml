@@ -6,6 +6,7 @@ dependencies:
   override:
     - npm install -g cordova
     - npm install
+    - cordova platform update android
 
 
 compile:
