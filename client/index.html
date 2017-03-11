@@ -9,9 +9,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="description" content="Dis here be some NetEOC is">
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-    <base href="/">
+    <base href="./">
     <script src="https://cdn.auth0.com/js/lock/10.6/lock.min.js"></script>
-  </head>
+  <link href="styles.css" rel="stylesheet"></head>
   <body ng-app="app" ng-strict-di ng-cloak>
 
     <app>
@@ -27,5 +27,13 @@
       ga('create', 'UA-71073175-2', 'auto');
       ga('send', 'pageview');
     </script>-->
+
+<script type="text/javascript">
+
+    require("./vendor.bundle.js");
+    require("./bootstrap.bundle.js");
+    require("./app.bundle.js");
+</script>
+
   </body>
 </html>

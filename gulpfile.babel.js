@@ -67,6 +67,9 @@ gulp.task('webpack', ['clean'], (cb) => {
 
     cb();
   });
+
+  // gulp.src('package.json').pipe(gulp.dest('./' + distFolder + "/")); 
+  gulp.src('index.html').pipe(gulp.dest('./' + distFolder + "/")); 
 });
 
 gulp.task('serve', () => {
