@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+   <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+     <base href='/'></base>
+     <script type="text/javascript" src="https://cdn.auth0.com/js/lock/10.6/lock.min.js"></script>
+     <title>NetEOC</title>
+   </head>
+   <body>
+     <nav class="navbar navbar-default" role="navigation" ng-controller="User.MenuController as UsersCrtl">
+       <div class="container">
+         <div class="navbar-header dropdown">
+             <a href="#" class="navbar-brand dropdown-toggle" data-toggle="dropdown" aria-expanded="false">NetEOC<span class="caret"></span></a>
+             <ul class="dropdown-menu" hawtio-main-nav ng-if="authService.getAuthState()">
+             </ul>
+           </div>
+           <ul class="nav navbar-nav" ng-if="authService.getAuthState()">
+             <li class="dropdown" >
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{UsersCrtl.subTitle}}<span class="caret"></span></a>
+                <ul class="dropdown-menu" hawtio-sub-tabs>
+                </ul>
+                </li>
+           </ul>
+           <ul id="right-nav" class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav" ng-if="authService.getAuthState()">
+                  <li><a ng-click="authService.logout()"> Logout</a></li>
+                </ul>
+               <ul class="nav navbar-nav" ng-if="!authService.getAuthState()">
+                   <li><a ng-click="authService.login()">login</a></li>
+               </ul>
+             <!-- <li><a ng-click="UsersCrtl.logout()"><span class="glyphicon-log-out"></span> Logout</a></li>-->
+
+
+
+              <!-- Modal -->
+              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Please Login:</h4>
+                    </div>
+                    <div class="modal-body">
+                      <div class="embed-responsive embed-responsive-16by9">
+                        <a class="btn btn-block btn-social btn-google" ng-click="UsersCrtl.poptastic('/auth/google')" onclick="">
+                          <span class="fa fa-google"></span> Sign in with Google
+                        </a>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              </ul>
+        </div>
+     </nav>
+
+     <div class="container">
+           <div class="row">
+             <div id="main"  class="col-lg-12 main ng-cloak" ng-controller="HawtioNav.ViewController">
+                <div ng-include src="viewPartial"></div>
+             </div>
+           </div>
+         </div>
+
+         <div ng-controller="NetEOC.HomePageController as ctlr">
+
+             
+
+
+         </div>
+
+
+
+
+         <!-- Button trigger modal
+         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+           Launch demo modal
+         </button>-->
+
+     <div class="navbar navbar-default navbar-fixed-bottom navbar-pf">
+       <div class="container">
+         <div class="navbar-header dropdown">
+             <a href="#" class="navbar-brand dropdown-toggle" data-toggle="dropdown" aria-expanded="false">NetEOC<span class="caret"></span></a>
+             <ul class="dropdown-menu" hawtio-main-nav ng-if="authService.getAuthState()">
+             </ul>
+           </div>
+           <div class="navbar-collapse collapse" id="navbar-main">
+             <ul class="nav navbar-nav">
+             </ul>
+             <ul class="nav navbar-nav navbar-right" ng-controller="User.MenuController as UsersCrtl">
+               <li><a href="https://en.wikipedia.org/wiki/Software_release_life_cycle#Alpha" target="_blank">V2.0.0-Alpha</a></li>
+               <li><a href="https://github.com/neteoc" target="_blank">Source Code</a></li>
+             </ul>
+         </div>
+       </div>
+     </div>
+
+
+
+
+<script src="https://use.fontawesome.com/ff56f68762.js"></script>
+
+
+   </body>
+</html>

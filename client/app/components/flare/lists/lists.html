@@ -1,0 +1,41 @@
+<navbar></navbar>
+
+<div class="container">
+
+    <a data-original-title="Broadcast Message" href="#" type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#createListModal" ng-click="FlaresCrtl.getLists()">
+        <span class="glyphicon glyphicon-envelope"> Create List </span>
+    </a>
+
+    <div ng-if="!$ctrl.lists.length">You ain't got no lists, Lieutenant ... man.</div>
+
+    <div ng-if="!!$ctrl.lists.length" ui-grid="$ctrl.listsGrid" class="grid"></div>
+  
+    <div class="modal fade" id="createListModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Send Flare</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="flareform" name="flareForm">
+                        <div class="form-group">
+                            <label for="title">Name</label>
+                            <input ng-model="$ctrl.newList.name" type="text" class="form-control" id="name" placeholder="title"  required >
+                        </div>
+                        <div class="form-group">
+                            <label for="listSelector">Organization</label>
+                            <select id="listSelector" class="form-control" ng-model="$ctrl.selectedOrganization" Required 
+                              ng-options="organization.name for organization in $ctrl.organizations">
+                            </select>
+                        </div>
+                        <p></p>
+                        <button ng-click="$ctrl.createList()" type="submit" class="btn btn-danger" data-dismiss="modal" ng-disabled="flareForm.$invalid">Fire</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>

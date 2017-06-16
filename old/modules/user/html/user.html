@@ -1,0 +1,24 @@
+
+<div ng-controller="User.PageController as UsersCrtl">
+
+<div ng-if="UsersCrtl.authService.getAuthState()">
+    <div class="panel panel-info" >
+        <div class="panel-heading">
+            <h3 class="panel-title capitalize">{{UsersCrtl.authService.getProfile().name}}</h3>
+        </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3 col-lg-3 ">
+                <img alt="User Pic" src="{{UsersCrtl.authService.getProfile().picture}}" class="img-circle img-responsive">
+            </div>
+        </div>
+    </div>
+        <div class="panel-footer">
+            <span class="pull-right">
+            <!--<button type="submit" class="btn btn-danger" ng-click="UsersCrtl.updateUser()">Save</button>-->
+          </span>
+        </div>
+    </div>
+</div>
+
+</div>

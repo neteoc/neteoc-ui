@@ -1,0 +1,44 @@
+
+<div ng-controller="User.PageController as UsersCrtl">
+
+<div ng-if="UsersCrtl.authService.getAuthState()">
+    <div class="panel panel-info" >
+        <div class="panel-heading">
+            <h3 class="panel-title capitalize">{{UsersCrtl.user.name}}</h3>
+        </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3 col-lg-3 "> <img alt="User Pic" src="{{UsersCrtl.user.picture}}" class="img-circle img-responsive"> </div>
+            <div class=" col-md-9 col-lg-9 "><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>
+                <form class="ng-pristine ng-valid ng-valid-email">
+                    <div class="form-group">
+                        <label for="contactInputEmail">Email message</label>
+                        <input type="email" class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-email" id="contactInputEmail" aria-describedby="emailHelp" placeholder="example@example.com" ng-model="UsersCrtl.user.flareemail">
+                        <small id="emailHelp" class="form-text text-muted">Address to recive flares</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactInputSMS">Text message</label>
+                        <input type="tel" class="form-control ng-pristine ng-untouched ng-valid ng-empty" id="contactInputSMS" aria-describedby="smsHelp" placeholder="555-555-5555" ng-model="UsersCrtl.user.flaresms">
+                        <small id="smsHelp" class="form-text text-muted">SMS (TXT) number</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactInputPhone">Phone Call</label>
+                        <input type="tel" class="form-control ng-pristine ng-untouched ng-valid ng-empty" id="contactInputPhone" aria-describedby="phoneHelp" placeholder="555-555-5555" ng-model="UsersCrtl.user.flaretel">
+                        <small id="phoneHelp" class="form-text text-muted">Number to call you at</small>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+        <div class="panel-footer">
+            <button type="submit" class="btn btn-danger" ng-click="UsersCrtl.updateUser()">Save</button>
+            <span class="pull-right">
+            <!--<button type="submit" class="btn btn-danger" ng-click="UsersCrtl.updateUser()">Save</button>-->
+          </span>
+        </div>
+    </div>
+</div>
+
+</div>
