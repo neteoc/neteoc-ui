@@ -17,7 +17,14 @@ let userModule = angular.module('user', modDeps)
 .config(['lockProvider', 'jwtOptionsProvider', '$httpProvider', function(lockProvider, jwtOptionsProvider, $httpProvider ) {
               lockProvider.init({
                   clientID: 'OZBDFi8UeN9fA1Wa8h2BSMYO0zT25R9m',
-                  domain: 'neteoc.auth0.com'
+                  domain: 'neteoc.auth0.com',
+                    options: {
+                        auth: {
+                            params: {
+                                scope: 'openid email name picture neteoc_id'
+                            }
+                        }
+                    }
               });
               jwtOptionsProvider.config({
                 tokenGetter: function () {

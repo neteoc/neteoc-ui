@@ -23,6 +23,8 @@ let MenuFactory = function (Auth) {
 
   let addToMainMenu = (item) => {
 
+    if(item.requireDev && window.location.host.indexOf("localhost") == -1) return;
+
       if(item.requireLogin){
         menu.main.privateItems.push(item)
       }else {

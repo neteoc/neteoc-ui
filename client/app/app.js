@@ -6,6 +6,7 @@ import AppComponent from './app.component';
 import 'normalize.css';
 import $ from 'jquery';
 import jQuery from 'jquery';
+import ngmap from 'ngmap';
 
 window.$ = $;
 window.jQuery = jQuery;
@@ -13,7 +14,8 @@ window.jQuery = jQuery;
 angular.module('app', [
     uiRouter,
     Common,
-    Components
+    Components,
+    ngmap
   ])
   .config(($locationProvider) => {
     "ngInject";

@@ -12,25 +12,10 @@ class FlareController {
   getAvailableLists = () => {
 
     let vm = this;
-    // TODO: unmockify
     this.$http.get('https://mockapi.neteoc.com/lists/').then(function(response) {
 
-      console.log("Sup");
-      console.log(response);
-      console.log(response.data);
-
       angular.extend(vm, {
-        // lists: response.data
-        lists: [
-          {
-            _id : 1,
-            name : "first list"
-          },
-          {
-            _id : 2,
-            name : "twoth list"
-          }
-        ]
+        lists: response.data
       });
     });
   }

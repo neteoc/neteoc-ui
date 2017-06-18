@@ -2,53 +2,64 @@ import $ from 'jquery';
 
 class OrganizationController {
 
-  constructor() {
+  constructor($http, $scope) {
     this.name = 'organization';
+    this.$http = $http;
 
-    this.orgs = this.getOrgs();
-    $(document).ready(function() {
-        $('#orglisttable').DataTable();
-    } );
+    this.newOrganization = {};
+    
+  var authToken = localStorage.getItem('id_token');
+  $http.defaults.headers.common.Authorization = 'bearer ' + authToken;
+
+  // TODO: This ain't right. Auth service or something, right?
+    this.userId = localStorage.getItem('neteoc_id');
+
+    this.getOrganizations();
+
+    this.organizationGrid = {
+      data: '$ctrl.organizations',
+      columnDefs: [{
+        name: 'Name',
+        field: 'name'
+      }, {
+        name: 'Description',
+        field: 'description'
+      }, {
+        name: ' ',
+        cellTemplate: '<div><button ng-click="grid.appScope.organizationDetails(row.entity.id)">Details</button></div>'
+      }]
+    };
+
+    $scope.organizationDetails = function(organizationId) {
+
+      window.location.href = "/organization/" + organizationId;
+    }
   }
 
-  // TODO: Get from API
-  getOrgs = () => {
+  getOrganizations = () => {
 
-    let orgs = [
-      {
-        _id: 1,
-        name: "u",
-        description: "none of u bidness"
-      },
-      {
-        _id: 2,
-        name: "me",
-        description: "likes puppies"
-      }
-    ];
-    return orgs;
+    let vm = this;
+    this.$http.get('http://54.172.225.43:54362/users/' + this.userId + '/organizations/').then(function(response) {
+
+      console.log(response);
+
+      angular.extend(vm, {
+        organizations: response.data
+      });
+    });
   }
 
-  createOrg = () => {
+  createOrganization = () => {
 
-    // TODO: Go to API
+    this.newOrganization.ownerId = this.userId;
 
-    this.orgs.push({
-      _id: 3,
-      name: "new org",
-      description: "this is the only new org you will ever create"
-    })
+    let vm = this;
+    this.$http.post('http://54.172.225.43:54362/organizations', this.newOrganization).then(function(response) {
 
-    $('#orglisttable').DataTable();
+        vm.organizations.push(response.data);
+    });
   }
-
-/*
-        let createOrg = function() {
-          Org.save(neworg).$promise.then(function(neworg){
-            getOrgs();
-          })
-        };
-        */
 }
 
+OrganizationController.$inject = ['$http', '$scope'];
 export default OrganizationController;

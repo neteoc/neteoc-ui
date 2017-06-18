@@ -52,6 +52,7 @@
     "lodash": "^4.11.1",
     "mocha": "^2.3.0",
     "ng-annotate-loader": "0.0.10",
+    "ngmap": "^1.18.0",
     "node-libs-browser": "^0.5.0",
     "node-sass": "^3.13.1",
     "raw-loader": "^0.5.1",
@@ -82,7 +83,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/angularclass/NG6-starter.git"
+    "url": "https://github.com/neteoc/neteoc-ui"
   },
   "author": "Kerry Hatcher",
   "license": "AGPL-3.0",

@@ -1,11 +1,11 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import flareComponent from './flare.component';
-import navbar from '../../common/navbar/navbar'
+import lists from './lists/lists';
 
 let flareModule = angular.module('flare', [
-  navbar,
-  uiRouter
+  uiRouter,
+  lists
 ])
 
 .config(($stateProvider) => {
@@ -18,7 +18,11 @@ let flareModule = angular.module('flare', [
 })
 
 .run(['Menu', function(Menu){
-  Menu.addToMainMenu({ display: "Flare", url: "/flare/", requireLogin: true })
+  Menu.addToMainMenu({ 
+    display: "Flare", 
+    url: "/flare/", 
+    requireLogin: true,
+    requireDev: true })
 }])
 
 .component('flare', flareComponent)

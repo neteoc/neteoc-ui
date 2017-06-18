@@ -2,54 +2,22 @@
 
 <div class="container">
 
-    <h1>{{$ctrl.organizationName}}</h1>
-    <h3>{{$ctrl.organizationDescription}}</h3>
+    <h1>{{$ctrl.organization.name}}</h1>
+    <h3>{{$ctrl.organization.description}}</h3>
 
     <p>
         <a data-original-title="Add User" href="#" type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#addOrgModal">
             <i class="fa fa-user-plus" aria-hidden="true"></i>
             <span> Invite User </span>
         </a>
-        <a type="button" ng-href="/flare/{{$ctrl.organizationId}}" class="btn btn-lg btn-primary" title="Send Flare">
+        <a type="button" ng-href="/flare/{{$ctrl.organization.id}}" class="btn btn-lg btn-primary" title="Send Flare">
             Send Flare <span class="glyphicon glyphicon-send"></span>
         </a>
     </p>
 
     <h3>Members: </h3>
 
-    <table id="orgdetailtable" datatable="ng" class="row-border hover">
-        <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>SMS</th>
-          <th>Telephone</th>
-          <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="member in $ctrl.organization.members">
-            <td>{{member.displayName }}</td>
-            <td>{{member.flareemail }}</td>
-            <td>{{member.flaresms }}</td>
-            <td>{{member.flaretel }}</td>
-            <td>
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Actions
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <!--<li><a href="#">Remove</a></li>-->
-                            <li ng-hide="$ctrl.isAdmin(member._id)" ng-click="$ctrl.makeAdmin(member._id)"><a href="#">Make Admin</a></li>
-                            <li ng-show="$ctrl.isAdmin(member._id)" ng-click="$ctrl.removeUser(member._id)"><a href="#">Remove Admin</a></li>
-                        </ul>
-                    </div>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
+    <div ui-grid="$ctrl.organizationMemberGrid" class="grid"></div>
 
     <h3>Invites</h3>
 
@@ -89,7 +57,7 @@
                     <form id="inviteform" name="inviteform">
                       <div class="form-group">
                           <label for="title">Email: </label>
-                          <input ng-model="$ctrl.newinvite.email" type="text" class="form-control" id="title" placeholder="title"  required >
+                          <input ng-model="$ctrl.newinvite.email" type="text" class="form-control" id="email" placeholder=""  required >
                           <p class="help-block">Tip: To invite a list of people,  add several emails here seperated by a comma. <br /> EX: example.person@example.com, other.person@no.com </p>
                       </div>
                         <p></p>
