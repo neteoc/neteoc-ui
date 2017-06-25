@@ -20,9 +20,18 @@ let exampleMission = {
 
 let MissionFactory = function () {
 
-  const attendingMissions = [];
-  const eligibleMissions = [exampleMission];
+  let attendingMissions = [];
+  let eligibleMissions = [exampleMission];
 
+  let storedMissions = JSON.parse(localStorage.getItem("missions"));
+
+  if(storedMissions && storedMissions.attendingMissions) {
+    attendingMissions = storedMissions.attendingMissions;
+  }
+
+  if(storedMissions && storedMissions.eligibleMissions) {
+    eligibleMissions = storedMissions.eligibleMissions;
+  }
 
   return { attendingMissions, eligibleMissions };
 };
