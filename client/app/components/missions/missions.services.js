@@ -23,6 +23,7 @@ let MissionFactory = function () {
   let attendingMissions = [];
   let eligibleMissions = [exampleMission];
 
+  // TODO: load from API
   let storedMissions = JSON.parse(localStorage.getItem("missions"));
 
   if(storedMissions && storedMissions.attendingMissions) {

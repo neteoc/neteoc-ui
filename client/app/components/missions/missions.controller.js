@@ -4,7 +4,6 @@ class MissionsController {
     this.missions = Mission
     
     this.eligibleMissionsGrid = {
-      appScopeProvider: this,
       data: '$ctrl.missions.eligibleMissions',
       columnDefs: [{
         name: 'Name',
@@ -17,25 +16,37 @@ class MissionsController {
         field: 'startDate'
       }, {
         name: ' ',
-        cellTemplate: '<div class="ui-grid-cell-contents ng-binding ng-scope">' 
-          + '<button class="button" ng-click="grid.appScope.signUpForMission(row.entity.id)">'
-          + 'Sign Up</button></div>'
+        cellTemplate: '<button class="button" ng-click="grid.appScope.$ctrl.signUpForMission(row.entity.id)">'
+          + 'Sign Up</button>'
       }]
     };
 
     this.newMission = {};
   }
-  // TODO: Fix the ng-click in the "Sign Up" column ...
 
-  gridFunctions = {
-    signUpForMission : function(missionId) {
-      alert(missionId);
+  signUpForMission = (missionId) => {
+
+    var eligibleMissions = this.missions.eligibleMissions;
+    var attendingMissions = this.missions.attendingMissions;
+
+    for(var index in eligibleMissions) {
+
+      if(eligibleMissions[index].id == missionId) {
+
+        attendingMissions.push(eligibleMissions[index]);
+        eligibleMissions.splice(index, 1);
+
+        // TODO: push to API
+        localStorage.setItem("missions", JSON.stringify(this.missions));
+        break;
+      }
     }
   }
 
   createMission = () => {
     this.missions.attendingMissions.push(this.newMission);
 
+    // TODO: push to API
     localStorage.setItem("missions", JSON.stringify(this.missions));
 
     this.newMission = {};
