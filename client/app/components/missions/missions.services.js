@@ -19,10 +19,12 @@ let exampleMission = {
 };
 
 let MissionFactory = function () {
-  const missions = [exampleMission];
+
+  const attendingMissions = [];
+  const eligibleMissions = [exampleMission];
 
 
-  return { missions };
+  return { attendingMissions, eligibleMissions };
 };
 
 
