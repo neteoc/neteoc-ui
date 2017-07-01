@@ -30,35 +30,40 @@
                   <form id="newMissionForm" name="newMissionForm">
                       <div class="form-group">
                           <label>Id: </label>
-                          <input type="text" ng-model="$ctrl.newMission.id" placeholder="SAD..." />
+                          <input class="form-control" type="text" ng-model="$ctrl.newMission.id" placeholder="SAD..." />
                       </div>
                       <div class="form-group">
                           <label>Title: </label>
-                          <input type="text" ng-model="$ctrl.newMission.title" />
+                          <input class="form-control" type="text" ng-model="$ctrl.newMission.title" />
                       </div>
                       <div class="form-group">
                           <label>Location: </label>
-                          <input type="text" ng-model="$ctrl.newMission.location" />
+                          <input class="form-control" type="text" ng-model="$ctrl.newMission.location" />
                       </div>
                       <div class="form-group">
                           <label>Start Date: </label>
-                          <input type="text" ng-model="$ctrl.newMission.startDate" />
+                          <input type="text" class="form-control" ng-model="$ctrl.newMission.startDate" />
                       </div>
                       <div class="form-group">
                           <label>End Date: </label>
-                          <input type="text" ng-model="$ctrl.newMission.endDate" />
+                          <input type="text" class="form-control" ng-model="$ctrl.newMission.endDate" />
                       </div>
                       <div class="form-group">
                           <label>Duty Level: </label>
-                          <input type="text" ng-model="$ctrl.newMission.dutyLevel" value="1" />
+                          <input class="form-control" type="text" ng-model="$ctrl.newMission.dutyLevel" value="1" />
                       </div>
                       <div class="form-group">
                           <label>Staff Needed: </label>
-                          <input type="text" ng-model="$ctrl.newMission.staffNeeded" />
+                          <input class="form-control" type="text" ng-model="$ctrl.newMission.staffNeeded" />
                       </div>
                       <div class="form-group">
                           <label>Staff Max: </label>
-                          <input type="text" ng-model="$ctrl.newMission.staffMax" />
+                          <input class="form-control" type="text" ng-model="$ctrl.newMission.staffMax" />
+                      </div>
+                      <div class="form-group">
+                          <label>Description: </label>
+                          <textarea class="form-control" ng-model="$ctrl.newMission.description" 
+                            placeholder="Special equipment, needs, notes, etc."></textarea>
                       </div>
                       <div class="form-group">
                           <label for="message">Attachments: </label>
