@@ -5,7 +5,7 @@
 <div ng-hide="$ctrl.missions.attendingMissions && $ctrl.missions.attendingMissions.length == 0">
   <h2>My Missions</h2>
 
-  <div ui-grid="{ data: $ctrl.missions.attendingMissions }" class="myGrid"></div>
+  <div ui-grid="$ctrl.attendingMissionsGrid" class="myGrid"></div>
 </div>
 
 <div ng-hide="$ctrl.missions.eligibleMissions && $ctrl.missions.eligibleMissions.length == 0">
@@ -40,9 +40,13 @@
                           <label>Location: </label>
                           <input class="form-control" type="text" ng-model="$ctrl.newMission.location" />
                       </div>
-                      <div class="form-group">
-                          <label>Start Date: </label>
-                          <input type="text" class="form-control" ng-model="$ctrl.newMission.startDate" />
+                      <label>Start Date: </label>
+                      <div class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="$ctrl.newMission.startDate" 
+                        is-open="$ctrl.startDatePoppedUp" datepicker-options="$ctrl.dateOptions" ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="$ctrl.startDatePoppedUp = true;"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
                       </div>
                       <div class="form-group">
                           <label>End Date: </label>

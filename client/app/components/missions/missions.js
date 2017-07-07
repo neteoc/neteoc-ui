@@ -3,12 +3,14 @@ import uiRouter from 'angular-ui-router';
 import missionsComponent from './missions.component';
 import navbar from '../../common/navbar/navbar'
 import MissionFactory from './missions.services';
+import MissionDetail from './missionDetail/missionDetail';
 
 require('angular-ui-grid/ui-grid.css');
 
 let missionsModule = angular.module('missions', [
   uiRouter,
   navbar,
+  MissionDetail,  
   require('angular-ui-grid')
 ])
 
@@ -20,13 +22,13 @@ let missionsModule = angular.module('missions', [
     "ngInject";
     $stateProvider
       .state('missions', {
-        url: '/missions/',
+        url: '/missions',
         component: 'missions'
       });
   })
 
   .run(['Menu', function(Menu){
-    Menu.addToMainMenu({ display: "Missions", url: "/missions/", requireLogin: true })
+    Menu.addToMainMenu({ display: "Missions", url: "/missions", requireLogin: true })
   }])
 
 .component('missions', missionsComponent)

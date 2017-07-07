@@ -20,8 +20,29 @@ class MissionsController {
           + 'Sign Up</button>'
       }]
     };
+    
+    this.attendingMissionsGrid = {
+      data: '$ctrl.missions.attendingMissions',
+      rowTemplate: '<div ng-click="grid.appScope.$ctrl.missionClick(row)" ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.uid" class="ui-grid-cell" ng-class="col.colIndex()" ui-grid-cell></div>'
+    }    
 
     this.newMission = {};
+
+    this.startDatePoppedUp = false;
+
+    this.dateOptions = {
+      formatYear: 'yy',
+      maxDate: new Date(2020, 5, 22),
+      minDate: new Date(),
+      startingDay: 1
+    };
+  }
+
+  missionClick = (row) => {
+    
+    if(!row.entity.guid) row.entity.guid = "someGooed";
+
+    window.location.href = "/missions/" + row.entity.guid;
   }
 
   signUpForMission = (missionId) => {
@@ -49,7 +70,10 @@ class MissionsController {
     // TODO: push to API
     localStorage.setItem("missions", JSON.stringify(this.missions));
 
-    this.newMission = {};
+    this.newMission = {
+      startDate: new Date(),
+      endDate: new Date()
+    };
   }
 }
 
