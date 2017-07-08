@@ -18,9 +18,10 @@
             </button>
         </span>
       </div>
-      <div class="input-group">
+      <div class="form-group">
         <label>Deployment: </label>
-        <span ng-bind="$ctrl.mission.startDate"></span> to <span ng-bind="$ctrl.mission.endDate"></span>
+        {{$ctrl.mission.startDate}} 
+        <span ng-if="!!$ctrl.mission.endDate"> to {{$ctrl.mission.endDate}}</span>
       </div>
       <div class="form-group">
           <label>Duty Level: </label>
@@ -43,7 +44,8 @@
 
 <!-- TODO: do not show if offline ... -->
 <div class="col-md-6" ng-hide="!$ctrl.mission.staff">
-  <label>Staff: <span>{{$ctrl.mission.staffLength}}</span> / <span ng-bind="$ctrl.mission.staff.staffNeeded"></span></label>
+  <label>Staff: {{$ctrl.mission.staffLength}} 
+    <span ng-show="!!$ctrl.mission.staff.staffNeeded">/ {{$ctrl.mission.staff.staffNeeded}}</span></label>
 
   <div ng-repeat="member in $ctrl.mission.staff">
     <span>{{member.name}}</span>
