@@ -1,9 +1,7 @@
 
 class mission {
   constructor() {
-
   }
-
 }
 
 let exampleMission = {
@@ -23,21 +21,28 @@ let MissionFactory = function () {
   let attendingMissions = [];
   let eligibleMissions = [exampleMission];
 
-  // TODO: load from API
-  let storedMissions = JSON.parse(localStorage.getItem("missions"));
+  // TOOD: extract url to global var
+  return $.ajax({
+    async: false,
+    url: "https://1g3aj59907.execute-api.us-east-1.amazonaws.com/dev/",
+  });/*
+  .done(function(result) {
+    
+    let storedMissions = result || JSON.parse(localStorage.getItem("missions"));
 
-  if(storedMissions && storedMissions.attendingMissions) {
-    attendingMissions = storedMissions.attendingMissions;
-  }
+    console.log(storedMissions);
 
-  if(storedMissions && storedMissions.eligibleMissions) {
-    eligibleMissions = storedMissions.eligibleMissions;
-  }
+    if(storedMissions && storedMissions.attendingMissions) {
+      attendingMissions = storedMissions.attendingMissions;
+    }
 
-  return { attendingMissions, eligibleMissions };
+    if(storedMissions && storedMissions.eligibleMissions) {
+      eligibleMissions = storedMissions.eligibleMissions;
+    }
+
+    return { attendingMissions, eligibleMissions };
+  });*/
 };
-
-
 
 //MenuFactory.$inject = ['Auth']
 export default MissionFactory;

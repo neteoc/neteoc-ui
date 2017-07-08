@@ -1,7 +1,23 @@
 class MissionsController {
-  constructor(Mission) {
+  constructor(MissionService) {
     this.name = 'missions';
-    this.missions = Mission
+
+    MissionService.then(function(result) {
+
+      var storedMissions = result || JSON.parse(localStorage.getItem("missions"));
+
+      console.log(storedMissions);
+
+      if(storedMissions && storedMissions.attendingMissions) {
+        attendingMissions = storedMissions.attendingMissions;
+      }
+
+      if(storedMissions && storedMissions.eligibleMissions) {
+        eligibleMissions = storedMissions.eligibleMissions;
+      }
+
+      this.missions = { attendingMissions, eligibleMissions };
+    });
     
     this.eligibleMissionsGrid = {
       data: '$ctrl.missions.eligibleMissions',
@@ -24,7 +40,7 @@ class MissionsController {
     this.attendingMissionsGrid = {
       data: '$ctrl.missions.attendingMissions',
       rowTemplate: '<div ng-click="grid.appScope.$ctrl.missionClick(row)" ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.uid" class="ui-grid-cell" ng-class="col.colIndex()" ui-grid-cell></div>'
-    }    
+    }
 
     this.newMission = {};
 
