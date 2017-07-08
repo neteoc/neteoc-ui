@@ -39,10 +39,8 @@ class MissionsController {
   }
 
   missionClick = (row) => {
-    
-    if(!row.entity.guid) row.entity.guid = "someGooed";
 
-    window.location.href = "/missions/" + row.entity.guid;
+    window.location.href = "/missions/" + row.entity.id;
   }
 
   signUpForMission = (missionId) => {
@@ -65,6 +63,8 @@ class MissionsController {
   }
 
   createMission = () => {
+    this.newMission.id_gsdf = this.newMission.id;
+    this.newMission.id = this.generateUUID();
     this.missions.attendingMissions.push(this.newMission);
 
     // TODO: push to API
@@ -74,6 +74,19 @@ class MissionsController {
       startDate: new Date(),
       endDate: new Date()
     };
+  }  
+  
+  generateUUID = () => {
+      var d = new Date().getTime();
+      if(window.performance && typeof window.performance.now === "function"){
+          d += performance.now(); //use high-precision timer if available
+      }
+      var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          var r = (d + Math.random()*16)%16 | 0;
+          d = Math.floor(d/16);
+          return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+      });
+      return uuid;
   }
 }
 

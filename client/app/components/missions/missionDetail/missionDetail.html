@@ -1,5 +1,54 @@
-<div>
-  {{$ctrl.missionId}}
+<navbar></navbar>
 
-  {{missions}}
+<div class="col-md-6">
+  <form id="missionForm" name="missionForm">
+
+    <h2>
+      <span ng-bind="$ctrl.mission.gsdf_id"></span>: 
+      <span ng-bind="$ctrl.mission.title"></span>
+    </h2>
+      <label>Location: </label>
+      <div class="input-group">
+        <span class="form-control" ng-bind="$ctrl.mission.location"></span>
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="$ctrl.startDatePoppedUp = true;">
+              <i class="fa fa-map"></i>
+            </button>
+        </span>
+      </div>
+      <div class="input-group">
+        <label>Deployment: </label>
+        <span ng-bind="$ctrl.mission.startDate"></span> to <span ng-bind="$ctrl.mission.endDate"></span>
+      </div>
+      <div class="form-group">
+          <label>Duty Level: </label>
+          <span ng-bind="$ctrl.mission.dutyLevel"></span>
+      </div>
+      <div class="form-group">
+          <label>Description: </label>
+          <textarea class="form-control" ng-model="$ctrl.mission.description" 
+            placeholder="Special equipment, needs, notes, etc."></textarea>
+      </div>
+      <div class="form-group">
+          <label for="message">Attachments: </label>
+          <input type="file" id="newAttachment" custom-on-change="attachmentAdded">
+          <input type="button" ng-show="$ctrl.newPin.hasAttachments()" value="Clear Attachments" ng-click="$ctrl.clearAttachments()">
+      </div>
+      <p></p>
+      <button ng-click="$ctrl.updateMission()" type="submit" class="btn btn-primary" ng-disabled="missionForm.$invalid">Update</button>
+  </form>
+</div>
+
+<!-- TODO: do not show if offline ... -->
+<div class="col-md-6" ng-hide="!$ctrl.mission.staff">
+  <label>Staff: <span>{{$ctrl.mission.staffLength}}</span> / <span ng-bind="$ctrl.mission.staff.staffNeeded"></span></label>
+
+  <div ng-repeat="member in $ctrl.mission.staff">
+    <span>{{member.name}}</span>
+  </div>
+
+  <p></p>
+
+  <!-- TODO: do not show button if at max staff-->
+  <button ng-click="$ctrl.signUp()" class="btn btn-primary" ng-show="$ctrl.mission.needsStaff">Sign Up</button>
 </div>
