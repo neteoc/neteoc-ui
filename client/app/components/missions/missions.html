@@ -34,7 +34,7 @@
                       </div>
                       <div class="form-group">
                           <label>Title: </label>
-                          <input class="form-control" type="text" ng-model="$ctrl.newMission.title" />
+                          <input class="form-control" type="text" ng-model="$ctrl.newMission.title" ng-required="true" />
                       </div>
                       <div class="form-group">
                           <label>Location: </label>
@@ -54,11 +54,11 @@
                       </div>
                       <div class="form-group">
                           <label>Duty Level: </label>
-                          <input class="form-control" type="text" ng-model="$ctrl.newMission.dutyLevel" value="1" />
+                          <input class="form-control" type="text" ng-model="$ctrl.newMission.dutyLevel" ng-required="true" />
                       </div>
                       <div class="form-group">
                           <label>Staff Needed: </label>
-                          <input class="form-control" type="text" ng-model="$ctrl.newMission.staffNeeded" />
+                          <input class="form-control" type="text" ng-model="$ctrl.newMission.staffNeeded" ng-required="true" />
                       </div>
                       <div class="form-group">
                           <label>Staff Max: </label>

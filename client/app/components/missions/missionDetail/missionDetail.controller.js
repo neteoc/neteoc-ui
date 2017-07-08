@@ -6,7 +6,39 @@ class MissionDetailController {
 
     this.mission = this.getMission();
 
-    this.mission.staff = {
+    console.log(this.mission);
+  }
+
+  getLocalId = () => {
+
+    // if is GSDF, return gsdf_id
+    // if is another branch, return their id
+    // needs a default ...
+    return this.mission.gsdf_id;
+  }
+
+  getMission = () => {
+
+    var missions = JSON.parse(localStorage.getItem("missions"));
+
+    for(var missionType in missions) {
+      for(var index in missions[missionType]) {
+        if(missions[missionType][index].id == this.missionId) {
+
+          var mission = missions[missionType][index];
+
+          this.getStaff(mission);
+
+          return mission;
+        }
+      }
+    }
+  }
+
+  // TODO: service call
+  getStaff = (mission) => {
+
+    mission.staff = {
       "someones-guid" : {
         name : "Kerry Hatcher"
       },
@@ -17,23 +49,8 @@ class MissionDetailController {
         name : "Eric Wehrly"
       }
     }
-    this.mission.staffLength = Object.keys(this.mission.staff).length;
-    this.mission.needsStaff = Object.keys(this.mission.staff).length < this.mission.staffMax;
-
-    console.log(this.mission);
-  }
-
-  getMission = () => {
-
-    var missions = JSON.parse(localStorage.getItem("missions"));
-
-    for(var missionType in missions) {
-      for(var index in missions[missionType]) {
-        if(missions[missionType][index].id == this.missionId) {
-          return missions[missionType][index];
-        }
-      }
-    }
+    mission.staffLength = Object.keys(mission.staff).length;
+    mission.needsStaff = Object.keys(mission.staff).length < mission.staffMax;
   }
 }
 
