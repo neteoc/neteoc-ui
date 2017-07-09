@@ -1,12 +1,9 @@
 class MissionDetailController {
-  constructor($stateParams) {
-    this.name = 'missionDetail';
+  constructor($stateParams, MissionService) {
 
     this.missionId = $stateParams.missionId;
 
-    this.mission = this.getMission();
-
-    console.log(this.mission);
+    this.getMission(MissionService);
   }
 
   getLocalId = () => {
@@ -17,43 +14,26 @@ class MissionDetailController {
     return this.mission.gsdf_id;
   }
 
-  getMission = () => {
+  getMission = (MissionService) => {
 
-    var missions = JSON.parse(localStorage.getItem("missions"));
+    var $ctrl = this;
+    this.mission = {};
 
-    for(var missionType in missions) {
-      for(var index in missions[missionType]) {
-        if(missions[missionType][index].id == this.missionId) {
+    MissionService.then(function(result) {
 
-          var mission = missions[missionType][index];
+      var missions = result || JSON.parse(localStorage.getItem("missions"));
 
-          this.getStaff(mission);
+      var mission = missions[$ctrl.missionId];
+      if(!('staff' in mission)) mission.staff = {};
 
-          return mission;
-        }
-      }
-    }
-  }
+      mission.staffLength = Object.keys(mission.staff).length;
+      mission.needsStaff = Object.keys(mission.staff).length < mission.staffMax;
 
-  // TODO: service call
-  getStaff = (mission) => {
-
-    mission.staff = {
-      "someones-guid" : {
-        name : "Kerry Hatcher"
-      },
-      "different-guid" : {
-        name : "Darrell Bailey"
-      },
-      "another-guid" : {
-        name : "Eric Wehrly"
-      }
-    }
-    mission.staffLength = Object.keys(mission.staff).length;
-    mission.needsStaff = Object.keys(mission.staff).length < mission.staffMax;
+      $ctrl.mission = mission;
+    });
   }
 }
 
-MissionDetailController.$inject = ['$stateParams'];
+MissionDetailController.$inject = ['$stateParams', 'Mission'];
 
 export default MissionDetailController;
