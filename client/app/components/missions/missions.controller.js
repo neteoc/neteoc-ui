@@ -9,21 +9,18 @@ class MissionsController {
 
       var attendingMissions = [];
       var eligibleMissions = [];
+        
+      var profile = JSON.parse(localStorage.getItem("profile"));
 
       for(var missionId in storedMissions) {
 
         var mission = storedMissions[missionId];
 
-        // if(mission.staff )
-        eligibleMissions.push(mission);
-      }
-
-      if(storedMissions && storedMissions.attendingMissions) {
-        attendingMissions = storedMissions.attendingMissions;
-      }
-
-      if(storedMissions && storedMissions.eligibleMissions) {
-        eligibleMissions = storedMissions.eligibleMissions;
+        if(profile.neteoc_id in mission.staff) {
+          attendingMissions.push(mission);
+        } else {
+          eligibleMissions.push(mission);
+        }
       }
 
       $ctrl.missions = { attendingMissions, eligibleMissions };

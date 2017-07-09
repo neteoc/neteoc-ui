@@ -6,6 +6,8 @@ class MissionDetailController {
     this.missionId = $stateParams.missionId;
     this.signedUpAlready = false;
 
+    this.userProfile = JSON.parse(localStorage.getItem("profile"));
+
     this.getMission();
   }
 
@@ -46,23 +48,19 @@ class MissionDetailController {
       mission.needsStaff = Object.keys(mission.staff).length < mission.staffMax;
     }
 
-    var profile = JSON.parse(localStorage.getItem("profile"));
-
-    if(profile.neteoc_id in mission.staff) {
+    if($ctrl.userProfile.neteoc_id in mission.staff) {
       $ctrl.signedUpAlready = true;
     }
   }
 
   signUp = () => {
 
-    var profile = JSON.parse(localStorage.getItem("profile"));
-
-    this.mission.staff[profile.neteoc_id] = {
-      name: profile.name
+    this.mission.staff[$ctrl.userProfile.neteoc_id] = {
+      name: $ctrl.userProfile.name
     }
     this.mission.staffLength = Object.keys(this.mission.staff).length;
 
-    this.MissionService.signUp(this.missionId, profile.neteoc_id);
+    this.MissionService.signUp(this.missionId, $ctrl.userProfile.neteoc_id);
   }
 }
 

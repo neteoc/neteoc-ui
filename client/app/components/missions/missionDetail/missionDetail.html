@@ -47,8 +47,10 @@
   <label>Staff: {{$ctrl.mission.staffLength}} 
     <span ng-show="!!$ctrl.mission.staff.staffNeeded">/ {{$ctrl.mission.staff.staffNeeded}}</span></label>
 
-  <div ng-repeat="member in $ctrl.mission.staff">
+  <div ng-repeat="(memberId, member) in $ctrl.mission.staff">
     <span>{{member.name}}</span>
+    <!-- TODO: this button deletes -->
+    <span class="delete" ng-show="memberId == $ctrl.userProfile.neteoc_id"> x</span>
   </div>
 
   <p></p>
