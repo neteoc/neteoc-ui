@@ -1,0 +1,87 @@
+<navbar></navbar>
+
+<div class="container">
+
+<div ng-hide="$ctrl.missions.attendingMissions && $ctrl.missions.attendingMissions.length == 0">
+  <h2>My Missions</h2>
+
+  <div ui-grid="$ctrl.attendingMissionsGrid" class="myGrid"></div>
+</div>
+
+<div ng-hide="$ctrl.missions.eligibleMissions && $ctrl.missions.eligibleMissions.length == 0">
+  <h2>Eligible Missions</h2>
+
+  <div ui-grid="$ctrl.eligibleMissionsGrid" class="grid missionGrid" external-scopes="gridFunctions"></div>
+</div>
+  
+  <!-- TODO: Restrict based on permissions -->
+  <a type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#missionModal">
+      <span class="glyphicon glyphicon-envelope"> Create Mission </span>
+  </a>
+
+  <div class="modal fade" id="missionModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title">New Mission</h4>
+              </div>
+              <div class="modal-body">
+                  <form id="newMissionForm" name="newMissionForm">
+                      <div class="form-group">
+                          <label>Id: </label>
+                          <input class="form-control" type="text" ng-model="$ctrl.newMission.id" placeholder="SAD..." />
+                      </div>
+                      <div class="form-group">
+                          <label>Title: </label>
+                          <input class="form-control" type="text" ng-model="$ctrl.newMission.title" ng-required="true" />
+                      </div>
+                      <div class="form-group">
+                          <label>Location: </label>
+                          <input class="form-control" type="text" ng-model="$ctrl.newMission.location" />
+                      </div>
+                      <label>Start Date: </label>
+                      <div class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="$ctrl.newMission.startDate" 
+                        is-open="$ctrl.startDatePoppedUp" datepicker-options="$ctrl.dateOptions" ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="$ctrl.startDatePoppedUp = true;"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                      </div>
+                      <div class="form-group">
+                          <label>End Date: </label>
+                          <input type="text" class="form-control" ng-model="$ctrl.newMission.endDate" />
+                      </div>
+                      <div class="form-group">
+                          <label>Duty Level: </label>
+                          <input class="form-control" type="text" ng-model="$ctrl.newMission.dutyLevel" ng-required="true" />
+                      </div>
+                      <div class="form-group">
+                          <label>Staff Needed: </label>
+                          <input class="form-control" type="text" ng-model="$ctrl.newMission.staffNeeded" ng-required="true" />
+                      </div>
+                      <div class="form-group">
+                          <label>Staff Max: </label>
+                          <input class="form-control" type="text" ng-model="$ctrl.newMission.staffMax" />
+                      </div>
+                      <div class="form-group">
+                          <label>Description: </label>
+                          <textarea class="form-control" ng-model="$ctrl.newMission.description" 
+                            placeholder="Special equipment, needs, notes, etc."></textarea>
+                      </div>
+                      <div class="form-group">
+                          <label for="message">Attachments: </label>
+                          <input type="file" id="newAttachment" custom-on-change="attachmentAdded">
+                          <div id="imagePreview"></div>
+                          <input type="button" ng-show="$ctrl.newPin.hasAttachments()" value="Clear Attachments" ng-click="$ctrl.clearAttachments()">
+                      </div>
+                      <p></p>
+                      <button ng-click="$ctrl.createMission()" type="submit" class="btn btn-danger" data-dismiss="modal" ng-disabled="newMissionForm.$invalid">Create</button>
+                  </form>
+              </div>
+          </div>
+          <div class="modal-footer"></div>
+      </div>
+  </div>
+
+</div>

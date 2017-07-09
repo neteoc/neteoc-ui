@@ -2,3 +2,7 @@
 #right-nav a {
     cursor: pointer;
 }
+
+.form-control.ng-invalid-required {
+    border: 1px solid red;    
+}
