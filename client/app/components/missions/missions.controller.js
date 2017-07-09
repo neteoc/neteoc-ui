@@ -1,15 +1,22 @@
 class MissionsController {
   constructor(MissionService) {
-    this.name = 'missions';
+    
+    var $ctrl = this;
 
     MissionService.then(function(result) {
 
       var storedMissions = result || JSON.parse(localStorage.getItem("missions"));
 
-      console.log(storedMissions);
-
       var attendingMissions = [];
       var eligibleMissions = [];
+
+      for(var missionId in storedMissions) {
+
+        var mission = storedMissions[missionId];
+
+        // if(mission.staff )
+        eligibleMissions.push(mission);
+      }
 
       if(storedMissions && storedMissions.attendingMissions) {
         attendingMissions = storedMissions.attendingMissions;
@@ -19,11 +26,12 @@ class MissionsController {
         eligibleMissions = storedMissions.eligibleMissions;
       }
 
-      this.missions = { attendingMissions, eligibleMissions };
+      $ctrl.missions = { attendingMissions, eligibleMissions };
     });
     
     this.eligibleMissionsGrid = {
-      data: '$ctrl.missions.eligibleMissions',
+      data: '$ctrl.missions.eligibleMissions',      
+      rowTemplate: '<div ng-click="grid.appScope.$ctrl.missionClick(row)" ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.uid" class="ui-grid-cell" ng-class="col.colIndex()" ui-grid-cell></div>',
       columnDefs: [{
         name: 'Name',
         cellTemplate: '<div class="ui-grid-cell-contents ng-binding ng-scope" title="{{row.entity.id}}">{{row.entity.title}}</div>'
@@ -33,10 +41,6 @@ class MissionsController {
       }, {
         name: 'Start Date',
         field: 'startDate'
-      }, {
-        name: ' ',
-        cellTemplate: '<button class="button" ng-click="grid.appScope.$ctrl.signUpForMission(row.entity.id)">'
-          + 'Sign Up</button>'
       }]
     };
     
@@ -87,13 +91,11 @@ class MissionsController {
     // TODO:
     // this.missions.eligibleMissions.push(this.newMission);
 
-    console.log(JSON.stringify(this.newMission));
-
     localStorage.setItem("missions", JSON.stringify(this.missions));
     $.ajax({
       url: "https://1g3aj59907.execute-api.us-east-1.amazonaws.com/dev/",
       method: "POST",
-      data: this.newMission
+      data: JSON.stringify(this.newMission)
     }).fail(function(err) {
       console.log(err);
     });

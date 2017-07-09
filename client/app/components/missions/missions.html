@@ -2,13 +2,13 @@
 
 <div class="container">
 
-<div ng-hide="$ctrl.missions.attendingMissions && $ctrl.missions.attendingMissions.length == 0">
+<div ng-show="$ctrl.missions.attendingMissions.length > 0">
   <h2>My Missions</h2>
 
   <div ui-grid="$ctrl.attendingMissionsGrid" class="myGrid"></div>
 </div>
 
-<div ng-hide="$ctrl.missions.eligibleMissions && $ctrl.missions.eligibleMissions.length == 0">
+<div ng-show="$ctrl.missions.eligibleMissions.length > 0">
   <h2>Eligible Missions</h2>
 
   <div ui-grid="$ctrl.eligibleMissionsGrid" class="grid missionGrid" external-scopes="gridFunctions"></div>
