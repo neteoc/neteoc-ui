@@ -3,7 +3,7 @@ class MissionsController {
     
     var $ctrl = this;
 
-    MissionService.then(function(result) {
+    MissionService.getMissions().then(function(result) {
 
       var storedMissions = result || JSON.parse(localStorage.getItem("missions"));
 

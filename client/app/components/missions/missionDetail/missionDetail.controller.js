@@ -1,9 +1,11 @@
 class MissionDetailController {
   constructor($stateParams, MissionService) {
 
+    this.MissionService = MissionService;
+
     this.missionId = $stateParams.missionId;
 
-    this.getMission(MissionService);
+    this.getMission();
   }
 
   getLocalId = () => {
@@ -14,12 +16,12 @@ class MissionDetailController {
     return this.mission.gsdf_id;
   }
 
-  getMission = (MissionService) => {
+  getMission = () => {
 
     var $ctrl = this;
     this.mission = {};
 
-    MissionService.then(function(result) {
+    this.MissionService.getMissions().then(function(result) {
 
       var missions = result || JSON.parse(localStorage.getItem("missions"));
 
@@ -27,10 +29,25 @@ class MissionDetailController {
       if(!('staff' in mission)) mission.staff = {};
 
       mission.staffLength = Object.keys(mission.staff).length;
-      mission.needsStaff = Object.keys(mission.staff).length < mission.staffMax;
+
+      if(!('staffMax' in mission)) {
+        mission.needsStaff = true;
+      } else {
+        mission.needsStaff = Object.keys(mission.staff).length < mission.staffMax;
+      }
+
+      console.log(mission);
 
       $ctrl.mission = mission;
     });
+  }
+
+  signUp = () => {
+
+    var userId = localStorage.getItem("neteoc_id");
+    console.log(userId);
+
+    this.MissionService.signUp(this.missionId, userId);
   }
 }
 
