@@ -47,12 +47,14 @@
   <label>Staff: {{$ctrl.mission.staffLength}} 
     <span ng-show="!!$ctrl.mission.staff.staffNeeded">/ {{$ctrl.mission.staff.staffNeeded}}</span></label>
 
-  <div ng-repeat="member in $ctrl.mission.staff">
+  <div ng-repeat="(memberId, member) in $ctrl.mission.staff">
     <span>{{member.name}}</span>
+    <!-- TODO: this button deletes -->
+    <span class="delete" ng-show="memberId == $ctrl.userProfile.neteoc_id"> x</span>
   </div>
 
   <p></p>
 
   <!-- TODO: do not show button if at max staff-->
-  <button ng-click="$ctrl.signUp()" class="btn btn-primary" ng-show="$ctrl.mission.needsStaff">Sign Up</button>
+  <button ng-click="$ctrl.signUp()" class="btn btn-primary" ng-show="$ctrl.mission.needsStaff && !$ctrl.signedUpAlready">Sign Up</button>
 </div>

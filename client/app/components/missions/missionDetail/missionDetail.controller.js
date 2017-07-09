@@ -1,12 +1,14 @@
 class MissionDetailController {
-  constructor($stateParams) {
-    this.name = 'missionDetail';
+  constructor($stateParams, MissionService) {
+
+    this.MissionService = MissionService;
 
     this.missionId = $stateParams.missionId;
+    this.signedUpAlready = false;
 
-    this.mission = this.getMission();
+    this.userProfile = JSON.parse(localStorage.getItem("profile"));
 
-    console.log(this.mission);
+    this.getMission();
   }
 
   getLocalId = () => {
@@ -19,41 +21,49 @@ class MissionDetailController {
 
   getMission = () => {
 
-    var missions = JSON.parse(localStorage.getItem("missions"));
+    var $ctrl = this;
+    this.mission = {};
 
-    for(var missionType in missions) {
-      for(var index in missions[missionType]) {
-        if(missions[missionType][index].id == this.missionId) {
+    this.MissionService.getMissions().then(function(result) {
 
-          var mission = missions[missionType][index];
+      var missions = result || JSON.parse(localStorage.getItem("missions"));
 
-          this.getStaff(mission);
+      $ctrl.mission = missions[$ctrl.missionId];
 
-          return mission;
-        }
-      }
+      $ctrl.getStaff();
+    });
+  }
+
+  getStaff = () => {
+
+    var mission = this.mission;
+
+    if(!('staff' in mission)) mission.staff = {};
+
+    mission.staffLength = Object.keys(mission.staff).length;
+
+    if(!('staffMax' in mission)) {
+      mission.needsStaff = true;
+    } else {
+      mission.needsStaff = Object.keys(mission.staff).length < mission.staffMax;
+    }
+
+    if(this.userProfile.neteoc_id in mission.staff) {
+      this.signedUpAlready = true;
     }
   }
 
-  // TODO: service call
-  getStaff = (mission) => {
+  signUp = () => {
 
-    mission.staff = {
-      "someones-guid" : {
-        name : "Kerry Hatcher"
-      },
-      "different-guid" : {
-        name : "Darrell Bailey"
-      },
-      "another-guid" : {
-        name : "Eric Wehrly"
-      }
+    this.mission.staff[this.userProfile.neteoc_id] = {
+      name: this.userProfile.name
     }
-    mission.staffLength = Object.keys(mission.staff).length;
-    mission.needsStaff = Object.keys(mission.staff).length < mission.staffMax;
+    this.mission.staffLength = Object.keys(this.mission.staff).length;
+
+    this.MissionService.signUp(this.missionId, this.userProfile.neteoc_id);
   }
 }
 
-MissionDetailController.$inject = ['$stateParams'];
+MissionDetailController.$inject = ['$stateParams', 'Mission'];
 
 export default MissionDetailController;

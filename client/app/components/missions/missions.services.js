@@ -1,48 +1,28 @@
 
 class mission {
-  constructor() {
-  }
+  constructor() { }
 }
 
-let exampleMission = {
-  id: "SAD 345 678",
-  title: "Look for dude",
-  location: "Stone Mtn",
-  startDate: "01JAN2016",
-  endDate: "03JAN2016",
-  dutyLevel: "1",
-  staffNeeded: 15,
-  staffRegistred: 9,
-  staffMax: 99,
-};
-
+  // TOOD: extract url to global var
 let MissionFactory = function () {
 
-  let attendingMissions = [];
-  let eligibleMissions = [exampleMission];
+  const missionServiceUrl = "https://1g3aj59907.execute-api.us-east-1.amazonaws.com/dev/";
 
-  // TOOD: extract url to global var
-  return $.ajax({
-    async: false,
-    url: "https://1g3aj59907.execute-api.us-east-1.amazonaws.com/dev/",
-  });/*
-  .done(function(result) {
-    
-    let storedMissions = result || JSON.parse(localStorage.getItem("missions"));
+  return {
 
-    console.log(storedMissions);
+    getMissions: function() {
+      return $.ajax({
+      async: false,
+      url: missionServiceUrl,
+    })},
 
-    if(storedMissions && storedMissions.attendingMissions) {
-      attendingMissions = storedMissions.attendingMissions;
-    }
-
-    if(storedMissions && storedMissions.eligibleMissions) {
-      eligibleMissions = storedMissions.eligibleMissions;
-    }
-
-    return { attendingMissions, eligibleMissions };
-  });*/
+    signUp: function(missionId, userId) {
+      return $.ajax({
+        url: missionServiceUrl + missionId,
+        method: "POST",
+        data: userId
+    })}
+  }
 };
 
-//MenuFactory.$inject = ['Auth']
 export default MissionFactory;
