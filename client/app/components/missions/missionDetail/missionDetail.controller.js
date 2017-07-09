@@ -44,10 +44,14 @@ class MissionDetailController {
 
   signUp = () => {
 
-    var userId = localStorage.getItem("neteoc_id");
-    console.log(userId);
+    var profile = JSON.parse(localStorage.getItem("profile"));
 
-    this.MissionService.signUp(this.missionId, userId);
+    this.mission.staff[profile.neteoc_id] = {
+      name: profile.name
+    }
+    this.mission.staffLength = Object.keys(this.mission.staff).length;
+
+    this.MissionService.signUp(this.missionId, profile.neteoc_id);
   }
 }
 
