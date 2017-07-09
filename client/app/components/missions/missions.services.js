@@ -6,19 +6,21 @@ class mission {
   // TOOD: extract url to global var
 let MissionFactory = function () {
 
+  const missionServiceUrl = "https://1g3aj59907.execute-api.us-east-1.amazonaws.com/dev/";
+
   return {
 
     getMissions: function() {
 
       return $.ajax({
       async: false,
-      url: "https://1g3aj59907.execute-api.us-east-1.amazonaws.com/dev/",
+      url: missionServiceUrl,
     })},
     signUp: function(missionId, userId) {
 
       return $.ajax({
         async: false,
-        url: "https://1g3aj59907.execute-api.us-east-1.amazonaws.com/dev/" + missionId,
+        url: missionServiceUrl + missionId,
         method: "POST",
         data: userId
     })}

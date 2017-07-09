@@ -54,5 +54,5 @@
   <p></p>
 
   <!-- TODO: do not show button if at max staff-->
-  <button ng-click="$ctrl.signUp()" class="btn btn-primary" ng-show="$ctrl.mission.needsStaff">Sign Up</button>
+  <button ng-click="$ctrl.signUp()" class="btn btn-primary" ng-show="$ctrl.mission.needsStaff && !$ctrl.signedUpAlready">Sign Up</button>
 </div>
