@@ -30,13 +30,13 @@ class MissionDetailController {
 
       $ctrl.mission = missions[$ctrl.missionId];
 
-      this.getStaff();
+      $ctrl.getStaff();
     });
   }
 
   getStaff = () => {
 
-    var mission = $ctrl.mission;
+    var mission = this.mission;
 
     if(!('staff' in mission)) mission.staff = {};
 
@@ -48,19 +48,19 @@ class MissionDetailController {
       mission.needsStaff = Object.keys(mission.staff).length < mission.staffMax;
     }
 
-    if($ctrl.userProfile.neteoc_id in mission.staff) {
-      $ctrl.signedUpAlready = true;
+    if(this.userProfile.neteoc_id in mission.staff) {
+      this.signedUpAlready = true;
     }
   }
 
   signUp = () => {
 
-    this.mission.staff[$ctrl.userProfile.neteoc_id] = {
-      name: $ctrl.userProfile.name
+    this.mission.staff[this.userProfile.neteoc_id] = {
+      name: this.userProfile.name
     }
     this.mission.staffLength = Object.keys(this.mission.staff).length;
 
-    this.MissionService.signUp(this.missionId, $ctrl.userProfile.neteoc_id);
+    this.MissionService.signUp(this.missionId, this.userProfile.neteoc_id);
   }
 }
 

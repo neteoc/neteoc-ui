@@ -11,15 +11,13 @@ let MissionFactory = function () {
   return {
 
     getMissions: function() {
-
       return $.ajax({
       async: false,
       url: missionServiceUrl,
     })},
-    signUp: function(missionId, userId) {
 
+    signUp: function(missionId, userId) {
       return $.ajax({
-        async: false,
         url: missionServiceUrl + missionId,
         method: "POST",
         data: userId

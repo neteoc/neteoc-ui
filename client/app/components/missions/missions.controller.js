@@ -16,7 +16,7 @@ class MissionsController {
 
         var mission = storedMissions[missionId];
 
-        if(profile.neteoc_id in mission.staff) {
+        if(mission.staff && profile.neteoc_id in mission.staff) {
           attendingMissions.push(mission);
         } else {
           eligibleMissions.push(mission);
