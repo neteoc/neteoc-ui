@@ -8,6 +8,9 @@ class MissionsController {
 
       console.log(storedMissions);
 
+      var attendingMissions = [];
+      var eligibleMissions = [];
+
       if(storedMissions && storedMissions.attendingMissions) {
         attendingMissions = storedMissions.attendingMissions;
       }
@@ -81,10 +84,19 @@ class MissionsController {
   createMission = () => {
     this.newMission.id_gsdf = this.newMission.id;
     this.newMission.id = this.generateUUID();
-    this.missions.attendingMissions.push(this.newMission);
+    // TODO:
+    // this.missions.eligibleMissions.push(this.newMission);
 
-    // TODO: push to API
+    console.log(JSON.stringify(this.newMission));
+
     localStorage.setItem("missions", JSON.stringify(this.missions));
+    $.ajax({
+      url: "https://1g3aj59907.execute-api.us-east-1.amazonaws.com/dev/",
+      method: "POST",
+      data: this.newMission
+    }).fail(function(err) {
+      console.log(err);
+    });
 
     this.newMission = {
       startDate: new Date(),
