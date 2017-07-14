@@ -1,11 +1,17 @@
 class MissionsController {
-  constructor(MissionService) {
+  constructor(MissionService, $http, $timeout) {
     
     var $ctrl = this;
+    this.$http = $http;
 
-    MissionService.getMissions().then(function(result) {
+    this.attendingMissions = [];
+    this.eligibleMissions = [];
 
-      var storedMissions = result || JSON.parse(localStorage.getItem("missions"));
+    this.$http.get(MissionService.url).then(function(result) {
+
+      console.log(result);
+
+      var storedMissions = result.data || JSON.parse(localStorage.getItem("missions"));
 
       var attendingMissions = [];
       var eligibleMissions = [];
@@ -17,17 +23,19 @@ class MissionsController {
         var mission = storedMissions[missionId];
 
         if(mission.staff && profile.neteoc_id in mission.staff) {
-          attendingMissions.push(mission);
+          $ctrl.attendingMissions.push(mission);
         } else {
-          eligibleMissions.push(mission);
+          $ctrl.eligibleMissions.push(mission);
         }
       }
 
-      $ctrl.missions = { attendingMissions, eligibleMissions };
+      $timeout(function() {
+        $ctrl.missions = { attendingMissions, eligibleMissions };
+      }, 1);
     });
     
     this.eligibleMissionsGrid = {
-      data: '$ctrl.missions.eligibleMissions',      
+      data: '$ctrl.eligibleMissions',      
       rowTemplate: '<div ng-click="grid.appScope.$ctrl.missionClick(row)" ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.uid" class="ui-grid-cell" ng-class="col.colIndex()" ui-grid-cell></div>',
       columnDefs: [{
         name: 'Name',
@@ -42,7 +50,7 @@ class MissionsController {
     };
     
     this.attendingMissionsGrid = {
-      data: '$ctrl.missions.attendingMissions',
+      data: '$ctrl.attendingMissions',
       rowTemplate: '<div ng-click="grid.appScope.$ctrl.missionClick(row)" ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.uid" class="ui-grid-cell" ng-class="col.colIndex()" ui-grid-cell></div>'
     }
 
@@ -89,13 +97,18 @@ class MissionsController {
     // this.missions.eligibleMissions.push(this.newMission);
 
     localStorage.setItem("missions", JSON.stringify(this.missions));
-    $.ajax({
+
+    //$ctrl.$http.post($ctrl.MissionService.url, JSON.stringify(this.newMission))
+
+    this.$http({
       url: "https://1g3aj59907.execute-api.us-east-1.amazonaws.com/dev/",
       method: "POST",
       data: JSON.stringify(this.newMission)
-    }).fail(function(err) {
-      console.log(err);
-    });
+    }).then(function successCallback(response) {
+      console.log(response);
+  }, function errorCallback(response) {
+      console.log(response);
+  });
 
     this.newMission = {
       startDate: new Date(),
@@ -117,5 +130,5 @@ class MissionsController {
   }
 }
 
-MissionsController.$inject = ['Mission'];
+MissionsController.$inject = ['Mission', '$http', '$timeout'];
 export default MissionsController;
