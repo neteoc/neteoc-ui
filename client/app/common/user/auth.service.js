@@ -72,7 +72,7 @@ let AuthService = function($q, lock, authManager, $rootScope, $location, $http) 
                     "email": profile.email
                 };
 
-                $http.post('http://54.172.225.43:54362/users', userPost).then(function(response) {
+                $http.post('https://dwaomjth0nnz7.cloudfront.net/users', userPost).then(function(response) {
                     
                     localStorage.setItem('neteoc_id', response.data.id);
                     console.log(response);
