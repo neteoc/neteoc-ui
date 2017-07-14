@@ -10,6 +10,8 @@ let MissionFactory = function () {
 
   return {
 
+    url: missionServiceUrl,
+
     getMissions: function() {
       return $.ajax({
       async: false,
