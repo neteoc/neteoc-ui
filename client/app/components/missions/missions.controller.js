@@ -31,11 +31,14 @@ class MissionsController {
 
       $timeout(function() {
         $ctrl.missions = { attendingMissions, eligibleMissions };
+
+        $ctrl.gridApi.core.refresh();
       }, 1);
     });
     
     this.eligibleMissionsGrid = {
-      data: '$ctrl.eligibleMissions',      
+      data: '$ctrl.eligibleMissions',  
+      enableRowHashing: false,
       rowTemplate: '<div ng-click="grid.appScope.$ctrl.missionClick(row)" ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.uid" class="ui-grid-cell" ng-class="col.colIndex()" ui-grid-cell></div>',
       columnDefs: [{
         name: 'Name',
@@ -48,6 +51,11 @@ class MissionsController {
         field: 'startDate'
       }]
     };
+
+    this.eligibleMissionsGrid.onRegisterApi = function(gridApi) {
+
+        $ctrl.gridApi = gridApi;
+    }
     
     this.attendingMissionsGrid = {
       data: '$ctrl.attendingMissions',
