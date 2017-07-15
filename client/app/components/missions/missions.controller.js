@@ -1,7 +1,7 @@
 class MissionsController {
   constructor(MissionService, $http, $timeout) {
     
-    var $ctrl = this;
+    let $ctrl = this;
     this.$http = $http;
 
     this.attendingMissions = [];
@@ -21,11 +21,16 @@ class MissionsController {
         var mission = storedMissions[missionId];
 
         if(mission.staff && profile.neteoc_id in mission.staff) {
-          $ctrl.attendingMissions.push(mission);
+          attendingMissions.push(mission);
         } else {
-          $ctrl.eligibleMissions.push(mission);
+          eligibleMissions.push(mission);
         }
       }
+      
+      angular.extend($ctrl, {
+        attendingMissions: attendingMissions,
+        eligibleMissions: eligibleMissions
+      });
     });
     
     this.eligibleMissionsGrid = {
