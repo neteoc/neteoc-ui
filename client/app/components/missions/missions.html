@@ -5,13 +5,13 @@
 <div ng-show="$ctrl.attendingMissions.length > 0">
   <h2>My Missions</h2>
 
-  <div ui-grid="$ctrl.attendingMissionsGrid" class="myGrid"></div>
+  <div ng-if="!!$ctrl.attendingMissions.length" ui-grid="$ctrl.attendingMissionsGrid" class="myGrid"></div>
 </div>
 
 <div ng-show="$ctrl.eligibleMissions.length > 0">
   <h2>Eligible Missions</h2>
 
-  <div ui-grid="$ctrl.eligibleMissionsGrid" class="grid missionGrid" external-scopes="gridFunctions"></div>
+  <div ng-if="!!$ctrl.eligibleMissions.length" ui-grid="$ctrl.eligibleMissionsGrid" class="grid missionGrid"  external-scopes="gridFunctions"></div>
 </div>
   
   <!-- TODO: Restrict based on permissions -->

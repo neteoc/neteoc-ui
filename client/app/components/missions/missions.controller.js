@@ -9,8 +9,6 @@ class MissionsController {
 
     this.$http.get(MissionService.url).then(function(result) {
 
-      console.log(result);
-
       var storedMissions = result.data || JSON.parse(localStorage.getItem("missions"));
 
       var attendingMissions = [];
@@ -28,12 +26,6 @@ class MissionsController {
           $ctrl.eligibleMissions.push(mission);
         }
       }
-
-      $timeout(function() {
-        $ctrl.missions = { attendingMissions, eligibleMissions };
-
-        $ctrl.gridApi.core.refresh();
-      }, 1);
     });
     
     this.eligibleMissionsGrid = {
@@ -51,11 +43,6 @@ class MissionsController {
         field: 'startDate'
       }]
     };
-
-    this.eligibleMissionsGrid.onRegisterApi = function(gridApi) {
-
-        $ctrl.gridApi = gridApi;
-    }
     
     this.attendingMissionsGrid = {
       data: '$ctrl.attendingMissions',
@@ -109,7 +96,8 @@ class MissionsController {
     //$ctrl.$http.post($ctrl.MissionService.url, JSON.stringify(this.newMission))
 
     this.$http({
-      url: "https://1g3aj59907.execute-api.us-east-1.amazonaws.com/dev/",
+      url: "https://1g3aj59907.execute-api.us-east-1.amazonaws.com/dev",
+      // url: "http://localhost:3000",
       method: "POST",
       data: JSON.stringify(this.newMission)
     }).then(function successCallback(response) {
