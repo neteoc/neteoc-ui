@@ -4,8 +4,8 @@ class MissionsController {
     let $ctrl = this;
     this.$http = $http;
 
-    this.attendingMissions = [];
-    this.eligibleMissions = [];
+    // this.attendingMissions = [];
+    // this.eligibleMissions = [];
 
     this.$http.get(MissionService.url).then(function(result) {
 
