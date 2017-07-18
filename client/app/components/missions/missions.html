@@ -28,40 +28,44 @@
               </div>
               <div class="modal-body">
                   <form id="newMissionForm" name="newMissionForm">
-                      <div class="form-group">
-                          <label>Id: </label>
+                      <div class="input-group">
+                          <span class="input-group-addon">id</span>
                           <input class="form-control" type="text" ng-model="$ctrl.newMission.id" placeholder="SAD..." />
                       </div>
-                      <div class="form-group">
-                          <label>Title: </label>
+                      <div class="input-group">
+                          <span class="input-group-addon">Title</span>
                           <input class="form-control" type="text" ng-model="$ctrl.newMission.title" ng-required="true" />
                       </div>
-                      <div class="form-group">
-                          <label>Location: </label>
+                      <div class="input-group">
+                          <span class="input-group-addon">Location</span>
                           <input class="form-control" type="text" ng-model="$ctrl.newMission.location" />
                       </div>
-                      <label>Start Date: </label>
                       <div class="input-group">
-                        <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="$ctrl.newMission.startDate" 
+                        <span class="input-group-addon">Start Date</span>
+                        <input type="text" class="form-control" uib-datepicker-popup="dd-MMM-yyyy" ng-model="$ctrl.newMission.startDate" 
                         is-open="$ctrl.startDatePoppedUp" datepicker-options="$ctrl.dateOptions" ng-required="true" close-text="Close" />
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="$ctrl.startDatePoppedUp = true;"><i class="glyphicon glyphicon-calendar"></i></button>
                         </span>
                       </div>
-                      <div class="form-group">
-                          <label>End Date: </label>
-                          <input type="text" class="form-control" ng-model="$ctrl.newMission.endDate" />
+                      <div class="input-group">
+                        <span class="input-group-addon">End Date</span>
+                        <input type="text" class="form-control" uib-datepicker-popup="dd-MMM-yyyy" ng-model="$ctrl.newMission.endDate" 
+                        is-open="$ctrl.endDatePoppedUp" datepicker-options="$ctrl.endDateOptions" ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="$ctrl.endDatePoppedUp = true;"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
                       </div>
-                      <div class="form-group">
-                          <label>Duty Level: </label>
+                      <div class="input-group">
+                        <span class="input-group-addon">Duty Level</span>
                           <input class="form-control" type="text" ng-model="$ctrl.newMission.dutyLevel" ng-required="true" />
                       </div>
-                      <div class="form-group">
-                          <label>Staff Needed: </label>
+                      <div class="input-group">
+                        <span class="input-group-addon">Staff Needed</span>
                           <input class="form-control" type="text" ng-model="$ctrl.newMission.staffNeeded" ng-required="true" />
                       </div>
-                      <div class="form-group">
-                          <label>Staff Max: </label>
+                      <div class="input-group">
+                        <span class="input-group-addon">Staff Max</span>
                           <input class="form-control" type="text" ng-model="$ctrl.newMission.staffMax" />
                       </div>
                       <div class="form-group">
