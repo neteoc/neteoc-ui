@@ -63,6 +63,20 @@ class MissionsController {
       minDate: new Date(),
       startingDay: 1
     };
+
+    this.endDateOptions = {
+      dateDisabled: endDateDisabled,
+      formatYear: 'yy',
+      maxDate: new Date(2020, 5, 22),
+      minDate: new Date(),
+      startingDay: 1
+    };
+
+    function endDateDisabled(data) {
+      var date = data.date;
+
+      return data.date <= $ctrl.newMission.startDate;
+    }
   }
 
   missionClick = (row) => {
