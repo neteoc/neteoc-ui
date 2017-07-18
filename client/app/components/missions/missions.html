@@ -58,15 +58,15 @@
                       </div>
                       <div class="input-group">
                         <span class="input-group-addon">Duty Level</span>
-                          <input class="form-control" type="text" ng-model="$ctrl.newMission.dutyLevel" ng-required="true" />
+                        <input type="number" class="form-control" min="1" max="4" step="1" ng-model="$ctrl.newMission.dutyLevel" ng-required="true" />
                       </div>
                       <div class="input-group">
                         <span class="input-group-addon">Staff Needed</span>
-                          <input class="form-control" type="text" ng-model="$ctrl.newMission.staffNeeded" ng-required="true" />
+                          <input type="number" class="form-control" min="1" step="1" ng-model="$ctrl.newMission.staffNeeded" ng-required="true" />
                       </div>
                       <div class="input-group">
                         <span class="input-group-addon">Staff Max</span>
-                          <input class="form-control" type="text" ng-model="$ctrl.newMission.staffMax" />
+                          <input type="number" class="form-control" min="1" step="1" ng-model="$ctrl.newMission.staffMax" />
                       </div>
                       <div class="form-group">
                           <label>Description: </label>
