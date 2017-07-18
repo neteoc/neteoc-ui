@@ -4,15 +4,12 @@ class MissionsController {
     let $ctrl = this;
     this.$http = $http;
 
-    // this.attendingMissions = [];
-    // this.eligibleMissions = [];
+    this.attendingMissions = [];
+    this.eligibleMissions = [];
 
     this.$http.get(MissionService.url).then(function(result) {
 
       var storedMissions = result.data || JSON.parse(localStorage.getItem("missions"));
-
-      var attendingMissions = [];
-      var eligibleMissions = [];
         
       var profile = JSON.parse(localStorage.getItem("profile"));
 
@@ -21,16 +18,15 @@ class MissionsController {
         var mission = storedMissions[missionId];
 
         if(mission.staff && profile.neteoc_id in mission.staff) {
-          attendingMissions.push(mission);
+          $ctrl.attendingMissions.push(mission);
         } else {
-          eligibleMissions.push(mission);
+          $ctrl.eligibleMissions.push(mission);
         }
       }
-      
-      angular.extend($ctrl, {
-        attendingMissions: attendingMissions,
-        eligibleMissions: eligibleMissions
-      });
+
+      // Angular bindings aren't supposed to work with ui-grid. It's only part of angular ui
+      $ctrl.eligibleMissionsGrid.data = $ctrl.eligibleMissions;
+      $ctrl.attendingMissionsGrid.data = $ctrl.attendingMissions;
     });
     
     this.eligibleMissionsGrid = {
