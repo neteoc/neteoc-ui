@@ -1,6 +1,7 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import missionDetailComponent from './missionDetail.component';
+import AuthService from '../../../common/user/auth.service';
 
 let missionDetailModule = angular.module('missionDetail', [
   uiRouter
@@ -16,6 +17,8 @@ let missionDetailModule = angular.module('missionDetail', [
   })
 
 .component('missionDetail', missionDetailComponent)
+
+.service('AuthService', AuthService)
 
 .name;
 

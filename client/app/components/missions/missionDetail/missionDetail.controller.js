@@ -1,7 +1,8 @@
 class MissionDetailController {
-  constructor($stateParams, MissionService) {
+  constructor($stateParams, MissionService, AuthService) {
 
     this.MissionService = MissionService;
+    this.AuthService = AuthService;
 
     this.missionId = $stateParams.missionId;
     this.signedUpAlready = false;
@@ -51,6 +52,16 @@ class MissionDetailController {
     if(this.userProfile.neteoc_id in mission.staff) {
       this.signedUpAlready = true;
     }
+
+    for(var index in mission.staff) {
+
+      this.AuthService.getUser(index, this.updateStaff);
+    }
+  }
+
+  updateStaff = (user) => {
+
+    this.mission.staff[user.id] = user;
   }
 
   signUp = () => {
@@ -71,6 +82,6 @@ class MissionDetailController {
   }
 }
 
-MissionDetailController.$inject = ['$stateParams', 'Mission'];
+MissionDetailController.$inject = ['$stateParams', 'Mission', 'AuthService'];
 
 export default MissionDetailController;
