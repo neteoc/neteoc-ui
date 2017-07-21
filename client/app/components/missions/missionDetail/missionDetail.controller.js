@@ -61,6 +61,13 @@ class MissionDetailController {
     this.mission.staffLength = Object.keys(this.mission.staff).length;
 
     this.MissionService.signUp(this.missionId, this.userProfile.neteoc_id);
+    
+    this.signedUpAlready = true;
+  }
+
+  unSignUp = () => {
+
+    console.log("TODO");
   }
 }
 
