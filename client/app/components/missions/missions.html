@@ -2,6 +2,10 @@
 
 <div class="container">
 
+<div ng-show="$ctrl.attendingMissions.length == 0 && $ctrl.eligibleMissions.length == 0">
+    <h2><i class="fa fa-spinner"></i> Loading Missions, please wait ... </h2>
+</div>
+
 <div ng-show="$ctrl.attendingMissions.length > 0">
   <h2>My Missions</h2>
 

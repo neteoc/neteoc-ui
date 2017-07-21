@@ -24,7 +24,7 @@ class MissionsController {
         }
       }
 
-      // Angular bindings aren't supposed to work with ui-grid. It's only part of angular ui
+      // Reassign the angular bindings, since apparently (angular) ui-grid doesn't do angular bindings *eyeroll*
       $ctrl.eligibleMissionsGrid.data = $ctrl.eligibleMissions;
       $ctrl.attendingMissionsGrid.data = $ctrl.attendingMissions;
     });
@@ -80,34 +80,13 @@ class MissionsController {
     window.location.href = "/missions/" + row.entity.id;
   }
 
-  signUpForMission = (missionId) => {
-
-    var eligibleMissions = this.missions.eligibleMissions;
-    var attendingMissions = this.missions.attendingMissions;
-
-    for(var index in eligibleMissions) {
-
-      if(eligibleMissions[index].id == missionId) {
-
-        attendingMissions.push(eligibleMissions[index]);
-        eligibleMissions.splice(index, 1);
-
-        // TODO: push to API
-        localStorage.setItem("missions", JSON.stringify(this.missions));
-        break;
-      }
-    }
-  }
-
   createMission = () => {
     this.newMission.id_gsdf = this.newMission.id;
     this.newMission.id = this.generateUUID();
-    // TODO:
-    // this.missions.eligibleMissions.push(this.newMission);
+
+    this.eligibleMissions.push(this.newMission);
 
     localStorage.setItem("missions", JSON.stringify(this.missions));
-
-    //$ctrl.$http.post($ctrl.MissionService.url, JSON.stringify(this.newMission))
 
     this.$http({
       url: "https://1g3aj59907.execute-api.us-east-1.amazonaws.com/dev",
@@ -124,6 +103,8 @@ class MissionsController {
       startDate: new Date(),
       endDate: new Date()
     };
+
+    jQuery("#missionModal").modal('hide');
   }  
   
   generateUUID = () => {

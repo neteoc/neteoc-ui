@@ -1,5 +1,9 @@
 <navbar></navbar>
 
+<div class="container">
+
+<h3><a href="/missions">go back to mission list</a></h3>
+
 <form id="missionForm" name="missionForm">
   <div class="col-md-12">
       <h2>
@@ -50,11 +54,13 @@
   <div ng-repeat="(memberId, member) in $ctrl.mission.staff">
     <span>{{member.name}}</span>
     <!-- TODO: this button deletes -->
-    <span class="delete" ng-show="memberId == $ctrl.userProfile.neteoc_id"> x</span>
+    <span class="delete" ng-click="$ctrl.unSignUp()" ng-show="memberId == $ctrl.userProfile.neteoc_id"> x</span>
   </div>
 
   <p></p>
 
   <!-- TODO: do not show button if at max staff-->
   <button ng-click="$ctrl.signUp()" class="btn btn-primary" ng-show="$ctrl.mission.needsStaff && !$ctrl.signedUpAlready">Sign Up</button>
+</div>
+
 </div>
