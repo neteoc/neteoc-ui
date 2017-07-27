@@ -33,6 +33,34 @@ let missionsModule = angular.module('missions', [
 
 .component('missions', missionsComponent)
 
+.directive('myDirective', function() {
+  console.log("directive!")
+  return {
+    restrict: 'A',
+    scope: true,
+    link: function (scope, element, attrs) {
+      element.bind('change', function(){
+       var formData = new FormData();
+       formData.append('file', element[0].files[0]);
+
+       console.log("here I am")
+
+       // optional front-end logging 
+        var fileObject = element[0].files[0];
+        scope.fileLog = {
+          'lastModified': fileObject.lastModified,
+          'lastModifiedDate': fileObject.lastModifiedDate,
+          'name': fileObject.name,
+          'size': fileObject.size,
+          'type': fileObject.type
+        };
+        scope.$apply();
+
+      });
+    }
+  };
+})
+
 .name;
 
 export default missionsModule;
