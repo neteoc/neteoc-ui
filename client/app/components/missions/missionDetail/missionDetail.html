@@ -2,7 +2,9 @@
 
 <div class="container">
 
-<h3><a href="/missions">go back to mission list</a></h3>
+<a href="/missions"><button type="button" class="btn btn-default">
+  go back to mission list
+</button></a>
 
 <form id="missionForm" name="missionForm">
   <div class="col-md-12">
@@ -52,7 +54,7 @@
     <span ng-show="!!$ctrl.mission.staff.staffNeeded">/ {{$ctrl.mission.staff.staffNeeded}}</span></label>
 
   <div ng-repeat="(memberId, member) in $ctrl.mission.staff">
-    <span>{{member.name}}</span>
+    <span>{{member.name || member.email}}</span>
     <!-- TODO: this button deletes -->
     <span class="delete" ng-click="$ctrl.unSignUp()" ng-show="memberId == $ctrl.userProfile.neteoc_id"> x</span>
   </div>
