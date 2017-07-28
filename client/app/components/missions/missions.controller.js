@@ -80,6 +80,11 @@ class MissionsController {
     window.location.href = "/missions/" + row.entity.id;
   }
 
+  attachmentAdded = (event) => {
+
+    console.log(event);
+  }
+
   createMission = () => {
     this.newMission.id_gsdf = this.newMission.id;
     this.newMission.id = this.generateUUID();
