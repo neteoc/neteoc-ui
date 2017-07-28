@@ -82,7 +82,34 @@ class MissionsController {
 
   attachmentAdded = (event) => {
 
-    console.log(event);
+    var vm = this;
+
+    var files = event.target.files;
+
+    var reader = new FileReader();
+    var fileName = files[0].name;
+
+    reader.onload = function(frEvent) {
+
+      vm.$http({
+            method: 'POST',
+            url: 'http://localhost:3000/derp/attachments',
+            data: {
+                upload: {
+                  name: fileName,
+                  contents: frEvent.target.result
+                }
+            }
+        })
+        .success(function (data) {
+          console.log(data);
+        })
+        .error(function (data, status) {
+          console.log(data);
+        });
+    }
+
+    reader.readAsDataURL(files[0]);
   }
 
   createMission = () => {
