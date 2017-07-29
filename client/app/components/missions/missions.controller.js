@@ -3,31 +3,12 @@ class MissionsController {
     
     let $ctrl = this;
     this.$http = $http;
+    this.MissionService = MissionService;
 
     this.attendingMissions = [];
     this.eligibleMissions = [];
 
-    this.$http.get(MissionService.url).then(function(result) {
-
-      var storedMissions = result.data || JSON.parse(localStorage.getItem("missions"));
-        
-      var profile = JSON.parse(localStorage.getItem("profile"));
-
-      for(var missionId in storedMissions) {
-
-        var mission = storedMissions[missionId];
-
-        if(mission.staff && profile.neteoc_id in mission.staff) {
-          $ctrl.attendingMissions.push(mission);
-        } else {
-          $ctrl.eligibleMissions.push(mission);
-        }
-      }
-
-      // Reassign the angular bindings, since apparently (angular) ui-grid doesn't do angular bindings *eyeroll*
-      $ctrl.eligibleMissionsGrid.data = $ctrl.eligibleMissions;
-      $ctrl.attendingMissionsGrid.data = $ctrl.attendingMissions;
-    });
+    this.fetchMissions();
     
     this.eligibleMissionsGrid = {
       data: '$ctrl.eligibleMissions',  
@@ -50,7 +31,11 @@ class MissionsController {
       rowTemplate: '<div ng-click="grid.appScope.$ctrl.missionClick(row)" ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.uid" class="ui-grid-cell" ng-class="col.colIndex()" ui-grid-cell></div>'
     }
 
-    this.newMission = {};
+    this.newMission = {
+      startDate: new Date(),
+      endDate: new Date(),
+      attachments: {}
+    };
 
     this.startDatePoppedUp = false;
 
@@ -69,10 +54,36 @@ class MissionsController {
     };
 
     function endDateDisabled(data) {
-      var date = data.date;
 
-      return data.date <= $ctrl.newMission.startDate;
+      return data.date < $ctrl.newMission.startDate;
     }
+  }
+
+  fetchMissions = () => {
+
+    let $ctrl = this;
+
+    this.$http.get(this.MissionService.url).then(function(result) {
+
+      var storedMissions = result.data || JSON.parse(localStorage.getItem("missions"));
+        
+      var profile = JSON.parse(localStorage.getItem("profile"));
+
+      for(var missionId in storedMissions) {
+
+        var mission = storedMissions[missionId];
+
+        if(mission.staff && profile.neteoc_id in mission.staff) {
+          $ctrl.attendingMissions.push(mission);
+        } else {
+          $ctrl.eligibleMissions.push(mission);
+        }
+      }
+
+      // Reassign the angular bindings, since apparently (angular) ui-grid doesn't do angular bindings *eyeroll*
+      $ctrl.eligibleMissionsGrid.data = $ctrl.eligibleMissions;
+      $ctrl.attendingMissionsGrid.data = $ctrl.attendingMissions;
+    });
   }
 
   missionClick = (row) => {
@@ -91,22 +102,7 @@ class MissionsController {
 
     reader.onload = function(frEvent) {
 
-      vm.$http({
-            method: 'POST',
-            url: 'http://localhost:3000/derp/attachments',
-            data: {
-                upload: {
-                  name: fileName,
-                  contents: frEvent.target.result
-                }
-            }
-        })
-        .success(function (data) {
-          console.log(data);
-        })
-        .error(function (data, status) {
-          console.log(data);
-        });
+      vm.newMission.attachments[fileName] = frEvent.target.result;
     }
 
     reader.readAsDataURL(files[0]);
@@ -133,11 +129,12 @@ class MissionsController {
 
     this.newMission = {
       startDate: new Date(),
-      endDate: new Date()
+      endDate: new Date(),
+      attachments: {}
     };
 
     jQuery("#missionModal").modal('hide');
-  }  
+  }
   
   generateUUID = () => {
       var d = new Date().getTime();
