@@ -1,9 +1,13 @@
 class MissionsController {
   constructor(MissionService, $http, $timeout) {
+
+    let apiUrl = "https://1g3aj59907.execute-api.us-east-1.amazonaws.com/dev";
+    // url: "http://localhost:3000",
     
     let $ctrl = this;
     this.$http = $http;
     this.MissionService = MissionService;
+    this.$timeout = $timeout;
 
     this.attendingMissions = [];
     this.eligibleMissions = [];
@@ -102,30 +106,51 @@ class MissionsController {
 
     reader.onload = function(frEvent) {
 
-      vm.newMission.attachments[fileName] = frEvent.target.result;
+      vm.$timeout( function(){
+          vm.newMission.attachments[fileName] = frEvent.target.result;
+      }, 5);
+
+      document.getElementById("newAttachment").value = '';
     }
 
     reader.readAsDataURL(files[0]);
   }
 
   createMission = () => {
+
     this.newMission.id_gsdf = this.newMission.id;
     this.newMission.id = this.generateUUID();
+
+    var attachments = this.newMission.attachments;
+    delete this.newMission.attachments;
 
     this.eligibleMissions.push(this.newMission);
 
     localStorage.setItem("missions", JSON.stringify(this.missions));
 
     this.$http({
-      url: "https://1g3aj59907.execute-api.us-east-1.amazonaws.com/dev",
-      // url: "http://localhost:3000",
+      url: apiUrl,
       method: "POST",
       data: JSON.stringify(this.newMission)
     }).then(function successCallback(response) {
       console.log(response);
-  }, function errorCallback(response) {
+    }, function errorCallback(response) {
       console.log(response);
-  });
+    });
+
+    this.$http({
+          method: 'POST',
+          url: apiUrl + this.newMission.id + '/attachments',
+          data: {
+              uploads: attachments
+          }
+      })
+      .success(function (data) {
+        console.log(data);
+      })
+      .error(function (data, status) {
+        console.log(data);
+      });
 
     this.newMission = {
       startDate: new Date(),
