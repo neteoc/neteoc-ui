@@ -27,7 +27,11 @@ let organizationModule = angular.module('organization', [
 })
 
 .run(['Menu', function(Menu){
-  Menu.addToMainMenu({ display: "Organization", url: "/organization", requireLogin: true })
+  Menu.addToMainMenu({ 
+    display: "Organization", 
+    url: "/organization", 
+    requireLogin: true,
+    requireDev: true })
 }])
 
 .component('organization', organizationComponent)
