@@ -12,13 +12,18 @@ let aboutModule = angular.module('about', [
   $stateProvider
     .state('about', {
       url: '/about',
-      component: 'about'
+      component: 'about',
+      
     });
 })
 
 //
 .run(['Menu', function(Menu){
-Menu.addToMainMenu({ display: "About", url: "/about" })
+Menu.addToMainMenu({ 
+  display: "About", 
+  url: "/about", 
+  requireLogin: true,
+  requireDev: true })
 
 }])
 
