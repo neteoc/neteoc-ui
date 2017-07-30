@@ -6,7 +6,7 @@ class mission {
   // TOOD: extract url to global var
 let MissionFactory = function () {
 
-  const missionServiceUrl = "https://1g3aj59907.execute-api.us-east-1.amazonaws.com/dev/";
+  const missionServiceUrl = "https://nkqre3h3me.execute-api.us-east-1.amazonaws.com/dev/";
 
   return {
 
