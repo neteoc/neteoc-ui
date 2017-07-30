@@ -1,7 +1,7 @@
 class MissionsController {
   constructor(MissionService, $http, $timeout) {
 
-    let apiUrl = "https://1g3aj59907.execute-api.us-east-1.amazonaws.com/dev";
+    this.apiUrl = "https://1g3aj59907.execute-api.us-east-1.amazonaws.com/dev/";
     // url: "http://localhost:3000",
     
     let $ctrl = this;
@@ -129,7 +129,7 @@ class MissionsController {
     localStorage.setItem("missions", JSON.stringify(this.missions));
 
     this.$http({
-      url: apiUrl,
+      url: this.apiUrl,
       method: "POST",
       data: JSON.stringify(this.newMission)
     }).then(function successCallback(response) {
@@ -140,7 +140,7 @@ class MissionsController {
 
     this.$http({
           method: 'POST',
-          url: apiUrl + this.newMission.id + '/attachments',
+          url: this.apiUrl + this.newMission.id + '/attachments',
           data: {
               uploads: attachments
           }
