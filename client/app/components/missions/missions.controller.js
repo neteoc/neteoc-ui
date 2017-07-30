@@ -1,33 +1,18 @@
 class MissionsController {
   constructor(MissionService, $http, $timeout) {
+
+    let apiUrl = "https://1g3aj59907.execute-api.us-east-1.amazonaws.com/dev";
+    // url: "http://localhost:3000",
     
     let $ctrl = this;
     this.$http = $http;
+    this.MissionService = MissionService;
+    this.$timeout = $timeout;
 
     this.attendingMissions = [];
     this.eligibleMissions = [];
 
-    this.$http.get(MissionService.url).then(function(result) {
-
-      var storedMissions = result.data || JSON.parse(localStorage.getItem("missions"));
-        
-      var profile = JSON.parse(localStorage.getItem("profile"));
-
-      for(var missionId in storedMissions) {
-
-        var mission = storedMissions[missionId];
-
-        if(mission.staff && profile.neteoc_id in mission.staff) {
-          $ctrl.attendingMissions.push(mission);
-        } else {
-          $ctrl.eligibleMissions.push(mission);
-        }
-      }
-
-      // Reassign the angular bindings, since apparently (angular) ui-grid doesn't do angular bindings *eyeroll*
-      $ctrl.eligibleMissionsGrid.data = $ctrl.eligibleMissions;
-      $ctrl.attendingMissionsGrid.data = $ctrl.attendingMissions;
-    });
+    this.fetchMissions();
     
     this.eligibleMissionsGrid = {
       data: '$ctrl.eligibleMissions',  
@@ -50,7 +35,11 @@ class MissionsController {
       rowTemplate: '<div ng-click="grid.appScope.$ctrl.missionClick(row)" ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.uid" class="ui-grid-cell" ng-class="col.colIndex()" ui-grid-cell></div>'
     }
 
-    this.newMission = {};
+    this.newMission = {
+      startDate: new Date(),
+      endDate: new Date(),
+      attachments: {}
+    };
 
     this.startDatePoppedUp = false;
 
@@ -69,10 +58,36 @@ class MissionsController {
     };
 
     function endDateDisabled(data) {
-      var date = data.date;
 
-      return data.date <= $ctrl.newMission.startDate;
+      return data.date < $ctrl.newMission.startDate;
     }
+  }
+
+  fetchMissions = () => {
+
+    let $ctrl = this;
+
+    this.$http.get(this.MissionService.url).then(function(result) {
+
+      var storedMissions = result.data || JSON.parse(localStorage.getItem("missions"));
+        
+      var profile = JSON.parse(localStorage.getItem("profile"));
+
+      for(var missionId in storedMissions) {
+
+        var mission = storedMissions[missionId];
+
+        if(mission.staff && profile.neteoc_id in mission.staff) {
+          $ctrl.attendingMissions.push(mission);
+        } else {
+          $ctrl.eligibleMissions.push(mission);
+        }
+      }
+
+      // Reassign the angular bindings, since apparently (angular) ui-grid doesn't do angular bindings *eyeroll*
+      $ctrl.eligibleMissionsGrid.data = $ctrl.eligibleMissions;
+      $ctrl.attendingMissionsGrid.data = $ctrl.attendingMissions;
+    });
   }
 
   missionClick = (row) => {
@@ -80,32 +95,71 @@ class MissionsController {
     window.location.href = "/missions/" + row.entity.id;
   }
 
+  attachmentAdded = (event) => {
+
+    var vm = this;
+
+    var files = event.target.files;
+
+    var reader = new FileReader();
+    var fileName = files[0].name;
+
+    reader.onload = function(frEvent) {
+
+      vm.$timeout( function(){
+          vm.newMission.attachments[fileName] = frEvent.target.result;
+      }, 5);
+
+      document.getElementById("newAttachment").value = '';
+    }
+
+    reader.readAsDataURL(files[0]);
+  }
+
   createMission = () => {
+
     this.newMission.id_gsdf = this.newMission.id;
     this.newMission.id = this.generateUUID();
+
+    var attachments = this.newMission.attachments;
+    delete this.newMission.attachments;
 
     this.eligibleMissions.push(this.newMission);
 
     localStorage.setItem("missions", JSON.stringify(this.missions));
 
     this.$http({
-      url: "https://1g3aj59907.execute-api.us-east-1.amazonaws.com/dev",
-      // url: "http://localhost:3000",
+      url: apiUrl,
       method: "POST",
       data: JSON.stringify(this.newMission)
     }).then(function successCallback(response) {
       console.log(response);
-  }, function errorCallback(response) {
+    }, function errorCallback(response) {
       console.log(response);
-  });
+    });
+
+    this.$http({
+          method: 'POST',
+          url: apiUrl + this.newMission.id + '/attachments',
+          data: {
+              uploads: attachments
+          }
+      })
+      .success(function (data) {
+        console.log(data);
+      })
+      .error(function (data, status) {
+        console.log(data);
+      });
 
     this.newMission = {
       startDate: new Date(),
-      endDate: new Date()
+      endDate: new Date(),
+      attachments: {}
     };
 
     jQuery("#missionModal").modal('hide');
-  }  
+  }
   
   generateUUID = () => {
       var d = new Date().getTime();

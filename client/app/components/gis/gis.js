@@ -25,6 +25,7 @@ let mapModule = angular.module('gis', [
 
 .component('gis', mapComponent)
 
+/*
 .directive('customOnChange', function() {
   return {
     restrict: 'A',
@@ -34,6 +35,7 @@ let mapModule = angular.module('gis', [
     }
   };
 })
+*/
 
 .name;
 

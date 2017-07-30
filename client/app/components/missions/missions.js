@@ -31,6 +31,16 @@ let missionsModule = angular.module('missions', [
     Menu.addToMainMenu({ display: "Missions", url: "/missions", requireLogin: true })
   }])
 
+.directive('customOnChange', function() {
+  return {
+    restrict: 'A',
+    link: function (scope, element, attrs) {
+      var onChangeHandler = scope.$ctrl[attrs.customOnChange];
+      element.bind('change', onChangeHandler);
+    }
+  };
+})
+
 .component('missions', missionsComponent)
 
 .name;
