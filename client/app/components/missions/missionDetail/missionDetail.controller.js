@@ -1,6 +1,7 @@
 class MissionDetailController {
-  constructor($stateParams, MissionService, AuthService) {
+  constructor($stateParams, MissionService, AuthService, $http) {
 
+    this.$http = $http;
     this.MissionService = MissionService;
     this.AuthService = AuthService;
 
@@ -32,6 +33,8 @@ class MissionDetailController {
       $ctrl.mission = missions[$ctrl.missionId];
 
       $ctrl.getStaff();
+
+      $ctrl.getAttachments();
     });
   }
 
@@ -59,6 +62,16 @@ class MissionDetailController {
     }
   }
 
+  getAttachments = () => {  
+
+    var $ctrl = this;
+
+    this.$http.get(this.MissionService.url + this.mission.id + "/attachments").then(function(result) {
+
+      $ctrl.mission.attachments = result.data;
+    });
+  }
+
   updateStaff = (user) => {
 
     this.mission.staff[user.id] = user;
@@ -82,6 +95,6 @@ class MissionDetailController {
   }
 }
 
-MissionDetailController.$inject = ['$stateParams', 'Mission', 'AuthService'];
+MissionDetailController.$inject = ['$stateParams', 'Mission', 'AuthService', '$http'];
 
 export default MissionDetailController;
