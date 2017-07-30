@@ -78,7 +78,7 @@ class MissionDetailController {
 
   unSignUp = () => {
 
-    console.log("TODO");
+    alert("Functionality not yet implemented. You're staying signed up for now, soldier.");
   }
 }
 
