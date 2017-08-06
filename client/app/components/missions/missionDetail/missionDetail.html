@@ -41,11 +41,13 @@
       <div class="form-group">
           <label for="message">Attachments: </label>
           <div ng-repeat="attachment in $ctrl.mission.attachments">
-              <span><a href="#">{{attachment}},</a></span>
+              <a ng-click="$ctrl.getAttachmentUrl(attachment)">{{attachment}}</a>, 
           </div>
+            <!--
             <br />
           <input type="file" id="newAttachment" custom-on-change="attachmentAdded">
           <input type="button" ng-show="$ctrl.newPin.hasAttachments()" value="Clear Attachments" ng-click="$ctrl.clearAttachments()">
+          -->
       </div>
       <p></p>
       <button ng-click="$ctrl.updateMission()" type="submit" class="btn btn-primary" ng-disabled="missionForm.$invalid">Update</button>

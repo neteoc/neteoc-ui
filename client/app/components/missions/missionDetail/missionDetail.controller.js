@@ -72,6 +72,11 @@ class MissionDetailController {
     });
   }
 
+  getAttachmentUrl = (attachment) => {
+
+    window.location.href = this.MissionService.url + this.mission.id + "/attachments/" + attachment;
+  }
+
   updateStaff = (user) => {
 
     this.mission.staff[user.id] = user;
