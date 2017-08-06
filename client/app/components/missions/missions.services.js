@@ -7,6 +7,7 @@ class mission {
 let MissionFactory = function () {
 
   const missionServiceUrl = "https://nkqre3h3me.execute-api.us-east-1.amazonaws.com/dev/";
+  // const missionServiceUrl = "http://localhost:3000/";
 
   return {
 
