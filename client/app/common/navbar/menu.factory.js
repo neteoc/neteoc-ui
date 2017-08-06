@@ -1,7 +1,7 @@
 let MenuFactory = function (Auth) {
   const menu = {
     main: {
-      display: "NetEOC",
+      display: "NetEOC Menu",
       items: [
       ],
       privateItems: [

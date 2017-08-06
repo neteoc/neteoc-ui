@@ -19,7 +19,7 @@ let mapModule = angular.module('gis', [
   Menu.addToMainMenu({ 
     display: "GIS", 
     url: "/gis", 
-    requireLogin: false,
+    requireLogin: true,
     requireDev: true })
 }])
 

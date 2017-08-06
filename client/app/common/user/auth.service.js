@@ -17,7 +17,7 @@ let AuthService = function($q, lock, authManager, $rootScope, $location, $http) 
        if (userProfile) {
            $rootScope.profile = userProfile;
            deferredProfile.resolve(userProfile);
-           console.log(userProfile);
+           // console.log(userProfile);
            return userProfile
        }
    }

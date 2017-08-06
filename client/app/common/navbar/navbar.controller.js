@@ -3,7 +3,6 @@ class NavbarController {
     this.name = 'navbar';
     this.auth = Auth;
     this.menu = Menu;
-    console.log(Auth);
   }
 
 
