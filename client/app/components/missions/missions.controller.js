@@ -9,6 +9,8 @@ class MissionsController {
     this.attendingMissions = [];
     this.eligibleMissions = [];
 
+    $http.defaults.headers.common.Authorization = 'bearer ' + localStorage.getItem("id_token");
+
     this.fetchMissions();
     
     this.eligibleMissionsGrid = {

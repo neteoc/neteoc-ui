@@ -5,6 +5,7 @@ class MissionDetailController {
     this.MissionService = MissionService;
     this.AuthService = AuthService;
 
+    $http.defaults.headers.common.Authorization = 'bearer ' + localStorage.getItem("id_token");
     this.missionId = $stateParams.missionId;
     this.signedUpAlready = false;
 
