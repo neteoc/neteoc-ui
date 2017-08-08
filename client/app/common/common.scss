@@ -2,3 +2,12 @@
 #right-nav a {
     cursor: pointer;
 }
+
+.form-control.ng-invalid {
+    border: 1px solid red;    
+}
+
+[ng-click] {
+
+    cursor: pointer;
+}

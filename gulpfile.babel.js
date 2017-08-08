@@ -98,6 +98,37 @@ gulp.task('serve', () => {
   });
 });
 
+gulp.task('sserve', () => {
+  const config = require('./webpack.dev.config');
+  config.entry.app = [
+    // this modules required to make HRM working
+    // it responsible for all this webpack magic
+    'webpack-hot-middleware/client?reload=true',
+    // application entry point
+  ].concat(paths.entry);
+
+  var compiler = webpack(config);
+
+  serve({
+    port: process.env.PORT || 8080,
+    open: false,
+    server: {baseDir: root},
+    https: true,
+    middleware: [
+      historyApiFallback(),
+      webpackDevMiddleware(compiler, {
+        stats: {
+          colors: colorsSupported,
+          chunks: false,
+          modules: false
+        },
+        publicPath: config.output.publicPath
+      }),
+      webpackHotMiddleware(compiler)
+    ]
+  });
+});
+
 gulp.task('watch', ['serve']);
 
 gulp.task('component', () => {

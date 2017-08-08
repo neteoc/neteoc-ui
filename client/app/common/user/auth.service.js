@@ -17,7 +17,7 @@ let AuthService = function($q, lock, authManager, $rootScope, $location, $http) 
        if (userProfile) {
            $rootScope.profile = userProfile;
            deferredProfile.resolve(userProfile);
-           console.log(userProfile);
+           // console.log(userProfile);
            return userProfile
        }
    }
@@ -72,10 +72,10 @@ let AuthService = function($q, lock, authManager, $rootScope, $location, $http) 
                     "email": profile.email
                 };
 
-                $http.post('http://54.172.225.43:54362/users', userPost).then(function(response) {
+                $http.post('https://dwaomjth0nnz7.cloudfront.net/users', userPost).then(function(response) {
                     
                     localStorage.setItem('neteoc_id', response.data.id);
-                    console.log(response);
+                    // console.log(response);
                 });
 
                localStorage.setItem('profile', JSON.stringify(profile));
@@ -88,13 +88,24 @@ let AuthService = function($q, lock, authManager, $rootScope, $location, $http) 
        });
    }
 
+   function getUser(userId, callback) {
+
+    $http.defaults.headers.common.Authorization = 'bearer ' + localStorage.getItem("id_token");
+
+    $http.get('https://dwaomjth0nnz7.cloudfront.net/users/' + userId).then(function(response) {
+
+        callback(response.data);
+    });
+   }
+
    return {
        login: login,
        logout: logout,
        registerAuthenticationListener: registerAuthenticationListener,
        getProfileDeferred: getProfileDeferred,
        getProfile: getProfile,
-       getAuthState: getAuthState
+       getAuthState: getAuthState,
+       getUser: getUser
    }
 };
 
