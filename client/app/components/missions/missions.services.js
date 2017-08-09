@@ -4,9 +4,11 @@ class mission {
 }
 
   // TOOD: extract url to global var
-let MissionFactory = function () {
+let MissionFactory = function ($appEnvironment) {
 
-  const missionServiceUrl = "https://nkqre3h3me.execute-api.us-east-1.amazonaws.com/dev/";
+  console.log($appEnvironment.config.apiUrl)
+
+  const missionServiceUrl = $appEnvironment.config.apiUrl;
   // const missionServiceUrl = "http://localhost:3000/";
 
   return {
