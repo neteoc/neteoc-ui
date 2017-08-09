@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "angular": "^1.5.0",
+    "angular-environment-config": "^1.0.0",
     "angular-http-auth": "^1.5.0",
     "angular-jwt": "^0.1.8",
     "angular-lock": "^1.0.5",
