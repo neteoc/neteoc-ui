@@ -10,12 +10,12 @@ require('angular-ui-grid/ui-grid.css');
 let missionsModule = angular.module('missions', [
   uiRouter,
   navbar,
-  MissionDetail,  
+  MissionDetail,
   require('angular-ui-grid')
 ])
 
 
-  .factory('Mission', MissionFactory)
+  .factory('Mission', ['$appEnvironment', MissionFactory])
 
 
   .config(($stateProvider) => {

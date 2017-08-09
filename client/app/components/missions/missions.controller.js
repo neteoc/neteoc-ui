@@ -174,5 +174,5 @@ class MissionsController {
   }
 }
 
-MissionsController.$inject = ['Mission', '$http', '$timeout'];
+MissionsController.$inject = ['Mission', '$http', '$timeout', '$appEnvironment'];
 export default MissionsController;
