@@ -29,7 +29,7 @@ class MissionDetailController {
 
     this.MissionService.getMissions().then(function(result) {
 
-      var missions = result || JSON.parse(localStorage.getItem("missions"));
+      var missions = result.data || JSON.parse(localStorage.getItem("missions"));
 
       $ctrl.mission = missions[$ctrl.missionId];
 

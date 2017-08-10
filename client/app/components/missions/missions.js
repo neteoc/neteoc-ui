@@ -15,7 +15,7 @@ let missionsModule = angular.module('missions', [
 ])
 
 
-  .factory('Mission', ['$appEnvironment', MissionFactory])
+  .factory('Mission', ['$appEnvironment', '$http', MissionFactory])
 
 
   .config(($stateProvider) => {
