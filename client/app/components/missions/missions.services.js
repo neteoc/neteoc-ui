@@ -27,6 +27,16 @@ let MissionFactory = function ($appEnvironment, $http) {
     getAttachments: function(missionId) {
 
       return $http.get(missionServiceUrl + missionId + "/attachments");
+    },
+
+    createMission: function(newMission) {
+
+      return $http.post(missionServiceUrl, JSON.stringify(newMission));
+    },
+
+    postAttachments: function(missionId, attachments) {
+
+      return $http.post(missionServiceUrl + missionId + "/attachments", {"uploads": attachments});
     }
   }
 };

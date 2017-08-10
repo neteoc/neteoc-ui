@@ -1,16 +1,12 @@
 class MissionsController {
-  constructor($http, $timeout, $appEnvironment, MissionService) {
+  constructor($timeout, $appEnvironment, MissionService) {
     
-    let $ctrl = this;
-    this.$http = $http;
     this.$timeout = $timeout;
     this.MissionService = MissionService;
     this.$appEnvironment = $appEnvironment;
 
     this.attendingMissions = [];
     this.eligibleMissions = [];
-
-    $http.defaults.headers.common.Authorization = 'bearer ' + localStorage.getItem("id_token");
 
     this.fetchMissions();
     
@@ -128,29 +124,19 @@ class MissionsController {
 
     localStorage.setItem("missions", JSON.stringify(this.missions));
 
-    this.$http({
-      url: this.MissionService.url,
-      method: "POST",
-      data: JSON.stringify(this.newMission)
-    }).then(function successCallback(response) {
+    this.MissionService.createMission(this.newMission)
+    .then(function successCallback(response) {
       console.log(response);
     }, function errorCallback(response) {
       console.log(response);
     });
 
-    this.$http({
-        method: 'POST',
-        url: this.MissionService.url + this.newMission.id + '/attachments',
-        data: {
-            uploads: attachments
-        }
-      })
-      .success(function (data) {
-        console.log(data);
-      })
-      .error(function (data, status) {
-        console.log(data);
-      });
+    this.MissionService.postAttachments(this.newMission.id, attachments)
+    .then(function successCallback(response) {
+      console.log(response);
+    }, function errorCallback(response) {
+      console.log(response);
+    });
 
     this.newMission = {
       startDate: new Date(),
@@ -175,5 +161,5 @@ class MissionsController {
   }
 }
 
-MissionsController.$inject = ['$http', '$timeout', '$appEnvironment', 'Mission'];
+MissionsController.$inject = ['$timeout', '$appEnvironment', 'Mission'];
 export default MissionsController;
