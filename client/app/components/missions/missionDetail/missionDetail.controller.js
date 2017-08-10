@@ -1,11 +1,9 @@
 class MissionDetailController {
-  constructor($stateParams, MissionService, AuthService, $http) {
+  constructor($stateParams, MissionService, AuthService) {
 
-    this.$http = $http;
     this.MissionService = MissionService;
     this.AuthService = AuthService;
 
-    $http.defaults.headers.common.Authorization = 'bearer ' + localStorage.getItem("id_token");
     this.missionId = $stateParams.missionId;
     this.signedUpAlready = false;
 
@@ -67,7 +65,7 @@ class MissionDetailController {
 
     var $ctrl = this;
 
-    this.$http.get(this.MissionService.url + this.mission.id + "/attachments").then(function(result) {
+    this.MissionService.getAttachments(this.missionId).then(function(result) {
 
       $ctrl.mission.attachments = result.data;
     });
@@ -101,6 +99,6 @@ class MissionDetailController {
   }
 }
 
-MissionDetailController.$inject = ['$stateParams', 'Mission', 'AuthService', '$http'];
+MissionDetailController.$inject = ['$stateParams', 'Mission', 'AuthService'];
 
 export default MissionDetailController;

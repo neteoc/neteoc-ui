@@ -24,13 +24,10 @@ let MissionFactory = function ($appEnvironment, $http) {
       return $http.post(missionServiceUrl + missionId + "/attend", userId);
     },
 
-    old_signUp: function(missionId, userId) {
-      return $.ajax({
-        headers: {"Authorization": 'bearer ' + localStorage.getItem("id_token")},
-        url: missionServiceUrl + missionId,
-        method: "POST",
-        data: userId
-    })}
+    getAttachments: function(missionId) {
+
+      return $http.get(missionServiceUrl + missionId + "/attachments");
+    }
   }
 };
 
