@@ -1,10 +1,11 @@
 class MissionsController {
-  constructor(MissionService, $http, $timeout) {
+  constructor($http, $timeout, $appEnvironment, MissionService) {
     
     let $ctrl = this;
     this.$http = $http;
-    this.MissionService = MissionService;
     this.$timeout = $timeout;
+    this.MissionService = MissionService;
+    this.$appEnvironment = $appEnvironment;
 
     this.attendingMissions = [];
     this.eligibleMissions = [];
@@ -64,9 +65,9 @@ class MissionsController {
 
   fetchMissions = () => {
 
-    let $ctrl = this;
+    var $ctrl = this;
 
-    this.$http.get(this.MissionService.url).then(function(result) {
+    this.MissionService.getMissions().then(function(result) {
 
       var storedMissions = result.data || JSON.parse(localStorage.getItem("missions"));
         
@@ -174,5 +175,5 @@ class MissionsController {
   }
 }
 
-MissionsController.$inject = ['Mission', '$http', '$timeout', '$appEnvironment'];
+MissionsController.$inject = ['$http', '$timeout', '$appEnvironment', 'Mission'];
 export default MissionsController;
