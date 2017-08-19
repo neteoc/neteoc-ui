@@ -1,6 +1,7 @@
 class MissionsController {
   constructor($timeout, $appEnvironment, MissionService) {
     
+    let $ctrl = this;
     this.$timeout = $timeout;
     this.MissionService = MissionService;
     this.$appEnvironment = $appEnvironment;
