@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "neteoc-prod",
+    "test": "gsdf-8dc44"
+  }
+}

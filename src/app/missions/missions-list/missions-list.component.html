@@ -1,0 +1,36 @@
+
+<div [ngbCollapse]="!canCreateMission">
+  <missions-form></missions-form>
+</div>
+
+
+<div class="card " >
+  <h4 class="card-header">Missions</h4>
+  <div class="card-body">
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th class="d-none d-md-table-cell">Duty Level</th>
+      <th class="d-none d-sm-table-cell">Location</th>
+      <th class="d-none d-md-table-cell">Start Date</th>
+      <th class="d-none d-md-table-cell">End Date</th>
+      <!--<th>Delete</th>-->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let mission of missions | async">
+      
+      <th scope="row"><a [routerLink]="['/missions', mission.$key  ]">{{  mission.incidentID }}</a></th>
+      <td>{{ mission.title | slice:0:28 || 'missing title' }}</td>
+      <td class="d-none d-md-table-cell">{{ mission.dutyLevel || 'missing locaton' }}</td>
+      <td class="d-none d-sm-table-cell">{{ mission.location || 'missing Duty Level' }}</td>
+      <td class="d-none d-md-table-cell">{{(mission.startDate)?.year}} {{(mission.startDate)?.month}} {{(mission.startDate)?.day}}</td>
+      <td class="d-none d-md-table-cell">{{(mission.endDate)?.year}} {{(mission.endDate)?.month}} {{(mission.endDate)?.day}}</td>
+      <!--<td><button type="submit" class="btn btn-danger" (click)='deleteItem(mission.$key)' >Delete</button></td>-->
+
+    </tr>
+  </tbody>
+</table>
+</div>

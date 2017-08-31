@@ -1,0 +1,26 @@
+<div *ngIf="(user | async)?.uid" class="card" >
+  <div class="card-body">
+    <h4 class="card-title">Missions</h4>
+    <h6 class="card-subtitle mb-2 text-muted">Missions you've signed up for</h6>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th class="d-none d-sm-table-cell">Location</th>
+          <th class="d-none d-md-table-cell">Start Date</th>
+          <th class="d-none d-md-table-cell">End Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let mission of missionList ">
+          <td> <a [routerLink]="['/missions', mission.$key  ]">{{ mission.title | slice:0:28 || 'missing title' }}</a></td>
+          <td class="d-none d-sm-table-cell">{{ mission.location }}</td>
+          <td class="d-none d-md-table-cell">{{(mission.startDate)?.year}} {{(mission.startDate)?.month}} {{(mission.startDate)?.day}}</td>
+          <td class="d-none d-md-table-cell">{{(mission.endDate)?.year}} {{(mission.endDate)?.month}} {{(mission.endDate)?.day}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <button  routerLink="/missions" type="button" class="btn btn-primary card-link">View All Missions</button>
+    <button *ngIf="canCreateMission" [routerLink]="['/missions']" [queryParams]="{showForm: true}" type="button" class="btn btn-success card-link">Create Mission</button>
+  </div>
+</div>

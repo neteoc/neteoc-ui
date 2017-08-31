@@ -1,0 +1,82 @@
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+  <li class="breadcrumb-item"><a routerLink="/missions">Missions</a></li>
+  <li class="breadcrumb-item active">{{ (missionDetails | async)?.$key  }}</li>
+</ol>
+
+<h1>{{ (missionDetails | async)?.incidentID  }}</h1>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">{{ (missionDetails | async)?.title }}</h4>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th scope="row">Duty Level</th>
+                    <td>{{ (missionDetails | async)?.dutyLevel }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Start Date</th>
+                    <td>{{ (missionDetails | async )?.startDate.year}} {{ (missionDetails | async )?.startDate.month}}  {{ (missionDetails | async )?.startDate.day}} </td>
+                </tr>
+                <tr>
+                    <th scope="row">End Date</th>
+                    <td>{{ (missionDetails | async )?.endDate.year}} {{ (missionDetails | async )?.endDate.month}}  {{ (missionDetails | async )?.endDate.day}} </td>
+                </tr>
+                <tr>
+                    <th scope="row">location</th>
+                    <td>{{ (missionDetails | async)?.location }} </td>
+                </tr>
+                <tr>
+                    <th scope="row">Staff Min</th>
+                    <td>{{ (missionDetails | async)?.staffMin }} </td>
+                </tr>
+                <tr>
+                    <th scope="row">Staff Max</th>
+                    <td>{{ (missionDetails | async)?.staffMax }} </td>
+                </tr>
+            </tbody>
+            </table>
+            <h4 class="card-title">Extra Details </h4>
+            {{ (missionDetails | async)?.extraDetails }}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Mission Roster</h4>
+        <button *ngIf="!rosterStatus" (click)='addSignupStatus()' class="btn btn-success my-2 my-sm-0">Sign yourself up for the mission</button>
+
+        <button *ngIf="rosterStatus" (click)='removeSignupStatus()' class="btn btn-danger my-2 my-sm-0">Remove yourself from the mission</button>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th class="d-none d-sm-table-cell">Email</th>
+      <th>Phone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let member of roster | async">
+      <th scope="row">{{member?.displayName}}</th>
+      <td class="d-none d-sm-table-cell">{{member.email}}</td>
+      <td>{{member.phoneNumber}}</td>
+    </tr>
+  </tbody>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+

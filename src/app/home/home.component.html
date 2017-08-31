@@ -1,0 +1,11 @@
+<div *ngIf="!(user | async)?.uid" class="jumbotron">
+  <h1 class="display-3">Welcome to NetEOC</h1>
+  <p class="lead">NETworked Emergency Operations Center</p>
+  <hr class="my-4">
+  <p>To get started, login</p>
+  <p class="lead">
+    <button *ngIf="!(user | async)?.uid" class="btn btn-success btn-lg btn-block" type="submit"  (click)="login()">Login</button>
+  </p>
+</div>
+
+<missions-block [user]="user"></missions-block>

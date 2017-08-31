@@ -1,0 +1,25 @@
+
+<nav class="navbar navbar-dark bg-dark navbar-fixed-top navbar-expand-sm">
+
+    <a class="navbar-brand" [routerLink]="['/']" (click)="navbarCollapsed = true">{{ title }}</a>
+
+    <button class="navbar-toggler navbar-toggler-right" type="button" (click)="navbarCollapsed = !navbarCollapsed"
+            [attr.aria-expanded]="!navbarCollapsed" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse" [ngbCollapse]="navbarCollapsed" id="navbarContent">
+      <ul class="navbar-nav mr-auto">
+        <li *ngIf="(user | async)?.uid" class="nav-item" [routerLinkActive]="['active']">
+          <a class="nav-link" [routerLink]="['/missions']" (click)="navbarCollapsed = true">Missions</a>
+        </li>
+        <li *ngIf="(user | async)?.uid" class="nav-item" [routerLinkActive]="['active']">
+          <a class="nav-link" [routerLink]="['/profile/', {id: userID}]" (click)="navbarCollapsed = true">Profile</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <button *ngIf="!(user | async)?.uid" class="btn btn-outline-success my-2 my-sm-0" type="submit"  (click)="login()">Login</button>
+        <button [routerLink]="['/']" *ngIf="(user | async)?.uid" class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="logout()">logout</button>
+      </form>
+    </div>
+</nav>
