@@ -5,6 +5,7 @@ import * as firebase from 'firebase/app';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { DatePipe } from '@angular/common';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 import { Mission } from '../shared/mission';
 import { MissionService } from '../shared/mission.service'
@@ -21,6 +22,7 @@ import { Roster } from '../shared/roster';
   providers: [MissionService, UserService]
 })
 export class MissionsDetailComponent implements OnInit {
+  closeResult: string;
   missionDetails: FirebaseObjectObservable<Mission>;
   missionInfo: any;
   roster: FirebaseListObservable<Roster[]>
@@ -34,7 +36,8 @@ export class MissionsDetailComponent implements OnInit {
   constructor(private missionSvc: MissionService,
               private userSvc: UserService,
               private route: ActivatedRoute,
-              public afAuth: AngularFireAuth) { 
+              public afAuth: AngularFireAuth,
+              private modalService: NgbModal) { 
                 this.user = afAuth.authState;
                
               }
@@ -89,5 +92,21 @@ export class MissionsDetailComponent implements OnInit {
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
+   open(content) {
+    this.modalService.open(content).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
 
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
 }

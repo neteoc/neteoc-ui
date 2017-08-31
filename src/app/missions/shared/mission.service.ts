@@ -52,7 +52,6 @@ export class MissionService {
     var missionRosterRef = dbRef.child('roster')
     //missionRosterRef.child(userID).set(userData)
 
-    console.log(missionInfo);
     var missionDetails = {
       title: missionInfo.title,
       location: missionInfo.location,

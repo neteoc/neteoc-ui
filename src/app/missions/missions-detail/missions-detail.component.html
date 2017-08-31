@@ -38,6 +38,10 @@
                     <th scope="row">Staff Max</th>
                     <td>{{ (missionDetails | async)?.staffMax }} </td>
                 </tr>
+                  <tr>
+                    <th scope="row">Attachment</th>
+                    <td><a href="{{ (missionDetails | async)?.attachmentLink }}" target="_blank">Cick Here</a> </td>
+                </tr>
             </tbody>
             </table>
             <h4 class="card-title">Extra Details </h4>
@@ -54,7 +58,7 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Mission Roster</h4>
-        <button *ngIf="!rosterStatus" (click)='addSignupStatus()' class="btn btn-success my-2 my-sm-0">Sign yourself up for the mission</button>
+        <button *ngIf="!rosterStatus" (click)='addSignupStatus(); open(content)' class="btn btn-success my-2 my-sm-0">Sign yourself up for the mission</button>
 
         <button *ngIf="rosterStatus" (click)='removeSignupStatus()' class="btn btn-danger my-2 my-sm-0">Remove yourself from the mission</button>
 <table class="table">
@@ -80,3 +84,21 @@
 </div>
 
 
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Success</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h4 class="card-title">Reminder:</h4>
+            {{ (missionDetails | async)?.extraDetails }}
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="c('Close click')">Done</button>
+  </div>
+</ng-template>

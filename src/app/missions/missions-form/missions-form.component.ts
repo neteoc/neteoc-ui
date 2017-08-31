@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
+
 import * as _ from "lodash";
 
 
@@ -18,7 +19,7 @@ import { UploadService } from '../shared/upload.service';
   styleUrls: ['./missions-form.component.css'],
 })
 export class MissionsFormComponent implements OnInit {
-
+  
   selectedFiles: FileList;
   currentUpload: Attachment;
 
@@ -61,5 +62,7 @@ export class MissionsFormComponent implements OnInit {
     this.missionSvc.createMission(this.mission)
     this.mission = new Mission();
   }
+
+
 
 }
