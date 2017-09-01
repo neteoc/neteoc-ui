@@ -1,17 +1,8 @@
 <div class="card text-center">
   <div class="card-header">
-    <ul class="nav nav-tabs card-header-tabs">
-      <li class="nav-item">
-        <a class="nav-link active">
-            
-              Open New Mission Form
-        </a>
-      </li>
-    </ul>
+    <h4>Edit Mission</h4>
   </div>
   <div class="card-body">
-    <h4 class="card-title">New Mission</h4>
-    <p class="card-text">edit</p>
     <form id="newMissionForm" name="newMissionForm"  class="ng-pristine ng-invalid ng-invalid-required ng-valid-date ng-valid-min ng-valid-max ng-valid-step">
       <div class="input-group">
           <span class="input-group-addon">id</span>
@@ -78,7 +69,7 @@
           </button>
       </div>-->
       <p></p>
-      <button type="submit" class="btn btn-primary" (click)='updateMission()' >Save new mission</button>
+      <button type="submit" class="btn btn-primary" (click)='updateMission()' [routerLink]="['/missions/', mission.$key]" >Update Mission</button>
     </form>
   </div>
 </div>

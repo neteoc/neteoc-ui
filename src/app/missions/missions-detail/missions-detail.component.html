@@ -7,7 +7,7 @@
 
 
 
-<button class="btn btn-lg btn-outline-primary " [routerLink]="['/missions',(missionDetails | async)?.$key, 'edit']"> Edit Mission </button>
+
 
 <hr>
 
@@ -53,7 +53,8 @@
             </tbody>
             </table>
             <h4 class="card-title">Extra Details </h4>
-            {{ (missionDetails | async)?.extraDetails }}
+            <p>{{ (missionDetails | async)?.extraDetails }}</p>
+            <button class="btn btn-lg btn-outline-dark " [routerLink]="['/missions',(missionDetails | async)?.$key, 'edit']"> Edit Mission </button>
       </div>
     </div>
   </div>

@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import { Location } from '@angular/common';
 
 import { Mission } from '../shared/mission';
 import { MissionService } from '../shared/mission.service';
@@ -26,7 +27,8 @@ export class MissionsEditComponent implements OnInit {
   constructor(private missionSvc: MissionService,
               private route: ActivatedRoute,
               private router: Router,
-              public afAuth: AngularFireAuth) {  this.user = afAuth.authState; }
+              public afAuth: AngularFireAuth,
+              private location: Location) {  this.user = afAuth.authState; }
 
   ngOnInit() {
 
@@ -52,6 +54,7 @@ export class MissionsEditComponent implements OnInit {
 
   updateMission(){
     this.missionSvc.updateMission(this.mission.$key, this.mission)
+    this.location.go("/misions/" +  this.id);
   }
 
 }
