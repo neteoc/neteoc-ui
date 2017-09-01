@@ -43,14 +43,6 @@ export class MissionService {
   }
   // Update an existing item
   updateMission(key: string, value: any): void {
-
-    console.log(key)
-
-
-    console.log(value)
-
-    console.log(this.missions)
-
     this.missions.update(key, value)
       .catch(error => this.handleError(error))
   }

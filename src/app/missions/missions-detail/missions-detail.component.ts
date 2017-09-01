@@ -13,13 +13,16 @@ import { MissionService } from '../shared/mission.service'
 import { User } from '../../users/shared/user'
 import { UserService } from '../../users/shared/user.service';
 
+import { RolesService } from '../../users/shared/roles.service';
+import { Role } from '../../users/shared/role';
+
 import { Roster } from '../shared/roster';
 
 @Component({
   selector: 'mission-detail',
   templateUrl: './missions-detail.component.html',
   styleUrls: ['./missions-detail.component.css'],
-  providers: [MissionService, UserService]
+  providers: [MissionService, UserService, RolesService]
 })
 export class MissionsDetailComponent implements OnInit {
   closeResult: string;
@@ -29,25 +32,29 @@ export class MissionsDetailComponent implements OnInit {
   rosterStatus: boolean;
   user: Observable<firebase.User>;
   userDetails:  FirebaseObjectObservable<User>;
+  userDetailInfo: any;
+  userDetailInfoReady: boolean = false;
+  userInfoReady: boolean = false;
   private sub: any;
   id: string;
   show: boolean = true;
+
+  canCreateMission = false;
 
   constructor(private missionSvc: MissionService,
               private userSvc: UserService,
               private route: ActivatedRoute,
               public afAuth: AngularFireAuth,
-              private modalService: NgbModal) { 
-                this.user = afAuth.authState;
+              private modalService: NgbModal,
+              private roleSvc: RolesService) { 
+              this.user = afAuth.authState;
                
               }
 
 
 
   addSignupStatus() {
-
-    this.userSvc.getUserDetails(this.afAuth.auth.currentUser.uid).subscribe( userDetails => this.missionSvc.signupMission(this.id, this.afAuth.auth.currentUser.uid, userDetails, this.missionInfo))
-    
+    this.missionSvc.signupMission(this.id, this.afAuth.auth.currentUser.uid, this.userDetailInfo, this.missionInfo)
   }
 
   removeSignupStatus() {
@@ -71,14 +78,42 @@ export class MissionsDetailComponent implements OnInit {
 
   }
 
+  displayNewMission(role){
+    this.canCreateMission = role.$value;
+  }
+
+  userReady(user){
+
+    this.userSvc.getUserDetails(this.afAuth.auth.currentUser.uid).subscribe( 
+            userDetails => this.userDetailInfo = userDetails,
+            error => console.log(error),
+            () => this.userDetailInfoReady = true
+          )
+    this.roleSvc.getRole("addMission", this.afAuth.auth.currentUser.uid).subscribe(
+        role => this.displayNewMission(role)
+      )      
+
+  }
+
 
 
   ngOnInit() {
+
+    this.user.subscribe(
+          user => this.userReady(user),
+          error => console.log(error),
+          () => this.userInfoReady = true
+    );
+
+    
+
+    
     
     this.sub = this.route.params.subscribe(params => {
        this.id = params['id']; // (+) converts string 'id' to a number
 
        // In a real app: dispatch action to load the details here.
+      
     });
     this.missionDetails = this.missionSvc.getMission(this.id);
     this.roster = this.missionSvc.getRosterList(this.id)
@@ -86,6 +121,8 @@ export class MissionsDetailComponent implements OnInit {
     this.missionDetails.subscribe(
           missionDetails => this.checkSignupStatus(missionDetails)
     );
+
+
 
   }
 
