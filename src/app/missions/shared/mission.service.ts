@@ -14,6 +14,7 @@ export class MissionService {
 
 
   constructor(private db: AngularFireDatabase) {
+    this.getMissionList();
   }
 
   getMissionList(query={}): FirebaseListObservable<Mission[]> {

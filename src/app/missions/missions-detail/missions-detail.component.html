@@ -45,7 +45,8 @@
             </tbody>
             </table>
             <h4 class="card-title">Extra Details </h4>
-            {{ (missionDetails | async)?.extraDetails }}
+            <p>{{ (missionDetails | async)?.extraDetails }}</p>
+            <button *ngIf="canCreateMission" class="btn btn-lg btn-outline-dark " [routerLink]="['/missions',(missionDetails | async)?.$key, 'edit']"> Edit Mission </button>
       </div>
     </div>
   </div>

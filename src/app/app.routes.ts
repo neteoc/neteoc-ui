@@ -7,6 +7,7 @@ import { ProfileComponent } from './users/profile/profile.component';
 import { MissionsListComponent } from './missions/missions-list/missions-list.component';
 import { MissionsDetailComponent } from './missions/missions-detail/missions-detail.component';
 import { MissionsFormComponent } from './missions/missions-form/missions-form.component';
+import { MissionsEditComponent } from './missions/missions-edit/missions-edit.component';
 
 export const routes = [
       {
@@ -27,6 +28,8 @@ export const routes = [
         component: MissionsListComponent
       },
       { path: 'missions/:id', component: MissionsDetailComponent },
+      { path: 'missions/:id/edit', component: MissionsEditComponent },
+
       {
         path: 'profile',
         component: ProfileComponent,

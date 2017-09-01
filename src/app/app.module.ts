@@ -20,6 +20,7 @@ import { MissionsListComponent } from './missions/missions-list/missions-list.co
 import { MissionsDetailComponent } from './missions/missions-detail/missions-detail.component';
 import { MissionsFormComponent } from './missions/missions-form/missions-form.component';
 import { MissionsBlockComponent } from './missions/missions-block/missions-block.component';
+import { MissionsEditComponent } from './missions/missions-edit/missions-edit.component';
 
 RouterModule.forRoot([
   {
@@ -37,7 +38,8 @@ RouterModule.forRoot([
     MissionsListComponent,
     MissionsDetailComponent,
     MissionsFormComponent,
-    MissionsBlockComponent
+    MissionsBlockComponent,
+    MissionsEditComponent
   ],
   imports: [
     BrowserModule,
