@@ -1,0 +1,84 @@
+<div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link active">
+            
+              Open New Mission Form
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <h4 class="card-title">New Mission</h4>
+    <p class="card-text">edit</p>
+    <form id="newMissionForm" name="newMissionForm"  class="ng-pristine ng-invalid ng-invalid-required ng-valid-date ng-valid-min ng-valid-max ng-valid-step">
+      <div class="input-group">
+          <span class="input-group-addon">id</span>
+          <input class="form-control ng-pristine ng-untouched ng-valid ng-empty"  type="text" [(ngModel)]="mission.incidentID" name="incidentID" placeholder="SAD..." required>
+      </div>
+      <div class="input-group">
+          <span class="input-group-addon">Title</span>
+          <input class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" type="text" [(ngModel)]="mission.title" name="title" required>
+      </div>
+      <div class="input-group">
+          <span class="input-group-addon">Primary Location Name</span>
+          <input class="form-control ng-pristine ng-untouched ng-valid ng-empty" type="text" [(ngModel)]="mission.location" name="location" required placeholder="Macon">
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">Start Date</span>
+        <input class="form-control" placeholder="yyyy-mm-dd" name="startDate" [(ngModel)]="mission.startDate" ngbDatepicker #d1="ngbDatepicker">
+        <button class="input-group-addon" (click)="d1.toggle(); d2.close()" type="button">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">End Date</span>
+        <input class="form-control" placeholder="yyyy-mm-dd" name="endDate" [(ngModel)]="mission.endDate" ngbDatepicker #d2="ngbDatepicker">
+        <button class="input-group-addon" (click)="d2.toggle(); d1.close()" type="button">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">Duty Level</span>
+        <select class="form-control"  [(ngModel)]="mission.dutyLevel"   name="dutyLevel" required>
+          <option [selected] selected="selected">N/A</option>
+          <option>4</option>
+          <option>3</option>
+          <option>2</option>
+          <option>1</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">Staff Needed</span>
+          <input type="number" class="form-control ng-pristine ng-untouched ng-empty ng-valid-min ng-valid-step ng-invalid ng-invalid-required" min="1" step="1"  type="number" [(ngModel)]="mission.staffMin" name="staffMin" required>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">Staff Max</span>
+          <input type="number" class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-min ng-valid-step" min="1" step="1"  type="number" [(ngModel)]="mission.staffMax" name="staffMax" required>
+      </div>
+      <div class="input-group">
+          <span class="input-group-addon">Attachment Link</span>
+          <input class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" type="text" [(ngModel)]="mission.attachmentLink" name="attachmentLink" required>
+      </div>
+      <div class="form-group">
+          <label>Extra Details: </label>
+          <textarea class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="Special equipment, needs, notes, etc." type="text" [(ngModel)]="mission.extraDetails" name="dutyLevel" required></textarea>
+      </div>
+      <!--<div class="form-group">
+          <label for="message">Attachments: </label>
+          <label class="btn btn-primary">
+              Browse <input type="file" (change)="detectFiles($event)" style="display: none;">
+          </label>
+          <button type="button"  class="btn btn-danger">Remove Attachments</button>
+          <button
+            [disabled]="!selectedFiles"
+            (click)="uploadSingle()">
+            Upload Single
+          </button>
+      </div>-->
+      <p></p>
+      <button type="submit" class="btn btn-primary" (click)='updateMission()' >Save new mission</button>
+    </form>
+  </div>
+</div>

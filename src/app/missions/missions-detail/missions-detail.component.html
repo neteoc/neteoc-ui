@@ -5,6 +5,14 @@
   <li class="breadcrumb-item active">{{ (missionDetails | async)?.$key  }}</li>
 </ol>
 
+
+
+<button class="btn btn-lg btn-outline-primary " [routerLink]="['/missions',(missionDetails | async)?.$key, 'edit']"> Edit Mission </button>
+
+<hr>
+
+<pre>{{closeResult}}</pre>
+
 <h1>{{ (missionDetails | async)?.incidentID  }}</h1>
 
 <div class="row">
