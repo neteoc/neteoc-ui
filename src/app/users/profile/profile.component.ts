@@ -17,6 +17,7 @@ import { UserService } from '../shared/user.service';
 export class ProfileComponent implements OnInit {
   user: Observable<firebase.User>;
   userdetail: any;
+  userEditLink: string;
   private sub: any;
   id: string;
   
@@ -31,6 +32,7 @@ export class ProfileComponent implements OnInit {
   showProfile(){
     this.userSvc.getUser(this.id).subscribe( userData => {
         this.userdetail = userData
+        this.userEditLink = userData.$key
     })
 
   }

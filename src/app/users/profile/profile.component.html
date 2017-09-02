@@ -1,5 +1,5 @@
 <div class="card">
-  <h4 class="card-header">{{ (userdetail )?.pubDetails.displayName }}</h4>
+  <h4 class="card-header">{{ (userdetail )?.pubDetails.displayName }}</h4> 
   <div class="card-body">
     <div class="container">
       <div class="row">
@@ -27,11 +27,17 @@
             </tbody>
           </table>
         </div>
+        <div class="row">
+          
+        </div>
       </div>
     </div>
 
     <!--<h4 class="card-title">Special title treatment</h4>
     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
     <a href="#" class="btn btn-primary">Go somewhere</a>-->
+  </div>
+  <div class="card-footer text-muted">
+    <button  [routerLink]="['/profile/edit/', userEditLink]"  type="button" class="btn btn-primary card-link">Edit Profile</button>
   </div>
 </div>
