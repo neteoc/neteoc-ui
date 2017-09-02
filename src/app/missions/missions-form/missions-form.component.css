@@ -5,3 +5,7 @@
 [disabled] {
     cursor: not-allowed;
 }
+
+input.ng-invalid {
+    border-left: 4px solid red;
+}

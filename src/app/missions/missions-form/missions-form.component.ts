@@ -57,12 +57,17 @@ export class MissionsFormComponent implements OnInit {
       });
   }
 
-
-  createMission() {
-    this.missionSvc.createMission(this.mission)
-    this.mission = new Mission();
+  // hooray! traditional forms in angular 2 are undocumented and nonsensical and likely unsupported!
+  getFormIsValid() {
+    return document.forms["newMissionForm"].checkValidity();
   }
 
 
+  createMission() {
 
+    if(this.getFormIsValid()) {
+      this.missionSvc.createMission(this.mission)
+      this.mission = new Mission();
+    }
+  }
 }

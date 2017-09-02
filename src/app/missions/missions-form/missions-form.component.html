@@ -15,36 +15,36 @@
     <h4 class="card-title">New Mission</h4>
     <p class="card-text">Use the form below to create a new mission. 
       Click the "save new mission" button at the bottom of the form when you are done.</p>
-    <form name="newMissionForm" ngNativeValidate>
+    <form id="newMissionForm" name="newMissionForm" ngNativeValidate>
       <div class="input-group">
           <span class="input-group-addon">id</span>
           <input class="form-control"  type="text" [(ngModel)]="mission.incidentID" name="incidentID" placeholder="SAD..." required>
       </div>
       <div class="input-group">
           <span class="input-group-addon">Title</span>
-          <input class="form-control" type="text" [(ngModel)]="mission.title" name="title">
+          <input class="form-control" type="text" [(ngModel)]="mission.title" name="title" required>
       </div>
       <div class="input-group">
           <span class="input-group-addon">Primary Location Name</span>
-          <input class="form-control" type="text" [(ngModel)]="mission.location" name="location" required placeholder="Macon">
+          <input class="form-control" type="text" [(ngModel)]="mission.location" name="location" placeholder="Macon">
       </div>
       <div class="input-group">
         <span class="input-group-addon">Start Date</span>
-        <input class="form-control" placeholder="yyyy-mm-dd" name="startDate" [(ngModel)]="mission.startDate" ngbDatepicker #d1="ngbDatepicker">
+        <input class="form-control" placeholder="yyyy-mm-dd" name="startDate" [(ngModel)]="mission.startDate" ngbDatepicker #d1="ngbDatepicker" required>
         <button class="input-group-addon" (click)="d1.toggle(); d2.close()" type="button">
           <i class="fa fa-calendar" aria-hidden="true"></i>
         </button>
       </div>
       <div class="input-group">
         <span class="input-group-addon">End Date</span>
-        <input class="form-control" placeholder="yyyy-mm-dd" name="endDate" [(ngModel)]="mission.endDate" ngbDatepicker #d2="ngbDatepicker">
+        <input class="form-control" placeholder="yyyy-mm-dd" name="endDate" [(ngModel)]="mission.endDate" ngbDatepicker #d2="ngbDatepicker" required>
         <button class="input-group-addon" (click)="d2.toggle(); d1.close()" type="button">
           <i class="fa fa-calendar" aria-hidden="true"></i>
         </button>
       </div>
       <div class="input-group">
         <span class="input-group-addon">Duty Level</span>
-        <select class="form-control"  [(ngModel)]="mission.dutyLevel"   name="dutyLevel" required>
+        <select class="form-control"  [(ngModel)]="mission.dutyLevel" name="dutyLevel" required>
           <option [selected] selected="selected">N/A</option>
           <option>4</option>
           <option>3</option>
@@ -81,7 +81,7 @@
           </button>
       </div>-->
       <p></p>
-      <button type="submit" class="btn btn-primary" (click)='createMission()' [disabled]="newMissionForm.valid">Save new mission</button>
+      <button type="submit" class="btn btn-primary" (click)='createMission()' [disabled]="!getFormIsValid()">Save new mission</button>
     </form>
   </div>
 </div>
