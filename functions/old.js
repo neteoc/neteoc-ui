@@ -4,6 +4,8 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
+
+
 // Listens for mission roster signups and updates other locations
 exports.addUserMission = functions.database.ref('/missions/{missionID}/roster/{userID}')
     .onCreate()(event => {
