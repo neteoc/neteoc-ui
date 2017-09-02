@@ -27,6 +27,7 @@ export class MissionsBlockComponent {
   private _user: Observable<firebase.User>
   canCreateMission = false;
   missionList: any;
+  hasMissions: boolean = false;
 
   @Input()
   set user(user: Observable<firebase.User>) {
@@ -48,7 +49,19 @@ export class MissionsBlockComponent {
 
   getMissionRoleStatus(user){
     if(user){
-      this.userSvc.getUserMissions(user.uid).subscribe( missionList => this.missionList = missionList)
+      this.userSvc.getUserMissions(user.uid).subscribe( missionList => {
+        this.missionList = missionList;
+        if(typeof missionList[0] === 'undefined' ){
+          this.hasMissions = false;
+          console.log(missionList);
+          console.log(this.hasMissions);
+        } else {
+          this.hasMissions = true;
+          console.log(missionList);
+          console.log(this.hasMissions);
+        }
+
+      })
       this.roleSvc.getRole("addMission", user.uid).subscribe(
         role => this.displayNewMission(role)
       )

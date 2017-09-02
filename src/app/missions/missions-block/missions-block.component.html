@@ -1,8 +1,9 @@
 <div *ngIf="(user | async)?.uid" class="card" >
   <div class="card-body">
     <h4 class="card-title">Missions</h4>
-    <h6 class="card-subtitle mb-2 text-muted">Missions you've signed up for</h6>
-    <table class="table">
+    <h6 class="card-subtitle mb-2 text-muted"  *ngIf="hasMissions">Missions you've signed up for</h6>
+    <h6 class="card-subtitle mb-2 text-muted"  *ngIf="!hasMissions">Click below to find a mission to sign up for</h6>
+    <table class="table"  *ngIf="hasMissions">
       <thead>
         <tr>
           <th>Name</th>
