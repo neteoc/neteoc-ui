@@ -34,9 +34,9 @@
                     <th scope="row">Staff Min</th>
                     <td>{{ (missionDetails | async)?.staffMin }} </td>
                 </tr>
-                <tr *ngIf="(missionDetails | async)?.staffMin">
+                <tr *ngIf="(missionDetails | async)?.staffMax">
                     <th scope="row">Staff Max</th>
-                    <td>{{ (missionDetails | async)?.staffMin }} </td>
+                    <td>{{ (missionDetails | async)?.staffMax }} </td>
                 </tr>
                   <tr *ngIf="(missionDetails | async)?.attachmentLink">
                     <th scope="row">Attachment</th>
