@@ -5,7 +5,7 @@
       <li class="nav-item">
         <a class="nav-link active">
             <button type="button" class="btn btn-success" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
-              Open New Mission Form
+              New Mission
             </button>
         </a>
       </li>
@@ -13,19 +13,20 @@
   </div>
   <div class="card-body" [ngbCollapse]="isCollapsed">
     <h4 class="card-title">New Mission</h4>
-    <p class="card-text">Use the form below to create a new mission. CLick the blue "save new mission" button at the bottom of the form when you are done and ready to save it.</p>
-    <form id="newMissionForm" name="newMissionForm"  class="ng-pristine ng-invalid ng-invalid-required ng-valid-date ng-valid-min ng-valid-max ng-valid-step">
+    <p class="card-text">Use the form below to create a new mission. 
+      Click the "save new mission" button at the bottom of the form when you are done.</p>
+    <form name="newMissionForm" ngNativeValidate>
       <div class="input-group">
           <span class="input-group-addon">id</span>
-          <input class="form-control ng-pristine ng-untouched ng-valid ng-empty"  type="text" [(ngModel)]="mission.incidentID" name="incidentID" placeholder="SAD..." required>
+          <input class="form-control"  type="text" [(ngModel)]="mission.incidentID" name="incidentID" placeholder="SAD..." required>
       </div>
       <div class="input-group">
           <span class="input-group-addon">Title</span>
-          <input class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" type="text" [(ngModel)]="mission.title" name="title" required>
+          <input class="form-control" type="text" [(ngModel)]="mission.title" name="title">
       </div>
       <div class="input-group">
           <span class="input-group-addon">Primary Location Name</span>
-          <input class="form-control ng-pristine ng-untouched ng-valid ng-empty" type="text" [(ngModel)]="mission.location" name="location" required placeholder="Macon">
+          <input class="form-control" type="text" [(ngModel)]="mission.location" name="location" required placeholder="Macon">
       </div>
       <div class="input-group">
         <span class="input-group-addon">Start Date</span>
@@ -53,19 +54,19 @@
       </div>
       <div class="input-group">
         <span class="input-group-addon">Staff Needed</span>
-          <input type="number" class="form-control ng-pristine ng-untouched ng-empty ng-valid-min ng-valid-step ng-invalid ng-invalid-required" min="1" step="1"  type="number" [(ngModel)]="mission.staffMin" name="staffMin" required>
+          <input type="number" class="form-control" min="1" step="1"  type="number" [(ngModel)]="mission.staffMin" name="staffMin" required>
       </div>
       <div class="input-group">
         <span class="input-group-addon">Staff Max</span>
-          <input type="number" class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-min ng-valid-step" min="1" step="1"  type="number" [(ngModel)]="mission.staffMax" name="staffMax" required>
+          <input type="number" class="form-control" min="1" step="1"  type="number" [(ngModel)]="mission.staffMax" name="staffMax" required>
       </div>
       <div class="input-group">
           <span class="input-group-addon">Attachment Link</span>
-          <input class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" type="text" [(ngModel)]="mission.attachmentLink" name="attachmentLink" required>
+          <input class="form-control" type="text" [(ngModel)]="mission.attachmentLink" name="attachmentLink" required>
       </div>
       <div class="form-group">
           <label>Extra Details: </label>
-          <textarea class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="Special equipment, needs, notes, etc." type="text" [(ngModel)]="mission.extraDetails" name="dutyLevel" required></textarea>
+          <textarea class="form-control" placeholder="Special equipment, needs, notes, etc." type="text" [(ngModel)]="mission.extraDetails" name="dutyLevel" required></textarea>
       </div>
       <!--<div class="form-group">
           <label for="message">Attachments: </label>
@@ -80,7 +81,7 @@
           </button>
       </div>-->
       <p></p>
-      <button type="submit" class="btn btn-primary" (click)='createMission()' >Save new mission</button>
+      <button type="submit" class="btn btn-primary" (click)='createMission()' [disabled]="newMissionForm.valid">Save new mission</button>
     </form>
   </div>
 </div>
