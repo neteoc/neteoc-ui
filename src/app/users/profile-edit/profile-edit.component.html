@@ -9,6 +9,15 @@
                     <span class="input-group-addon">Cell Phone</span>
                     <input class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" type="text" [(ngModel)]="profile.cellPhone" name="cellPhone" required>
                 </div>
+                <div class="input-group">
+                  <span class="input-group-addon">Duty Level</span>
+                  <select class="form-control"  [(ngModel)]="profile.dutyLevel"   name="dutyLevel" required>
+                    <option>4</option>
+                    <option>3</option>
+                    <option>2</option>
+                    <option>1</option>
+                  </select>
+                </div>
                 
             </form>
 

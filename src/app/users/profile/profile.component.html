@@ -21,6 +21,10 @@
                 <td>{{ (userdetail)?.pubDetails.email }}</td>
               </tr>
               <tr>
+                <th scope="row">Duty Level</th>
+                <td>{{ (userdetail)?.pubDetails.dutyLevel || "missing" }}</td>
+              </tr>
+              <tr>
                 <th scope="row">Cell Phone</th>
                 <td><a href="tel:{{ (userdetail)?.pubDetails.cellPhone }}">{{ (userdetail )?.pubDetails.cellPhone }}</a></td>
               </tr>
