@@ -14,7 +14,7 @@
           <a class="nav-link" [routerLink]="['/missions']" (click)="navbarCollapsed = true">Missions</a>
         </li>
         <li *ngIf="(user | async)?.uid" class="nav-item" [routerLinkActive]="['active']">
-          <a class="nav-link" [routerLink]="['/profile/', {id: userID}]" (click)="navbarCollapsed = true">Profile</a>
+          <a class="nav-link" [routerLink]="['/profile/', userID]" (click)="navbarCollapsed = true">Profile</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">

@@ -67,14 +67,15 @@
     <tr>
       <th>Name</th>
       <th class="d-none d-sm-table-cell">Email</th>
-      <th>Phone</th>
+      <th >Phone</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let member of roster | async">
-      <th scope="row"><a  [routerLink]="['/profile/', {id: member?.$key}]">{{member?.displayName}}</a></th>
+      <th scope="row"><a   [routerLink]="['/profile/', member.$key]" >{{member?.displayName}}</a></th>
       <td class="d-none d-sm-table-cell">{{member.email}}</td>
-      <td>{{member.phoneNumber}}</td>
+      <td ><a *ngIf="member?.cellPhone" href="tel:{{ (member)?.cellPhone }}">{{member.cellPhone}}</a></td>
+      <!-- <td> <a *ngIf="member?.cellPhone" href="tel:{{ (member)?.cellPhone }}">{{ (member )?.member.cellPhone }}</a></td> -->
     </tr>
   </tbody>
 </table>

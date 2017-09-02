@@ -25,6 +25,13 @@ export class UserService {
     return this.user
   }
 
+  updateUserDetails(key: string, value: any){
+    var updates = {};
+    updates['/users/' + key + '/pubDetails'] = value;
+    this.db.database.ref().update(updates)
+
+  }
+
   getUserMissions(key: string): FirebaseListObservable<any> {
     const userPath =  `${this.basePath}/${key}/missions`;
     return  this.db.list(userPath)

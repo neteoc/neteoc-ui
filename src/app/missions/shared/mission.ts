@@ -11,4 +11,5 @@ export class Mission {
   staffMin: number;
   extraDetails: string;
   attachments: string;
+  attachmentLink: string;
 }

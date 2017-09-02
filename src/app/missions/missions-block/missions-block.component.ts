@@ -53,12 +53,8 @@ export class MissionsBlockComponent {
         this.missionList = missionList;
         if(typeof missionList[0] === 'undefined' ){
           this.hasMissions = false;
-          console.log(missionList);
-          console.log(this.hasMissions);
         } else {
           this.hasMissions = true;
-          console.log(missionList);
-          console.log(this.hasMissions);
         }
 
       })

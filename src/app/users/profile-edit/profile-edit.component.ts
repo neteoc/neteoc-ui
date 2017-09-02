@@ -9,62 +9,43 @@ import { User } from '../shared/user'
 import { UserService } from '../shared/user.service';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'],
+  selector: 'app-profile-edit',
+  templateUrl: './profile-edit.component.html',
+  styleUrls: ['./profile-edit.component.css'],
   providers: [UserService]
 })
-export class ProfileComponent implements OnInit {
+export class ProfileEditComponent implements OnInit {
   user: Observable<firebase.User>;
-  userdetail: any;
+  profile: any;
   userEditLink: string;
   private sub: any;
   id: string;
-  isSelf: boolean = false;
-  
 
   constructor(public afAuth: AngularFireAuth,
               private userSvc: UserService,
               private route: ActivatedRoute) {
-    this.user = afAuth.authState;
+              
+        this.user = afAuth.authState;
     
-  }
-
-  showProfile(){
-    this.userSvc.getUser(this.id).subscribe( userData => {
-        this.userdetail = userData
-        this.userEditLink = userData.$key
-
-        this.user.subscribe( user => {
-
-          if(user.uid == this.id){
-            this.isSelf = true;
-          } else {
-            this.isSelf = false;
-          }
-
-        })
-
-        
-        
-    })
-
   }
 
   ngOnInit() {
+
     this.sub = this.route.params.subscribe(params => {
        this.id = params['id']; // (+) converts string 'id' to a number
-       this.showProfile();
+       this.userSvc.getUser(this.id).subscribe( userData => {
+          this.profile = userData.pubDetails
+          
+          this.userEditLink = userData.$key
+      })
       
        // In a real app: dispatch action to load the details here.
     });
-
-    
-   
   }
 
-  ngOnDestroy() {
-    this.sub.unsubscribe();
+  onUpdateClick(){
+    this.userSvc.updateUserDetails(this.userEditLink, this.profile)
+
   }
 
 }
