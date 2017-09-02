@@ -14,31 +14,31 @@
         <h4 class="card-title">{{ (missionDetails | async)?.title }}</h4>
         <table class="table">
             <tbody>
-                <tr>
+                <tr *ngIf="(missionDetails | async)?.dutyLevel">
                     <th scope="row">Duty Level</th>
                     <td>{{ (missionDetails | async)?.dutyLevel }}</td>
                 </tr>
-                <tr>
+                <tr  *ngIf="(missionDetails | async)?.startDate.year">
                     <th scope="row">Start Date</th>
                     <td>{{ (missionDetails | async )?.startDate.year}} {{ (missionDetails | async )?.startDate.month}}  {{ (missionDetails | async )?.startDate.day}} </td>
                 </tr>
-                <tr>
+                <tr  *ngIf="(missionDetails | async)?.endDate.year">
                     <th scope="row">End Date</th>
                     <td>{{ (missionDetails | async )?.endDate.year}} {{ (missionDetails | async )?.endDate.month}}  {{ (missionDetails | async )?.endDate.day}} </td>
                 </tr>
-                <tr>
+                <tr *ngIf="(missionDetails | async)?.location">
                     <th scope="row">location</th>
                     <td>{{ (missionDetails | async)?.location }} </td>
                 </tr>
-                <tr>
+                <tr *ngIf="(missionDetails | async)?.staffMin">
                     <th scope="row">Staff Min</th>
                     <td>{{ (missionDetails | async)?.staffMin }} </td>
                 </tr>
-                <tr>
+                <tr *ngIf="(missionDetails | async)?.staffMin">
                     <th scope="row">Staff Max</th>
-                    <td>{{ (missionDetails | async)?.staffMax }} </td>
+                    <td>{{ (missionDetails | async)?.staffMin }} </td>
                 </tr>
-                  <tr>
+                  <tr *ngIf="(missionDetails | async)?.attachmentLink">
                     <th scope="row">Attachment</th>
                     <td><a href="{{ (missionDetails | async)?.attachmentLink }}" target="_blank">Cick Here</a> </td>
                 </tr>
@@ -72,7 +72,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let member of roster | async">
-      <th scope="row">{{member?.displayName}}</th>
+      <th scope="row"><a  [routerLink]="['/profile/', {id: member?.$key}]">{{member?.displayName}}</a></th>
       <td class="d-none d-sm-table-cell">{{member.email}}</td>
       <td>{{member.phoneNumber}}</td>
     </tr>

@@ -70,6 +70,22 @@
       </div>-->
       <p></p>
       <button type="submit" class="btn btn-primary" (click)='updateMission()' [routerLink]="['/missions/', mission.$key]" >Update Mission</button>
+      <!--<button type="submit" class="btn btn-danger"  (click)='open(content)' >Delete Mission</button>-->
     </form>
   </div>
 </div>
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header bg-danger text-white">
+    <h4 class="modal-title">Warning</h4>
+  </div>
+  <div class="modal-body">
+    <h4 class="card-title">This action cannot be reversed!</h4>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-lg btn-danger" (click)="deleteMission(); c('Close click')" [routerLink]="['/missions/']">Delete Mission</button>
+    <button type="button" class="btn btn-lg btn-success" (click)="c('Close click')">Go Back</button>
+  </div>
+</ng-template>

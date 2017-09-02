@@ -38,6 +38,7 @@ export class MissionsDetailComponent implements OnInit {
   private sub: any;
   id: string;
   show: boolean = true;
+  userID: string;
 
   canCreateMission = false;
 
@@ -83,6 +84,8 @@ export class MissionsDetailComponent implements OnInit {
   }
 
   userReady(user){
+
+    this.userID = user.uid
 
     this.userSvc.getUserDetails(this.afAuth.auth.currentUser.uid).subscribe( 
             userDetails => this.userDetailInfo = userDetails,

@@ -16,7 +16,7 @@ import { UserService } from '../shared/user.service';
 })
 export class ProfileComponent implements OnInit {
   user: Observable<firebase.User>;
-  userdetail: FirebaseObjectObservable<User>;
+  userdetail: any;
   private sub: any;
   id: string;
   
@@ -28,13 +28,23 @@ export class ProfileComponent implements OnInit {
     
   }
 
+  showProfile(){
+    this.userSvc.getUser(this.id).subscribe( userData => {
+        this.userdetail = userData
+    })
+
+  }
+
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
        this.id = params['id']; // (+) converts string 'id' to a number
-
+       this.showProfile();
+      
        // In a real app: dispatch action to load the details here.
     });
-   this.userdetail = this.userSvc.getUser(this.id);
+
+    
+   
   }
 
   ngOnDestroy() {
