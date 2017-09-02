@@ -60,6 +60,7 @@ export class MissionService {
       endDate: missionInfo.endDate
     }
 
+
     var updates = {};
     updates['/missions/' + key + '/roster/' + userID] = userData;
     updates['/users/' + userID + '/missions/' + key] = missionDetails;

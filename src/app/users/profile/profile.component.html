@@ -38,6 +38,6 @@
     <a href="#" class="btn btn-primary">Go somewhere</a>-->
   </div>
   <div class="card-footer text-muted">
-    <button  [routerLink]="['/profile/edit/', userEditLink]"  type="button" class="btn btn-primary card-link">Edit Profile</button>
+    <button *ngIf="isSelf"  [routerLink]="['/profile/edit/', userEditLink]"  type="button" class="btn btn-primary card-link">Edit Profile</button>
   </div>
 </div>

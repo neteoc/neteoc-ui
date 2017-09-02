@@ -20,6 +20,7 @@ export class ProfileComponent implements OnInit {
   userEditLink: string;
   private sub: any;
   id: string;
+  isSelf: boolean = false;
   
 
   constructor(public afAuth: AngularFireAuth,
@@ -33,6 +34,19 @@ export class ProfileComponent implements OnInit {
     this.userSvc.getUser(this.id).subscribe( userData => {
         this.userdetail = userData
         this.userEditLink = userData.$key
+
+        this.user.subscribe( user => {
+
+          if(user.uid == this.id){
+            this.isSelf = true;
+          } else {
+            this.isSelf = false;
+          }
+
+        })
+
+        
+        
     })
 
   }
