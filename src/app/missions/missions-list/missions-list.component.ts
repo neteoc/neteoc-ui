@@ -30,7 +30,7 @@ export class MissionsListComponent implements OnInit {
                }
 
   ngOnInit() {
-    this.missions = this.missionSvc.getMissionList({limitToLast: 5})
+    this.missions = this.missionSvc.getMissionList()
     //this.addMissionRole = this.roleSvc.getRole("addMission");
     this.user.subscribe(
           user => this.getMissionRoleStatus(user)

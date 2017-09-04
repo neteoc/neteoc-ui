@@ -30,23 +30,19 @@ export class MenuComponent implements OnInit {
     
   }
 
-  updateProfileLink(user: firebase.User){
-    if(user){
-      this.userID = user.uid
-    }    
-  }
-
-  redirectOnAnon(){
-    if(!this.afAuth.auth.currentUser){
-      this.location.go("/");
-      
-    }
-  }
 
   ngOnInit() {
-    this.redirectOnAnon();
-    this.user.subscribe(
-          user => this.updateProfileLink(user)
-      );
+    
+    this.user.subscribe(user =>{
+      //If user is annon then rediret to the homepage
+      if(!this.afAuth.auth.currentUser){
+        this.location.go("/");
+      } else {
+        //else update the profile like to the current user
+          this.userID = user.uid
+      }
+       
+
+    });
   }
 }
