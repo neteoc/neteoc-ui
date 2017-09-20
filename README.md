@@ -2,7 +2,9 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.3.2.
 
-Prod is currently at https://gsdf-8dc44.firebaseapp.com
+Test is currently at https://gsdf-8dc44.firebaseapp.com
+Prod is currently at https://gsdf.neteoc.com/
+
 
 ## Development server
 
