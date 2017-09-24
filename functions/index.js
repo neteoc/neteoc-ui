@@ -35,7 +35,7 @@ exports.sendMissionSignupEmail = functions.database.ref('/missions/{missionId}/r
       to: original.email,
     //Subject and text data  
       subject: 'Mission Signup Notice',
-      html: `<p>Dear${original.displayName}</p><p>You have signed up for a mission. To see more details vist <a href="https://gsdf-8dc44.firebaseapp.com/missions/${event.params.missionId}">https://gsdf-8dc44.firebaseapp.com/missions/${event.params.missionId}</a></p>`
+      html: `<p>Dear${original.displayName}</p><p>You have signed up for a mission. To see more details vist <a href="https://gsdf.neteoc.com/missions/${event.params.missionId}">https://gsdf-8dc44.firebaseapp.com/missions/${event.params.missionId}</a></p>`
     }
 
     console.log(original)
