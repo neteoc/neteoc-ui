@@ -22,6 +22,7 @@ import { MissionsFormComponent } from './missions/missions-form/missions-form.co
 import { MissionsBlockComponent } from './missions/missions-block/missions-block.component';
 import { MissionsEditComponent } from './missions/missions-edit/missions-edit.component';
 import { ProfileEditComponent } from './users/profile-edit/profile-edit.component';
+import { GeoComponent } from './geo/geo.component';
 
 RouterModule.forRoot([
   {
@@ -41,7 +42,8 @@ RouterModule.forRoot([
     MissionsFormComponent,
     MissionsBlockComponent,
     MissionsEditComponent,
-    ProfileEditComponent
+    ProfileEditComponent,
+    GeoComponent
   ],
   imports: [
     BrowserModule,
