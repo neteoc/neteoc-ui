@@ -35,8 +35,9 @@ selector: 'leaflet-map',
 
 template: '<div id="leaflet-map-component" class="leafletMapComponent"></div>',
 
+
 styles: [`.leafletMapComponent { 
-        width: 600px; 
+        width: 100%; 
         height: 400px; 
        }`] 
 })
