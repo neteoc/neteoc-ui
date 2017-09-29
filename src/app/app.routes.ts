@@ -9,6 +9,7 @@ import { MissionsDetailComponent } from './missions/missions-detail/missions-det
 import { MissionsFormComponent } from './missions/missions-form/missions-form.component';
 import { MissionsEditComponent } from './missions/missions-edit/missions-edit.component';
 import { ProfileEditComponent } from './users/profile-edit/profile-edit.component';
+import { GeoComponent } from './geo/geo.component'
 
 export const routes = [
       {
@@ -36,5 +37,10 @@ export const routes = [
         component: ProfileComponent,
       },
       { path: 'profile/:id', component: ProfileComponent },
-      { path: 'profile/edit/:id', component: ProfileEditComponent }
+      { path: 'profile/edit/:id', component: ProfileEditComponent },
+      {
+        path: 'gis',
+        component: GeoComponent,
+      },
+
     ]

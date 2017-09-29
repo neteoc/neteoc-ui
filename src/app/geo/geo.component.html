@@ -1,3 +1,42 @@
-<p>
-  geo works!
-</p>
+<div ng-controller="mapCtrl">
+  <leaflet-map width="100%" height="480px" tiles="openStreetMapTiles" markers="mapMarkers" center="mapCenter"></leaflet-map>
+
+  <button class="btn btn-primary" ng-click="editPoi(null)">
+      <span class="glyphicon glyphicon-plus"> New Map Entry</span>
+  </button>
+
+  <button class="btn btn-primary" ng-click="saveKml()">
+      <span class="glyphicon glyphicon-floppy"> Save KML</span>
+  </button>
+
+  <table datatable="ng" class="row-border hover">
+      <thead>
+          <th>Center on</th>
+          <th>Name</th>
+          <th>Latitude</th>
+          <th>Longitude</th>
+          <th>Updated</th>
+          <th>Uploaded</th>
+          <th></th>
+      </thead>
+      <tbody>
+        <!--
+          <tr ng-repeat="pin in mapMarkers">
+              <td ng-click="setMapCenter(pin.lat, pin.lng, 13);">
+                  <span class="glyphicon glyphicon-screenshot"></span>
+              </td>
+              <td>{{pin.name}}</td>
+              <td>{{pin.lat}}</td>
+              <td>{{pin.lng}}</td>
+              <td>{{militaryDateFormat(pin.modified)}}</td>
+              <td></td>
+              <td>
+                  <button class="btn" ng-click="editPoi(pin)">
+                      <span class="glyphicon glyphicon-pencil"> Edit</span>
+                  </button>
+              </td>
+          </tr>
+        -->
+      </tbody>
+  </table>
+</div>

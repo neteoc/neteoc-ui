@@ -16,6 +16,9 @@
         <li *ngIf="(user | async)?.uid" class="nav-item" [routerLinkActive]="['active']">
           <a class="nav-link" [routerLink]="['/profile/', userID]" (click)="navbarCollapsed = true">Profile</a>
         </li>
+        <li *ngIf="(user | async)?.uid" class="nav-item" [routerLinkActive]="['active']">
+          <a class="nav-link" [routerLink]="['/gis/']" (click)="navbarCollapsed = true">GIS</a>
+        </li>
         <!--<li>
             <a class="nav-link">Messages <span class="badge badge-light">4</span></a>
         </li>-->

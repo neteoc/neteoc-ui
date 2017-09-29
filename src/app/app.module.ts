@@ -23,6 +23,7 @@ import { MissionsBlockComponent } from './missions/missions-block/missions-block
 import { MissionsEditComponent } from './missions/missions-edit/missions-edit.component';
 import { ProfileEditComponent } from './users/profile-edit/profile-edit.component';
 import { GeoComponent } from './geo/geo.component';
+import { LeafletMapComponent } from './leaflet-map/leaflet-map.component';
 
 RouterModule.forRoot([
   {
@@ -43,7 +44,8 @@ RouterModule.forRoot([
     MissionsBlockComponent,
     MissionsEditComponent,
     ProfileEditComponent,
-    GeoComponent
+    GeoComponent,
+    LeafletMapComponent
   ],
   imports: [
     BrowserModule,

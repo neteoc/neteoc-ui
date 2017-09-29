@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LeafletMapComponent } from '../leaflet-map/leaflet-map.component';
 
 @Component({
   selector: 'app-geo',
