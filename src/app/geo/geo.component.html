@@ -20,7 +20,7 @@
           <th></th>
       </thead>
       <tbody>
-        <!--
+        
           <tr ng-repeat="pin in mapMarkers">
               <td ng-click="setMapCenter(pin.lat, pin.lng, 13);">
                   <span class="glyphicon glyphicon-screenshot"></span>
@@ -28,7 +28,7 @@
               <td>{{pin.name}}</td>
               <td>{{pin.lat}}</td>
               <td>{{pin.lng}}</td>
-              <td>{{militaryDateFormat(pin.modified)}}</td>
+              <!--<td>{{militaryDateFormat(pin.modified)}}</td>-->
               <td></td>
               <td>
                   <button class="btn" ng-click="editPoi(pin)">
@@ -36,7 +36,7 @@
                   </button>
               </td>
           </tr>
-        -->
+        
       </tbody>
   </table>
 </div>
