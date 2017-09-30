@@ -31,79 +31,78 @@ import * as L from 'leaflet';
 import { Map } from 'leaflet';
 
 @Component({
-selector: 'leaflet-map',
+  selector: 'leaflet-map',
 
-template: '<div id="leaflet-map-component" class="leafletMapComponent"></div>',
+  template: '<div id="leaflet-map-component" class="leafletMapComponent"></div>',
 
-
-styles: [`.leafletMapComponent { 
-        width: 100%; 
-        height: 400px; 
-       }`] 
+  styles: [`.leafletMapComponent { 
+          width: 100%; 
+          height: 400px; 
+        }`] 
 })
 
 export class LeafletMapComponent
 {
-protected _map: Map;           // leaflet map
+  protected _map: Map;           // leaflet map
 
-// Outputs
-@Output() layerAdded  : EventEmitter<any> = new EventEmitter();
-@Output() layerRemoved: EventEmitter<any> = new EventEmitter();
+  // Outputs
+  @Output() layerAdded  : EventEmitter<any> = new EventEmitter();
+  @Output() layerRemoved: EventEmitter<any> = new EventEmitter();
 
-/**
-* Construct a new Leaflet Map component
-*
-* @return nothing
-*/
-constructor()
-{
-// empty
-}
+  /**
+  * Construct a new Leaflet Map component
+  *
+  * @return nothing
+  */
+  constructor()
+  {
+  // empty
+  }
 
-/**
-* Initialize the map
-*
-* @param params: Object Map params recognized by Leaflet
-*
-* @param tileData: Object containing 'url' and 'attribution' data for the tile layer
-*
-* @return nothing The leaflet map is created, intialized with the supplied parameters, and assigned to the DIV created in the component template.  A single
-* tile layer is addes
-*/
-public initialize(params: Object, tileData: Object): void
-{
-// the div id is hardcoded in this example - a future example will show how to make this component more general
-this._map =  L.map('leaflet-map-component', params);
+  /**
+  * Initialize the map
+  *
+  * @param params: Object Map params recognized by Leaflet
+  *
+  * @param tileData: Object containing 'url' and 'attribution' data for the tile layer
+  *
+  * @return nothing The leaflet map is created, intialized with the supplied parameters, and assigned to the DIV created in the component template.  A single
+  * tile layer is addes
+  */
+  public initialize(params: Object, tileData: Object): void
+  {
+    // the div id is hardcoded in this example - a future example will show how to make this component more general
+    this._map =  L.map('leaflet-map-component', params);
 
-// events supported in this demo
-this._map.on('layeradd'   , () => {this.__onLayerAdded()}   );
-this._map.on('layerremove', () => {this.__onLayerRemoved()} );
+    // events supported in this demo
+    this._map.on('layeradd'   , () => {this.__onLayerAdded()}   );
+    this._map.on('layerremove', () => {this.__onLayerRemoved()} );
 
-// add a single tile layer
-L.tileLayer(tileData['url'], { attribution: tileData['attribution'] }).addTo(this._map); 
-}
+    // add a single tile layer
+    L.tileLayer(tileData['url'], { attribution: tileData['attribution'] }).addTo(this._map); 
+  }
 
-/**
-* Move the map to the input location
-*
-* @param lat: number Location latitude in degrees
-*
-* @param long: number Location longitude in degrees
-*/
-public toLocation(lat: number, long: number): void
-{
-this._map.panTo( [lat, long]);
-}
+  /**
+  * Move the map to the input location
+  *
+  * @param lat: number Location latitude in degrees
+  *
+  * @param long: number Location longitude in degrees
+  */
+  public toLocation(lat: number, long: number): void
+  {
+    this._map.panTo( [lat, long]);
+  }
 
-protected __onLayerAdded(): void
-{
-// perform additional logic on layer added here
-this.layerAdded.emit();
-}
+  protected __onLayerAdded(): void
+  {
+    // perform additional logic on layer added here
+    this.layerAdded.emit();
+  }
 
-protected __onLayerRemoved(): void
-{
-// perform additional logic on layer removed here
-this.layerRemoved.emit();
-}
+  protected __onLayerRemoved(): void
+  {
+    // perform additional logic on layer removed here
+    this.layerRemoved.emit();
+  }
 }
