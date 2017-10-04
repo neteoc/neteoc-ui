@@ -4,6 +4,8 @@ import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'ngbd-modal-content',
+  templateUrl: './poiEdit.component.html',
+  /*
   template: `
     <div class="modal-header">
       <h4 class="modal-title">Hi there!</h4>
@@ -18,6 +20,7 @@ import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
       <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
     </div>
   `
+  */
 })
 
 export class PoiEditModal {

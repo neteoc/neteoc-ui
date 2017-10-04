@@ -24,6 +24,7 @@ import { MissionsEditComponent } from './missions/missions-edit/missions-edit.co
 import { ProfileEditComponent } from './users/profile-edit/profile-edit.component';
 import { GeoComponent } from './geo/geo.component';
 import { LeafletMapComponent } from './leaflet-map/leaflet-map.component';
+import { PoiEditModal } from './modals/poiEdit.component';
 
 RouterModule.forRoot([
   {
@@ -45,7 +46,11 @@ RouterModule.forRoot([
     MissionsEditComponent,
     ProfileEditComponent,
     GeoComponent,
-    LeafletMapComponent
+    LeafletMapComponent,
+    PoiEditModal
+  ],
+  entryComponents: [
+    PoiEditModal
   ],
   imports: [
     BrowserModule,
