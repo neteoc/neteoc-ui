@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';  
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { LeafletMapComponent } from '../leaflet-map/leaflet-map.component';
+import {Point, MapMarker } from '../common/MapComponents';
 
 import { PoiEditModal } from '../modals/poiEdit.component';
 
@@ -15,8 +16,7 @@ export class GeoComponent implements OnInit {
   pin = {};
   mapParams = {};
   tileData = {};
-  mapMarkers: MapMarker[];
-  modalCloseResult: string;
+  mapMarkers: MapMarker[] = [];
 
   mapCenter: Point = {    // give mapCenter a value so that setMapCenter has a correct binding
       lat: 32.837,
@@ -35,24 +35,7 @@ export class GeoComponent implements OnInit {
       attribution: 'Ma',
     }
     this._leafletMap.initialize(this.mapParams, this.tileData );
-  }  
-
-  open() {
-    const modalRef = this.modalService.open(PoiEditModal);
-    modalRef.componentInstance.name = 'World';
-  }
-  
-  /*
-  // https://ng-bootstrap.github.io/#/components/modal/examples
-    open(content) {
-      console.log(content);
-      this.modalService.open(content).result.then((result) => {
-        this.modalCloseResult = `Closed with: ${result}`;
-      }, (reason) => {
-        // this.modalCloseResult = `Dismissed ${this.getDismissReason(reason)}`;
-      });
-    }
-    */
+  } 
 
   editPoi(pointOfInterest): void {
     
@@ -63,17 +46,8 @@ export class GeoComponent implements OnInit {
           pointOfInterest = this.mapMarkers[this.mapMarkers.length - 1];
       }
 
-      this.editingPoi = pointOfInterest;
-
-      /*
-      uibModal.open({
-          templateUrl: "views/gis/poiEdit.modal.html",
-          controller: "poiEditController",
-          scope: $scope
-      }).result.then(function(result){
-          // TODO: if editing a POI and the values are not the defaults, are you sure you want to cancel?
-      }, function(err){});
-      */
+      const modalRef = this.modalService.open(PoiEditModal);
+      modalRef.componentInstance.editingPoi = pointOfInterest;
   };
 
   // TODO: There needs to be an 'add' function to add the object,
@@ -133,23 +107,4 @@ export class GeoComponent implements OnInit {
 
       return (new Date()).getTime()/1000|0;
   }
-}
-
-class Point {
-  lat: number;
-  lng: number;
-  zoom: number;
-}
-
-class MapMarker extends Point {
-
-  id: String;
-  name: String;
-  description: String;
-  draggable: Boolean;
-  uploaded: Boolean;
-  created: number;
-  modified: number;
-  fields: Object;
-  attachments: Object;
 }

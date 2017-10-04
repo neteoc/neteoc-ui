@@ -1,10 +1,10 @@
   <leaflet-map width="100%" height="480px" tiles="openStreetMapTiles" markers="mapMarkers" center="mapCenter"></leaflet-map>
 
-  <button class="btn btn-primary" ng-click="editPoi(null)">
+  <button class="btn btn-primary" (click)="editPoi(null)">
       <span class="glyphicon glyphicon-plus"> New Map Entry</span>
   </button>
 
-  <button class="btn btn-primary" ng-click="saveKml()">
+  <button class="btn btn-primary" (click)="saveKml()">
       <span class="glyphicon glyphicon-floppy"> Save KML</span>
   </button>
 
@@ -21,7 +21,7 @@
       <tbody>
         
           <tr ng-repeat="pin in mapMarkers">
-              <td ng-click="setMapCenter(pin.lat, pin.lng, 13);">
+              <td (click)="setMapCenter(pin.lat, pin.lng, 13);">
                   <span class="glyphicon glyphicon-screenshot"></span>
               </td>
               <td>{{pin.name}}</td>
@@ -30,7 +30,7 @@
               <!--<td>{{militaryDateFormat(pin.modified)}}</td>-->
               <td></td>
               <td>
-                  <button class="btn" ng-click="editPoi(pin)">
+                  <button class="btn" (click)="editPoi(pin)">
                       <span class="glyphicon glyphicon-pencil"> Edit</span>
                   </button>
               </td>
@@ -39,19 +39,5 @@
       </tbody>
   </table>
 
-  <ng-template #content let-c="close" let-d="dismiss">
-    <div class="modal-header">
-      <h4 class="modal-title">{{editingPoi.name}}</h4>
-      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <p>One fine body&hellip;</p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-    </div>
-  </ng-template>
   <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
   
