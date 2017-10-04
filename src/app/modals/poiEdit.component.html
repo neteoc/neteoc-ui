@@ -8,8 +8,87 @@
 </div>
 
   <div class="modal-body">
-    <p>Hello, {{editingPoi.name}}!</p>
+      <form id="newPinForm" name="newPinForm" class="ng-pristine ng-valid">          
+        <div class="form-group">
+            <textarea class="form-control" rows="3" ng-model="editingPoi.description"></textarea>
+        </div>
+
+        <div class="input-group">
+            <span class="input-group-addon">Latitude: </span>
+            <input type="text" ng-model="editingPoi.lat" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+            <span class="input-group-addon">Longitude: </span>
+            <input type="text" ng-model="editingPoi.lng" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty">
+            <!-- Rather than the "from device" button, we could add a button here with glyphicon-screenshot ....-->
+        </div>
+
+        <p></p>
+
+        <div class="form-group">
+            <p>
+                <label>Get lat & long from ...</label>
+                <button class="btn btn-default" (click)="locationFromDevice()">
+                    <!-- TODO: Really this should be a laptop, not a phone. Misleading. -->
+                    <span class="fa fa-phone"></span> Device
+                </button>
+                <button class="btn btn-default">
+                    <span class="fa fa-file"></span> File
+                </button>
+            </p>
+        </div>
+
+        <div class="form-group">
+            <label>Fields: </label>
+            <button (click)="addNewPinField()" class="btn btn-default">
+                <span class="fa fa-plus"></span>
+            </button>
+            <div ng-repeat="(fieldKey, fieldValue) in editingPoi.fields" class="ng-scope">
+                <!-- TODO: prevent (saving) duplicate key -->
+                <input type="text" ng-model="fieldKey"> 
+                <input type="text" ng-model="fieldValue"> 
+                <button (click)="deletePinField(fieldKey)" class="btn btn-danger">
+                    <span class="fa fa-minus"></span>
+                </button>
+            </div>
+        </div>
+        <div class="form-group">
+            <!-- TODO: click for button should trigger the input's click ... -->
+            <!-- TODO: Make this thing expand slowly somehow, and not change height -->
+            <button class="btn btn-default resize-2s" ng-mouseover="showAttachmentsText=true" ng-mouseleave="showAttachmentsText=false">
+                <label class="fa fa-paperclip">
+                    <input type="file" style="display: none;" custom-on-change="attachmentAdded" />
+                </label>
+                <label (show)="showAttachmentsText"> Attachments</label>
+            </button>
+            <!-- TODO: Clear all attachments button 
+            <input type="button" ng-show="editingPoi.hasAttachments()" value="Clear Attachments" (click)="$ctrl.clearAttachments()" class="ng-hide">                            
+            -->
+        </div>
+        <div class="form-group">
+          <!--
+            <div class="attachmentContainer" ng-repeat="(attachmentName, attachment) in editingPoi.attachments" class="ng-scope">
+                <img width="140px" height="140px" data-ng-src="{{attachment.imageSrc}}" />
+                <button (click)="deleteAttachment(attachmentName)" class="btn btn-danger">
+                    <span class="fa fa-minus"></span>
+                </button>
+                <button (click)="latLongFromAttachment(attachmentName)" class="btn btn-default" ng-show="attachment.lat != null">
+                    <span class="fa fa-screenshot"></span>
+                </button>
+            </div>
+          -->
+        </div>
+    </form>
   </div>
+
   <div class="modal-footer">
+    <!--
     <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+    -->
+    
+    <button class="btn btn-default">Copy</button>
+    <button type="submit" class="btn btn-success" (click)="savePoi()" ng-disabled="newPinForm.$invalid">
+                        <span class="fa fa-save"></span> Save
+    </button>
+    <button (click)="deleteMapMarker(editingPoi)" type="submit" class="btn btn-danger">
+        <span class="fa fa-trash"> Delete</span>
+    </button>
   </div>
