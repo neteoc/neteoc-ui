@@ -1,7 +1,8 @@
-import { Component
-  , OnInit
-  , ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';  
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { LeafletMapComponent } from '../leaflet-map/leaflet-map.component';
+
+import { PoiEditModal } from '../modals/poiEdit.component';
 
 @Component({
   selector: 'app-geo',
@@ -15,6 +16,7 @@ export class GeoComponent implements OnInit {
   mapParams = {};
   tileData = {};
   mapMarkers: MapMarker[];
+  modalCloseResult: string;
 
   mapCenter: Point = {    // give mapCenter a value so that setMapCenter has a correct binding
       lat: 32.837,
@@ -24,7 +26,7 @@ export class GeoComponent implements OnInit {
 
   editingPoi: MapMarker;
 
-  constructor() { }
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
     this.mapParams =  {zoom: 13, center: [51.505, -0.09]};
@@ -34,6 +36,23 @@ export class GeoComponent implements OnInit {
     }
     this._leafletMap.initialize(this.mapParams, this.tileData );
   }  
+
+  open() {
+    const modalRef = this.modalService.open(PoiEditModal);
+    modalRef.componentInstance.name = 'World';
+  }
+  
+  /*
+  // https://ng-bootstrap.github.io/#/components/modal/examples
+    open(content) {
+      console.log(content);
+      this.modalService.open(content).result.then((result) => {
+        this.modalCloseResult = `Closed with: ${result}`;
+      }, (reason) => {
+        // this.modalCloseResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    }
+    */
 
   editPoi(pointOfInterest): void {
     
