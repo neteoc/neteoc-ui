@@ -9,6 +9,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { RouterModule }   from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule } from 'angular-calendar';
+import {InlineEditorModule} from 'ng2-inline-editor';
 import { routes } from './app.routes';
 
 import { AppComponent } from './app.component';
@@ -61,7 +62,8 @@ RouterModule.forRoot([
     AngularFireModule.initializeApp(environment.firebase, 'gsdf'), // imports firebase/app needed for everything
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    InlineEditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
