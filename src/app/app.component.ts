@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
@@ -25,7 +25,10 @@ import { AuthheaderComponent } from './authheader/authheader.component';
     MatButtonModule,
     MatMenuModule,
     AuthheaderComponent
-  ],
+  ,
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive],
   templateUrl: './app.component.html',
   styleUrl: './app.component.less'
 })
