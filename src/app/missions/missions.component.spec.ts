@@ -11,7 +11,7 @@ describe('MissionsComponent', () => {
       imports: [MissionsComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(MissionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
