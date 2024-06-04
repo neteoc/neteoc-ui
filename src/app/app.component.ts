@@ -8,6 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
+import { environment } from '../environments/environment';
+
 
 @Component({
   selector: 'app-root',
@@ -25,5 +27,5 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   styleUrl: './app.component.less'
 })
 export class AppComponent {
-  title = 'neteoc';
+  title = environment.name;
 }

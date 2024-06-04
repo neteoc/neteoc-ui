@@ -23,7 +23,7 @@
   "hosting": {
     "public": "dist/neteoc/browser",
     "predeploy": [
-      "npm run build"
+      "ng build --configuration=production"
     ],
     "ignore": [
       "firebase.json",
