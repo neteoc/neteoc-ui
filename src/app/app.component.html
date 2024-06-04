@@ -1,9 +1,11 @@
 <mat-toolbar color="primary">
     <mat-icon>local_fire_department</mat-icon>
     <span>{{ title }}</span>
-  <a mat-button href="/">Home</a>
-  <a mat-button href="/profile">Profile</a>
-  <a mat-button href="/missions">Missions</a>
+    <a mat-button routerLink="/">Home</a>
+    <a mat-button routerLink="/profile">Profile</a>
+    <a mat-button routerLink="/missions" routerLinkActive="active">Missions</a>
+
+  
 
 </mat-toolbar>
 
