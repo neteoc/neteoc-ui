@@ -1,46 +1,10 @@
+import { Routes } from '@angular/router';
+import { MissionsComponent } from './missions/missions.component';
+import { ProfileComponent } from './profile/profile.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
-import { AppComponent } from './app.component';
-import { MenuComponent } from './menu/menu.component';
-import { environment } from '../environments/environment';
-import { HomeComponent } from './home/home.component';
-import { ProfileComponent } from './users/profile/profile.component';
-import { MissionsListComponent } from './missions/missions-list/missions-list.component';
-import { MissionsDetailComponent } from './missions/missions-detail/missions-detail.component';
-import { MissionsFormComponent } from './missions/missions-form/missions-form.component';
-import { MissionsEditComponent } from './missions/missions-edit/missions-edit.component';
-import { ProfileEditComponent } from './users/profile-edit/profile-edit.component';
-import { GeoComponent } from './geo/geo.component'
-
-export const routes = [
-      {
-        path: '',
-        component: HomeComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: 'm2',
-        component: MissionsListComponent
-      },
-      {
-        path: 'missions/create',
-        component: MissionsFormComponent
-      },
-      {
-        path: 'missions',
-        component: MissionsListComponent
-      },
-      { path: 'missions/:id', component: MissionsDetailComponent },
-      { path: 'missions/:id/edit', component: MissionsEditComponent },
-
-      {
-        path: 'profile',
-        component: ProfileComponent,
-      },
-      { path: 'profile/:id', component: ProfileComponent },
-      { path: 'profile/edit/:id', component: ProfileEditComponent },
-      {
-        path: 'gis',
-        component: GeoComponent,
-      },
-
-    ]
+export const routes: Routes = [
+    { path: 'missions', component: MissionsComponent },
+    { path: 'profile', component: ProfileComponent },
+    { path: '**', component: PageNotFoundComponent}
+];
