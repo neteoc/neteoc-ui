@@ -11,7 +11,7 @@ describe('PageNotFoundComponent', () => {
       imports: [PageNotFoundComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(PageNotFoundComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
