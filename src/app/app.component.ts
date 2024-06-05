@@ -28,7 +28,9 @@ import { AuthheaderComponent } from './authheader/authheader.component';
   ,
     RouterOutlet,
     RouterLink,
-    RouterLinkActive],
+    RouterLinkActive,
+    AuthheaderComponent
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.less'
 })
