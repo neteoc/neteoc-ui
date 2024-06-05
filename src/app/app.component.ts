@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { environment } from '../environments/environment';
+import { AuthheaderComponent } from './authheader/authheader.component';
 
 
 @Component({
@@ -22,7 +23,9 @@ import { environment } from '../environments/environment';
     CommonModule,
     DragDropModule,
     MatButtonModule,
-    MatMenuModule],
+    MatMenuModule,
+    AuthheaderComponent
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.less'
 })
