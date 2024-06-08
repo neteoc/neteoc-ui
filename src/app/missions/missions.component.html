@@ -1,1 +1,20 @@
-<p>missions works!</p>
+<h1>Upcoming Missions</h1>
+
+<!-- <mat-card *ngFor="let mission of missions" class="mission-card">
+    <mat-card-header>
+        <mat-card-title>{{ mission.title }}</mat-card-title>
+        <mat-card-subtitle>{{ mission.date | date: 'medium' }}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="mission.image" alt="{{ mission.title }}">
+    <mat-card-content>
+        <p>{{ mission.description }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button color="primary" (click)="joinMission(mission)">Join</button>
+    </mat-card-actions> -->
+
+<ul>
+    <li *ngFor="let mission of missions | async">
+        <a routerLink="/missions/{{ mission.id }}"> - {{ mission.title }} - {{ mission.description }} </a>
+    </li>
+</ul>

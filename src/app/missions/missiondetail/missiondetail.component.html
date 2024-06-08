@@ -1,0 +1,8 @@
+<!-- Use the async pipe to subscribe to the mission$ observable and access its current value -->
+<div *ngIf="mission$ | async as mission">
+    <h2>Mission Details</h2>
+    <p><strong>ID:</strong> {{ mission.id }}</p>
+    <p><strong>Title:</strong> {{ mission.title }}</p>
+    <p><strong>Description:</strong> {{ mission.description }}</p>
+    <!-- Add more fields as needed based on the Mission model -->
+  </div>
