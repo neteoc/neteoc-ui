@@ -5,8 +5,14 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
-    { path: '', component: HomeComponent},
-    { path: 'missions', component: MissionsComponent },
-    { path: 'profile', component: ProfileComponent },
-    { path: '**', component: PageNotFoundComponent}
+  { path: '', component: HomeComponent },
+
+  { path: 'profile', component: ProfileComponent },
+    { path: 'profile/:id', component: ProfileComponent },
+  
+  {
+    path: 'missions',
+    loadChildren: () => import('./missions/mission.routes').then(feature => feature.routes),
+  },
+  { path: '**', component: PageNotFoundComponent },
 ];

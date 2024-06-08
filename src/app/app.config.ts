@@ -11,6 +11,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getFunctions, provideFunctions } from '@angular/fire/functions';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 
+
 import { environment } from '../environments/environment'
 
 export const appConfig: ApplicationConfig = {
@@ -26,6 +27,6 @@ export const appConfig: ApplicationConfig = {
     UserTrackingService,
     provideFirestore(() => getFirestore()),
     provideFunctions(() => getFunctions()),
-    provideStorage(() => getStorage())
+    provideStorage(() => getStorage()),
   ]
 };
