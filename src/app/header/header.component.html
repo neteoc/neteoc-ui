@@ -1,24 +1,63 @@
 <mat-toolbar color="primary">
-    <mat-icon>local_fire_department</mat-icon>
-    <span>{{ title }}</span>
 
-    <a mat-button routerLink="/">Home</a>
+    <!-- <button mat-button [matMenuTriggerFor]="mainMenu">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #mainMenu="matMenu">
+        <button routerLink="/">
+            <mat-icon>home</mat-icon>
+            Home
+        </button>
+        <a mat-button routerLink="/missions" *ngIf="isAuthenticated" >Missions</a>
+
+    </mat-menu> -->
+
+    <button mat-button [matMenuTriggerFor]="mainMenu">Menu</button>
+    <mat-menu #mainMenu="matMenu">
+        <button mat-menu-item routerLink="/">
+            <mat-icon>home</mat-icon>
+            Home
+        </button>
+        <button mat-menu-item routerLink="/missions" *ngIf="isAuthenticated">
+            <mat-icon>assignment</mat-icon>
+            Missions
+        </button>
+    </mat-menu>
+
     
-    <a mat-button routerLink="/missions" routerLinkActive="active">Missions</a>
-    <span class="toolbar-spacer"></span>
-    <a *ngIf="isAuthenticated; else showLogin" [matMenuTriggerFor]="menu">
-        <img id=profile src="{{ photoURL }}" alt=" {{ username }}">
-    </a>
-    <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/profile/{{ uid }}">Profile</button>
-        <button mat-menu-item (click)="logout()">Logout</button>
-      </mat-menu>
+    
+    
+    <span class="toolbar-spacer" ></span>
+ 
+    <div id="profilediv" *ngIf="isAuthenticated; else showLogin">
+    
+        
+        <button mat-button [matMenuTriggerFor]="menu" id="profileButton">
+            <mat-icon>arrow_drop_down</mat-icon>
+            {{ username }}
+                <!-- <img id=profile src="{{ photoURL }}" alt=" {{ username }}"> -->
+                
+        </button>
+        
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item routerLink="/profile/{{ uid }}">
+                <mat-icon>manage_accounts</mat-icon>
+                Profile
+            </button>
+            <button mat-menu-item (click)="logout()">
+                <mat-icon>logout</mat-icon>
+                Logout</button>
+        </mat-menu>
+    
+    </div>
 
 
 
 
     <ng-template #showLogin>
-        <a mat-button (click)="byGoogle()">Login</a>
+        <div id="profilediv">
+            <a mat-button (click)="byGoogle()">Login</a>
+        </div>
     </ng-template>
 
 </mat-toolbar>

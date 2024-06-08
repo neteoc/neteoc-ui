@@ -6,7 +6,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { environment } from '../environments/environment';
 import { HeaderComponent } from './header/header.component';
-
+import { MainmenuComponent } from './mainmenu/mainmenu.component';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +16,7 @@ import { HeaderComponent } from './header/header.component';
     CommonModule,
     DragDropModule,
     HeaderComponent,
+    MainmenuComponent,
     RouterOutlet,
     RouterLink,
     RouterLinkActive,

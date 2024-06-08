@@ -4,6 +4,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
 
+import { authGuard } from './auth.guard';
+
 export const routes: Routes = [
   { path: '', component: HomeComponent },
 
@@ -12,6 +14,7 @@ export const routes: Routes = [
   
   {
     path: 'missions',
+    canActivate: [authGuard],
     loadChildren: () => import('./missions/mission.routes').then(feature => feature.routes),
   },
   { path: '**', component: PageNotFoundComponent },
