@@ -34,7 +34,9 @@
     <!-- Position Column -->
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef>Title</th>
-      <td mat-cell *matCellDef="let element">{{element.title}}</td>
+      <td mat-cell *matCellDef="let element">
+        <button mat-flat-button color="primary" routerLink="/missions/detail/{{ element.id }}">{{element.title}}</button>
+      </td>
     </ng-container>
   
     <!-- Name Column -->
@@ -53,11 +55,17 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let element">
-        <button mat-fab color="primary" style="display: inline-block">
-            <mat-icon>person_add</mat-icon>
+        <button mat-raised-button routerLink="/missions/signin/{{ element.id }}" color="accent" style="display: inline-block">
+            <mat-icon>login</mat-icon>
+            Sign In
         </button>
-        <button mat-fab color="warn">
+        <button mat-raised-button color="primary" style="display: inline-block">
+            <mat-icon>person_add</mat-icon>
+            Sign Up
+        </button>
+        <button mat-raised-button color="warn">
             <mat-icon>delete</mat-icon>
+            Delete
         </button>
         <!-- <button mat-fab color="accent" style="display: inline-block" >Info</button> -->
       </td>

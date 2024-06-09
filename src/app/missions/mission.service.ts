@@ -4,7 +4,8 @@ import {
   collectionData,
   collection,
   doc,
-  getDocs
+  getDocs,
+  runTransaction
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
@@ -40,6 +41,29 @@ export class MissionService {
   getMission(id: string) {
     return doc(this.firestore, `${this.basePath}/${id}`);
   }
-  
 
+  async signIntoMission(missionId: string, userId: string, Latitude: number, Longitude: number) {
+    const missionRef = doc(this.firestore, `${this.basePath}/${missionId}`);
+    await runTransaction(this.firestore, async (transaction) => {
+      const missionDoc = await transaction.get(missionRef);
+      if (!missionDoc.exists()) {
+        throw new Error("Mission does not exist!");
+      }
+      const missionData = missionDoc.data() as Mission;
+      // Check if the user is already in the roster to avoid duplicates
+      const isUserInRoster = missionData.roster?.some(rosterEntry => rosterEntry.userId === userId);
+      if (!isUserInRoster) {
+        const newUserRosterEntry = {
+          userId: userId,
+          location: {
+            Latitude: Latitude,
+            Longitude: Longitude,
+          },
+        };
+        const updatedRoster = [...missionData.roster, newUserRosterEntry];
+        // Update the mission document with the new roster
+        transaction.update(missionRef, { roster: updatedRoster });
+      }
+    });
+  }
 }

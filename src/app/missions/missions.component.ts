@@ -11,7 +11,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { Mission } from './mission';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
+
+
 
 @Component({
   selector: 'app-missions',
