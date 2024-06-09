@@ -1,5 +1,5 @@
 .toolbar-spacer {
-    flex: 1 1 auto;
+    flex: 2 2 auto;
   }
 
   mat-toolbar {
@@ -8,7 +8,14 @@
   }
 
 #profile {
+    display: flex;
+    height: 30px;
+    width: auto;
+}
+
+#profileButton > span.mdc-button__label {
     height: 100%;
+    display: flex;
     width: auto;
 }
 
@@ -20,5 +27,16 @@ a {
 app-authheader {
     height: 20%;
     display: flex;
+    align-items: center;
+}
+
+#profilediv {
+  display: flex;
+
+}
+
+span .mdc-button__label {
+    display: flex;
+    height: 100%;
     align-items: center;
 }

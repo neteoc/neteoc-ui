@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Firestore, collectionData, collection } from '@angular/fire/firestore';
-import { Subscription, tap } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';  
 import { Auth, authState, User, user } from '@angular/fire/auth';
 import { ActivatedRoute } from '@angular/router';

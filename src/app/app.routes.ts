@@ -4,14 +4,30 @@ import { ProfileComponent } from './profile/profile.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
 
-export const routes: Routes = [
-  { path: '', component: HomeComponent },
+import { authGuard } from './auth.guard';
+import { LoginComponent } from './login/login.component';
 
-  { path: 'profile', component: ProfileComponent },
-    { path: 'profile/:id', component: ProfileComponent },
+export const routes: Routes = [
+  {
+    path: '',
+    canActivate: [authGuard],
+    component: HomeComponent
+  },
+  { path: 'login', component: LoginComponent }, 
+  {
+    path: 'profile',
+    canActivate: [authGuard],
+    component: ProfileComponent
+  },
+  {
+    path: 'profile/:id',
+    canActivate: [authGuard],
+    component: ProfileComponent
+  },
   
   {
     path: 'missions',
+    canActivate: [authGuard],
     loadChildren: () => import('./missions/mission.routes').then(feature => feature.routes),
   },
   { path: '**', component: PageNotFoundComponent },

@@ -6,6 +6,7 @@ import {
   UserCredential,
   signOut
 } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -14,7 +15,10 @@ import {
 export class AuthService {
   private _auth = inject(Auth);
 
+  constructor(private _router: Router) { }
+
   logout(): Promise<void> {
+    this._router.navigateByUrl('/login')
     return signOut(this._auth);
   }
 
