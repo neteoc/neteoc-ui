@@ -1,0 +1,15 @@
+name: Test build process
+on:
+  push:
+    branches-ignore:
+      - main
+permissions:
+  checks: write
+  contents: read
+  pull-requests: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci && npm run build
