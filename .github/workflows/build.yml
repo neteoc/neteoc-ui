@@ -3,6 +3,13 @@ on:
   push:
     branches-ignore:
       - main
+    paths:
+      - 'src/**'
+      - '.github/workflows/*build*.yml'
+      - 'functions/**'
+      - 'public/**'
+      - '*.json'
+      - '.firebaserc'
 permissions:
   checks: write
   contents: read
