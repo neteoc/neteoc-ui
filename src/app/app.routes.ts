@@ -5,10 +5,11 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { HomeComponent } from './home/home.component';
 
 import { authGuard } from './auth.guard';
+import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-
+  { path: 'login', component: LoginComponent }, 
   { path: 'profile', component: ProfileComponent },
     { path: 'profile/:id', component: ProfileComponent },
   
