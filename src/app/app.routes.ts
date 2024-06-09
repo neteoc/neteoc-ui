@@ -8,10 +8,22 @@ import { authGuard } from './auth.guard';
 import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
+  {
+    path: '',
+    canActivate: [authGuard],
+    component: HomeComponent
+  },
   { path: 'login', component: LoginComponent }, 
-  { path: 'profile', component: ProfileComponent },
-    { path: 'profile/:id', component: ProfileComponent },
+  {
+    path: 'profile',
+    canActivate: [authGuard],
+    component: ProfileComponent
+  },
+  {
+    path: 'profile/:id',
+    canActivate: [authGuard],
+    component: ProfileComponent
+  },
   
   {
     path: 'missions',

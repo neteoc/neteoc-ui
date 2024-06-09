@@ -1,12 +1,15 @@
 @use '@angular/material' as mat;
+@use './m3-theme';
 
 @include mat.core();
+
 
 // Define a dark theme
 $dark-theme: mat.define-theme((
   color: (
     theme-type: dark,
     primary: mat.$azure-palette,
+    tertiary: mat.$blue-palette,
   ),
 ));
 
@@ -15,6 +18,7 @@ $light-theme: mat.define-theme((
   color: (
     theme-type: light,
     primary: mat.$azure-palette,
+    tertiary: mat.$blue-palette,
   ),
 ));
 

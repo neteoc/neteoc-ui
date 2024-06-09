@@ -12,7 +12,10 @@
 
     </mat-menu> -->
 
-    <button mat-button [matMenuTriggerFor]="mainMenu">Menu</button>
+    <button mat-button [matMenuTriggerFor]="mainMenu">
+        <mat-icon>menu</mat-icon>
+        NetEOC
+    </button>
     <mat-menu #mainMenu="matMenu">
         <button mat-menu-item routerLink="/">
             <mat-icon>home</mat-icon>
