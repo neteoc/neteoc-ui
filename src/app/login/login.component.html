@@ -1,9 +1,13 @@
 
-
 <mat-grid-list cols="1" rowHeight="2:1">
+
     <mat-grid-tile>
-        <button mat-flat-button color="primary">
-            Login
-        </button>    
+        
+        <button mat-raised-button color="primary" (click)="byGoogle()">
+            <mat-icon svgIcon="thumbs-up"></mat-icon>
+            Sign in with Google
+        </button>
+
     </mat-grid-tile>
-  </mat-grid-list>
+
+</mat-grid-list>
