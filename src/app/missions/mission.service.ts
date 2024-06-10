@@ -8,6 +8,7 @@ import {
   runTransaction
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators'; 
 
 import { Mission } from './mission';
 
@@ -21,7 +22,9 @@ export class MissionService {
 
   constructor() {
     const missionCollection = collection(this.firestore, 'missions');
-    this.missions$ = collectionData(missionCollection) as Observable<Mission[]>;
+    this.missions$ = collectionData(missionCollection, { idField: 'id' }).pipe( // Use the pipe operator
+      map((missions: Mission[]) => missions) // Transform the Observable<Mission[]> into Observable<any[]>
+    );
   }
 
   getMissionList() {

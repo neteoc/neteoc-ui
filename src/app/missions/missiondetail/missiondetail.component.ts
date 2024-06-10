@@ -4,6 +4,8 @@ import { RouterLink, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Firestore, doc, docData } from '@angular/fire/firestore';
 import { switchMap } from 'rxjs/operators';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 import { Mission } from '../mission';
 
@@ -12,7 +14,9 @@ import { Mission } from '../mission';
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink
+    RouterLink,
+    MatButtonModule,
+    MatIconModule
   ],
   templateUrl: './missiondetail.component.html',
   styleUrl: './missiondetail.component.less'
@@ -36,6 +40,11 @@ export class MissiondetailComponent implements OnInit {
         return docData(missionDocRef, { idField: 'id' }) as Observable<Mission>;
       })
     );
+  }
+
+  goBack() {
+    // Navigate back to the previous page
+    window.history.back();
   }
 
   ngOnInit(): void {
