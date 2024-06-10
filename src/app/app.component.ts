@@ -45,23 +45,13 @@ export class AppComponent {
     this._authService.user$.subscribe((aUser: User | null) => {
       this.isAuthenticated = this._authService.isAuthenticated$;
       if (this.isAuthenticated) {
-        console.log("User is authenticated:" , aUser)
+        
       }
     }
       
     );
-    console.log("ngOnInit: " ,this.isAuthenticated)
+    
   }
 
-  ngAfterContentInit() {
-    console.log("ngAfterContentInit: " ,this.isAuthenticated)
-  }
 
-  ngAfterViewInit() {
-    console.log("ngAfterViewInit: " ,this.isAuthenticated)
-  }
-
-  ngAfterContentChecked() { 
-    console.log("ngAfterContentChecked:", this.isAuthenticated)
-  }
 }
