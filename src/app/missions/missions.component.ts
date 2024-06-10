@@ -9,9 +9,11 @@ import { map } from 'rxjs/operators'; // Add this line
 import { MatIconModule } from '@angular/material/icon';
 
 import { Mission } from './mission';
+import { MissionlistComponent } from './missionlist/missionlist.component';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+
 
 
 
@@ -24,33 +26,23 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     MatTableModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MissionlistComponent
   ],
   templateUrl: './missions.component.html',
   styleUrl: './missions.component.less'
 })
 export class MissionsComponent implements AfterViewInit {
-  missions: Observable<Mission[]>;
-  firestore: Firestore = inject(Firestore);
 
-  dataSource = new MatTableDataSource<any>();
-  displayedColumns: string[] = ['title', 'description', 'location', 'action'];
-  @ViewChild(MatSort) sort!: MatSort;
 
 
 
 
   constructor(private afs: Firestore, public dialog: MatDialog) {
-    const missionCollection = collection(this.firestore, 'missions');
-    this.missions = collectionData(missionCollection, { idField: 'id' }).pipe( // Use the pipe operator
-      map((missions: Mission[]) => missions) // Transform the Observable<Mission[]> into Observable<any[]>
-    );
+
   }
 
   ngAfterViewInit() {
-    this.missions.subscribe(data => { // Subscribe to the transformed Observable
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.sort = this.sort;
-    })
+
   }
 }

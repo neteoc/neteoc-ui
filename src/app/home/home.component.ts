@@ -4,6 +4,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import {MatIconRegistry, MatIconModule} from '@angular/material/icon';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { MissionlistComponent } from '../missions/missionlist/missionlist.component';
 
 
 @Component({
@@ -14,11 +15,13 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
     MatGridListModule,
     MatCardModule,
     MatIconModule,
-    RouterLink
+    RouterLink,
+    MissionlistComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.less'
 })
 export class HomeComponent {
+  
 
 }
