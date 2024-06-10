@@ -4,45 +4,49 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   UserCredential,
-  signOut
+  signOut,
+  authState,
+  user
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { map, take } from 'rxjs/operators';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private _auth = inject(Auth);
+  private auth = inject(Auth);
+  redirectUrl: string | null = null;
 
-  constructor(private _router: Router) { }
+  constructor(private _router: Router) {   }
+
+  user$ = user(this.auth);
 
   logout(): Promise<void> {
     this._router.navigateByUrl('/login')
-    return signOut(this._auth);
+    return signOut(this.auth);
   }
 
   byGoogle(): Promise<UserCredential> {
-    return signInWithPopup(this._auth, new GoogleAuthProvider())
+    return signInWithPopup(this.auth, new GoogleAuthProvider())
   }
 
-  get isAuthenticated(): boolean {
-    return this._auth.currentUser !== null;
-  }
+  isAuthenticated$ = this.user$.pipe(map(user => !!user));
 
   get username(): string | null {
-    return this._auth.currentUser ? this._auth.currentUser.displayName : null;
+    return this.auth.currentUser ? this.auth.currentUser.displayName : null;
   }
 
   get email(): string | null {
-    return this._auth.currentUser ? this._auth.currentUser.email : null;
+    return this.auth.currentUser ? this.auth.currentUser.email : null;
   }
 
   get photoURL(): string | null {
-    return this._auth.currentUser ? this._auth.currentUser.photoURL : null;
+    return this.auth.currentUser ? this.auth.currentUser.photoURL : null;
   }
 
   get uid(): string | null {
-    return this._auth.currentUser ? this._auth.currentUser.uid : null;
+    return this.auth.currentUser ? this.auth.currentUser.uid : null;
   }
 }
