@@ -27,6 +27,7 @@ import { MissionService } from '../mission.service';
 })
 export class MissionlistComponent {
   @Input() displayedColumns: string[] = ['title', 'action'];
+  @Input() displayHeaders: boolean = true;
   missions: Observable<Mission[]>;
   
 

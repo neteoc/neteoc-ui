@@ -3,35 +3,20 @@
 
 </div>
 
-<mat-grid-list cols="2" rowHeight="4:3" role="list" gutterSize="3em">
 
-    <mat-grid-tile role="listitem">
-        <mat-grid-tile-header>
-            Profile
-        </mat-grid-tile-header>
-
-        <mat-grid-tile-footer>
-            <button mat-raised-button color="primary">Details</button>
-        </mat-grid-tile-footer>
-        
-        
-
-    </mat-grid-tile>
-
-    <mat-grid-tile role="listitem">
-        <mat-grid-tile-header>
-            Missions
-        </mat-grid-tile-header>
-
-        <app-missionlist [displayedColumns]="['title']"></app-missionlist>
+<mat-card>
+    <mat-card-header>
+        Missions
+    </mat-card-header>
+    <mat-card-content>
+        <app-missionlist [displayedColumns]="['linkedTitle', 'description', 'detailsLink']" [displayHeaders]="false"></app-missionlist>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-fab extended routerLink="/missions" color="accent">
+            <mat-icon>list</mat-icon>
+            View All
+        </button>
+    </mat-card-actions>
+  </mat-card>
 
 
-        <mat-grid-tile-footer>
-            <button mat-raised-button color="primary" routerLink="/missions">Missions</button>
-        </mat-grid-tile-footer>
-        
-        
-
-    </mat-grid-tile>
-
-</mat-grid-list>
