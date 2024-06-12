@@ -5,12 +5,15 @@ import {
   collection,
   doc,
   getDocs,
-  runTransaction
+  runTransaction,
+  addDoc
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'; 
 
 import { Mission } from './mission';
+import { UserService } from '../user.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +22,11 @@ export class MissionService {
   firestore: Firestore = inject(Firestore);
   missions$: Observable<Mission[]>;
   private basePath: string = '/missions';
+  missionCollection = collection(this.firestore, 'missions');
 
   constructor() {
-    const missionCollection = collection(this.firestore, 'missions');
-    this.missions$ = collectionData(missionCollection, { idField: 'id' }).pipe( // Use the pipe operator
+    const missionCollection2 = this.missionCollection;
+    this.missions$ = collectionData(missionCollection2, { idField: 'id' }).pipe( // Use the pipe operator
       map((missions: Mission[]) => missions) // Transform the Observable<Mission[]> into Observable<any[]>
     );
   }
@@ -41,8 +45,20 @@ export class MissionService {
     return missions;
   };
 
+
   getMission(id: string) {
     return doc(this.firestore, `${this.basePath}/${id}`);
+  }
+
+  async addMission(mission: Mission) {
+    try {
+      const docRef = await addDoc(this.missionCollection, mission);
+      console.log("Document written with ID: ", docRef.id);
+      return docRef.id;
+    } catch (e) {
+      console.error("Error adding document: ", e);
+      throw new Error("Failed to add mission");
+    }
   }
 
   async signIntoMission(missionId: string, userId: string, Latitude: number, Longitude: number) {
