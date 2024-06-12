@@ -4,6 +4,10 @@ export interface Mission {
   description: string;
   location: string;
   roster: Array<roster>;
+  ownerID: string;
+  admins: Array<string>;
+  startDate: Date;
+  endDate: Date;
 }
 
 interface roster {
@@ -14,4 +18,6 @@ interface roster {
   }
 }
 
-
+interface admins {
+  userId: string;
+}
