@@ -8,6 +8,8 @@ export interface Mission {
   admins: Array<string>;
   startDate: Date;
   endDate: Date;
+  signupEnabled: boolean;
+  
 }
 
 interface roster {

@@ -57,6 +57,14 @@
         <mat-error>End Date is required</mat-error>
         <mat-hint>Estimated, can be updated later</mat-hint>
     </mat-form-field>
+
+
+
+        <mat-checkbox id="signupEnabled" formControlName="signupEnabled">
+            signupEnabled
+        </mat-checkbox>
+
+
 </div>
 
     <mat-card-actions>
@@ -66,7 +74,15 @@
             </div>
             <button [disabled]="submitted || !newMissionForm.valid"
                     color="primary"
-                    mat-raised-button>Register
+                    mat-raised-button
+                    type="submit">
+                    Submit
+            </button>
+            <button mat-raised-button 
+                    (click)="cancel()"
+                    color="warn"
+                    type="button">
+                    Cancel
             </button>
             </div>
             

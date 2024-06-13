@@ -5,6 +5,8 @@
 @use '@angular/material/core/m2';
 @use '@angular/material/core/typography/typography';
 
+@use './app/missions/missionlist/missionlist-theme' as missionlist;
+
 
 // Define a theme.
 $primary: m2.define-palette(m2.$blue-palette, 800, 700, 900);
@@ -49,4 +51,5 @@ $theme-light: m2.define-light-theme((
   // Include all theme styles for the components.
   @include all-theme.all-component-themes($theme-light);
   @include typography.typography-hierarchy($theme-light);
+  @include missionlist.theme($theme-light);
 }

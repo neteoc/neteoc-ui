@@ -1,3 +1,16 @@
-<button mat-raised-button color="primary" (click)="signInToMission(missionId ?? '', userId ?? '', Latitude  ?? 0, Longitude  ?? 0)">
-    Sign In
-</button>
+
+
+
+<mat-card>
+    <mat-card-title>Sign into mission</mat-card-title>
+    <mat-card-content></mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="signInToMission(missionId ?? '', userId ?? '', Latitude  ?? 0, Longitude  ?? 0)">
+            Sign In
+        </button>
+        <button mat-raised-button color="warn" (click)="cancel()">
+            Cancel
+        </button>
+        </mat-card-actions>
+</mat-card>
+  

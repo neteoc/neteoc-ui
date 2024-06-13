@@ -1,0 +1,17 @@
+@use "sass:map";
+@use "@angular/material" as mat;
+
+@mixin color($theme) {
+  .striped-row-even {
+    background-color: mat.get-theme-color($theme, primary, 200);
+  }
+  .striped-row-odd {
+    background-color: mat.get-theme-color($theme, primary, 100);
+  }
+}
+
+@mixin theme($theme) {
+  @if mat.theme-has($theme, color) {
+    @include color($theme);
+  }
+}
