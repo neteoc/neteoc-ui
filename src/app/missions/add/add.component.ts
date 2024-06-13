@@ -1,6 +1,9 @@
 import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { Auth, authState, User, user } from '@angular/fire/auth';
 import {
   AbstractControl,
@@ -36,6 +39,9 @@ import { start } from 'repl';
     MatCardModule,
     MatButtonModule,
     MatDatepickerModule,
+    CommonModule,
+    MatSelectModule,
+    MatCheckboxModule
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './add.component.html',
@@ -48,6 +54,7 @@ export class AddComponent {
     location: ['', Validators.required],
     startDate: ['', Validators.required],
     endDate: ['', Validators.required],
+    signupEnabled: [true, Validators.required]
   });
   submitted = false;
   private auth: Auth = inject(Auth);
@@ -79,6 +86,10 @@ export class AddComponent {
 
   }
 
+  cancel(): void {
+    this.router.navigate(['/missions']);
+  }
+
   async submit(): Promise<void> {
     this.submitted = true;
     const startDateValue = this.newMissionForm.value.startDate;
@@ -91,12 +102,13 @@ export class AddComponent {
     const newMission: Mission = {
       title: this.newMissionForm.value.name || '',
       description: this.newMissionForm.value.description || '',
-      location: 'San Francisco',
+      location: this.newMissionForm.value.location || '',
       ownerID: this.userID || '',
       startDate: startDate,
       endDate: endDate,
       admins: [],
-      roster: []
+      roster: [],
+      signupEnabled: this.newMissionForm.value.signupEnabled  || false,
     }
     console.log(newMission);
     try {

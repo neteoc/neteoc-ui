@@ -1,10 +1,40 @@
 
-<button mat-raised-button (click)="goBack()" color="accent"><mat-icon>arrow_back</mat-icon> Back</button>
-<!-- Use the async pipe to subscribe to the mission$ observable and access its current value -->
 <div *ngIf="mission$ | async as mission">
-    <h2>Mission Details</h2>
+
+
+<!-- Use the async pipe to subscribe to the mission$ observable and access its current value -->
+<mat-card>
+  <mat-card-title>{{ mission.title }}</mat-card-title>
+  <mat-card-content>
     <p><strong>ID:</strong> {{ mission.id }}</p>
-    <p><strong>Title:</strong> {{ mission.title }}</p>
     <p><strong>Description:</strong> {{ mission.description }}</p>
-    <!-- Add more fields as needed based on the Mission model -->
-  </div>
+    {{ mission.signupEnabled }}
+
+  </mat-card-content>
+
+
+    
+  <mat-card-actions>
+    <button 
+    mat-raised-button 
+    (click)="goBack()" color="primary">
+      <mat-icon>arrow_back</mat-icon> 
+      Back
+    </button>
+    <button 
+    mat-raised-button 
+    (click)="openDialog()" 
+    color="accent"
+    [disabled]="!mission.signupEnabled"
+    >
+      <mat-icon>login</mat-icon>
+      Sign In
+    </button>
+    </mat-card-actions>
+
+
+
+
+</mat-card>
+
+</div>

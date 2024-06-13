@@ -32,4 +32,5 @@ export class UserService {
     const userSnap = await getDoc(userDoc);
     return userSnap.data();
   }
+
 }

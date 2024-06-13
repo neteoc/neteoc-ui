@@ -6,8 +6,12 @@ import { Firestore, doc, docData } from '@angular/fire/firestore';
 import { switchMap } from 'rxjs/operators';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import {Dialog, DIALOG_DATA, DialogModule} from '@angular/cdk/dialog';
+import { MatCardModule } from '@angular/material/card';
+import { Router } from '@angular/router';
 
 import { Mission } from '../mission';
+import { SigninComponent } from '../signin/signin.component';
 
 @Component({
   selector: 'app-missiondetail',
@@ -16,7 +20,9 @@ import { Mission } from '../mission';
     CommonModule,
     RouterLink,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    DialogModule,
+    MatCardModule
   ],
   templateUrl: './missiondetail.component.html',
   styleUrl: './missiondetail.component.less'
@@ -25,8 +31,13 @@ export class MissiondetailComponent implements OnInit {
   mission$: Observable<Mission>;
   firestore: Firestore = inject(Firestore);
   private route: ActivatedRoute = inject(ActivatedRoute);
+  missionId: string | null = null;
   
-  constructor() {
+  constructor(
+    public dialog: Dialog,
+    private router: Router,
+  ) {
+    
     // Initialize the mission Observable
     this.mission$ = this.route.paramMap.pipe(
       switchMap(params => {
@@ -35,6 +46,7 @@ export class MissiondetailComponent implements OnInit {
         if (!missionId) {
           throw new Error('Mission ID not found in route parameters.');
         }
+        this.missionId = missionId;
         // Use the mission ID to query Firestore
         const missionDocRef = doc(this.firestore, `missions/${missionId}`);
         return docData(missionDocRef, { idField: 'id' }) as Observable<Mission>;
@@ -44,10 +56,21 @@ export class MissiondetailComponent implements OnInit {
 
   goBack() {
     // Navigate back to the previous page
-    window.history.back();
+    //window.history.back();
+    this.router.navigate(['/missions']);
   }
 
   ngOnInit(): void {
     // ngOnInit remains empty as the logic is handled in the constructor
   }
-}
+
+  openDialog() {
+    this.dialog.open(SigninComponent, {
+      data: {
+        missionID: this.missionId,
+      },
+    });
+  }
+  
+  }
+

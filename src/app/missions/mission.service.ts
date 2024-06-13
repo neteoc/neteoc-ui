@@ -6,7 +6,8 @@ import {
   doc,
   getDocs,
   runTransaction,
-  addDoc
+  addDoc,
+  deleteDoc
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'; 
@@ -48,6 +49,16 @@ export class MissionService {
 
   getMission(id: string) {
     return doc(this.firestore, `${this.basePath}/${id}`);
+  }
+
+  async deleteMission(missionId: string) {
+    const missionRef = doc(this.firestore, `${this.basePath}/${missionId}`);
+    try {
+      await deleteDoc(missionRef);
+      console.log("Mission successfully deleted!");
+    } catch (error) {
+      console.error("Error removing mission: ", error);
+    }
   }
 
   async addMission(mission: Mission) {
