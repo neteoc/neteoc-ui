@@ -14,6 +14,8 @@ import {
   ReactiveFormsModule,
   FormGroup
 } from '@angular/forms';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,7 +23,7 @@ import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MissionService } from '../mission.service';
 import { Mission } from '../mission';
 import { start } from 'repl';
@@ -41,7 +43,7 @@ import { start } from 'repl';
     MatDatepickerModule,
     CommonModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './add.component.html',

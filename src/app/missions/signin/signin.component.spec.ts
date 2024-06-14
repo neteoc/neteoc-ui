@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { Firestore } from '@angular/fire/firestore';
+import { MissionService } from '../mission.service'
 import { SigninComponent } from './signin.component';
+import { Auth } from '@angular/fire/auth';
 
 describe('SigninComponent', () => {
   let component: SigninComponent;
@@ -8,7 +10,10 @@ describe('SigninComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SigninComponent]
+      imports: [
+        SigninComponent,
+        Firestore,
+      ]
     })
     .compileComponents();
     
@@ -20,4 +25,6 @@ describe('SigninComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // Additional tests...
 });
