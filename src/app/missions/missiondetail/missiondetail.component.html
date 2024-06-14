@@ -22,8 +22,17 @@
       Back
     </button>
     <button 
+      mat-raised-button 
+      routerLink="/missions/edit/{{ mission.id }}"
+      color="accent"
+      [disabled]="!isOwner(mission.ownerID)"
+      >
+      <mat-icon>edit</mat-icon>
+      Edit
+    </button>
+    <button 
     mat-raised-button 
-    (click)="openDialog()" 
+    (click)="openDialog(  )" 
     color="accent"
     [disabled]="!mission.signupEnabled"
     >

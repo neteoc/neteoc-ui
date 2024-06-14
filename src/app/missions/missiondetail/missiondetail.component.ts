@@ -1,17 +1,17 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';  
-import { RouterLink, ActivatedRoute } from '@angular/router';
+import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Firestore, doc, docData } from '@angular/fire/firestore';
 import { switchMap } from 'rxjs/operators';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import {Dialog, DIALOG_DATA, DialogModule} from '@angular/cdk/dialog';
-import { MatCardModule } from '@angular/material/card';
-import { Router } from '@angular/router';
+import {MatCardModule} from '@angular/material/card';
 
 import { Mission } from '../mission';
 import { SigninComponent } from '../signin/signin.component';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-missiondetail',
@@ -35,6 +35,7 @@ export class MissiondetailComponent implements OnInit {
   
   constructor(
     public dialog: Dialog,
+    private authService: AuthService,
     private router: Router,
   ) {
     
@@ -52,6 +53,20 @@ export class MissiondetailComponent implements OnInit {
         return docData(missionDocRef, { idField: 'id' }) as Observable<Mission>;
       })
     );
+  }
+
+  isOwner(missionOwnerId: string): boolean {
+    console.log("Checking if user is the owner of the mission")
+    // Assuming you have a way to get the current user's ID, for example, from a UserService
+
+    if (!this.authService.uid) {
+      console.log("User not logged in");
+      return false;
+    } else {
+      console.log("User logged in. " + this.authService.uid + " is the current user");
+      return missionOwnerId === this.authService.uid;
+    }
+    
   }
 
   goBack() {

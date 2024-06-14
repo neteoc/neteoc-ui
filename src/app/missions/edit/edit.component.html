@@ -1,0 +1,6 @@
+<p>edit works!</p>
+
+<form [formGroup]="missionForm" (ngSubmit)="updateMission()">
+    <input formControlName="title" placeholder="Title">
+    <textarea formControlName="description" placeholder="Description"></textarea>    <button mat-flat-button mat-type="submit" color="primary">Save Changes</button>
+</form>

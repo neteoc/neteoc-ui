@@ -7,7 +7,9 @@ import {
   getDocs,
   runTransaction,
   addDoc,
-  deleteDoc
+  deleteDoc,
+  updateDoc,
+  docData
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'; 
@@ -48,7 +50,8 @@ export class MissionService {
 
 
   getMission(id: string) {
-    return doc(this.firestore, `${this.basePath}/${id}`);
+    const missionRef = doc(this.firestore, `${this.basePath}/${id}`);
+    return docData(missionRef, { idField: 'id' }) as Observable<Mission>;
   }
 
   async deleteMission(missionId: string) {
@@ -69,6 +72,17 @@ export class MissionService {
     } catch (e) {
       console.error("Error adding document: ", e);
       throw new Error("Failed to add mission");
+    }
+  }
+
+  async updateMission(missionId: string, missionData: Partial<Mission>) {
+    const missionRef = doc(this.firestore, `${this.basePath}/${missionId}`);
+    try {
+      await updateDoc(missionRef, missionData);
+      console.log("Mission successfully updated!");
+    } catch (error) {
+      console.error("Error updating mission: ", error);
+      throw new Error("Failed to update mission");
     }
   }
 
