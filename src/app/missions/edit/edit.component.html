@@ -1,6 +1,26 @@
-<p>edit works!</p>
-
-<form [formGroup]="missionForm" (ngSubmit)="updateMission()">
-    <input formControlName="title" placeholder="Title">
-    <textarea formControlName="description" placeholder="Description"></textarea>    <button mat-flat-button mat-type="submit" color="primary">Save Changes</button>
-</form>
+<mat-card>
+    <mat-card-title>Edit Mission</mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="missionForm" (ngSubmit)="updateMission()">
+            <div class="form-fields">
+                <mat-form-field>
+                    <textarea id="name" matInput formControlName="title" type="text" placeholder="Title"
+                        cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                        cdkAutosizeMaxRows="5">
+        </textarea>
+                    <mat-error>Name is required</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <textarea id="description" matInput type="text" formControlName="description"
+                        placeholder="Description" cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                        cdkAutosizeMinRows="5" cdkAutosizeMaxRows="10">
+        </textarea>
+                    <mat-error>description is required</mat-error>
+                </mat-form-field>
+                <button mat-flat-button mat-type="submit" color="primary">
+                    Save Changes
+                </button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

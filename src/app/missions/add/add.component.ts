@@ -1,31 +1,29 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Auth, authState, User, user } from '@angular/fire/auth';
 import {
   AbstractControl,
   FormControl,
   FormBuilder,
   Validators,
-  FormsModule, 
+  FormsModule,
   ReactiveFormsModule,
-  FormGroup
+  FormGroup,
 } from '@angular/forms';
+
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MissionService } from '../mission.service';
 import { Mission } from '../mission';
-import { start } from 'repl';
-
 
 @Component({
   selector: 'app-add',
@@ -41,11 +39,11 @@ import { start } from 'repl';
     MatDatepickerModule,
     CommonModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './add.component.html',
-  styleUrl: './add.component.less'
+  styleUrl: './add.component.less',
 })
 export class AddComponent {
   newMissionForm = this.formBuilder.group({
@@ -54,7 +52,7 @@ export class AddComponent {
     location: ['', Validators.required],
     startDate: ['', Validators.required],
     endDate: ['', Validators.required],
-    signupEnabled: [true, Validators.required]
+    signupEnabled: [true, Validators.required],
   });
   submitted = false;
   private auth: Auth = inject(Auth);
@@ -65,26 +63,24 @@ export class AddComponent {
   constructor(
     private formBuilder: FormBuilder,
     private missionService: MissionService,
-    private router: Router,
+    private router: Router
   ) {
-    this.authStateSubscription = this.authState$.subscribe((aUser: User | null) => {
-      //handle auth state changes here. Note, that user will be null if there is no currently logged in user.
-      console.log(aUser);
-      this.userID = aUser?.uid;
-    })
-   }
+    this.authStateSubscription = this.authState$.subscribe(
+      (aUser: User | null) => {
+        //handle auth state changes here. Note, that user will be null if there is no currently logged in user.
+        console.log(aUser);
+        this.userID = aUser?.uid;
+      }
+    );
+  }
 
   get f(): { [p: string]: AbstractControl } | undefined {
     return this.newMissionForm?.controls;
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
-  }
-
-  forgotPassword(): void {
-
-  }
+  forgotPassword(): void {}
 
   cancel(): void {
     this.router.navigate(['/missions']);
@@ -108,16 +104,15 @@ export class AddComponent {
       endDate: endDate,
       admins: [],
       roster: [],
-      signupEnabled: this.newMissionForm.value.signupEnabled  || false,
-    }
+      signupEnabled: this.newMissionForm.value.signupEnabled || false,
+    };
     console.log(newMission);
     try {
       const missionID = await this.missionService.addMission(newMission);
       this.router.navigate(['/missions/detail', missionID]); // Navigate using the missionID
     } catch (error) {
-      console.error("Failed to add mission", error);
+      console.error('Failed to add mission', error);
       // Handle the error (e.g., show an error message)
-    };
+    }
   }
-
 }
