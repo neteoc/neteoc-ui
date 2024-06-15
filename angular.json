@@ -32,7 +32,6 @@
               }
             ],
             "styles": [
-              
               "src/styles.scss",
               "src/theme.scss"
             ],
@@ -45,7 +44,7 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
-               ],
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -128,11 +127,23 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": "606ac525-74f0-4b0e-92bf-08d49c7a35f5"
+    "analytics": "606ac525-74f0-4b0e-92bf-08d49c7a35f5",
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

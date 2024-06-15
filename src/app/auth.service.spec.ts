@@ -14,9 +14,10 @@ describe('AuthService', () => {
       providers: [
         AuthService,
         provideAuth(() => getAuth()),
+        provideFirebaseApp(() => initializeApp(environment.firebase)), 
       ],
       imports: [
-        provideFirebaseApp(() => initializeApp(environment.firebase)), 
+        
       ]
 
     });

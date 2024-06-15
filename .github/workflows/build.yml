@@ -1,4 +1,4 @@
-name: Test build process
+name: On Push
 on:
   push:
     branches-ignore:
@@ -26,4 +26,31 @@ jobs:
         with:
           node-version-file: '.nvmrc'
 
-      - run: npm ci && npm run build
+      - run: npm ci
+      - run: npm run build
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8
+        with:
+          node-version-file: '.nvmrc'
+
+      - run: npm ci
+      # - run: npm lint # TODO: enable this once we've fixed all the errors
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8
+        with:
+          node-version-file: '.nvmrc'
+
+      - run: npm ci
+      - run: npm run test:ci
