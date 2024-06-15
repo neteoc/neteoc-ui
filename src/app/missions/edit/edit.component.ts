@@ -1,5 +1,22 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { TextFieldModule } from '@angular/cdk/text-field'; 
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCardModule } from '@angular/material/card';
+
+
+import {
+  AbstractControl,
+  FormControl,
+  FormBuilder,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule,
+  FormGroup,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common'; // Import Location
 import { MatButtonModule } from '@angular/material/button';
@@ -12,8 +29,16 @@ import { MissionService } from '../mission.service';
   selector: 'app-edit',
   standalone: true,
   imports: [
+    FormsModule,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    TextFieldModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatCardModule,
+    CommonModule,
   ],
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.scss'

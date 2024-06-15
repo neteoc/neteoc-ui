@@ -2,91 +2,69 @@
 
 <mat-card>
 
-<form (ngSubmit)="submit()" [formGroup]="newMissionForm">
-    <div class="form-fields">
-    <mat-form-field>
-        <mat-label>Name</mat-label>
-        <textarea 
-        id="name" 
-        matInput 
-        type="text" 
-        formControlName="name"
-        cdkTextareaAutosize
-        #autosize="cdkTextareaAutosize"
-        cdkAutosizeMinRows="1"
-        cdkAutosizeMaxRows="5"
-        ></textarea>
-        <mat-error>Name is required</mat-error>
-    </mat-form-field>
+    <form (ngSubmit)="submit()" [formGroup]="newMissionForm">
+        <div class="form-fields">
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <textarea id="name" matInput type="text" formControlName="name" cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
+                <mat-error>Name is required</mat-error>
+            </mat-form-field>
 
-    <mat-form-field>
-        <mat-label>Description</mat-label>
-        <textarea 
-        id="description" 
-        matInput 
-        type="text" 
-        formControlName="description"
-        cdkTextareaAutosize
-        #autosize="cdkTextareaAutosize"
-        cdkAutosizeMinRows="1"
-        cdkAutosizeMaxRows="5"
-        ></textarea>
-        <mat-error>description is required</mat-error>
-    </mat-form-field>
+            <mat-form-field>
+                <mat-label>Description</mat-label>
+                <textarea id="description" matInput type="text" formControlName="description" cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
+                <mat-error>description is required</mat-error>
+            </mat-form-field>
 
-    <mat-form-field>
-        <mat-label>Location</mat-label>
-        <input id="location" matInput type="text" formControlName="location">
-        <mat-error>location is required</mat-error>
-        
-    </mat-form-field>
+            <mat-form-field>
+                <mat-label>Location</mat-label>
+                <input id="location" matInput type="text" formControlName="location">
+                <mat-error>location is required</mat-error>
 
-    <mat-form-field>
-        <mat-label>Start Date</mat-label>
-        <input id="startDate" matInput [matDatepicker]="picker" formControlName="startDate">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <mat-error>Start Date is required</mat-error>
-    </mat-form-field>
+            </mat-form-field>
 
-    <mat-form-field>
-        <mat-label>End Date</mat-label>
-        <input id="endDate" matInput [matDatepicker]="picker2" formControlName="endDate">
-        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-        <mat-datepicker #picker2></mat-datepicker>
-        <mat-error>End Date is required</mat-error>
-        <mat-hint>Estimated, can be updated later</mat-hint>
-    </mat-form-field>
+            <mat-form-field>
+                <mat-label>Start Date</mat-label>
+                <input id="startDate" matInput [matDatepicker]="picker" formControlName="startDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error>Start Date is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>End Date</mat-label>
+                <input id="endDate" matInput [matDatepicker]="picker2" formControlName="endDate">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+                <mat-error>End Date is required</mat-error>
+                <mat-hint>Estimated, can be updated later</mat-hint>
+            </mat-form-field>
 
 
 
-        <mat-checkbox id="signupEnabled" formControlName="signupEnabled">
-            signupEnabled
-        </mat-checkbox>
+            <mat-checkbox id="signupEnabled" formControlName="signupEnabled">
+                signupEnabled
+            </mat-checkbox>
 
 
-</div>
+        </div>
 
-    <mat-card-actions>
-        <div class="button-container">
-            <div *ngIf="submitted" class="spinner-container">
-                <mat-spinner diameter="24"></mat-spinner>
-            </div>
-            <button [disabled]="submitted || !newMissionForm.valid"
-                    color="primary"
-                    mat-raised-button
-                    type="submit">
+        <mat-card-actions>
+            <div class="button-container">
+                <div *ngIf="submitted" class="spinner-container">
+                    <mat-spinner diameter="24"></mat-spinner>
+                </div>
+                <button [disabled]="submitted || !newMissionForm.valid" color="primary" mat-raised-button type="submit">
                     Submit
-            </button>
-            <button mat-raised-button 
-                    (click)="cancel()"
-                    color="warn"
-                    type="button">
+                </button>
+                <button mat-raised-button (click)="cancel()" color="warn" type="button">
                     Cancel
-            </button>
+                </button>
             </div>
-            
-      </mat-card-actions>
-</form>
 
-</mat-card> 
+        </mat-card-actions>
+    </form>
+
+</mat-card>
