@@ -1,4 +1,4 @@
-name: Test, Lint, Build
+name: On Push
 on:
   push:
     branches-ignore:
