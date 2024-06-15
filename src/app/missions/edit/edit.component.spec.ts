@@ -3,6 +3,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideRouter } from '@angular/router';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { environment } from '../../../environments/environment'
 import { routes } from '../../app.routes';
@@ -22,6 +23,7 @@ describe('EditComponent', () => {
         provideFirebaseApp(() => initializeApp(environment.firebase)),
         provideAuth(() => getAuth()),
         provideFirestore(() => getFirestore()),
+        provideAnimations(),
       ],
     })
     .compileComponents();

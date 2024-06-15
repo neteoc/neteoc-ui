@@ -25,7 +25,11 @@ export class ProfileComponent {
   // User$: Observable<User[]>;
   private sub: any;
   id: string | undefined;
-  userdetail: any;
+  userdetail: any = {
+    photoURL: '',
+    displayName: 'Loading...',
+    email: ''
+  };
   authState$ = authState(this.auth);
   authStateSubscription: Subscription;
   firestore: Firestore = inject(Firestore);

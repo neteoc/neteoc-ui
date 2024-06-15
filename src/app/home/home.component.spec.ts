@@ -1,6 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Auth } from '@angular/fire/auth';
-import { Firestore } from '@angular/fire/firestore';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { provideRouter } from '@angular/router';
+
+import { environment } from '../../environments/environment'
+import { routes } from '../app.routes';
 import { HomeComponent } from './home.component';
 
 describe('HomeComponent', () => {
@@ -9,9 +14,15 @@ describe('HomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [
+        provideRouter(routes),
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideFirestore(() => getFirestore()),
+        provideAuth(() => getAuth()),
+      ], 
       imports: [
         HomeComponent,
-        Auth]
+]
     })
       .compileComponents();
     

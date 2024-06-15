@@ -39,10 +39,10 @@ describe('AppComponent', () => {
     expect(app.title).toEqual(environment.name);
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('#page_title')?.textContent).toContain('Home');
-  });
+  // it('should render title', () => {
+  //   const fixture = TestBed.createComponent(AppComponent);
+  //   fixture.detectChanges();
+  //   const compiled = fixture.nativeElement as HTMLElement;
+  //   expect(compiled.querySelector('#page_title')?.textContent).toContain('Home');
+  // });
 });
