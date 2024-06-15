@@ -5,6 +5,8 @@ service cloud.firestore {
     match /missions/{missionId} {
       // Allow read to any authenticated user
       allow read: if request.auth != null;
+      // Allow create to any authenticated user
+      allow create: if request.auth != null;
       // Allow write (update, delete) only if the user is the owner of the mission
       allow write: if request.auth.uid == resource.data.ownerID;
     }
