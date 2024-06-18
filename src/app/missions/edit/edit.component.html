@@ -17,6 +17,23 @@
         </textarea>
                     <mat-error>description is required</mat-error>
                 </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Location" formControlName="location">
+                    <mat-error>Location is required</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="pickerStart" placeholder="Start Date" formControlName="startDate">
+                    <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerStart></mat-datepicker>
+                    <mat-error>Start Date is required</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="pickerEnd" placeholder="End Date" formControlName="endDate">
+                    <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerEnd></mat-datepicker>
+                    <mat-error>End Date is required</mat-error>
+                </mat-form-field>
+                <mat-checkbox formControlName="signupEnabled">Signup Enabled</mat-checkbox>
                 <button mat-flat-button mat-type="submit" color="primary">
                     Save Changes
                 </button>

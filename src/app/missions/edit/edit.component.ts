@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TextFieldModule } from '@angular/cdk/text-field'; 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -6,6 +6,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDatepicker } from '@angular/material/datepicker';
+
 
 
 import {
@@ -39,11 +42,15 @@ import { MissionService } from '../mission.service';
     MatCheckboxModule,
     MatCardModule,
     CommonModule,
+    MatDatepickerModule,
   ],
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.scss'
 })
-export class EditComponent {
+export class EditComponent implements AfterViewInit  {
+  @ViewChild('pickerStart') pickerStart!: MatDatepicker<Date>;
+  @ViewChild('pickerEnd') pickerEnd!: MatDatepicker<Date>;
+
   missionForm: FormGroup;
 
   constructor(
@@ -56,7 +63,10 @@ export class EditComponent {
     this.missionForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      // Add other fields as necessary
+      location: ['', Validators.required], // Add location
+      startDate: ['', Validators.required], // Add startDate
+      endDate: ['', Validators.required], // Add endDate
+      signupEnabled: [false] // Add signupEnabled, default to false
     });
   
     const missionId = this.route.snapshot.paramMap.get('id');
@@ -65,6 +75,11 @@ export class EditComponent {
         this.missionForm.patchValue(mission);
       });
     }
+  }
+
+  ngAfterViewInit() {
+    // Ensure pickerStart and pickerEnd are initialized here if needed
+    // This method is called after Angular has fully initialized the component's view
   }
 
   
