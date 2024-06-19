@@ -17,6 +17,11 @@
         </textarea>
                     <mat-error>description is required</mat-error>
                 </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Location" formControlName="location">
+                    <mat-error>Location is required</mat-error>
+                </mat-form-field>
+                <mat-checkbox formControlName="signupEnabled">Signup Enabled</mat-checkbox>
                 <button mat-flat-button mat-type="submit" color="primary">
                     Save Changes
                 </button>

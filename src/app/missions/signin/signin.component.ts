@@ -72,14 +72,10 @@ export class SigninComponent {
   }
 
   signInToMission(missionId: string, userId: string, Latitude: number, Longitude: number) {
-    console.log('Signing into mission:', missionId, userId);
     this.missionService.signIntoMission(missionId, userId, Latitude, Longitude).then(() => {
-      console.log('Signed into mission successfully');
       this.dialogRef.close();
     }).catch(error => {
       console.error('Error signing into mission:', error);
-      console.log('missionId:', missionId)
-      console.log('userId:', userId)
     });
 
   }
@@ -88,12 +84,8 @@ export class SigninComponent {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         if (position) {
-          console.log("Latitude: " + position.coords.latitude +
-            "Longitude: " + position.coords.longitude);
           this.Latitude = position.coords.latitude;
           this.Longitude = position.coords.longitude;
-          console.log(this.Latitude);
-          console.log(this.Longitude);
         }
       },
         (error) => console.log(error));
