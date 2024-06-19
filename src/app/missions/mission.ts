@@ -18,6 +18,7 @@ interface roster {
     Latitude: number;
     Longitude: number;
   }
+  
 }
 
 interface admins {
