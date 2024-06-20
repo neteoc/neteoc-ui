@@ -3,6 +3,11 @@ service cloud.firestore {
   match /databases/{database}/documents {
     // Match any document in the 'missions' collection
     match /missions/{missionId} {
+      match /roster/{rosterId} {
+        allow read: if request.auth != null;
+        allow create: if request.auth != null;
+        allow write: if request.auth.uid == resource.data.userId;
+      }
       // Allow read to any authenticated user
       allow read: if request.auth != null;
       // Allow create to any authenticated user

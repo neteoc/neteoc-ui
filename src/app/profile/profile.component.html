@@ -1,5 +1,18 @@
-<img src="{{ userdetail?.photoURL }}"/>
+<button 
+    mat-raised-button 
+    color="primary"
+    (click)="openEditDialog(  )" 
+>
+    <mat-icon>edit</mat-icon>
+    Edit Profile
+</button>
 
 <h1>{{ userdetail?.displayName }} </h1>
+
+
+
+<img src="{{ userdetail?.photoURL }}"/>
+
+
 
 <p>Email: {{ userdetail?.email }}</p>

@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import { MissionsComponent } from './missions/missions.component';
-import { ProfileComponent } from './profile/profile.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
 
@@ -11,24 +9,23 @@ export const routes: Routes = [
   {
     path: '',
     canActivate: [authGuard],
-    component: HomeComponent
+    component: HomeComponent,
   },
-  { path: 'login', component: LoginComponent }, 
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
   {
     path: 'profile',
     canActivate: [authGuard],
-    component: ProfileComponent
+    loadChildren: () =>
+      import('./profile/profile.routes').then((feature) => feature.routes),
   },
-  {
-    path: 'profile/:id',
-    canActivate: [authGuard],
-    component: ProfileComponent
-  },
-  
   {
     path: 'missions',
     canActivate: [authGuard],
-    loadChildren: () => import('./missions/mission.routes').then(feature => feature.routes),
+    loadChildren: () =>
+      import('./missions/mission.routes').then((feature) => feature.routes),
   },
   { path: '**', component: PageNotFoundComponent },
 ];

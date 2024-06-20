@@ -34,6 +34,10 @@ export class AuthService {
 
   isAuthenticated$ = this.user$.pipe(map(user => !!user));
 
+  get getUserID(): string | null {
+    return this.auth.currentUser ? this.auth.currentUser.uid : null;
+  }
+
   get username(): string | null {
     return this.auth.currentUser ? this.auth.currentUser.displayName : null;
   }

@@ -1,11 +1,13 @@
-import { Component, inject } from '@angular/core';
-import { Firestore, collectionData, collection } from '@angular/fire/firestore';
-import { Subscription } from 'rxjs';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';  
-import { Auth, authState, User, user } from '@angular/fire/auth';
-import { ActivatedRoute } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import {Dialog, DIALOG_DATA, DialogModule} from '@angular/cdk/dialog';
 
 import { UserService } from '../user.service';
+import { AuthService } from '../auth.service';
+import { EditComponent } from './edit/edit.component';
 
 
 
@@ -14,60 +16,52 @@ import { UserService } from '../user.service';
   standalone: true,
   imports: [
     CommonModule,
-
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+    DialogModule
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.less',
-  providers: [UserService]
+  providers: [
+    UserService,
+    AuthService
+  ]
 })
 export class ProfileComponent {
-  private auth: Auth = inject(Auth);
-  // User$: Observable<User[]>;
-  private sub: any;
-  id: string | undefined;
+  userID: string | null;
   userdetail: any = {
     photoURL: '',
     displayName: 'Loading...',
     email: ''
   };
-  authState$ = authState(this.auth);
-  authStateSubscription: Subscription;
-  firestore: Firestore = inject(Firestore);
-  user: User | null = null;
+
 
   constructor(
     public userservice: UserService,
-    private route: ActivatedRoute
+    private authservice: AuthService,
+    public dialog: Dialog,
   ) {
-    this.authStateSubscription = this.authState$.subscribe((aUser: User | null) => {
-      //handle auth state changes here. Note, that user will be null if there is no currently logged in user.
-      console.log(aUser);
-      this.user = aUser;
-      this.id = aUser?.uid;
-      
-    })
-    
-    // const auth = inject(Auth);
-    // const itemCollection = collection(this.firestore, 'users');
-    // this.User$ = collectionData<User>(itemCollection);
-    // this.user = auth.authState;
+    this.userID = this.authservice.getUserID;
   }
 
   showProfile() {
-    this.userservice.getUser(this.id ?? "").then((user) => {
+    this.userservice.getUser(this.userID ?? "").then((user) => {
       console.log(user);
       this.userdetail = user ? user['pubDetails'] : null;
     });
   }
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      this.id = params['id']; // (+) converts string 'id' to a number
-      this.showProfile();
-      
-      // In a real app: dispatch action to load the details here.
+    this.showProfile();
+
+  }
+
+  openEditDialog() {
+    this.dialog.open(EditComponent, {
+      data: {
+        missionID: this.userID,
+      },
     });
-
-
   }
 }

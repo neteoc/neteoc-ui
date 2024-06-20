@@ -1,17 +1,5 @@
 <mat-toolbar color="primary">
 
-    <!-- <button mat-button [matMenuTriggerFor]="mainMenu">
-        <mat-icon>menu</mat-icon>
-    </button>
-    <mat-menu #mainMenu="matMenu">
-        <button routerLink="/">
-            <mat-icon>home</mat-icon>
-            Home
-        </button>
-        <a mat-button routerLink="/missions" *ngIf="isAuthenticated" >Missions</a>
-
-    </mat-menu> -->
-
     <button mat-button [matMenuTriggerFor]="mainMenu">
         <mat-icon>menu</mat-icon>
         NetEOC
@@ -43,7 +31,7 @@
         </button>
         
         <mat-menu #menu="matMenu">
-            <button mat-menu-item routerLink="/profile/{{ uid }}">
+            <button mat-menu-item routerLink="/profile">
                 <mat-icon>manage_accounts</mat-icon>
                 Profile
             </button>
