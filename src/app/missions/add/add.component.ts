@@ -102,7 +102,6 @@ export class AddComponent {
       startDate: startDate,
       endDate: endDate,
       admins: [],
-      roster: [],
       signupEnabled: this.newMissionForm.value.signupEnabled || false,
     };
     console.log(newMission);

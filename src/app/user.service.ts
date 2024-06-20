@@ -26,6 +26,19 @@ export class UserService {
   getQueryRef(ref: string) {
     return collection(this.firestore, ref);
   }
+
+  async getUserPub(userId: string) {
+    const docref = `users/${userId}/pubDetails`
+    console.log(docref);
+    const userDoc = doc(this.firestore, docref, "email");
+    const userSnap = await getDoc(userDoc);
+    if (!userSnap.exists()) {
+      console.log('No such document!');
+      return null;
+    } else {
+      return userSnap.data();
+    }
+  }
   
   async getUser(userId: string) {
     const userDoc = doc(this.getQueryRef('users'), userId);

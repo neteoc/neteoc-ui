@@ -53,9 +53,9 @@ export class ViewComponent {
   }
 
   showProfile() {
-    this.userservice.getUser(this.id ?? "").then((user) => {
+    this.userservice.getUserPub(this.id ?? "").then((user) => {
       console.log(user);
-      this.userdetail = user ? user['pubDetails'] : null;
+      this.userdetail = user ? user : null;
     });
   }
 

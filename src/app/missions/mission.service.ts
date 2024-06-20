@@ -9,7 +9,8 @@ import {
   addDoc,
   deleteDoc,
   updateDoc,
-  docData
+  docData,
+  setDoc
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'; 
@@ -87,27 +88,19 @@ export class MissionService {
   }
 
   async signIntoMission(missionId: string, userId: string, Latitude: number, Longitude: number) {
-    const missionRef = doc(this.firestore, `${this.basePath}/${missionId}`);
-    await runTransaction(this.firestore, async (transaction) => {
-      const missionDoc = await transaction.get(missionRef);
-      if (!missionDoc.exists()) {
-        throw new Error("Mission does not exist!");
-      }
-      const missionData = missionDoc.data() as Mission;
-      // Check if the user is already in the roster to avoid duplicates
-      const isUserInRoster = missionData.roster?.some(rosterEntry => rosterEntry.userId === userId);
-      if (!isUserInRoster) {
-        const newUserRosterEntry = {
-          userId: userId,
-          location: {
-            Latitude: Latitude,
-            Longitude: Longitude,
-          },
-        };
-        const updatedRoster = [...missionData.roster, newUserRosterEntry];
-        // Update the mission document with the new roster
-        transaction.update(missionRef, { roster: updatedRoster });
-      }
-    });
+    const rosterRef = collection(this.firestore, `${this.basePath}/${missionId}/roster`);
+    const newUserRosterEntry = {
+      location: {
+        Latitude: Latitude,
+        Longitude: Longitude,
+      },
+    };
+    try {
+      const docRef = await setDoc(doc(this.firestore,  `${this.basePath}/${missionId}/roster/${userId}`), newUserRosterEntry);
+      console.log("User added to roster with Id: ", userId);
+    } catch (error) {
+      console.error("Error adding user to roster: ", error);
+      throw new Error("Failed to sign into mission");
+    }
   }
 }

@@ -3,7 +3,6 @@ export interface Mission {
   title: string;
   description: string;
   location: string;
-  roster: Array<roster>;
   ownerID: string;
   admins: Array<string>;
   startDate: Date;
@@ -13,7 +12,7 @@ export interface Mission {
 }
 
 interface roster {
-  userId: string;
+  id?: string;
   location: {
     Latitude: number;
     Longitude: number;
