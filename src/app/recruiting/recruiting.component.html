@@ -1,0 +1,7 @@
+<ul>
+    <li *ngFor="let submission of submissions | async">
+        <!-- Display fields from the submission object, e.g., name -->
+        {{ submission.name }} - {{ submission.timestamp.toDate() | date:'short' }}
+
+    </li>
+</ul>
