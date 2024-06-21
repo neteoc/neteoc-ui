@@ -7,12 +7,12 @@
  * See a full list of supported triggers at https://firebase.google.com/docs/functions
  */
 
-import * as admin from "firebase-admin";
-import * as functions from "firebase-functions";
-import * as logger from "firebase-functions/logger";
+import * as admin from 'firebase-admin';
+import * as functions from 'firebase-functions';
+import * as logger from 'firebase-functions/logger';
 
 import axios from 'axios';
-import {SecretManagerServiceClient} from '@google-cloud/secret-manager';
+import { SecretManagerServiceClient } from '@google-cloud/secret-manager';
 
 const client = new SecretManagerServiceClient();
 
@@ -20,7 +20,7 @@ const client = new SecretManagerServiceClient();
 admin.initializeApp();
 
 export const newUserProfile = functions.auth.user().onCreate((user) => {
-  logger.info("User created", {user: user});
+  logger.info('User created', { user: user });
   const doc = admin.firestore().doc(`users/${user.uid}`);
 
   doc.set({
@@ -35,9 +35,6 @@ export const newUserProfile = functions.auth.user().onCreate((user) => {
     },
   });
 });
-
-
-
 
 // Assuming the accessSecret function is correctly implemented and retrieves the TURNSTILE_SECRET_KEY
 async function accessSecret(): Promise<string> {
@@ -57,39 +54,45 @@ async function accessSecret(): Promise<string> {
   }
 }
 
-
-export const handleFormSubmission = functions.https.onRequest(async (req, res) => {
-
-    console.log('Request body:', req.body)
+export const handleFormSubmission = functions.https.onRequest(
+  async (req, res) => {
+    console.log('Request body:', req.body);
 
     if (req.method != 'POST') {
       res.status(405).send('Method Not Allowed');
+      return;
     }
 
     const { turnstileResponse, ...formData } = req.body;
+    formData.status = 'new';
+    formData.timestamp = admin.firestore.FieldValue.serverTimestamp();
 
     try {
       // Retrieve the TURNSTILE_SECRET_KEY using the accessSecret function
       const TURNSTILE_SECRET_KEY = await accessSecret();
 
-      const validationResponse = await axios.post(`https://challenges.cloudflare.com/turnstile/v0/siteverify`, {
-        secret: TURNSTILE_SECRET_KEY,
-        response: turnstileResponse,
-      });
+      const validationResponse = await axios.post(
+        `https://challenges.cloudflare.com/turnstile/v0/siteverify`,
+        {
+          secret: TURNSTILE_SECRET_KEY,
+          response: turnstileResponse,
+        }
+      );
 
       if (!validationResponse.data.success) {
         res.status(403).send('Captcha validation failed');
         console.log('Captcha validation failed');
+        return;
       }
 
       await admin.firestore().collection('recruiting').add(formData);
       res.redirect(303, 'https://gsdf.georgia.gov/thank-you/');
+      return;
     } catch (error) {
       console.error('Error:', error);
-      console.error('Internal Server Error - A')
+      console.error('Internal Server Error - A');
       res.status(500).send('Internal Server Error - A');
+      return;
     }
-    console.error('Internal Server Error - B')
-    res.status(500).send('Internal Server Error - B');
-
-});
+  }
+);
