@@ -25,6 +25,10 @@
             <mat-icon>assignment</mat-icon>
             Missions
         </button>
+        <button mat-menu-item routerLink="/recruiting" *ngIf="isAuthenticated">
+            <mat-icon>person</mat-icon>
+            Recruiting
+        </button>
     </mat-menu>
 
     

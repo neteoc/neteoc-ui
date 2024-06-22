@@ -59,6 +59,7 @@ export const handleFormSubmission = functions.https.onRequest(
     console.log('Request body:', req.body);
 
     if (req.method != 'POST') {
+      console.error('Method Not Allowed');
       res.status(405).send('Method Not Allowed');
       return;
     }
@@ -76,12 +77,14 @@ export const handleFormSubmission = functions.https.onRequest(
         {
           secret: TURNSTILE_SECRET_KEY,
           response: turnstileResponse,
+          remoteip: req.body
         }
       );
 
       if (!validationResponse.data.success) {
         res.status(403).send('Captcha validation failed');
-        console.log('Captcha validation failed');
+        console.error('Captcha validation failed');
+        console.error('Response:', validationResponse.data);
         return;
       }
 
