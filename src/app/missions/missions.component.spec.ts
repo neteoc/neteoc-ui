@@ -8,14 +8,9 @@ import { environment } from '../../environments/environment'
 import { routes } from '../app.routes';
 import { MissionsComponent } from './missions.component';
 
-
 describe('MissionsComponent', () => {
   let component: MissionsComponent;
   let fixture: ComponentFixture<MissionsComponent>;
-
-  // Mock Firestore and Auth objects
-  const mockFirestore = {/* Mock methods and properties as needed */};
-  const mockAuth = {/* Mock methods and properties as needed */};
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

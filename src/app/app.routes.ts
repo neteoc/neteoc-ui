@@ -13,7 +13,15 @@ export const routes: Routes = [
     canActivate: [authGuard],
     component: HomeComponent
   },
-  { path: 'login', component: LoginComponent }, 
+  {
+    path: 'recruiting',
+    canActivate: [authGuard],
+    loadChildren: () => import('./recruiting/recruiting.routes').then(feature => feature.routes),
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  }, 
   {
     path: 'profile',
     canActivate: [authGuard],
