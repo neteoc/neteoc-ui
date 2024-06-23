@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
@@ -37,10 +37,10 @@ const GOOGLE_ICON =
   templateUrl: './login.component.html',
   styleUrl: './login.component.less'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   private _authService = inject(AuthService);
   user$ = user(this._authService);
-  isAuthenticated: boolean = false;
+  isAuthenticated = false;
 
   constructor(private router: Router, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     iconRegistry.addSvgIconLiteral('thumbs-up', sanitizer.bypassSecurityTrustHtml(GOOGLE_ICON));

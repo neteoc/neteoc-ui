@@ -40,7 +40,7 @@ jobs:
           node-version-file: '.nvmrc'
 
       - run: npm ci
-      # - run: npm lint # TODO: enable this once we've fixed all the errors
+      - run: npm lint
   test:
     runs-on: ubuntu-latest
     steps:

@@ -1,10 +1,10 @@
-import { Component, inject, Input  } from '@angular/core';
+import { Component, Input  } from '@angular/core';
 import { CommonModule } from '@angular/common';  
 import { Observable } from 'rxjs';
 import { RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTable, MatTableModule, MatTableDataSource } from '@angular/material/table';
+import { MatTableModule} from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 
 import { Mission } from '../mission';
@@ -28,7 +28,7 @@ import { AuthService } from '../../auth.service';
 })
 export class MissionlistComponent {
   @Input() displayedColumns: string[] = ['title', 'action', 'edit'];
-  @Input() displayHeaders: boolean = true;
+  @Input() displayHeaders = true;
   missions: Observable<Mission[]>;
   
 

@@ -1,16 +1,14 @@
-import { Component, inject, viewChild, ViewChild, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';  
 import { RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
-import { MatTable, MatTableModule, MatTableDataSource } from '@angular/material/table';
-import { Observable } from 'rxjs';
-import { Firestore, collection, collectionData } from '@angular/fire/firestore';
-import { map } from 'rxjs/operators'; // Add this line
+import { MatTableModule } from '@angular/material/table';
+
 import { MatIconModule } from '@angular/material/icon';
 
-import { Mission } from './mission';
+
 import { MissionlistComponent } from './missionlist/missionlist.component';
-import { MatSort } from '@angular/material/sort';
+
 import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -32,17 +30,16 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './missions.component.html',
   styleUrl: './missions.component.less'
 })
-export class MissionsComponent implements AfterViewInit {
+export class MissionsComponent {
 
 
 
 
 
-  constructor(private afs: Firestore, public dialog: MatDialog) {
-
-  }
-
-  ngAfterViewInit() {
+  constructor(
+    public dialog: MatDialog
+  ) {
 
   }
+
 }

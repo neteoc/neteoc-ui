@@ -2,11 +2,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import {Dialog, DialogRef, DIALOG_DATA, DialogModule} from '@angular/cdk/dialog';
-import { MissionService } from '../mission.service'
+import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
+
 import { provideRouter } from '@angular/router';
 import { SigninComponent } from './signin.component';
-import { Auth } from '@angular/fire/auth';
 import { environment } from '../../../environments/environment'
 import { routes } from '../../app.routes';
 

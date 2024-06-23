@@ -1,17 +1,15 @@
-import { Component, inject, Inject, Input } from '@angular/core';
-import {Dialog, DialogRef, DIALOG_DATA, DialogModule} from '@angular/cdk/dialog';
-import { Auth, authState, User, user } from '@angular/fire/auth';
+import { Component, inject, Inject, OnInit } from '@angular/core';
+import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
+import { Auth, authState, User } from '@angular/fire/auth';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { Firestore, doc, docData } from '@angular/fire/firestore';
+import { Firestore } from '@angular/fire/firestore';
 import { MatButtonModule } from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
-import { Mission } from '../mission';
+
 import { MissionService } from '../mission.service';
 import { UserService } from '../../user.service';
-import { LocationService } from '../../services/location/location.service';
+
 
 export interface DialogData {
   missionID: string;
@@ -29,7 +27,7 @@ export interface DialogData {
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.less'
 })
-export class SigninComponent {
+export class SigninComponent implements OnInit {
   missionId: string | null = null;
   private auth: Auth = inject(Auth);
   private route: ActivatedRoute = inject(ActivatedRoute);
@@ -62,10 +60,6 @@ export class SigninComponent {
     public ngOnInit(): void {
       this.getLocation();
     }
-
-  meep(missionId: string, userId: string) {
-    console.log('meep');
-  }
 
   cancel() {
     this.dialogRef.close();

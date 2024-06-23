@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -28,7 +28,7 @@ import { AuthService } from './auth.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.less'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   private _authService = inject(AuthService);
   title = environment.name;
   user$ = user(this._authService);

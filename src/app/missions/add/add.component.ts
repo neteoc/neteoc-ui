@@ -4,15 +4,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { Auth, authState, User, user } from '@angular/fire/auth';
+import { Auth, authState, User } from '@angular/fire/auth';
 import {
   AbstractControl,
-  FormControl,
   FormBuilder,
   Validators,
   FormsModule,
   ReactiveFormsModule,
-  FormGroup,
 } from '@angular/forms';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -73,13 +71,9 @@ export class AddComponent {
     );
   }
 
-  get f(): { [p: string]: AbstractControl } | undefined {
+  get f(): Record<string, AbstractControl> | undefined {
     return this.newMissionForm?.controls;
   }
-
-  ngOnInit(): void {}
-
-  forgotPassword(): void {}
 
   cancel(): void {
     this.router.navigate(['/missions']);

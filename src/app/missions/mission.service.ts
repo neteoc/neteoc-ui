@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'; 
 
 import { Mission } from './mission';
-import { UserService } from '../user.service';
+
 
 
 @Injectable({
@@ -24,7 +24,7 @@ import { UserService } from '../user.service';
 export class MissionService {
   firestore: Firestore = inject(Firestore);
   missions$: Observable<Mission[]>;
-  private basePath: string = '/missions';
+  private basePath = '/missions';
   missionCollection = collection(this.firestore, 'missions');
 
   constructor() {

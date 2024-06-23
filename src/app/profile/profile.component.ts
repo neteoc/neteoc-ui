@@ -1,12 +1,18 @@
-import { Component, inject } from '@angular/core';
-import { Firestore, collectionData, collection } from '@angular/fire/firestore';
+import { Component, inject, OnInit } from '@angular/core';
+import { Firestore } from '@angular/fire/firestore';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';  
-import { Auth, authState, User, user } from '@angular/fire/auth';
+import { Auth, authState, User } from '@angular/fire/auth';
 import { ActivatedRoute } from '@angular/router';
+
 
 import { UserService } from '../user.service';
 
+interface UserDetails {
+  photoURL: string;
+  displayName: string;
+  email: string;
+}
 
 
 @Component({
@@ -20,12 +26,11 @@ import { UserService } from '../user.service';
   styleUrl: './profile.component.less',
   providers: [UserService]
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
   private auth: Auth = inject(Auth);
-  // User$: Observable<User[]>;
-  private sub: any;
+  private sub!: Subscription;
   id: string | undefined;
-  userdetail: any = {
+  userdetail: UserDetails = {
     photoURL: '',
     displayName: 'Loading...',
     email: ''
@@ -46,11 +51,6 @@ export class ProfileComponent {
       this.id = aUser?.uid;
       
     })
-    
-    // const auth = inject(Auth);
-    // const itemCollection = collection(this.firestore, 'users');
-    // this.User$ = collectionData<User>(itemCollection);
-    // this.user = auth.authState;
   }
 
   showProfile() {
