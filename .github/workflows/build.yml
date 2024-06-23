@@ -40,7 +40,7 @@ jobs:
           node-version-file: '.nvmrc'
 
       - run: npm ci
-      - run: npm lint
+      - run: npm run lint
   test:
     runs-on: ubuntu-latest
     steps:
