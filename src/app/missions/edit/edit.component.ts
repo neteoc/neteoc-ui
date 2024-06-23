@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TextFieldModule } from '@angular/cdk/text-field'; 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,8 +12,6 @@ import { MatDatepicker } from '@angular/material/datepicker';
 
 
 import {
-  AbstractControl,
-  FormControl,
   FormBuilder,
   Validators,
   FormsModule,
@@ -24,7 +22,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common'; // Import Location
 import { MatButtonModule } from '@angular/material/button';
 
-import { Mission } from '../mission';
+
 import { MissionService } from '../mission.service';
 
 
@@ -47,7 +45,7 @@ import { MissionService } from '../mission.service';
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.scss'
 })
-export class EditComponent implements AfterViewInit  {
+export class EditComponent {
   @ViewChild('pickerStart') pickerStart!: MatDatepicker<Date>;
   @ViewChild('pickerEnd') pickerEnd!: MatDatepicker<Date>;
 
@@ -76,12 +74,6 @@ export class EditComponent implements AfterViewInit  {
       });
     }
   }
-
-  ngAfterViewInit() {
-    // Ensure pickerStart and pickerEnd are initialized here if needed
-    // This method is called after Angular has fully initialized the component's view
-  }
-
   
   
   updateMission() {

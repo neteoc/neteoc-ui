@@ -3,9 +3,9 @@ export interface Mission {
   title: string;
   description: string;
   location: string;
-  roster: Array<roster>;
+  roster: roster[];
   ownerID: string;
-  admins: Array<string>;
+  admins: admins[];
   startDate: Date;
   endDate: Date;
   signupEnabled: boolean;

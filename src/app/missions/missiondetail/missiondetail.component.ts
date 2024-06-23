@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';  
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -6,7 +6,10 @@ import { Firestore, doc, docData } from '@angular/fire/firestore';
 import { switchMap } from 'rxjs/operators';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import {Dialog, DIALOG_DATA, DialogModule} from '@angular/cdk/dialog';
+import {
+  Dialog,
+  DialogModule
+} from '@angular/cdk/dialog';
 import {MatCardModule} from '@angular/material/card';
 
 import { Mission } from '../mission';
@@ -27,7 +30,7 @@ import { AuthService } from '../../auth.service';
   templateUrl: './missiondetail.component.html',
   styleUrl: './missiondetail.component.less'
 })
-export class MissiondetailComponent implements OnInit {
+export class MissiondetailComponent {
   mission$: Observable<Mission>;
   firestore: Firestore = inject(Firestore);
   private route: ActivatedRoute = inject(ActivatedRoute);
@@ -73,10 +76,6 @@ export class MissiondetailComponent implements OnInit {
     // Navigate back to the previous page
     //window.history.back();
     this.router.navigate(['/missions']);
-  }
-
-  ngOnInit(): void {
-    // ngOnInit remains empty as the logic is handled in the constructor
   }
 
   openDialog() {

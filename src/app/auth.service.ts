@@ -5,11 +5,10 @@ import {
   signInWithPopup,
   UserCredential,
   signOut,
-  authState,
   user
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { map, take } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({

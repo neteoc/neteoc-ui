@@ -1,17 +1,4 @@
 <mat-toolbar color="primary">
-
-    <!-- <button mat-button [matMenuTriggerFor]="mainMenu">
-        <mat-icon>menu</mat-icon>
-    </button>
-    <mat-menu #mainMenu="matMenu">
-        <button routerLink="/">
-            <mat-icon>home</mat-icon>
-            Home
-        </button>
-        <a mat-button routerLink="/missions" *ngIf="isAuthenticated" >Missions</a>
-
-    </mat-menu> -->
-
     <button mat-button [matMenuTriggerFor]="mainMenu">
         <mat-icon>menu</mat-icon>
         NetEOC
@@ -63,7 +50,7 @@
 
     <ng-template #showLogin>
         <div id="profilediv">
-            <a mat-button (click)="byGoogle()">Login</a>
+            <a mat-button (click)="byGoogle()" (keypress)="byGoogle()" tabindex="0">Login</a>
         </div>
     </ng-template>
 
