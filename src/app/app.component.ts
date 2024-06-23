@@ -1,10 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { RouterOutlet, RouterLink, RouterLinkActive, ActivatedRoute } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {
-  user,
-  User
+  user
 } from '@angular/fire/auth';
 
 import { environment } from '../environments/environment';
@@ -35,22 +34,10 @@ export class AppComponent {
   user$ = user(this._authService);
 
   isAuthenticated: boolean = this._authService.isAuthenticated$;
-
-  constructor() {
-
-  }
-  
+ 
 
   ngOnInit() {
-    this._authService.user$.subscribe((aUser: User | null) => {
-      this.isAuthenticated = this._authService.isAuthenticated$;
-      if (this.isAuthenticated) {
-        
-      }
-    }
-      
-    );
-    
+    this.isAuthenticated = this._authService.isAuthenticated$;
   }
 
 

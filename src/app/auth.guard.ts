@@ -6,7 +6,7 @@ import { map, take } from 'rxjs/operators';
 
 
 
-export const authGuard: CanActivateFn = (route, state) => {
+export const authGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router: Router = inject(Router);
 

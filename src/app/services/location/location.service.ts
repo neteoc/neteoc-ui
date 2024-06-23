@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class LocationService {
-  constructor() {}
 
   getCurrentLocation() {
     return new Promise((resolve, reject) => {
@@ -18,8 +17,8 @@ export class LocationService {
                   'Longitude: ' +
                   position.coords.longitude
               );
-              let lat = position.coords.latitude;
-              let lng = position.coords.longitude;
+              const lat = position.coords.latitude;
+              const lng = position.coords.longitude;
 
               const location = {
                 lat,

@@ -16,7 +16,7 @@ import { User } from './user';
 export class UserService {
   firestore: Firestore = inject(Firestore);
   users$: Observable<User[]>;
-  private basePath: string = '/users';
+  private basePath = '/users';
 
   constructor() {
     const userProfileCollection = collection(this.firestore, 'users');

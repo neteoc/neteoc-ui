@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,7 +15,6 @@ import {
 import { environment } from '../../environments/environment';
 
 import { AuthService } from '../auth.service';
-import e from 'express';
 
 @Component({
   selector: 'app-header',
@@ -34,13 +33,13 @@ import e from 'express';
   templateUrl: './header.component.html',
   styleUrl: './header.component.less',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit { // Implement OnInit interface
   private _authService = inject(AuthService);
   user$ = user(this._authService);
   title = environment.name;
   isAuthenticated: boolean = this._authService.isAuthenticated$;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this._authService.user$.subscribe((aUser: User | null) => {
       this.isAuthenticated = this._authService.isAuthenticated$;
       if (aUser) {

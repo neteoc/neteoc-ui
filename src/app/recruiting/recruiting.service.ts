@@ -4,7 +4,6 @@ import {
   Firestore,
   collectionData,
   collection,
-  doc,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
@@ -16,7 +15,7 @@ import { Submission } from './submission';
 export class RecruitingService {
   firestore: Firestore = inject(Firestore);
   submissions$: Observable<Submission[]>;
-  private basePath: string = '/recruiting';
+  private basePath = '/recruiting';
   submissionCollection = collection(this.firestore, 'recruiting');
 
   constructor() { 
