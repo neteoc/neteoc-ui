@@ -36,7 +36,7 @@ function isTimestampWithSeconds(timestamp: unknown): timestamp is Timestamp {
   styleUrls: ['./recruiting.component.scss'],
 })
 export class RecruitingComponent implements OnInit {
-  displayedColumns: string[] = ['timestamp', 'fname', 'status'];
+  displayedColumns: string[] = ['timestamp', 'fname', 'phone', 'status'];
   dataSource = new MatTableDataSource<Submission>([]);
 
   @ViewChild(MatSort, { static: true }) sort!: MatSort;

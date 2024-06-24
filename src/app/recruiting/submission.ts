@@ -9,5 +9,4 @@ export interface Submission {
     preferred: string;
     status: string;
     timestamp: string;
-
 }

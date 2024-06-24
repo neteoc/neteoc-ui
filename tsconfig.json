@@ -21,9 +21,11 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "forceConsistentCasingInFileNames": true
   },
-  "angularCompilerOptions": {
+  "angularCompilerOptions": 
+  {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
