@@ -51,9 +51,11 @@ npm install -g firebase-tools
 
 ## Developing
 
-Watch this video: 
+Watch this video playlist: 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/xAT0lHYhHMY?si=IPleWN1wn2P7qdOz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+![image]()
+
+[![Introduction to Angular](https://github.com/neteoc/neteoc-ui/assets/1011814/a2b26ef8-2205-437f-8cf9-345c1c5b2562)](https://www.youtube.com/watch?v=xAT0lHYhHMY&list=PL1w1q3fL4pmj9k1FrJ3Pe91EPub2_h4jF&index=2)
 
 ### Development server
 
