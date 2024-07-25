@@ -7,5 +7,6 @@ import { DetailComponent } from './detail/detail.component';
 export const routes: Routes = [
     { path: '', component: MissionRequestComponent },
     { path: 'add', component: AddComponent },
+    { path: 'new', component: AddComponent },
     { path: 'detail/:id', component: DetailComponent },
 ]

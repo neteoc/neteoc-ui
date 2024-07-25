@@ -74,7 +74,7 @@ export class AddComponent implements OnInit {
 
   }
 
-  cancel() {
-    this.submitted = false;
+  cancel(): void {
+    this.router.navigate(['/mission-requests']);
   }
 }
