@@ -37,5 +37,10 @@ export const routes: Routes = [
     canActivate: [authGuard],
     loadChildren: () => import('./missions/mission.routes').then(feature => feature.routes),
   },
+  {
+    path: 'mission-requests',
+    canActivate: [authGuard],
+    loadChildren: () => import('./mission-request/mission-requests.routes').then(feature => feature.routes),
+  },
   { path: '**', component: PageNotFoundComponent },
 ];

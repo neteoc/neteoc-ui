@@ -26,5 +26,12 @@ service cloud.firestore {
       // Allow write (update, delete) only if the user is the owner of the mission
       allow write: if request.auth.uid == resource.data.ownerID;
     }
+    // Match any document in the 'mission-requests' collection
+    match /mission-requests/{missionRequestId} {
+      // Allow create if the user has the 'missionrequestor' role
+      allow create: if request.auth != null && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles.hasAny(["missionrequestor", "superadmin" ]);
+      allow read: if request.auth != null && ( request.auth.uid == resource.data.submittedBy || get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles.hasAny([ "superadmin" ]));
+      allow write: if request.auth != null && ( request.auth.uid == resource.data.submittedBy || get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles.hasAny([ "superadmin" ]));
+    }
   }
 }

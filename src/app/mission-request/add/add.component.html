@@ -1,0 +1,49 @@
+<p>add works!</p>
+
+
+<mat-card>
+
+    <form (ngSubmit)="submit()" [formGroup]="newMissionRequestForm">
+        <div class="form-fields">
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <textarea id="name" matInput type="text" formControlName="name" cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
+                <mat-error>Name is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Description</mat-label>
+                <textarea id="description" matInput type="text" formControlName="description" cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
+                <mat-error>description is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Location</mat-label>
+                <input id="location" matInput type="text" formControlName="location">
+                <mat-error>location is required</mat-error>
+
+            </mat-form-field>
+
+
+
+        </div>
+
+        <mat-card-actions>
+            <div class="button-container">
+                <div *ngIf="submitted" class="spinner-container">
+                    <mat-spinner diameter="24"></mat-spinner>
+                </div>
+                <button [disabled]="submitted" color="primary" mat-raised-button type="submit">
+                    Submit
+                </button>
+                <button mat-raised-button (click)="cancel()" color="warn" type="button">
+                    Cancel
+                </button>
+            </div>
+
+        </mat-card-actions>
+    </form>
+
+</mat-card>

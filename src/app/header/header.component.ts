@@ -15,6 +15,8 @@ import {
 import { environment } from '../../environments/environment';
 
 import { AuthService } from '../auth.service';
+import { UserService } from '../user.service';
+import { User as UserInterface } from '../user';
 
 @Component({
   selector: 'app-header',
@@ -38,12 +40,24 @@ export class HeaderComponent implements OnInit { // Implement OnInit interface
   user$ = user(this._authService);
   title = environment.name;
   isAuthenticated: boolean = this._authService.isAuthenticated$;
+  userDetails: UserInterface | null = null;
+
+  constructor(
+    public userservice: UserService
+  ) {}
 
   ngOnInit(): void {
-    this._authService.user$.subscribe((aUser: User | null) => {
+    this._authService.user$.subscribe(async (aUser: User | null) => {
       this.isAuthenticated = this._authService.isAuthenticated$;
       if (aUser) {
         console.log('User is authenticated');
+        console.log(aUser);
+        if (aUser) {
+          this.userDetails = await this.userservice.getUser(aUser.uid);
+          console.log(this.userDetails);
+        } else {
+          this.userDetails = null;
+        }
         
       } else {
         this.isAuthenticated = false;
@@ -77,4 +91,9 @@ export class HeaderComponent implements OnInit { // Implement OnInit interface
   get photoURL(): string {
     return this._authService.photoURL || '';
   }
+
+  checkRoles(roles: string[]): boolean {
+    return this.userDetails?.roles?.some(v => roles.includes(v)) ?? false;
+  }
+
 }

@@ -30,7 +30,7 @@ export class UserService {
   async getUser(userId: string) {
     const userDoc = doc(this.getQueryRef('users'), userId);
     const userSnap = await getDoc(userDoc);
-    return userSnap.data();
+    return userSnap.data() as User | null;
   }
 
 }

@@ -56,7 +56,11 @@ export class ProfileComponent implements OnInit {
   showProfile() {
     this.userservice.getUser(this.id ?? "").then((user) => {
       console.log(user);
-      this.userdetail = user ? user['pubDetails'] : null;
+      this.userdetail = user ? user.pubDetails as UserDetails : {
+        photoURL: '',
+        displayName: 'Unknown',
+        email: ''
+      };
     });
   }
 

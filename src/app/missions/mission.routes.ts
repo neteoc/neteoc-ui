@@ -5,7 +5,7 @@ import { MissiondetailComponent } from './missiondetail/missiondetail.component'
 import { AddComponent } from './add/add.component';
 import { SigninComponent } from './signin/signin.component';
 import { EditComponent } from './edit/edit.component';
-import { RequestComponent } from './request/request.component';
+
 
 
 export const routes: Routes = [
@@ -14,6 +14,5 @@ export const routes: Routes = [
     { path: 'detail/:id', component: MissiondetailComponent },
     { path: 'signin/:id', component: SigninComponent },
     { path: 'edit/:id', component: EditComponent },
-    { path: 'request', component: RequestComponent }
     
 ]
