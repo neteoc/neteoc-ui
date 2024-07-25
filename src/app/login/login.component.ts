@@ -51,6 +51,10 @@ export class LoginComponent implements OnInit {
 
   }
 
+  byMicrosoft() {
+    this._authService.byMicrosoft();
+  }
+
   ngOnInit() {
     this._authService.user$.subscribe((aUser: User | null) => {
       this.isAuthenticated = this._authService.isAuthenticated$;
