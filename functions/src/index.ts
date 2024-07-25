@@ -22,12 +22,18 @@ admin.initializeApp();
 export const newUserProfile = functions.auth.user().onCreate((user) => {
   logger.info('User created', { user: user });
   const doc = admin.firestore().doc(`users/${user.uid}`);
+  var approved = false;
+  // TODO: The email domain whitelist should be configurable via the DB
+  if (user.email && /^[a-zA-Z0-9._%+-]+@(gasdf\.us|[a-zA-Z0-9.-]+\.(mil|gov))$/.test(user.email)) {
+    approved = true;
+  } 
 
   doc.set({
     displayName: user.displayName,
   });
 
   doc.set({
+    approved: approved,
     pubDetails: {
       email: user.email,
       displayName: user.displayName,
