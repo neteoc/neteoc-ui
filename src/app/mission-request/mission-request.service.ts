@@ -1,18 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import {
   Firestore,
-  collectionData,
   collection,
-  doc,
-  getDocs,
-  runTransaction,
-  addDoc,
-  deleteDoc,
-  updateDoc,
-  docData
+  addDoc
 } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators'; 
 
 import { MissionRequest } from './mission-request';
 
@@ -24,7 +15,6 @@ export class MissionRequestService {
   private basePath = '/mission-requests';
   missionRequestCollection = collection(this.firestore, 'mission-requests');
 
-  constructor() { }
 
   async addMissionRequest(missionRequest: MissionRequest) {
     try {

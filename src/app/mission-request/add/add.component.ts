@@ -62,9 +62,11 @@ export class AddComponent implements OnInit {
     };
     try {
       const missionRequestId = this.MissionRequestService.addMissionRequest(newMissionRequest);
+      return missionRequestId;
 
     } catch (e) {
       console.error('Error adding mission request: ', e);
+      throw new Error("Failed to add mission request");
     }
 
   }
