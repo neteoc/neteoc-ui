@@ -3,8 +3,8 @@
 
 <mat-card>
 
-    <form (ngSubmit)="submit()" [formGroup]="newMissionRequestForm">
-        <div class="form-fields">
+    <form (ngSubmit)="submit()" [formGroup]="newMissionRequestForm" >
+        <div class="form-fields" *ngIf="!submitted">
             <mat-form-field>
                 <mat-label>Name</mat-label>
                 <textarea id="name" matInput type="text" formControlName="name" cdkTextareaAutosize
@@ -35,10 +35,10 @@
                 <div *ngIf="submitted" class="spinner-container">
                     <mat-spinner diameter="24"></mat-spinner>
                 </div>
-                <button [disabled]="submitted" color="primary" mat-raised-button type="submit">
+                <button [disabled]="submitted || !newMissionRequestForm.valid" color="primary" mat-raised-button type="submit">
                     Submit
                 </button>
-                <button mat-raised-button (click)="cancel()" color="warn" type="button">
+                <button mat-raised-button (click)="cancel()" [disabled]="submitted"  color="warn" type="button">
                     Cancel
                 </button>
             </div>

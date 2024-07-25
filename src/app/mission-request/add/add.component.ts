@@ -9,6 +9,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { Router } from '@angular/router';
 
 import { MissionRequest } from '../mission-request';
 import { MissionRequestService } from '../mission-request.service';
@@ -40,7 +41,8 @@ export class AddComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private MissionRequestService: MissionRequestService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -52,7 +54,7 @@ export class AddComponent implements OnInit {
     });
   }
 
-  submit() {
+  async submit() {
     this.submitted = true;
     const newMissionRequest: MissionRequest = {
       name: this.newMissionRequestForm.value.name,
@@ -61,8 +63,9 @@ export class AddComponent implements OnInit {
       submittedBy: this.authService.uid || 'unknown'
     };
     try {
-      const missionRequestId = this.MissionRequestService.addMissionRequest(newMissionRequest);
-      return missionRequestId;
+      const missionRequestId = await this.MissionRequestService.addMissionRequest(newMissionRequest);
+      console.log('Added mission request with ID: ', missionRequestId);
+      this.router.navigate(['/mission-requests/detail', missionRequestId]); // Navigate using the missionID
 
     } catch (e) {
       console.error('Error adding mission request: ', e);

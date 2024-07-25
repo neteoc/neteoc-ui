@@ -1,4 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { provideRouter } from '@angular/router';
+
+import { environment } from '../../environments/environment';
+import { routes } from '../app.routes';
 
 import { MissionRequestComponent } from './mission-request.component';
 
@@ -8,7 +15,15 @@ describe('MissionRequestComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MissionRequestComponent]
+      imports: [
+        MissionRequestComponent,
+      ],
+      providers: [
+        provideRouter(routes),
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideFirestore(() => getFirestore()),
+        provideAuth(() => getAuth()),
+      ],
     })
     .compileComponents();
 

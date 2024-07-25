@@ -19,6 +19,7 @@ export class MissionRequestService {
   async addMissionRequest(missionRequest: MissionRequest) {
     try {
       const docRef = await addDoc(this.missionRequestCollection, missionRequest);
+      console.log('Document written with ID: ', docRef.id);
       return docRef.id;
     } catch (e) {
       console.error('Error adding mission request: ', e);
