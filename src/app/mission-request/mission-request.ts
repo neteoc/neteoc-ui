@@ -4,6 +4,7 @@ export interface MissionRequest {
     description: string;
     location: string;
     submittedBy: string;
+    ownedBy?: string;
     // submittedDate: string;
     // submittedBy: string;
     // startDate: string;

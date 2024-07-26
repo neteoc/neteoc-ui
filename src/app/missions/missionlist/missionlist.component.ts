@@ -34,7 +34,8 @@ export class MissionlistComponent {
 
   constructor(
     private missionService: MissionService,
-    private authService: AuthService) {
+    private authService: AuthService
+  ) {
     this.missions = missionService.getMissionList();
   }
 

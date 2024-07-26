@@ -1,0 +1,56 @@
+<div *ngIf="displayTable">
+
+    <h1>{{type}}</h1>
+
+    <table mat-table [dataSource]="(displayedMissionRequests | async) ?? []" class="mission-request-table">
+
+        
+        
+        <ng-container matColumnDef="detailsLink">
+            <ng-container *ngIf="displayHeaders">
+            <th mat-header-cell *matHeaderCellDef>Details</th>
+            </ng-container>
+            <td mat-cell *matCellDef="let element">
+                <button mat-flat-button color="primary" routerLink="/mission-requests/detail/{{ element.id }}">
+                    <mat-icon>arrow_forward</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <ng-container *ngIf="displayHeaders">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            </ng-container>
+            <td mat-cell *matCellDef="let element">
+            {{element.name}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+            <ng-container *ngIf="displayHeaders">
+            <th mat-header-cell *matHeaderCellDef>Description</th>
+            </ng-container>
+            <td mat-cell *matCellDef="let element">
+            {{element.description}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="location">
+            <ng-container *ngIf="displayHeaders">
+            <th mat-header-cell *matHeaderCellDef>Location</th>
+            </ng-container>
+            <td mat-cell *matCellDef="let element">
+            {{element.location}}
+            </td>
+        </ng-container>
+
+        <ng-container *ngIf="displayHeaders">
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        </ng-container>
+
+        <tr mat-row *matRowDef="let row; let odd = odd; let even = even; columns: displayedColumns;" [class.striped-row-odd]="odd" [class.striped-row-even]="even" ></tr>
+
+    </table>
+
+
+</div>
