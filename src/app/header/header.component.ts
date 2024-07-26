@@ -16,7 +16,8 @@ import { environment } from '../../environments/environment';
 
 import { AuthService } from '../auth.service';
 import { UserService } from '../user.service';
-import { User as UserInterface } from '../user';
+import { UserProfile } from '../user';
+
 
 @Component({
   selector: 'app-header',
@@ -38,9 +39,12 @@ import { User as UserInterface } from '../user';
 export class HeaderComponent implements OnInit { // Implement OnInit interface
   private _authService = inject(AuthService);
   user$ = user(this._authService);
+  userId: string = '';
   title = environment.name;
   isAuthenticated: boolean = this._authService.isAuthenticated$;
-  userDetails: UserInterface | null = null;
+  userRoles: { [key: string]: boolean } = {}; 
+  userProfile: UserProfile | null = null;
+
 
   constructor(
     public userservice: UserService
@@ -53,10 +57,13 @@ export class HeaderComponent implements OnInit { // Implement OnInit interface
         console.log('User is authenticated');
         console.log(aUser);
         if (aUser) {
-          this.userDetails = await this.userservice.getUser(aUser.uid);
-          console.log(this.userDetails);
+          this.userId = aUser.uid;
+          this.userProfile = await this.userservice.getUserProfile(aUser.uid);
+          const roles = await this.userservice.getUserRoles(aUser.uid);
+          this.userRoles = roles as { [key: string]: boolean };
+          console.log(this.userRoles);
         } else {
-          this.userDetails = null;
+          this.userRoles = {};
         }
         
       } else {
@@ -93,7 +100,15 @@ export class HeaderComponent implements OnInit { // Implement OnInit interface
   }
 
   checkRoles(roles: string[]): boolean {
-    return this.userDetails?.roles?.some(v => roles.includes(v)) ?? false;
+
+    if (this.userRoles) {
+      for (let role of roles) {
+        if (this.userRoles[role]) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
 }

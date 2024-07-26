@@ -22,6 +22,7 @@ admin.initializeApp();
 export const newUserProfile = functions.auth.user().onCreate((user) => {
   logger.info('User created', { user: user });
   const doc = admin.firestore().doc(`users/${user.uid}`);
+  const profiledoc = admin.firestore().doc(`users/${user.uid}/public/profile`);
   let approved = false;
   // TODO: The email domain whitelist should be configurable via the DB
   if (user.email && /^[a-zA-Z0-9._%+-]+@(gasdf\.us|[a-zA-Z0-9.-]+\.(mil|gov))$/.test(user.email)) {
@@ -29,16 +30,13 @@ export const newUserProfile = functions.auth.user().onCreate((user) => {
   } 
 
   doc.set({
-    displayName: user.displayName,
+    approved: approved,
   });
 
-  doc.set({
-    approved: approved,
-    pubDetails: {
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-    },
+  profiledoc.set({
+    email: user.email,
+    displayName: user.displayName,
+    photoURL: user.photoURL,
   });
 });
 
