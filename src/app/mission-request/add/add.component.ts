@@ -26,7 +26,7 @@ import { state } from '@angular/animations';
 import { zip } from 'rxjs';
 
 @Component({
-  selector: 'app-add',
+  selector: 'app-request',
   standalone: true,
   imports: [
     FormsModule,
@@ -138,10 +138,19 @@ export class AddComponent implements OnInit {
 
   async submit() {
     this.submitted = true;
+
+
     const newMissionRequest: MissionRequest = {
       name: this.newMissionRequestForm.value.name,
       description: this.newMissionRequestForm.value.description,
-      location: this.newMissionRequestForm.value.location,
+      address: {
+        name: this.newMissionRequestForm.value.location,
+        address: this.newMissionRequestForm.value.address,
+        address2: this.newMissionRequestForm.value.address2,
+        city: this.newMissionRequestForm.value.city,
+        state: this.newMissionRequestForm.value.state,
+        postalCode: this.newMissionRequestForm.value.postalCode
+      },
       submittedBy: this.authService.uid || 'unknown',
       submittedDate: new Date().toISOString(),
       startDate: new Date( this.newMissionRequestForm.value.startDate ).toISOString(),

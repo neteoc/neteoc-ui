@@ -2,7 +2,7 @@ export interface MissionRequest {
     id?: string;
     name: string;
     description: string;
-    location: string;
+    address: address;
     submittedBy: string;
     ownedBy?: string;
     submittedDate: string;
@@ -14,4 +14,13 @@ export interface MissionRequest {
     // status: string;
 }
 
+
+interface address {
+    name: string;
+    address: string;
+    address2?: string;
+    city: string;
+    state: string;
+    postalCode: string;
+}
 

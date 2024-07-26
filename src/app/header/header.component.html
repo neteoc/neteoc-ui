@@ -8,10 +8,10 @@
             <mat-icon>home</mat-icon>
             Home
         </button>
-        <!-- <button mat-menu-item routerLink="/missions" *ngIf="isAuthenticated && checkRoles(['superadmin'])">
+        <button mat-menu-item routerLink="/missions" *ngIf="isAuthenticated && checkRoles(['superadmin','missionrequestor'])">
             <mat-icon>assignment</mat-icon>
             Missions
-        </button> -->
+        </button>
         <button mat-menu-item routerLink="/mission-requests" *ngIf="isAuthenticated && checkRoles(['superadmin','missionrequestor'])">
             <mat-icon>assignment</mat-icon>
             Mission Requests

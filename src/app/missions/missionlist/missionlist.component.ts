@@ -27,7 +27,7 @@ import { AuthService } from '../../auth.service';
   styleUrl: './missionlist.component.scss'
 })
 export class MissionlistComponent {
-  @Input() displayedColumns: string[] = ['title', 'action', 'edit'];
+  @Input() displayedColumns: string[] = ['detailsLink', 'title', 'action', 'edit'];
   @Input() displayHeaders = true;
   missions: Observable<Mission[]>;
   

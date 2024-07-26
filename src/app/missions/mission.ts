@@ -12,6 +12,28 @@ export interface Mission {
   
 }
 
+export interface MissionRequest {
+  id?: string;
+  name: string;
+  description: string;
+  address: address;
+  submittedBy: string;
+  ownedBy?: string;
+  submittedDate: string;
+  startDate: string;
+  endDate: string;
+}
+
+
+interface address {
+  name: string;
+  address: string;
+  address2?: string;
+  city: string;
+  state: string;
+  postalCode: string;
+}
+
 interface roster {
   userId: string;
   location: {

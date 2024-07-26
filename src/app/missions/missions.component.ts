@@ -7,11 +7,13 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 
 
-import { MissionlistComponent } from './missionlist/missionlist.component';
+
 
 import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 
+import { MissionlistComponent } from './missionlist/missionlist.component';
+import { TableComponent } from './request/table/table.component';
 
 
 
@@ -25,7 +27,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatTableModule,
     MatButtonModule,
     MatIconModule,
-    MissionlistComponent
+    MissionlistComponent,
+    TableComponent
   ],
   templateUrl: './missions.component.html',
   styleUrl: './missions.component.less'
