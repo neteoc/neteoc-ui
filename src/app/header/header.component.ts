@@ -39,10 +39,10 @@ import { UserProfile } from '../user';
 export class HeaderComponent implements OnInit { // Implement OnInit interface
   private _authService = inject(AuthService);
   user$ = user(this._authService);
-  userId: string = '';
+  userId = '';
   title = environment.name;
   isAuthenticated: boolean = this._authService.isAuthenticated$;
-  userRoles: { [key: string]: boolean } = {}; 
+  userRoles: Record<string, boolean> = {}; 
   userProfile: UserProfile | null = null;
 
 
@@ -60,7 +60,7 @@ export class HeaderComponent implements OnInit { // Implement OnInit interface
           this.userId = aUser.uid;
           this.userProfile = await this.userservice.getUserProfile(aUser.uid);
           const roles = await this.userservice.getUserRoles(aUser.uid);
-          this.userRoles = roles as { [key: string]: boolean };
+          this.userRoles = roles as  Record<string, boolean>;
           console.log(this.userRoles);
         } else {
           this.userRoles = {};
@@ -102,7 +102,7 @@ export class HeaderComponent implements OnInit { // Implement OnInit interface
   checkRoles(roles: string[]): boolean {
 
     if (this.userRoles) {
-      for (let role of roles) {
+      for (const role of roles) {
         if (this.userRoles[role]) {
           return true;
         }

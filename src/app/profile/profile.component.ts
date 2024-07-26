@@ -9,12 +9,6 @@ import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../user.service';
 import { UserProfile } from '../user';
 
-interface UserDetails {
-  photoURL: string;
-  displayName: string;
-  email: string;
-}
-
 
 @Component({
   selector: 'app-profile',
