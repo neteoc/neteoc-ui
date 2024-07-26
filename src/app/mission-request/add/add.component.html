@@ -3,13 +3,14 @@
 
 <mat-card>
 
-    <form (ngSubmit)="submit()" [formGroup]="newMissionRequestForm" >
+    <form (ngSubmit)="submit()" [formGroup]="newMissionRequestForm">
         <div class="form-fields" *ngIf="!submitted">
             <mat-form-field>
                 <mat-label>Name</mat-label>
                 <textarea id="name" matInput type="text" formControlName="name" cdkTextareaAutosize
                     #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
                 <mat-error>Name is required</mat-error>
+                <mat-hint>Mission name, ex: Jug Festival</mat-hint>
             </mat-form-field>
 
             <mat-form-field>
@@ -17,13 +18,74 @@
                 <textarea id="description" matInput type="text" formControlName="description" cdkTextareaAutosize
                     #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
                 <mat-error>description is required</mat-error>
+                <mat-hint>What do you need?</mat-hint>
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>Location</mat-label>
+                <mat-label>Location Name</mat-label>
                 <input id="location" matInput type="text" formControlName="location">
                 <mat-error>location is required</mat-error>
+                <mat-hint>Ex: County EOC, City Hall, etc</mat-hint>
 
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <textarea matInput placeholder="Address" formControlName="address"></textarea>
+                @if (newMissionRequestForm.controls['address'].hasError('required')) {
+                <mat-error>Address is <strong>required</strong></mat-error>
+                }
+                <mat-hint>Ex: 123 Nowhere RD</mat-hint>
+
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <textarea matInput placeholder="Address 2" formControlName="address2"></textarea>
+                <mat-hint>Optional: Office 321</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <input matInput placeholder="City" formControlName="city">
+                @if (newMissionRequestForm.controls['city'].hasError('required')) {
+                <mat-error>City is <strong>required</strong></mat-error>
+                }
+                <mat-hint>Ex: Macon</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <mat-select placeholder="State" formControlName="state">
+                    @for (state of states; track state) {
+                    <mat-option [value]="state.abbreviation">{{ state.name }}</mat-option>
+                    }
+                </mat-select>
+                @if (newMissionRequestForm.controls['state'].hasError('required')) {
+                <mat-error>State is <strong>required</strong></mat-error>
+                }
+                <mat-hint>Ex: Georgia</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <input matInput #postalCode maxlength="5" placeholder="Postal Code" type="number"
+                    formControlName="postalCode">
+                <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+            </mat-form-field>
+
+
+            <mat-form-field>
+                <mat-label>Start Date</mat-label>
+                <input id="startDate" matInput [matDatepicker]="picker" formControlName="startDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error>Start Date is required</mat-error>
+                <mat-hint>Estimated, can be updated later</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>End Date</mat-label>
+                <input id="endDate" matInput [matDatepicker]="picker2" formControlName="endDate">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+                <mat-error>End Date is required</mat-error>
+                <mat-hint>Estimated, can be updated later</mat-hint>
             </mat-form-field>
 
 
@@ -35,10 +97,11 @@
                 <div *ngIf="submitted" class="spinner-container">
                     <mat-spinner diameter="24"></mat-spinner>
                 </div>
-                <button [disabled]="submitted || !newMissionRequestForm.valid" color="primary" mat-raised-button type="submit">
+                <button [disabled]="submitted || !newMissionRequestForm.valid" color="primary" mat-raised-button
+                    type="submit">
                     Submit
                 </button>
-                <button mat-raised-button (click)="cancel()" [disabled]="submitted"  color="warn" type="button">
+                <button mat-raised-button (click)="cancel()" [disabled]="submitted" color="warn" type="button">
                     Cancel
                 </button>
             </div>

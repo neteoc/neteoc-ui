@@ -27,7 +27,7 @@ import { MissionRequest } from '../mission-request';
   styleUrl: './table.component.scss'
 })
 export class TableComponent implements OnInit {
-  @Input() displayedColumns: string[] = ['detailsLink', 'name', 'description', 'location'];
+  @Input() displayedColumns: string[] = ['name', 'description', 'location', 'submittedDate'];
   @Input() displayHeaders = true;
   @Input() type!: string;
   displayTable: boolean = false;
