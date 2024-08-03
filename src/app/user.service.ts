@@ -8,7 +8,7 @@ import {
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
-import { User } from './user';
+import { User, UserProfile } from './user';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,19 @@ export class UserService {
   async getUser(userId: string) {
     const userDoc = doc(this.getQueryRef('users'), userId);
     const userSnap = await getDoc(userDoc);
-    return userSnap.data();
+    return userSnap.data() as User | null;
+  }
+
+  async getUserProfile(userId: string) {
+    const userProfileDoc = doc(this.getQueryRef(`users/${userId}/public`), 'profile');
+    const userProfileSnap = await getDoc(userProfileDoc);
+    return userProfileSnap.data() as UserProfile | null;
+  }
+
+  async getUserRoles(userId: string) {
+    const userRolesDoc = doc(this.getQueryRef(`users/${userId}/private`), 'roles');
+    const userRolesSnap = await getDoc(userRolesDoc);
+    return userRolesSnap.data() as object | null;
   }
 
 }

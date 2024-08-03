@@ -1,0 +1,22 @@
+<h1>Mission Request Details</h1>
+
+
+<div *ngIf="missionRequest">
+    <h2>{{ missionRequest.name }}</h2>
+    <p><strong>Description:</strong> {{ missionRequest.description }}</p>
+    <p><strong>Location:</strong> </p>
+    <a href="{{ mapLink }}" target="_blank">
+        {{ missionRequest.address.name }}
+        {{ missionRequest.address.address }}
+        {{ missionRequest.address.address2 }}
+        {{ missionRequest.address.city }}
+        {{ missionRequest.address.state }}
+        {{ missionRequest.address.postalCode }}
+    </a>
+    <p><strong>Submitted By:</strong> <a href="/profile/{{ missionRequest.submittedBy }}">User</a></p>
+    <p><strong>Owned By:</strong> <a href="/profile/{{ missionRequest.ownedBy }}">User</a></p>
+    <!-- Add more fields as necessary -->
+</div>
+<div *ngIf="!missionRequest">
+    <p>Loading...</p>
+</div>

@@ -8,12 +8,13 @@ import { EditComponent } from './edit/edit.component';
 import { RequestComponent } from './request/request.component';
 
 
+
 export const routes: Routes = [
     { path: '', component: MissionsComponent },
     { path: 'add', component: AddComponent },
+    { path: 'request', component: RequestComponent },
     { path: 'detail/:id', component: MissiondetailComponent },
     { path: 'signin/:id', component: SigninComponent },
     { path: 'edit/:id', component: EditComponent },
-    { path: 'request', component: RequestComponent }
     
 ]

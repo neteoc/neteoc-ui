@@ -1,0 +1,11 @@
+<h1>Mission Requests</h1>
+
+<button mat-raised-button color="primary" routerLink="/mission-requests/add">
+   
+    <mat-icon>add</mat-icon>
+    New Mission Request
+</button>
+
+<app-table [type]="'submitted'"></app-table>
+
+<app-table [type]="'owned'"></app-table>

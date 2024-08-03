@@ -7,12 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 
 
 import { UserService } from '../user.service';
-
-interface UserDetails {
-  photoURL: string;
-  displayName: string;
-  email: string;
-}
+import { UserProfile } from '../user';
 
 
 @Component({
@@ -30,9 +25,9 @@ export class ProfileComponent implements OnInit {
   private auth: Auth = inject(Auth);
   private sub!: Subscription;
   id: string | undefined;
-  userdetail: UserDetails = {
+  userdetail: UserProfile = {
     photoURL: '',
-    displayName: 'Loading...',
+    displayName: 'Unknown',
     email: ''
   };
   authState$ = authState(this.auth);
@@ -54,9 +49,13 @@ export class ProfileComponent implements OnInit {
   }
 
   showProfile() {
-    this.userservice.getUser(this.id ?? "").then((user) => {
+    this.userservice.getUserProfile(this.id ?? "").then((user) => {
       console.log(user);
-      this.userdetail = user ? user['pubDetails'] : null;
+      this.userdetail = user ? user as UserProfile : {
+        photoURL: '',
+        displayName: 'Unknown',
+        email: ''
+      };
     });
   }
 

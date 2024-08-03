@@ -1,11 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideRouter } from '@angular/router';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
-import { environment } from '../../environments/environment'
 import { HeaderComponent } from './header.component';
-import { routes } from '../app.routes';
+import { environment } from '../../environments/environment';
+import { UserService } from '../user.service';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -13,15 +14,16 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      providers: [
-        HeaderComponent,
-        provideRouter(routes),
-        provideFirebaseApp(() => initializeApp(environment.firebase)),
-        provideAuth(() => getAuth())
-      ],
       imports: [
-        HeaderComponent,
-      ]
+        HeaderComponent
+      ],
+      providers: [
+        provideRouter([]),
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideAuth(() => getAuth()),
+        provideFirestore(() => getFirestore()),
+        UserService
+      ],
     })
     .compileComponents();
     

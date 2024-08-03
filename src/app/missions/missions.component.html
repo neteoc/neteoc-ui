@@ -1,10 +1,14 @@
 <h1>Upcoming Missions</h1>
 
-<button mat-raised-button color="primary" routerLink="/missions/add">
+<!-- <button mat-raised-button color="primary" routerLink="/missions/add">
    
     <mat-icon>add</mat-icon>
     Add Mission
-</button>
+</button> -->
 
-<app-missionlist [displayedColumns]="['linkedTitle', 'action', 'edit']"></app-missionlist>
 
+<app-missionlist></app-missionlist>
+
+<app-request-table [type]="'owned'"></app-request-table>
+
+<app-request-table [type]="'submitted'"></app-request-table>
