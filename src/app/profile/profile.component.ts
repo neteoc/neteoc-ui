@@ -89,8 +89,6 @@ export class ProfileComponent implements OnInit {
         console.log("this.id: ", this.id);
       }
       this.showProfile();
-
-      // In a real app: dispatch action to load the details here.
     });
   }
 }

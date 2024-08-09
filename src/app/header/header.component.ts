@@ -48,14 +48,11 @@ export class HeaderComponent implements OnInit {
     this._authService.user$.subscribe(async (aUser: User | null) => {
       this.isAuthenticated = this._authService.isAuthenticated$;
       if (aUser) {
-        console.log('User is authenticated');
-        console.log(aUser);
         if (aUser) {
           this.userId = aUser.uid;
           this.Profile = await this.userservice.getProfile(aUser.uid);
           const roles = await this.userservice.getUserRoles(aUser.uid);
           this.userRoles = roles as Record<string, boolean>;
-          console.log(this.userRoles);
         } else {
           this.userRoles = {};
         }
