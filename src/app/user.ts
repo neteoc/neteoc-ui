@@ -13,7 +13,5 @@ export interface Profile {
 }
 
 export interface Roles {
-    superadmin?: boolean;
-    missionrequestor?: boolean;
-    recruiting?: boolean;
+    [key: string]: boolean;
 }

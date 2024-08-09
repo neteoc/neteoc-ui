@@ -90,6 +90,7 @@ export class HeaderComponent implements OnInit {
 
   checkRoles(roles: string[]): boolean {
     if (this.userRoles) {
+      roles.push('superadmin');
       for (const role of roles) {
         if (this.userRoles[role]) {
           return true;

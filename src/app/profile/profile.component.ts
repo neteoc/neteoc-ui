@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { Auth, authState, User } from '@angular/fire/auth';
 import { ActivatedRoute } from '@angular/router';
 
+import { AuthService } from '../auth.service';
 import { UserService } from '../user.service';
 import { Profile } from '../user';
 import { User as UserDetail } from '../user';
@@ -18,6 +19,7 @@ import { User as UserDetail } from '../user';
   providers: [UserService],
 })
 export class ProfileComponent implements OnInit {
+  private authService = inject(AuthService);
   private auth: Auth = inject(Auth);
   private sub!: Subscription;
   id: string | undefined;
@@ -39,7 +41,10 @@ export class ProfileComponent implements OnInit {
   firestore: Firestore = inject(Firestore);
   user: User | null = null;
 
-  constructor(public userservice: UserService, private route: ActivatedRoute) {
+  constructor(
+    public userservice: UserService,
+    private route: ActivatedRoute
+  ) {
     this.authStateSubscription = this.authState$.subscribe(
       (aUser: User | null) => {
         //handle auth state changes here. Note, that user will be null if there is no currently logged in user.
@@ -77,7 +82,12 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.sub = this.route.params.subscribe((params) => {
-      this.id = params['id']; // (+) converts string 'id' to a number
+      if (params['id']) {
+        this.id = params['id'];
+      } else if (this.authService.uid) {
+        this.id = this.authService.uid;
+        console.log("this.id: ", this.id);
+      }
       this.showProfile();
 
       // In a real app: dispatch action to load the details here.
