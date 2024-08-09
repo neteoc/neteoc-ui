@@ -1,15 +1,19 @@
 export interface User {
     $key: string;
-    pubDetails: object;
-    roles: [string];
+    name: string;
+    approved: boolean;
+    private: [];
+    public: [];
 }
 
-export interface UserProfile {
+export interface Profile {
     email: string;
     displayName: string;
     photoURL: string;
 }
 
-export interface UserRoles {
-    key: [string];
+export interface Roles {
+    superadmin?: boolean;
+    missionrequestor?: boolean;
+    recruiting?: boolean;
 }

@@ -8,16 +8,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-import {
-  user,
-  User
-} from '@angular/fire/auth';
+import { user, User } from '@angular/fire/auth';
 import { environment } from '../../environments/environment';
 
 import { AuthService } from '../auth.service';
 import { UserService } from '../user.service';
-import { UserProfile } from '../user';
-
+import { Profile } from '../user';
 
 @Component({
   selector: 'app-header',
@@ -36,19 +32,17 @@ import { UserProfile } from '../user';
   templateUrl: './header.component.html',
   styleUrl: './header.component.less',
 })
-export class HeaderComponent implements OnInit { // Implement OnInit interface
+export class HeaderComponent implements OnInit {
+  // Implement OnInit interface
   private _authService = inject(AuthService);
   user$ = user(this._authService);
   userId = '';
   title = environment.name;
   isAuthenticated: boolean = this._authService.isAuthenticated$;
-  userRoles: Record<string, boolean> = {}; 
-  userProfile: UserProfile | null = null;
+  userRoles: Record<string, boolean> = {};
+  Profile: Profile | null = null;
 
-
-  constructor(
-    public userservice: UserService
-  ) {}
+  constructor(public userservice: UserService) {}
 
   ngOnInit(): void {
     this._authService.user$.subscribe(async (aUser: User | null) => {
@@ -58,21 +52,17 @@ export class HeaderComponent implements OnInit { // Implement OnInit interface
         console.log(aUser);
         if (aUser) {
           this.userId = aUser.uid;
-          this.userProfile = await this.userservice.getUserProfile(aUser.uid);
+          this.Profile = await this.userservice.getProfile(aUser.uid);
           const roles = await this.userservice.getUserRoles(aUser.uid);
-          this.userRoles = roles as  Record<string, boolean>;
+          this.userRoles = roles as Record<string, boolean>;
           console.log(this.userRoles);
         } else {
           this.userRoles = {};
         }
-        
       } else {
         this.isAuthenticated = false;
       }
-    }
-      
-    );
-    
+    });
   }
   logout(): void {
     this._authService.logout();
@@ -85,7 +75,6 @@ export class HeaderComponent implements OnInit { // Implement OnInit interface
   get uid(): string {
     return this._authService.uid || '';
   }
-
 
   get username(): string {
     return this._authService.username || '';
@@ -100,7 +89,6 @@ export class HeaderComponent implements OnInit { // Implement OnInit interface
   }
 
   checkRoles(roles: string[]): boolean {
-
     if (this.userRoles) {
       for (const role of roles) {
         if (this.userRoles[role]) {
@@ -110,5 +98,4 @@ export class HeaderComponent implements OnInit { // Implement OnInit interface
     }
     return false;
   }
-
 }

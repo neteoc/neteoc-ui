@@ -19,15 +19,18 @@ const client = new SecretManagerServiceClient();
 // Initialize Firebase
 admin.initializeApp();
 
-export const newUserProfile = functions.auth.user().onCreate((user) => {
+export const newProfile = functions.auth.user().onCreate((user) => {
   logger.info('User created', { user: user });
   const doc = admin.firestore().doc(`users/${user.uid}`);
   const profiledoc = admin.firestore().doc(`users/${user.uid}/public/profile`);
   let approved = false;
   // TODO: The email domain whitelist should be configurable via the DB
-  if (user.email && /^[a-zA-Z0-9._%+-]+@(gasdf\.us|[a-zA-Z0-9.-]+\.(mil|gov))$/.test(user.email)) {
+  if (
+    user.email &&
+    /^[a-zA-Z0-9._%+-]+@(gasdf\.us|[a-zA-Z0-9.-]+\.(mil|gov))$/.test(user.email)
+  ) {
     approved = true;
-  } 
+  }
 
   doc.set({
     approved: approved,
@@ -81,7 +84,7 @@ export const handleFormSubmission = functions.https.onRequest(
         {
           secret: TURNSTILE_SECRET_KEY,
           response: turnstileResponse,
-          remoteip: req.body
+          remoteip: req.body,
         }
       );
 

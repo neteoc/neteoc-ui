@@ -1,72 +1,86 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { Subscription } from 'rxjs';
-import { CommonModule } from '@angular/common';  
+import { CommonModule } from '@angular/common';
 import { Auth, authState, User } from '@angular/fire/auth';
 import { ActivatedRoute } from '@angular/router';
 
-
 import { UserService } from '../user.service';
-import { UserProfile } from '../user';
-
+import { Profile } from '../user';
+import { User as UserDetail } from '../user';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [
-    CommonModule,
-
-  ],
+  imports: [CommonModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.less',
-  providers: [UserService]
+  providers: [UserService],
 })
 export class ProfileComponent implements OnInit {
   private auth: Auth = inject(Auth);
   private sub!: Subscription;
   id: string | undefined;
-  userdetail: UserProfile = {
+  userProfile: Profile = {
     photoURL: '',
     displayName: 'Unknown',
-    email: ''
+    email: '',
   };
+  userDetail: UserDetail = {
+    $key: '',
+    name: '',
+    approved: false,
+    private: [],
+    public: [],
+  };
+
   authState$ = authState(this.auth);
   authStateSubscription: Subscription;
   firestore: Firestore = inject(Firestore);
   user: User | null = null;
 
-  constructor(
-    public userservice: UserService,
-    private route: ActivatedRoute
-  ) {
-    this.authStateSubscription = this.authState$.subscribe((aUser: User | null) => {
-      //handle auth state changes here. Note, that user will be null if there is no currently logged in user.
-      console.log(aUser);
-      this.user = aUser;
-      this.id = aUser?.uid;
-      
-    })
+  constructor(public userservice: UserService, private route: ActivatedRoute) {
+    this.authStateSubscription = this.authState$.subscribe(
+      (aUser: User | null) => {
+        //handle auth state changes here. Note, that user will be null if there is no currently logged in user.
+        console.log(aUser);
+        this.user = aUser;
+        this.id = aUser?.uid;
+      }
+    );
   }
 
   showProfile() {
-    this.userservice.getUserProfile(this.id ?? "").then((user) => {
+    this.userservice.getUser(this.id ?? '').then((user) => {
+      this.userDetail = user
+        ? (user as UserDetail)
+        : {
+          $key: '',
+          name: '',
+          approved: false,
+          private: [],
+          public: [],
+        };
+      });
+    
+    this.userservice.getProfile(this.id ?? '').then((user) => {
       console.log(user);
-      this.userdetail = user ? user as UserProfile : {
-        photoURL: '',
-        displayName: 'Unknown',
-        email: ''
-      };
+      this.userProfile = user
+        ? (user as Profile)
+        : {
+            photoURL: '',
+            displayName: 'Unknown',
+            email: '',
+          };
     });
   }
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
+    this.sub = this.route.params.subscribe((params) => {
       this.id = params['id']; // (+) converts string 'id' to a number
       this.showProfile();
-      
+
       // In a real app: dispatch action to load the details here.
     });
-
-
   }
 }
